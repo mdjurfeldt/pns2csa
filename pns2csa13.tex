@@ -1,6 +1,66 @@
 \documentclass[a4paper]{article}
 
+\usepackage{authblk}
+
+\title{Modeling connectivity: Connection-set Algebra in NEST and PyNN}
+\author[1,2]{Mikael Djurfeldt}
+\author[3]{Andrew P. Davison}
+\author[4]{Jochen M. Eppler}
+\affil[1]{PDC, KTH, Stockholm, Sweden}
+\affil[2]{International Neuroinformatics Coordinating Facility (INCF),
+  Stockholm, Sweden}
+\affil[3]{Unit{\'e} de Neurosciences, Information et Complexit{\'e}
+  (UNIC), CNRS, Gif sur Yvette, France}
+\affil[4]{Institute of Neuroscience and Medicine (INM­6) and
+  Institute for Advanced Simulation (IAS­6)
+  J{\"u}lich Research Centre and JARA, J{\"u}lich, Germany}
+
 \begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Most neuronal network simulators provide simulator­specific methods
+  for specifying connectivity.  In addition, several universal
+  description languages for neuronal network models (e.g. PyNN,
+  NeuroML and NineML) have been developed in the recent
+  years. Usually, there is a choice between explicitly specifying
+  individual connections or selecting one of a predefined set of
+  connection primitives, such as different forms of random
+  connectivity. Common primitives are well suited for building random
+  balanced networks, synfire chains and recurrent networks without
+  much structure. However, they often either lack the required
+  expressiveness or their implementations lack the required
+  computational efficiency to specify the connectivity of complex
+  hierarchical network models now under investigation.
+
+  The connection­set algebra (CSA; Djurfeldt, Neuroinformatics
+  10(3):287­304; 2012) is a general formalism for specifying the
+  connectivity of neuronal network models. CSA provides operators to
+  form more complex sets of connections from simpler ones and also
+  provides parameterization of such sets, and thus allows to express
+  connectivity from its small­scale to its large­scale structure. The
+  CSA is expressive enough to describe a wide range of connectivities
+  and can serve as a concise notation for network structure in
+  scientific writing as well as in model description code for neural
+  simulations. CSA implementations allow for scalable and efficient
+  representation of connectivity in parallel neuronal network
+  simulators. The expressiveness of CSA makes prototyping of network
+  structure easy.
+
+  Here, we describe the Python implementation of CSA and its use in
+  the context of the neural simulation tool NEST (Gewaltig and
+  Diesmannn, Scholarpedia 2(4):1430; 2007) and the
+  simulator­independent specification language PyNN (Davison et al.,
+  Front. Neuroinf. 2:11; 2009).  We developed an interface (the
+  ConnectionGenerator) that abstracts the simulator and the connection
+  generating library from each other, making both the simulator and
+  the connectivity description library replaceable. We demonstrate how
+  CSA can be used for the specification of connectivity in PyNN and
+  how using CSA as a high­level representation of connectivity
+  patterns when transferring the model description to NEST avoids
+  performance penalties and results in good scalability.
+\end{abstract}
 
 \section{Introduction}
 
@@ -42,5 +102,8 @@
 %test scaling
 
 \section{Discussion}
+
+\bibliographystyle{apalike}
+\bibliography{pns2csa13}
 
 \end{document}
