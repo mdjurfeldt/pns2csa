@@ -1,67 +1,100 @@
-\documentclass[a4paper]{article}
 
-\usepackage{authblk}
-\renewcommand\Affilfont{\scriptsize}
+\documentclass{frontiersSCNS} % for Science articles
 
-\usepackage{natbib}
+\usepackage{url,lineno}
+\linenumbers
 
-\title{Modeling connectivity: Connection-set Algebra in NEST and PyNN}
-\author[1,2]{Mikael Djurfeldt}
-\author[3]{Andrew P. Davison}
-\author[4]{Jochen M. Eppler}
-\affil[1]{PDC, KTH, Stockholm, Sweden}
-\affil[2]{International Neuroinformatics Coordinating Facility (INCF),
-  Stockholm, Sweden}
-\affil[3]{Unit{\'e} de Neurosciences, Information et Complexit{\'e}
-  (UNIC), CNRS, Gif sur Yvette, France}
-\affil[4]{Institute of Neuroscience and Medicine (INM­6) and
-  Institute for Advanced Simulation (IAS­6),
-  J{\"u}lich Research Centre and JARA, J{\"u}lich, Germany}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+
+\copyrightyear{}
+\pubyear{}
+
+\def\journal{Neuroinformatics}%%% write here for which journal %%%
+\def\DOI{}
+\def\articleType{Research Article}
+\def\keyFont{\fontsize{8}{11}\helveticabold }
+\def\firstAuthorLast{Djurfeldt {et~al.}}
+\def\Authors{Mikael Djurfeldt\,$^{1,2,*}$, Andrew P. Davison\,$^{3}$
+  and Jochen M. Eppler\,$^4$}
+% Affiliations should be keyed to the author's name with superscript numbers and be listed as follows: Laboratory, Institute, Department, Organization, City, State abbreviation (USA, Canada, Australia), and Country (without detailed address information such as city zip codes or street names).
+% If one of the authors has a change of address, list the new address below the correspondence details using a superscript symbol and use the same symbol to indicate the author in the author list.
+\def\Address{$^{1}$PDC, KTH, Stockholm, Sweden\\
+  $^{2}$International Neuroinformatics Coordinating Facility (INCF),
+  Stockholm, Sweden\\
+  $^{3}$Unité de Neurosciences, Information et Complexité (UNIC),
+  CNRS, Gif sur Yvette, France\\
+  $^{4}$Institute of Neuroscience and Medicine (INM-6) and Institute
+  for Advanced Simulation (IAS-6), Jülich Research Centre and
+  JARA, Jülich, Germany}
+% The Corresponding Author should be marked with an asterisk
+% Provide the exact contact address (this time including street name and city zip code) and email of the corresponding author
+\def\corrAuthor{Mikael Djurfeldt} \def\corrAddress{International
+  Neuroinformatics Coordinating Facility (INCF), Nobels väg 15 A,
+  Stockholm, SE-17177, Sweden} \def\corrEmail{djurfeldt@incf.org}
+
+% \color{FrontiersColor} Is the color used in the Journal name, in the title, and the names of the sections
+
 
 \begin{document}
+\onecolumn
+\firstpage{1}
+
+\title[CSA in NEST and PyNN]{Modeling connectivity: Connection-set Algebra in NEST and PyNN}
+\author[\firstAuthorLast ]{\Authors}
+\address{}
+\correspondance{}
+\extraAuth{}% If there are more than 1 additional author, comment this line and uncomment the next one
+%\extraAuth{corresponding Author2 \\ Laboratory X2, Institute X2, Department X2, Organization X2, Street X2, City X2 , State XX2 (only USA, Canada and Australia), Zip Code2, X2 Country X2, email2@uni2.edu}
+\topic{Python in Neuroscience 2}
 
 \maketitle
-
 \begin{abstract}
-  Most neuronal network simulators provide simulator­specific methods
-  for specifying connectivity.  In addition, several universal
-  description languages for neuronal network models (e.g. PyNN,
-  NeuroML and NineML) have been developed in the recent
-  years. Usually, there is a choice between explicitly specifying
-  individual connections or selecting one of a predefined set of
-  connection primitives, such as different forms of random
-  connectivity. Common primitives are well suited for building random
-  balanced networks, synfire chains and recurrent networks without
-  much structure. However, they often either lack the required
-  expressiveness or their implementations lack the required
-  computational efficiency to specify the connectivity of complex
-  hierarchical network models now under investigation.
 
-  The connection­set algebra \citep[CSA;][]{djurfeldt12} is a general
-  formalism for specifying the connectivity of neuronal network
-  models. CSA provides operators to form more complex sets of
-  connections from simpler ones and also provides parameterization of
-  such sets, and thus allows to express connectivity from its
-  small­scale to its large­scale structure. The CSA is expressive
-  enough to describe a wide range of connectivities and can serve as a
-  concise notation for network structure in scientific writing as well
-  as in model description code for neural simulations. CSA
-  implementations allow for scalable and efficient representation of
-  connectivity in parallel neuronal network simulators. The
-  expressiveness of CSA makes prototyping of network structure easy.
+Most neuronal network simulators provide simulator­specific methods
+for specifying connectivity.  In addition, several universal
+description languages for neuronal network models (e.g. PyNN,
+NeuroML and NineML) have been developed in the recent
+years. Usually, there is a choice between explicitly specifying
+individual connections or selecting one of a predefined set of
+connection primitives, such as different forms of random
+connectivity. Common primitives are well suited for building random
+balanced networks, synfire chains and recurrent networks without
+much structure. However, they often either lack the required
+expressiveness or their implementations lack the required
+computational efficiency to specify the connectivity of complex
+hierarchical network models now under investigation.
 
-  Here, we describe the Python implementation of CSA and its use in
-  the context of the neural simulation tool NEST
-  \citep{Gewaltig_07_11204} and the simulator­independent
-  specification language PyNN \citep{Davison09}. We developed an
-  interface (the ConnectionGenerator) that abstracts the simulator and
-  the connection generating library from each other, making both the
-  simulator and the connectivity description library replaceable. We
-  demonstrate how CSA can be used for the specification of
-  connectivity in PyNN and how using CSA as a high­level
-  representation of connectivity patterns when transferring the model
-  description to NEST avoids performance penalties and results in good
-  scalability.
+The connection­set algebra \citep[CSA;][]{djurfeldt12} is a general
+formalism for specifying the connectivity of neuronal network
+models. CSA provides operators to form more complex sets of
+connections from simpler ones and also provides parameterization of
+such sets, and thus allows to express connectivity from its
+small­scale to its large­scale structure. The CSA is expressive
+enough to describe a wide range of connectivities and can serve as a
+concise notation for network structure in scientific writing as well
+as in model description code for neural simulations. CSA
+implementations allow for scalable and efficient representation of
+connectivity in parallel neuronal network simulators. The
+expressiveness of CSA makes prototyping of network structure easy.
+
+Here, we describe the Python implementation of CSA and its use in
+the context of the neural simulation tool NEST
+\citep{Gewaltig_07_11204} and the simulator­independent
+specification language PyNN \citep{Davison09}. We developed an
+interface (the ConnectionGenerator) that abstracts the simulator and
+the connection generating library from each other, making both the
+simulator and the connectivity description library replaceable. We
+demonstrate how CSA can be used for the specification of
+connectivity in PyNN and how using CSA as a high­level
+representation of connectivity patterns when transferring the model
+description to NEST avoids performance penalties and results in good
+scalability.
+
+\tiny
+ \keyFont{ \section{Keywords:} model description, connectivity,
+ neural simulation, Python, large-scale modeling } %All article
+ %types: you may provide up to 8 keywords; at least 5 are mandatory.
 \end{abstract}
 
 \section{Introduction}
@@ -109,7 +142,37 @@
 
 \section{Discussion}
 
-\bibliographystyle{neuralcomput_natbib}
+
+% \textbf{Figure 1.}{ Enter the caption for your figure here.  Repeat as  necessary for each of your figures.}\label{fig:01}% Don't add the figures in the LaTeX files, please upload them when submitting the article. Frontiers will add the figures at the end of the provisional pdf.
+% 
+% \begin{table}[!t]
+% \processtable{Resolution Requirements for the figures\label{Tab:01}}
+% {\begin{tabular}{lllll}\toprule
+% Image Type & Description & Format & Color Mode & Resolution\\\midrule
+% Line Art & An image composed of lines and text,  & TIFF, EPS, JPEG & RGB, Bitmap & 900 - 1200 dpi\\
+%            & which does not contain tonal or shaded areas.& & &\\
+%            Halftone & A continuous tone photograph, which contains no text. & TIFF, EPS, JPEG & RGB, Grayscale & 300 dpi\\
+% Combination & Image contains halftone + text or line art elements. & TIFF, EPS, JPEG & RGB,Grayscale & 600 - 900 dpi\\\botrule
+% \end{tabular}}{This is a footnote}
+% \end{table}
+
+\section*{Conflict-of-Interest Statement}
+The authors declare that the research was conducted in the absence of
+any commercial or financial relationships that could be construed as a
+potential conflict of interest.
+
+\section*{Acknowledgement}
+Partially supported by the Helmholtz Association: HASB and portfolio
+theme SMHB, the Jülich Aachen Research Alliance (JARA), the VSR
+computation time grant JINB33 on the JUQUEEN supercomputer in Jülich,
+the Next-Generation Supercomputer Project of MEXT, and EU Grant 269921
+(BrainScaleS).
+
+%\paragraph{Funding\textcolon} Text Text Text Text Text Text  Text Text.
+
+%\section*{Supplemental Data}
+
+\bibliographystyle{frontiersinSCNS&ENG} % for Science and Engineering articles
 \bibliography{pns2csa13}
 
 \end{document}
