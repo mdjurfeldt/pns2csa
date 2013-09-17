@@ -503,9 +503,9 @@
   \parbox[c]{2.5pc}{%
     \helvetica
     \hfil
-    \flushright  \includegraphics[width=2.5pc,angle=0]{figures/logo2.eps}\\ \medskip
+    \flushright  \includegraphics[width=2.5pc,angle=0]{./figures/logo2.pdf}\\ \medskip
   }}
- \rule{\textwidth}{1\p@}\par%
+  {\parindent0pt\rule{\textwidth}{1\p@}\par}%
   \helvetica
   \hbox to \textwidth{%
   \parbox[t]{36.5pc}{%

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="480"
+   height="160"
+   id="svg3034"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="block_diagram_conngenn.svg">
+  <defs
+     id="defs3036" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.0659496"
+     inkscape:cx="334.53913"
+     inkscape:cy="9.0830483"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:snap-global="true"
+     gridtolerance="10"
+     objecttolerance="20"
+     guidetolerance="20"
+     inkscape:snap-bbox="true"
+     inkscape:snap-nodes="false"
+     inkscape:snap-page="false"
+     inkscape:snap-grids="true"
+     inkscape:bbox-paths="false"
+     inkscape:bbox-nodes="false"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:snap-bbox-midpoints="false"
+     inkscape:object-nodes="false"
+     inkscape:snap-smooth-nodes="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="713"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3042"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       dotted="true"
+       originx="-150px"
+       originy="-450px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3039">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-150,-442.36218)">
+    <rect
+       transform="scale(-1,1)"
+       style="fill:#eeeeec;stroke:#0251a0;stroke-width:0.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3205"
+       width="479"
+       height="54"
+       x="-629.5"
+       y="547.86218"
+       rx="2.5"
+       ry="2.5" />
+    <rect
+       ry="2.5"
+       rx="2.5"
+       y="442.86218"
+       x="-629.5"
+       height="99.000031"
+       width="479"
+       id="rect4982-9"
+       style="fill:#eeeeec;stroke:#0251a0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       x="154.01562"
+       y="561.0575"
+       id="text3048"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="154.01562"
+         y="561.0575"
+         id="tspan3054">C++</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       x="154.01562"
+       y="456.0575"
+       id="text3060"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3062"
+         x="154.01562"
+         y="456.0575">Python</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 270,477.86215 0,19.00003"
+       id="path3318"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4088"
+       d="m 270,532.42558 0,24.95958"
+       style="fill:none;stroke:#000000;stroke-width:0.99999988;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4090"
+       d="m 560,477.86215 0,19.00003"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.99999988;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 560,532.42558 0,24.95958"
+       id="path4092"
+       inkscape:connector-curvature="0" />
+    <rect
+       ry="2.5"
+       rx="2.4999995"
+       y="497.86215"
+       x="210.5"
+       height="34.000031"
+       width="119"
+       id="rect3219"
+       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3231"
+       width="409.2265"
+       height="24"
+       x="210.47464"
+       y="452.86218"
+       rx="2.5000002"
+       ry="2.4999998" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3302"
+       width="119"
+       height="34.000031"
+       x="210.5"
+       y="557.86218"
+       rx="2.4999995"
+       ry="2.5" />
+    <rect
+       ry="2.5"
+       rx="2.4999995"
+       y="557.86218"
+       x="350.5"
+       height="34.000031"
+       width="129"
+       id="rect3308"
+       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3310"
+       width="119"
+       height="34.000031"
+       x="500.5"
+       y="497.86215"
+       rx="2.4999995"
+       ry="2.5" />
+    <rect
+       ry="2.5"
+       rx="2.4999995"
+       y="557.86218"
+       x="500.5"
+       height="34.000031"
+       width="119"
+       id="rect3312"
+       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       x="270.13184"
+       y="579.15125"
+       id="text4978"><tspan
+         sodipodi:role="line"
+         x="270.13184"
+         y="579.15125"
+         id="tspan3304">Simulator kernel</tspan></text>
+    <text
+       id="text3215"
+       y="510.46472"
+       x="270.12012"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       xml:space="preserve"><tspan
+         y="510.46472"
+         x="270.12012"
+         sodipodi:role="line"
+         id="tspan3298">Simulator Python</tspan><tspan
+         id="tspan3221"
+         y="525.46472"
+         x="270.12012"
+         sodipodi:role="line">bindings</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       x="415"
+       y="467.96472"
+       id="text3225"><tspan
+         sodipodi:role="line"
+         id="tspan3227"
+         x="415"
+         y="467.96472">User level / simulation scripts</tspan><tspan
+         sodipodi:role="line"
+         x="415"
+         y="482.96472"
+         id="tspan3229" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       x="559.61328"
+       y="510.46472"
+       id="text3235"><tspan
+         sodipodi:role="line"
+         x="559.61328"
+         y="510.46472"
+         id="tspan3239">Python bindungs for</tspan><tspan
+         id="tspan3263"
+         sodipodi:role="line"
+         x="559.61328"
+         y="525.46472">conn.-gen. library</tspan></text>
+    <text
+       id="text3245"
+       y="570.46472"
+       x="560.08496"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       xml:space="preserve"><tspan
+         id="tspan3249"
+         y="570.46472"
+         x="560.08496"
+         sodipodi:role="line">Connection</tspan><tspan
+         id="tspan3255"
+         y="585.46472"
+         x="560.08496"
+         sodipodi:role="line">generating library</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       x="414.80078"
+       y="571.65125"
+       id="text3267"><tspan
+         sodipodi:role="line"
+         x="414.80078"
+         y="571.65125"
+         id="tspan3271">ConnectionGenerator</tspan><tspan
+         id="tspan3277"
+         sodipodi:role="line"
+         x="414.80078"
+         y="586.65125">interface</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4098"
+       d="m 349.50003,574.86218 -19.00003,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 499.50003,574.86218 -19.00003,0"
+       id="path4100"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
