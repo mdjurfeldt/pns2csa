@@ -14,7 +14,7 @@
    id="svg3034"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="block_diagram_conngenn.svg">
+   sodipodi:docname="block_diagram_conngen.svg">
   <defs
      id="defs3036" />
   <sodipodi:namedview
@@ -72,7 +72,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -244,7 +244,7 @@
          sodipodi:role="line"
          x="559.61328"
          y="510.46472"
-         id="tspan3239">Python bindungs for</tspan><tspan
+         id="tspan3239">Python bindings for</tspan><tspan
          id="tspan3263"
          sodipodi:role="line"
          x="559.61328"
