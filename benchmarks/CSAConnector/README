@@ -1,0 +1,8 @@
+This benchmark will compare the performance of PyNN's CSAConnector and
+the CSAConnector from the NEST backend using Python CSA (csa) and the
+C++ version of CSA (libcsa).
+
+The benchmarks are run for different numbers of neurons by the script
+do_bench.sh.
+
+The graphs are created by the script plot_bench.sh.
