@@ -103,14 +103,14 @@ simulations. CSA implementations allow for scalable and efficient
 representation of connectivity in parallel neuronal network
 simulators.
 
-Here, we describe the use of CSA and the new ConnectionGenerator
-interface in the neural simulation tool NEST \citep{Gewaltig_07_11204}
-and the simulator-independent neural specification language PyNN
-\citep{Davison09}. We demonstrate how CSA can be used for the
-specification of connectivity in PyNN and how using CSA as a
-high-level representation of connectivity patterns avoids performance
-penalties and results in good scalability when transferred to the
-simulator.
+Here, we describe the use of CSA and how it is coupled to the neural
+simulation tool NEST \citep{Gewaltig_07_11204} through the new
+ConnectionGenerator interface provided by the libneurosim library. We
+demonstrate how CSA can be used for the specification of connectivity
+in simulator-independent neural specification language PyNN
+\citep{Davison09} and how using CSA, as a high-level representation of
+connectivity patterns, avoids performance penalties and results in
+good scalability when transferred to the simulator.
 
 \tiny
  \keyFont{ \section{Keywords:} model description, connectivity,
@@ -120,8 +120,8 @@ simulator.
 
 \section{Introduction}
 
-Currently, most simulators use their own methods for describing the
-connections between neurons. This makes it hard for the users to port
+Currently, most simulators use their own methods for describing
+connections between neurons. This makes it hard for users to port
 models from one simulator to another and leaves the efficient
 implementation of connection-generating functions as a task to the
 simulator developers. Especially in a parallel environment, this is
@@ -258,7 +258,33 @@ Generator interface for NEST is explained in Section
 %----------------------------------------------------------------------
 
 \section{The Connection-set Algebra}\label{sec:csa}
-\tbw{To be written}
+
+The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
+for network connectivity which can be used both when describing a
+network to a fellow researcher and when implementing a model for a
+simulator.  It is currently focused on connectivity which has a
+constructive or statistical element, but it can also be used when all
+network connections are given, or in cases where only elements of the
+connectivity is pre-specified.
+
+Some of the distinguishing aspects of CSA are:
+\begin{itemize}
+\item It is abstract. CSA deals with sets of \emph{connections}. A
+  connection is basically just an edge in a graph, with associated
+  parameters. There is a clean separation between CSA and other
+  aspects of model or simulator infrastructure.
+\item A connection-set can represent a \emph{type} of
+  connectivity---a connectivity pattern---in addition to the connectivity
+  of a specific network.
+\item It is that it is an algebra: There are pre-existing
+  connection-sets and operators to define new connection-sets in terms
+  of existing.
+\item It enables a succinct and precise description and definition of
+  connectivity in terms of such algebraic expressions.
+\item There are ways to implement CSA on a computer which are both
+  efficient and scalable on a parallel computer.
+\end{itemize}
+
 %\subsection{Basic concepts}
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
@@ -268,6 +294,7 @@ Generator interface for NEST is explained in Section
 %\subsubsection{Masks}
 %\subsection{Python wrapper}
 %\subsection{Serialization/deserialization}
+\tbw{To be continued...}
 
 %----------------------------------------------------------------------
 
