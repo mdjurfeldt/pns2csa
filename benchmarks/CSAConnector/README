@@ -1,8 +1,22 @@
-This benchmark will compare the performance of PyNN's CSAConnector and
-the CSAConnector from the NEST backend using Python CSA (csa) and the
-C++ version of CSA (libcsa).
 
-The benchmarks are run for different numbers of neurons by the script
-do_bench.sh.
+Introduction
+------------
+These benchmarks will compare the performance of PyNN's CSAConnector
+and the CSAConnector from the NEST backend using Python CSA (csa) and
+the C++ version of CSA (libcsa). The benchmarks are run for different
+numbers of neurons by the script do_bench.sh. Please adapt them as
+needed.
 
-The graphs are created by the script plot_bench.sh.
+Plotting
+--------
+The graphs are created by the script plot_bench.sh. To extract the
+data from the files created by do_bench.sh, use
+
+    grep -h \.CSAConnector *.log > data.log
+
+The plotting script uses svg_utils for Python to assemble multiple
+panels into one publication ready figure. svg_utils is available from
+https://github.com/btel/svg_utils. Convert the resulting SVG files to
+PDF using something like
+
+    inkscape --export-pdf=CSAConnector.pdf CSAConnector.svg
