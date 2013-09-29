@@ -3,6 +3,6 @@
 #PBS -o /users/eppler/CSA/CSAConnector/${PBS_JOBID}.o
 #PBS -e /users/eppler/CSA/CSAConnector/${PBS_JOBID}.e
 
-. /users/eppler/CSA/CSAConnector/enable.sh
+. /users/eppler/CSA/CSAConnector/enable_csa_hambach.sh
 cd /users/eppler/CSA/CSAConnector
 bash do_bench_runtime_scaling.sh
