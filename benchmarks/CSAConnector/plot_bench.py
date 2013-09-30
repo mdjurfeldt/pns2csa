@@ -1,6 +1,6 @@
 import re
-import matplotlib
-matplotlib.use('Agg')
+#import matplotlib
+#matplotlib.use('Agg')
 import pylab
 import numpy
 import operator
@@ -14,7 +14,7 @@ pylab.rc("ytick", labelsize=14)
 pylab.rc("font", size=14)
 pylab.rc("legend", fontsize=14)
 
-datafile = "data.log"
+datafile = "data/data.log"
 with open(datafile) as f:
     rawdata = f.readlines()
 
@@ -66,14 +66,15 @@ for connector in connectors:
         ax1.loglog(n, linear_t, lw=4, c="#dddddd", zorder=i)
         ax1.loglog(n, linear_t, lw=2, c="#eeeeee", zorder=i)
 
-        slope, _ = numpy.polyfit(numpy.log(n), numpy.log(m), 1)
-        label = ", ".join((pynn_component, library, "%.2f" % slope))
-        ax2.loglog(n, m/1024.0, lw=2, marker="o", linestyle=style, label=label,
-                   color=color, zorder=i+100)
+        if sum(m) != 0:
+            slope, _ = numpy.polyfit(numpy.log(n), numpy.log(m), 1)
+            label = ", ".join((pynn_component, library, "%.2f" % slope))
+            ax2.loglog(n, m/1024.0, lw=2, marker="o", linestyle=style, label=label,
+                       color=color, zorder=i+100)
      
-        linear_m = [m[0]*float(x)/n[0] for x in n]
-        ax2.loglog(n, linear_m, lw=4, c="#dddddd", zorder=i)
-        ax2.loglog(n, linear_m, lw=2, c="#eeeeee", zorder=i)
+            linear_m = [m[0]*float(x)/n[0]/1024. for x in n]
+            ax2.loglog(n, linear_m, lw=4, c="#dddddd", zorder=i)
+            ax2.loglog(n, linear_m, lw=2, c="#eeeeee", zorder=i)
     
     fig1.subplots_adjust(left=0.14, bottom=0.1, right=0.96, top=0.91)
     fig2.subplots_adjust(left=0.14, bottom=0.1, right=0.96, top=0.91)
@@ -94,10 +95,11 @@ for connector in connectors:
                fancybox=True, loc="best", numpoints=1)
 
     handles, labels = ax2.get_legend_handles_labels()
-    hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
-    handles, labels = zip(*hl)
-    ax2.legend(handles, labels, title="connector, library, slope",
-               fancybox=True, loc="best", numpoints=1)
+    if len(handles) != 0:
+        hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
+        handles, labels = zip(*hl)
+        ax2.legend(handles, labels, title="connector, library, slope",
+                   fancybox=True, loc="best", numpoints=1)
 
     fname = "CSAConnector_%s.svg" % connector
     fig1.savefig(fname)

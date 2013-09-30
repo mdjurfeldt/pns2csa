@@ -5,4 +5,4 @@
 
 . /users/eppler/CSA/CSAConnector/enable_csa_hambach.sh
 cd /users/eppler/CSA/CSAConnector
-bash do_bench_runtime_scaling.sh
+bash do_bench_scaling.sh
