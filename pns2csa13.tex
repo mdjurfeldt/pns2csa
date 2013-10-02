@@ -194,7 +194,7 @@ CSA connection set and issue one-to-one connect calls at the different
 backends. During this study, we extended PyNN with a new and
 specialized CSAConnector, which passes the complete CSA object down to
 the simulator to reduce the overhead. The details of this effienct
-interface are described in Section \ref{sec:conn_gen_pynn}. Section
+interface are described in section \ref{sec:conn_gen_pynn}. Section
 \ref{sec:benchmarks} contains benchmarking results of the different
 implementations of the CSAConnector and the native NEST connection
 routines.
@@ -251,8 +251,8 @@ toplogical measures in the network.
 
 A comparison of the performance of the Topology module to the native
 connection routines and to the novel CSA interface to NEST is given in
-Section \ref{sec:benchmarks}. The implementation of the Connection
-Generator interface for NEST is explained in Section
+section \ref{sec:benchmarks}. The implementation of the Connection
+Generator interface for NEST is explained in section
 \ref{sec:conn_gen_nest}.
 
 %----------------------------------------------------------------------
@@ -398,11 +398,11 @@ target index of the next connection and the parameters of the
 connection. The connections are established by calling NEST's basic
 \texttt{Network::connect()} function. The extraction of contiguous
 ranges and the index translation for the creation of masks is detailed
-in Section \ref{sec:creating_masks}.
+in section \ref{sec:creating_masks}.
 
 \subsection{Creating masks}\label{sec:creating_masks}
 
-As explained in Section \ref{sec:csa}, CSA needs to know about which
+As explained in section \ref{sec:csa}, CSA needs to know about which
 neurons in the pre- and post-synaptic population are local to the MPI
 process, and which are remote. This information is contained in masks,
 which are created and set by each NEST process. The masks for CSA are
@@ -529,7 +529,7 @@ post-synaptic populations instead of the gids at that positions. This
 means that we have to translate indices from NEST to CSA during the
 setting of the masks and back when we actually create the connections.
 
-As explained in Section \ref{sec:csa}, the masks for the sources must
+As explained in section \ref{sec:csa}, the masks for the sources must
 contain all local and remote nodes. The \emph{skip} of the mask is
 therefore always set to 1. For the sources, the same source mask is
 stored \emph{n\_proc} times on each process. The masks for the targets
@@ -555,25 +555,74 @@ not added to the mask.
 %----------------------------------------------------------------------
 
 \section{Benchmarks}\label{sec:benchmarks}
-\tbw{To be written}
-
-\subsection{CSA vs. Topology vs. RCC}
-\tbw{To be written}
 
 %To assess the absolute performance and the scaling behavior of our
 %implementation, we conducted several benchmark simulations. All
 %simulations consisted of building a random balanced network, which is
 %shown in Figure X.
-%
-%\textbf{Figure 5.}{Block diagram or ingredient table of the benchmark
-%  model according to \citet{Nordlie-2009_e1000456}.}\label{fig:05}
-%
-%\subsubsection{Results}\label{sec:benchmarks_results}
-%
-%\textbf{Figure 6.}{Scaling plots for different connection methods and
-%  networks.}\label{fig:06}
 
-\subsection{simple vs. specialized CSAConnector}
+\tbw{To be written}
+
+\subsection{CSA vs. Topology vs. RCC}
+\tbw{To be written}
+
+\subsection{PYNN Connection Generators}
+
+We ran a series of benchmarks, in order to assess and compare the
+different implementations of CSA (see section \ref{sec:csa}) and the
+different implementations of the CSAConnector for PyNN (see section
+\ref{sec:conn_gen_pynn}). These benchmarks were using PyNN as available , In particular, the following combinations
+were tested:
+
+\begin{itemize}
+\item PyNN's original CSAConnector that is available for all backends
+  in combination with the Python CSA implementation (as gotten from
+  the INCF software center via SVN)
+
+\textbf{PyNN, csa} This used  and
+  the . The CSAConnector intersects the csa object with a
+  mask consisting of the nodes in the Projection and iterates the csa
+  object on the Python level and connects by sending one
+  ConvergentConnect call per source and target (Andrew, why not plain
+  Connects?) to PyNEST.
+\item \textbf{nest, csa} This used my new CSAConnector for the NEST
+  backend (from py personal github form of PyNN at
+  https://github.com/jougs/PyNN) and the Python CSA
+  implementation. The CSAConnector just passes down the csa object as
+  ConnectionGenerator to PyNEST, which iterates it from the C++ level
+  by issueing callbacks to the corresponding Python functions.
+\item \textbf{nest, libcsa} This used my new CSAConnector for the NEST
+  backend and the C++ CSA implementation libcsa (from your private
+  git). The object is instantiated from Python and passed down by
+  PyNN. However, all iterations happen completely in C++, with only
+  little overhead added by function calls in PyNN, PyNEST and SLI.
+\end{itemize}
+
+Indeed, we cannot run the fourth combination (PyNN, libcsa) due to the
+error described in a previous mail (see attachment). Due to sleep
+deprivation and the prospect of explaining stuff(tm) to 30k visitors
+at the open day at the Research Center tomorrow, I don't fully
+understand what you propose, but assume that this is what you write
+about below.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=.7]{benchmarks/CSAConnector/CSAConnector.pdf}
+\caption{Benchmark results for the use of CSA in PyNN and NEST
+  comparing the two CSAConnector implementations explained in section
+  \ref{sec:conn_gen_pynn} and the two CSA implementations explained in
+  section \ref{sec:csa}. Color and dash codes are given in the
+  legends, slope is the mean slope of the data shown. \textbf{A} shows
+  the run time for connecting a network using CSAs \emph{random} mask
+  with a probality of 0.1 for different numbers of neurons. \textbf{B}
+  shows the same as in A, but using CSAs \emph{oneToOne}
+  mask. \textbf{C} shows the memory consumption of the Python process
+  after connecting the network described in A. \textbf{D} shows the
+  results of a strong scaling benchmark for different numbers of MPI
+  processes. The network contains 1,000 neurons per process and is
+  connected as the network in A.}\label{fig:pynn_benchmarks}
+\end{figure}
+
 \tbw{To be written}
 
 %----------------------------------------------------------------------

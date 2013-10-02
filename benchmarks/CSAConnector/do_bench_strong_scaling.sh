@@ -3,9 +3,9 @@
 for np in 1 2 4 6 12 24 48; do
 
   nn=`echo $np*1000 | bc`
-  mpirun -np $np python PyNN_CSAConnector_csa_scaling.py $nn > data/PyNN_CSAConnector_csa_strong_scaling_$np.log
-  # mpirun -np $np python PyNN_CSAConnector_libcsa_scaling.py $nn > data/PyNN_CSAConnector_libcsa_strong_scaling_$np.log
-  mpirun -np $np python nest_CSAConnector_csa_scaling.py $nn > data/nest_CSAConnector_csa_strong_scaling_$np.log
-  mpirun -np $np python nest_CSAConnector_libcsa_scaling.py $nn > data/nest_CSAConnector_libcsa_strong_scaling_$np.log
+  mpirun -np $np python PyNN_CSAConnector_csa_scaling.py $nn $np > data/PyNN_CSAConnector_csa_strong_scaling_$np.log
+  # mpirun -np $np python PyNN_CSAConnector_libcsa_scaling.py $nn $np > data/PyNN_CSAConnector_libcsa_strong_scaling_$np.log
+  mpirun -np $np python nest_CSAConnector_csa_scaling.py $nn $np > data/nest_CSAConnector_csa_strong_scaling_$np.log
+  mpirun -np $np python nest_CSAConnector_libcsa_scaling.py $nn $np > data/nest_CSAConnector_libcsa_strong_scaling_$np.log
 
 done
