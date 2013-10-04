@@ -18,7 +18,7 @@ cset = csa.random(0.1)
 connector = CSAConnector(cset)
 proj = Projection(pop, pop, connector)
 rank = nest.Rank()
-print "nest CSAConnector random(0.1) csa %i %f %i" % (n, time() - start, rank, np)
+print "nest CSAConnector random(0.1) csa %i %f %i %i" % (n, time() - start, rank, np)
 
 #import nest.visualization as vis
 #vis.plot_network(pop.all_cells, "nest_CSAConnector_csa_scaling.pdf")
