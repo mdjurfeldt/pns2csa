@@ -166,15 +166,15 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
+PyNN CSAConnector random(0.1) csa 48000 922.352470 6 12
+PyNN CSAConnector random(0.1) csa 48000 938.307544 0 12
+PyNN CSAConnector random(0.1) csa 48000 946.850718 3 12
+PyNN CSAConnector random(0.1) csa 48000 954.004278 9 12
+PyNN CSAConnector random(0.1) csa 48000 957.762911 10 12
+PyNN CSAConnector random(0.1) csa 48000 959.933299 8 12
+PyNN CSAConnector random(0.1) csa 48000 963.834466 5 12
+PyNN CSAConnector random(0.1) csa 48000 965.288456 11 12
+PyNN CSAConnector random(0.1) csa 48000 974.900911 7 12
+PyNN CSAConnector random(0.1) csa 48000 984.169719 2 12
+PyNN CSAConnector random(0.1) csa 48000 988.645186 1 12
+PyNN CSAConnector random(0.1) csa 48000 991.032534 4 12

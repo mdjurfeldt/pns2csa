@@ -12,4 +12,4 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-usage: PyNN_CSAConnector_csa_scaling.py <num_neurons>
+PyNN CSAConnector random(0.1) csa 48000 2138.310348 0 1

@@ -12,4 +12,3 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-usage: nest_CSAConnector_csa_scaling.py <num_neurons>
