@@ -334,3 +334,27 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
+nest CSAConnector random(0.1) csa 48000 45.138624 2 24
+nest CSAConnector random(0.1) csa 48000 45.451738 18 24
+nest CSAConnector random(0.1) csa 48000 45.666711 6 24
+nest CSAConnector random(0.1) csa 48000 45.972878 11 24
+nest CSAConnector random(0.1) csa 48000 46.073503 19 24
+nest CSAConnector random(0.1) csa 48000 46.113995 0 24
+nest CSAConnector random(0.1) csa 48000 46.608106 1 24
+nest CSAConnector random(0.1) csa 48000 46.682896 9 24
+nest CSAConnector random(0.1) csa 48000 46.713891 22 24
+nest CSAConnector random(0.1) csa 48000 46.858469 21 24
+nest CSAConnector random(0.1) csa 48000 47.027499 13 24
+nest CSAConnector random(0.1) csa 48000 47.052582 16 24
+nest CSAConnector random(0.1) csa 48000 47.241281 3 24
+nest CSAConnector random(0.1) csa 48000 47.230070 4 24
+nest CSAConnector random(0.1) csa 48000 47.321405 12 24
+nest CSAConnector random(0.1) csa 48000 47.369699 15 24
+nest CSAConnector random(0.1) csa 48000 47.431135 7 24
+nest CSAConnector random(0.1) csa 48000 47.625660 10 24
+nest CSAConnector random(0.1) csa 48000 47.790755 8 24
+nest CSAConnector random(0.1) csa 48000 47.939647 5 24
+nest CSAConnector random(0.1) csa 48000 48.426948 14 24
+nest CSAConnector random(0.1) csa 48000 48.897639 17 24
+nest CSAConnector random(0.1) csa 48000 49.203945 23 24
+nest CSAConnector random(0.1) csa 48000 49.589869 20 24

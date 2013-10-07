@@ -166,3 +166,15 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
+nest CSAConnector random(0.1) libcsa 48000 14.144910 3 12
+nest CSAConnector random(0.1) libcsa 48000 14.413746 8 12
+nest CSAConnector random(0.1) libcsa 48000 14.412312 4 12
+nest CSAConnector random(0.1) libcsa 48000 14.802400 1 12
+nest CSAConnector random(0.1) libcsa 48000 14.851536 7 12
+nest CSAConnector random(0.1) libcsa 48000 14.913357 2 12
+nest CSAConnector random(0.1) libcsa 48000 15.502748 11 12
+nest CSAConnector random(0.1) libcsa 48000 15.801452 0 12
+nest CSAConnector random(0.1) libcsa 48000 15.849819 5 12
+nest CSAConnector random(0.1) libcsa 48000 16.248592 10 12
+nest CSAConnector random(0.1) libcsa 48000 16.394899 6 12
+nest CSAConnector random(0.1) libcsa 48000 16.418379 9 12
