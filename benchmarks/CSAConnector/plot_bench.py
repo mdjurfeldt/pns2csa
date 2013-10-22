@@ -117,7 +117,7 @@ for connector in connectors:
         print "saved '%s'" % fname
 
 
-for scaling_mode in ("strong",):#("weak", "strong"):
+for scaling_mode in ("weak", "strong"):
 
     datafile_runtime = "data/data_%s_scaling.log" % scaling_mode
     with open(datafile_runtime) as f:
@@ -139,6 +139,7 @@ for scaling_mode in ("strong",):#("weak", "strong"):
         np = int(d[7])
     
         if rank == 0:
+            print connector, pynn_component, library, n_neurons, time, np
             try:
                 data[connector][(pynn_component, library)].append((n_neurons, time, np))
             except: # connector not in data, or (pynn_component, library) not in data[connector]
@@ -198,12 +199,12 @@ plot2 = fig2.getroot()
 plot2.moveto(430, 10)
 txt2 = sg.TextElement(440, 20, "B", size=18, weight="bold")
 
-fig3 = sg.fromfile("CSAConnector_mem_random(0.1).svg")
+fig3 = sg.fromfile("CSAConnector_strong_scaling_random(0.1).svg")
 plot3 = fig3.getroot()
 plot3.moveto(0, 325)
 txt3 = sg.TextElement(10, 335, "C", size=18, weight="bold")
 
-fig4 = sg.fromfile("CSAConnector_strong_scaling_random(0.1).svg")
+fig4 = sg.fromfile("CSAConnector_weak_scaling_random(0.1).svg")
 plot4 = fig4.getroot()
 plot4.moveto(430, 325)
 txt4 = sg.TextElement(440, 335, "D", size=18, weight="bold")
