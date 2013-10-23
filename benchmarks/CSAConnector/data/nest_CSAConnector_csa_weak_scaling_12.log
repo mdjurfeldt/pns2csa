@@ -166,15 +166,15 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 48000 89.541720 5 12
-nest CSAConnector random(0.1) csa 48000 89.930525 4 12
-nest CSAConnector random(0.1) csa 48000 90.866920 0 12
-nest CSAConnector random(0.1) csa 48000 91.274189 2 12
-nest CSAConnector random(0.1) csa 48000 92.081760 3 12
-nest CSAConnector random(0.1) csa 48000 92.759055 11 12
-nest CSAConnector random(0.1) csa 48000 93.007914 6 12
-nest CSAConnector random(0.1) csa 48000 94.666328 8 12
-nest CSAConnector random(0.1) csa 48000 96.003603 7 12
-nest CSAConnector random(0.1) csa 48000 97.272557 1 12
-nest CSAConnector random(0.1) csa 48000 99.002209 9 12
-nest CSAConnector random(0.1) csa 48000 101.108122 10 12
+nest CSAConnector random(0.1) csa 12000 5.535001 7 12
+nest CSAConnector random(0.1) csa 12000 5.557103 0 12
+nest CSAConnector random(0.1) csa 12000 5.551426 1 12
+nest CSAConnector random(0.1) csa 12000 5.595147 2 12
+nest CSAConnector random(0.1) csa 12000 5.720558 3 12
+nest CSAConnector random(0.1) csa 12000 5.730342 8 12
+nest CSAConnector random(0.1) csa 12000 5.750605 11 12
+nest CSAConnector random(0.1) csa 12000 5.803717 9 12
+nest CSAConnector random(0.1) csa 12000 5.807214 4 12
+nest CSAConnector random(0.1) csa 12000 5.812463 6 12
+nest CSAConnector random(0.1) csa 12000 5.812307 10 12
+nest CSAConnector random(0.1) csa 12000 5.911710 5 12

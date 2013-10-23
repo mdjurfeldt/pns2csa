@@ -334,27 +334,27 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 24000 217.155804 0
-PyNN CSAConnector random(0.1) csa 24000 217.599458 8
-PyNN CSAConnector random(0.1) csa 24000 218.683595 15
-PyNN CSAConnector random(0.1) csa 24000 218.796691 22
-PyNN CSAConnector random(0.1) csa 24000 218.814937 5
-PyNN CSAConnector random(0.1) csa 24000 219.875326 13
-PyNN CSAConnector random(0.1) csa 24000 219.957199 1
-PyNN CSAConnector random(0.1) csa 24000 220.611069 23
-PyNN CSAConnector random(0.1) csa 24000 221.281689 12
-PyNN CSAConnector random(0.1) csa 24000 221.497978 10
-PyNN CSAConnector random(0.1) csa 24000 221.633509 18
-PyNN CSAConnector random(0.1) csa 24000 221.715043 6
-PyNN CSAConnector random(0.1) csa 24000 222.386187 17
-PyNN CSAConnector random(0.1) csa 24000 223.061223 7
-PyNN CSAConnector random(0.1) csa 24000 223.704228 11
-PyNN CSAConnector random(0.1) csa 24000 223.707240 19
-PyNN CSAConnector random(0.1) csa 24000 224.405309 21
-PyNN CSAConnector random(0.1) csa 24000 224.716736 3
-PyNN CSAConnector random(0.1) csa 24000 224.954463 4
-PyNN CSAConnector random(0.1) csa 24000 227.048768 16
-PyNN CSAConnector random(0.1) csa 24000 227.455042 20
-PyNN CSAConnector random(0.1) csa 24000 230.301403 14
-PyNN CSAConnector random(0.1) csa 24000 232.963551 9
-PyNN CSAConnector random(0.1) csa 24000 234.573842 2
+PyNN CSAConnector random(0.1) csa 48000 868.716263 6 24
+PyNN CSAConnector random(0.1) csa 48000 876.195634 5 24
+PyNN CSAConnector random(0.1) csa 48000 882.210551 7 24
+PyNN CSAConnector random(0.1) csa 48000 882.687580 16 24
+PyNN CSAConnector random(0.1) csa 48000 884.991311 3 24
+PyNN CSAConnector random(0.1) csa 48000 891.114217 8 24
+PyNN CSAConnector random(0.1) csa 48000 892.555066 15 24
+PyNN CSAConnector random(0.1) csa 48000 892.748759 21 24
+PyNN CSAConnector random(0.1) csa 48000 893.006156 22 24
+PyNN CSAConnector random(0.1) csa 48000 894.126992 19 24
+PyNN CSAConnector random(0.1) csa 48000 894.527824 11 24
+PyNN CSAConnector random(0.1) csa 48000 897.161580 20 24
+PyNN CSAConnector random(0.1) csa 48000 898.078736 2 24
+PyNN CSAConnector random(0.1) csa 48000 900.050958 9 24
+PyNN CSAConnector random(0.1) csa 48000 901.187791 12 24
+PyNN CSAConnector random(0.1) csa 48000 901.328570 4 24
+PyNN CSAConnector random(0.1) csa 48000 901.771832 14 24
+PyNN CSAConnector random(0.1) csa 48000 901.941154 0 24
+PyNN CSAConnector random(0.1) csa 48000 904.103323 17 24
+PyNN CSAConnector random(0.1) csa 48000 904.572010 1 24
+PyNN CSAConnector random(0.1) csa 48000 908.874067 10 24
+PyNN CSAConnector random(0.1) csa 48000 910.184134 18 24
+PyNN CSAConnector random(0.1) csa 48000 914.900700 23 24
+PyNN CSAConnector random(0.1) csa 48000 916.388013 13 24

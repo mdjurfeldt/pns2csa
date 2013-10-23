@@ -54,7 +54,7 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 4000 1.811393 3
-nest CSAConnector random(0.1) csa 4000 1.829840 0
-nest CSAConnector random(0.1) csa 4000 1.828550 1
-nest CSAConnector random(0.1) csa 4000 1.848489 2
+nest CSAConnector random(0.1) csa 48000 262.492589 1 4
+nest CSAConnector random(0.1) csa 48000 273.264137 3 4
+nest CSAConnector random(0.1) csa 48000 274.320120 2 4
+nest CSAConnector random(0.1) csa 48000 274.507917 0 4

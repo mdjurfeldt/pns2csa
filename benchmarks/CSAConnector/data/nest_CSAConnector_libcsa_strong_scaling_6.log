@@ -82,9 +82,9 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) libcsa 6000 0.456013 5
-nest CSAConnector random(0.1) libcsa 6000 0.500220 4
-nest CSAConnector random(0.1) libcsa 6000 0.511708 3
-nest CSAConnector random(0.1) libcsa 6000 0.528957 2
-nest CSAConnector random(0.1) libcsa 6000 0.537167 1
-nest CSAConnector random(0.1) libcsa 6000 0.531432 0
+nest CSAConnector random(0.1) libcsa 48000 29.260578 4 6
+nest CSAConnector random(0.1) libcsa 48000 29.284363 0 6
+nest CSAConnector random(0.1) libcsa 48000 29.603133 3 6
+nest CSAConnector random(0.1) libcsa 48000 31.067643 1 6
+nest CSAConnector random(0.1) libcsa 48000 31.449226 2 6
+nest CSAConnector random(0.1) libcsa 48000 31.512563 5 6
