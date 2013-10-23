@@ -12,4 +12,4 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 1000 0.450618 0
+nest CSAConnector random(0.1) csa 48000 1111.832372 0 1

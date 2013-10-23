@@ -166,15 +166,15 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 12000 56.658626 0
-PyNN CSAConnector random(0.1) csa 12000 56.839590 3
-PyNN CSAConnector random(0.1) csa 12000 56.903646 7
-PyNN CSAConnector random(0.1) csa 12000 57.247727 8
-PyNN CSAConnector random(0.1) csa 12000 57.578323 2
-PyNN CSAConnector random(0.1) csa 12000 58.221933 6
-PyNN CSAConnector random(0.1) csa 12000 58.757467 5
-PyNN CSAConnector random(0.1) csa 12000 58.823341 10
-PyNN CSAConnector random(0.1) csa 12000 58.912194 4
-PyNN CSAConnector random(0.1) csa 12000 59.032488 11
-PyNN CSAConnector random(0.1) csa 12000 59.378650 9
-PyNN CSAConnector random(0.1) csa 12000 60.786587 1
+PyNN CSAConnector random(0.1) csa 48000 926.741417 6 12
+PyNN CSAConnector random(0.1) csa 48000 934.498614 11 12
+PyNN CSAConnector random(0.1) csa 48000 947.014489 4 12
+PyNN CSAConnector random(0.1) csa 48000 947.252540 9 12
+PyNN CSAConnector random(0.1) csa 48000 947.660352 8 12
+PyNN CSAConnector random(0.1) csa 48000 954.320649 5 12
+PyNN CSAConnector random(0.1) csa 48000 958.647573 7 12
+PyNN CSAConnector random(0.1) csa 48000 962.297818 1 12
+PyNN CSAConnector random(0.1) csa 48000 964.663320 10 12
+PyNN CSAConnector random(0.1) csa 48000 967.000803 2 12
+PyNN CSAConnector random(0.1) csa 48000 975.088989 3 12
+PyNN CSAConnector random(0.1) csa 48000 1045.130984 0 12

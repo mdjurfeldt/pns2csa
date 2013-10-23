@@ -670,51 +670,51 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 48000 833.068850 1
-PyNN CSAConnector random(0.1) csa 48000 845.613349 16
-PyNN CSAConnector random(0.1) csa 48000 849.972019 34
-PyNN CSAConnector random(0.1) csa 48000 855.414492 32
-PyNN CSAConnector random(0.1) csa 48000 859.251060 3
-PyNN CSAConnector random(0.1) csa 48000 861.403877 45
-PyNN CSAConnector random(0.1) csa 48000 861.584675 4
-PyNN CSAConnector random(0.1) csa 48000 861.777909 11
-PyNN CSAConnector random(0.1) csa 48000 862.034943 6
-PyNN CSAConnector random(0.1) csa 48000 862.828596 29
-PyNN CSAConnector random(0.1) csa 48000 863.337926 43
-PyNN CSAConnector random(0.1) csa 48000 865.119685 9
-PyNN CSAConnector random(0.1) csa 48000 865.228666 21
-PyNN CSAConnector random(0.1) csa 48000 865.247633 27
-PyNN CSAConnector random(0.1) csa 48000 866.449157 8
-PyNN CSAConnector random(0.1) csa 48000 867.076171 30
-PyNN CSAConnector random(0.1) csa 48000 868.602340 12
-PyNN CSAConnector random(0.1) csa 48000 869.264581 41
-PyNN CSAConnector random(0.1) csa 48000 870.508549 18
-PyNN CSAConnector random(0.1) csa 48000 871.091233 33
-PyNN CSAConnector random(0.1) csa 48000 871.638315 28
-PyNN CSAConnector random(0.1) csa 48000 872.285744 2
-PyNN CSAConnector random(0.1) csa 48000 875.531148 26
-PyNN CSAConnector random(0.1) csa 48000 875.553966 7
-PyNN CSAConnector random(0.1) csa 48000 875.835250 0
-PyNN CSAConnector random(0.1) csa 48000 877.251871 25
-PyNN CSAConnector random(0.1) csa 48000 877.380512 20
-PyNN CSAConnector random(0.1) csa 48000 877.924573 17
-PyNN CSAConnector random(0.1) csa 48000 881.664924 19
-PyNN CSAConnector random(0.1) csa 48000 884.330324 40
-PyNN CSAConnector random(0.1) csa 48000 885.747332 5
-PyNN CSAConnector random(0.1) csa 48000 885.953196 23
-PyNN CSAConnector random(0.1) csa 48000 888.972925 15
-PyNN CSAConnector random(0.1) csa 48000 889.957697 36
-PyNN CSAConnector random(0.1) csa 48000 890.971859 14
-PyNN CSAConnector random(0.1) csa 48000 892.077043 10
-PyNN CSAConnector random(0.1) csa 48000 893.423282 35
-PyNN CSAConnector random(0.1) csa 48000 894.529385 22
-PyNN CSAConnector random(0.1) csa 48000 894.806107 38
-PyNN CSAConnector random(0.1) csa 48000 901.746384 39
-PyNN CSAConnector random(0.1) csa 48000 903.030366 31
-PyNN CSAConnector random(0.1) csa 48000 904.413777 44
-PyNN CSAConnector random(0.1) csa 48000 905.000740 13
-PyNN CSAConnector random(0.1) csa 48000 910.265594 37
-PyNN CSAConnector random(0.1) csa 48000 914.785981 42
-PyNN CSAConnector random(0.1) csa 48000 925.612985 47
-PyNN CSAConnector random(0.1) csa 48000 930.282367 24
-PyNN CSAConnector random(0.1) csa 48000 948.009882 46
+PyNN CSAConnector random(0.1) csa 48000 838.088140 3 48
+PyNN CSAConnector random(0.1) csa 48000 846.765079 9 48
+PyNN CSAConnector random(0.1) csa 48000 855.674564 22 48
+PyNN CSAConnector random(0.1) csa 48000 858.719916 31 48
+PyNN CSAConnector random(0.1) csa 48000 859.844043 43 48
+PyNN CSAConnector random(0.1) csa 48000 860.765538 39 48
+PyNN CSAConnector random(0.1) csa 48000 862.044417 46 48
+PyNN CSAConnector random(0.1) csa 48000 863.138895 1 48
+PyNN CSAConnector random(0.1) csa 48000 863.412843 47 48
+PyNN CSAConnector random(0.1) csa 48000 863.513161 14 48
+PyNN CSAConnector random(0.1) csa 48000 863.642402 8 48
+PyNN CSAConnector random(0.1) csa 48000 865.661695 40 48
+PyNN CSAConnector random(0.1) csa 48000 867.089783 38 48
+PyNN CSAConnector random(0.1) csa 48000 868.334163 18 48
+PyNN CSAConnector random(0.1) csa 48000 870.222912 20 48
+PyNN CSAConnector random(0.1) csa 48000 871.530948 30 48
+PyNN CSAConnector random(0.1) csa 48000 872.349518 44 48
+PyNN CSAConnector random(0.1) csa 48000 872.764432 10 48
+PyNN CSAConnector random(0.1) csa 48000 873.702708 24 48
+PyNN CSAConnector random(0.1) csa 48000 874.241003 19 48
+PyNN CSAConnector random(0.1) csa 48000 876.259221 13 48
+PyNN CSAConnector random(0.1) csa 48000 876.322721 7 48
+PyNN CSAConnector random(0.1) csa 48000 876.423605 21 48
+PyNN CSAConnector random(0.1) csa 48000 876.583937 28 48
+PyNN CSAConnector random(0.1) csa 48000 878.975769 17 48
+PyNN CSAConnector random(0.1) csa 48000 878.964590 0 48
+PyNN CSAConnector random(0.1) csa 48000 879.881506 5 48
+PyNN CSAConnector random(0.1) csa 48000 881.043630 2 48
+PyNN CSAConnector random(0.1) csa 48000 881.379582 42 48
+PyNN CSAConnector random(0.1) csa 48000 881.658666 35 48
+PyNN CSAConnector random(0.1) csa 48000 883.556357 6 48
+PyNN CSAConnector random(0.1) csa 48000 883.749471 37 48
+PyNN CSAConnector random(0.1) csa 48000 885.054930 25 48
+PyNN CSAConnector random(0.1) csa 48000 885.624814 45 48
+PyNN CSAConnector random(0.1) csa 48000 885.643535 34 48
+PyNN CSAConnector random(0.1) csa 48000 887.251570 12 48
+PyNN CSAConnector random(0.1) csa 48000 887.565975 27 48
+PyNN CSAConnector random(0.1) csa 48000 888.591050 26 48
+PyNN CSAConnector random(0.1) csa 48000 889.724593 36 48
+PyNN CSAConnector random(0.1) csa 48000 890.152868 11 48
+PyNN CSAConnector random(0.1) csa 48000 890.395683 15 48
+PyNN CSAConnector random(0.1) csa 48000 891.465692 23 48
+PyNN CSAConnector random(0.1) csa 48000 897.435671 33 48
+PyNN CSAConnector random(0.1) csa 48000 900.023537 16 48
+PyNN CSAConnector random(0.1) csa 48000 907.737185 32 48
+PyNN CSAConnector random(0.1) csa 48000 915.160630 41 48
+PyNN CSAConnector random(0.1) csa 48000 923.963192 29 48
+PyNN CSAConnector random(0.1) csa 48000 931.329044 4 48

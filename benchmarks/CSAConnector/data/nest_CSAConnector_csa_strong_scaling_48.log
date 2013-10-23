@@ -23,6 +23,20 @@ NO WARRANTY. See the file LICENSE for details.
 
 Problems or suggestions?
   Website     : http://www.nest-initiative.org
+
+              -- N E S T --
+
+  Copyright (C) 2004 The NEST Initiative
+  Version 2.3.svn Sep 28 2013 00:21:47
+
+This program is provided AS IS and comes with
+NO WARRANTY. See the file LICENSE for details.
+
+Problems or suggestions?
+  Website     : http://www.nest-initiative.org
+  Mailing list: nest_user@nest-initiative.org
+
+Type 'nest.help()' to find out more about NEST.
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
@@ -656,65 +670,51 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-
-              -- N E S T --
-
-  Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
-
-This program is provided AS IS and comes with
-NO WARRANTY. See the file LICENSE for details.
-
-Problems or suggestions?
-  Website     : http://www.nest-initiative.org
-  Mailing list: nest_user@nest-initiative.org
-
-Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 48000 23.343200 24
-nest CSAConnector random(0.1) csa 48000 23.355808 17
-nest CSAConnector random(0.1) csa 48000 23.345764 14
-nest CSAConnector random(0.1) csa 48000 23.432515 2
-nest CSAConnector random(0.1) csa 48000 23.479920 0
-nest CSAConnector random(0.1) csa 48000 23.335748 47
-nest CSAConnector random(0.1) csa 48000 23.565852 4
-nest CSAConnector random(0.1) csa 48000 23.539089 31
-nest CSAConnector random(0.1) csa 48000 23.262547 6
-nest CSAConnector random(0.1) csa 48000 23.499763 16
-nest CSAConnector random(0.1) csa 48000 23.253725 10
-nest CSAConnector random(0.1) csa 48000 23.440978 40
-nest CSAConnector random(0.1) csa 48000 23.299426 9
-nest CSAConnector random(0.1) csa 48000 23.501407 8
-nest CSAConnector random(0.1) csa 48000 23.711255 19
-nest CSAConnector random(0.1) csa 48000 23.400409 33
-nest CSAConnector random(0.1) csa 48000 23.372104 7
-nest CSAConnector random(0.1) csa 48000 23.802546 43
-nest CSAConnector random(0.1) csa 48000 23.808426 29
-nest CSAConnector random(0.1) csa 48000 23.660441 35
-nest CSAConnector random(0.1) csa 48000 23.920074 39
-nest CSAConnector random(0.1) csa 48000 23.594633 44
-nest CSAConnector random(0.1) csa 48000 23.905839 22
-nest CSAConnector random(0.1) csa 48000 23.632354 13
-nest CSAConnector random(0.1) csa 48000 23.959306 42
-nest CSAConnector random(0.1) csa 48000 23.713932 12
-nest CSAConnector random(0.1) csa 48000 23.978209 36
-nest CSAConnector random(0.1) csa 48000 23.941531 25
-nest CSAConnector random(0.1) csa 48000 23.724019 27
-nest CSAConnector random(0.1) csa 48000 23.603278 26
-nest CSAConnector random(0.1) csa 48000 24.021221 21
-nest CSAConnector random(0.1) csa 48000 24.077027 18
-nest CSAConnector random(0.1) csa 48000 23.731067 1
-nest CSAConnector random(0.1) csa 48000 23.756978 37
-nest CSAConnector random(0.1) csa 48000 23.781185 46
-nest CSAConnector random(0.1) csa 48000 23.914143 15
-nest CSAConnector random(0.1) csa 48000 24.193266 38
-nest CSAConnector random(0.1) csa 48000 23.826071 11
-nest CSAConnector random(0.1) csa 48000 23.960266 23
-nest CSAConnector random(0.1) csa 48000 23.903370 30
-nest CSAConnector random(0.1) csa 48000 24.073379 41
-nest CSAConnector random(0.1) csa 48000 23.927047 45
-nest CSAConnector random(0.1) csa 48000 24.108704 3
-nest CSAConnector random(0.1) csa 48000 24.236070 20
-nest CSAConnector random(0.1) csa 48000 24.116424 32
-nest CSAConnector random(0.1) csa 48000 24.273982 5
-nest CSAConnector random(0.1) csa 48000 24.326327 28
-nest CSAConnector random(0.1) csa 48000 25.279983 34
+nest CSAConnector random(0.1) csa 48000 23.025783 4 48
+nest CSAConnector random(0.1) csa 48000 22.999455 1 48
+nest CSAConnector random(0.1) csa 48000 23.382391 14 48
+nest CSAConnector random(0.1) csa 48000 23.358419 43 48
+nest CSAConnector random(0.1) csa 48000 23.361863 20 48
+nest CSAConnector random(0.1) csa 48000 23.409435 25 48
+nest CSAConnector random(0.1) csa 48000 23.413464 38 48
+nest CSAConnector random(0.1) csa 48000 23.398006 7 48
+nest CSAConnector random(0.1) csa 48000 23.454915 32 48
+nest CSAConnector random(0.1) csa 48000 23.359001 23 48
+nest CSAConnector random(0.1) csa 48000 23.536619 12 48
+nest CSAConnector random(0.1) csa 48000 23.556617 44 48
+nest CSAConnector random(0.1) csa 48000 23.542354 28 48
+nest CSAConnector random(0.1) csa 48000 23.567624 26 48
+nest CSAConnector random(0.1) csa 48000 23.591074 46 48
+nest CSAConnector random(0.1) csa 48000 23.692154 8 48
+nest CSAConnector random(0.1) csa 48000 23.627894 11 48
+nest CSAConnector random(0.1) csa 48000 23.659526 47 48
+nest CSAConnector random(0.1) csa 48000 23.655117 9 48
+nest CSAConnector random(0.1) csa 48000 23.650310 21 48
+nest CSAConnector random(0.1) csa 48000 23.358985 2 48
+nest CSAConnector random(0.1) csa 48000 23.692473 33 48
+nest CSAConnector random(0.1) csa 48000 23.739390 13 48
+nest CSAConnector random(0.1) csa 48000 23.732340 36 48
+nest CSAConnector random(0.1) csa 48000 23.770988 16 48
+nest CSAConnector random(0.1) csa 48000 23.735351 10 48
+nest CSAConnector random(0.1) csa 48000 23.792556 31 48
+nest CSAConnector random(0.1) csa 48000 23.515134 6 48
+nest CSAConnector random(0.1) csa 48000 23.817845 29 48
+nest CSAConnector random(0.1) csa 48000 23.816367 39 48
+nest CSAConnector random(0.1) csa 48000 23.553327 5 48
+nest CSAConnector random(0.1) csa 48000 23.831556 0 48
+nest CSAConnector random(0.1) csa 48000 23.860975 41 48
+nest CSAConnector random(0.1) csa 48000 23.911211 17 48
+nest CSAConnector random(0.1) csa 48000 24.008044 18 48
+nest CSAConnector random(0.1) csa 48000 24.030725 27 48
+nest CSAConnector random(0.1) csa 48000 23.793970 35 48
+nest CSAConnector random(0.1) csa 48000 23.787691 22 48
+nest CSAConnector random(0.1) csa 48000 24.039630 40 48
+nest CSAConnector random(0.1) csa 48000 23.844770 45 48
+nest CSAConnector random(0.1) csa 48000 24.096558 42 48
+nest CSAConnector random(0.1) csa 48000 24.113261 30 48
+nest CSAConnector random(0.1) csa 48000 24.130479 19 48
+nest CSAConnector random(0.1) csa 48000 23.941014 15 48
+nest CSAConnector random(0.1) csa 48000 24.005280 24 48
+nest CSAConnector random(0.1) csa 48000 23.826538 37 48
+nest CSAConnector random(0.1) csa 48000 24.344950 3 48
+nest CSAConnector random(0.1) csa 48000 24.417207 34 48

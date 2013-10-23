@@ -283,12 +283,52 @@ Some of the distinguishing aspects of CSA are:
   efficient and scalable on a parallel computer.
 \end{itemize}
 
-%\subsection{Basic concepts}
+\subsection{Basic concepts}
+
+In neuronal network simulations, we often want to connect a source
+population of neurons $P_s$ to a target population $P_t$.  In nature,
+such a connection corresponds to an axon arising from the axon hillock
+of a neuron and forming one of its synaptic contacts on the dendrite
+of a receiving neuron.  The basic concept of a CSA connection-set, in
+the setting of a neuronal simulation, is as the set of connections
+between $P_s$ and $P_t$, along with zero or more connection
+parameters, such as \emph{delay} or \emph{synaptic efficacy}.
+
+In order to create an abstraction barrier between the actual neurons
+of a population $P$ and the CSA, we enumerate $P$ using non-negative
+integers from an index set $\mathcal{I}$ and let a CSA connection from
+$P_s$ to $P_t$ be represented by the pair $(i, j)$, where $i \in
+\mathcal{I}_s, j \in \mathcal{I}_s$.  Such indices can be likened with
+the GIDs (Global IDentifier) of the NEURON and NEST simulators, but
+normally start at 0 and runs consecutively for each population.
+Introducing this abstraction, in the form of a mapping from objects in
+the simulation domain to integers, gives at least two major
+advantages: 1. The CSA does not need to care about the nature of the
+objects in $P$---they could just as well be synaptic boutons as neurons.
+2. The index set $\mathcal{I}$ can be chosen to be infinite.  The
+gain of this will be shown shortly.
+
+A connection-set with zero parameters is called a \emph{mask}. A mask
+holds information regarding the existence of connections
+
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
 %  \textbf{Figure 2.}{An example of using CSA.}\label{fig:02}
 %\subsection{Parallelization}
-%\subsection{Implementation}
+\subsection{Implementation}
+
+There currently exists three implementations of CSA.  The original
+implementation is written in C++ and is part of the SPLIT simulation
+library \citep{djurfeldt05}.  It was used to specify the connectivity
+of the KTH cortex model \citep{djurfeldt08}---a model with three
+hierarchical levels of structure.  The second implementation is
+written in Python.  Here, the purposes were 1. to get an easily usable
+and extendable demonstration of CSA and 2. to experiment with new ways
+to implement CSA. This implementation has been released as free
+software under the GPL and is available at the INCF software center
+\citep{djurfeldt10}.  The benchmarks in this article are performed
+using a novel C++ implementation.
+
 %\subsubsection{Masks}
 %\subsection{Python wrapper}
 %\subsection{Serialization/deserialization}
