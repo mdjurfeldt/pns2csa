@@ -554,23 +554,11 @@ not added to the mask.
 
 \section{Benchmarks}\label{sec:benchmarks}
 
-%To assess the absolute performance and the scaling behavior of our
-%implementation, we conducted several benchmark simulations. All
-%simulations consisted of building a random balanced network, which is
-%shown in Figure X.
-
-\tbw{To be written}
-
-\subsection{CSA vs. Topology vs. RCC}
-\tbw{To be written}
-
-\subsection{PYNN Connection Generators}
-
 We ran a series of benchmarks, in order to assess and compare the
 different implementations of CSA (see section \ref{sec:csa}) and the
 different implementations of the CSAConnector for PyNN (see section
-\ref{sec:conn_gen_pynn}). These benchmarks were using PyNN as available , In particular, the following combinations
-were tested:
+\ref{sec:conn_gen_pynn}). These benchmarks were using PyNN as
+available, In particular, the following combinations were tested:
 
 \begin{itemize}
 \item PyNN's original CSAConnector that is available for all backends
@@ -606,19 +594,21 @@ about below.
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.7]{benchmarks/CSAConnector/CSAConnector.pdf}
-\caption{Benchmark results for the use of CSA in PyNN and NEST
+\caption{Benchmark results for the use of CSA in NEST through PyNN
   comparing the two CSAConnector implementations explained in section
   \ref{sec:conn_gen_pynn} and the two CSA implementations explained in
   section \ref{sec:csa}. Color and dash codes are given in the
-  legends, slope is the mean slope of the data shown. \textbf{A} shows
-  the run time for connecting a network using CSAs \emph{random} mask
-  with a probality of 0.1 for different numbers of neurons. \textbf{B}
-  shows the same as in A, but using CSAs \emph{oneToOne}
-  mask. \textbf{C} shows the memory consumption of the Python process
-  after connecting the network described in A. \textbf{D} shows the
-  results of a strong scaling benchmark for different numbers of MPI
-  processes. The network contains 1,000 neurons per process and is
-  connected as the network in A.}\label{fig:pynn_benchmarks}
+  legends, slope is the slope between the first and the last data
+  point shown. Gray lines denote the expected scaling behavior.
+  \textbf{A} shows the run time for connecting a network using CSAs
+  \emph{random} mask with a probality of 0.1 for different numbers of
+  neurons. \textbf{B} shows the same as in A, but using CSAs
+  \emph{oneToOne} mask. \textbf{C} shows a strong scaling experiment,
+  wiring a network of 48,000 neurons using CSAs \emph{random} mask
+  with a probality of 0.1 and varying the number of MPI processes from
+  1 to 48. \textbf{D} shows the results of a weak scaling experiment,
+  wiring a network of 1,000 neurons per MPI process connected and run
+  in the same way as the experiment in C.}\label{fig:pynn_benchmarks}
 \end{figure}
 
 \tbw{To be written}
