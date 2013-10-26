@@ -9,13 +9,13 @@ import numpy
 import operator
 
 colors = {"nest": "#ff6633", "PyNN": "#31cd32"}
-styles = {"libcsa": "--", "csa": "-"}
+styles = {"libcsa": "dotted", "csa": "solid"}
 
-pylab.rc("axes", labelsize=14, titlesize=14)
-pylab.rc("xtick", labelsize=14)
-pylab.rc("ytick", labelsize=14)
-pylab.rc("font", size=14)
-pylab.rc("legend", fontsize=14)
+pylab.rc("axes", labelsize=12, titlesize=14)
+pylab.rc("xtick", labelsize=12)
+pylab.rc("ytick", labelsize=12)
+pylab.rc("font", size=12)
+pylab.rc("legend", fontsize=12)
 
 datafile_runtime = "data/data_runtime.log"
 with open(datafile_runtime) as f:
@@ -55,31 +55,35 @@ for connector in connectors:
 
     for (i, ((pynn_component, library), values)) in enumerate(data[connector].items()):
 
-        v = numpy.sort(numpy.array(values),0)
+        arr = numpy.array(values)
+        v = arr[arr[:,0].argsort()]
         n, t, m = v[:,0], v[:,1], v[:,2]
         color = colors[pynn_component]
-        style = styles[library]
 
         slope, _ = numpy.polyfit(numpy.log(n), numpy.log(t), 1)
         label = ", ".join((pynn_component, library, "%.2f" % slope))
-        ax1.loglog(n, t, lw=2, marker="o", linestyle=style, label=label,
-                   color=color, zorder=i+100)
+        line, = ax1.loglog(n, t, lw=2, marker="o", ls="-",
+                           label=label, color=color, zorder=i+100)
+        if styles[library] == "dotted":
+            line.set_dashes([2, 2])
 
         if "random" in connector:
             expected_t = [t[0]*(float(x)**2/n[0]**2) for x in n]
         else:
             expected_t = [t[0]*float(x)/n[0] for x in n]
-        ax1.loglog(n, expected_t, lw=4, c="#dddddd", zorder=i)
+        ax1.loglog(n, expected_t, lw=4, c=color, alpha=0.33, zorder=i)
         ax1.loglog(n, expected_t, lw=2, c="#eeeeee", zorder=i)
 
         if sum(m) != 0:
             slope, _ = numpy.polyfit(numpy.log(n), numpy.log(m), 1)
             label = ", ".join((pynn_component, library, "%.2f" % slope))
-            ax2.loglog(n, m/1024.0, lw=2, marker="o", linestyle=style, label=label,
-                       color=color, zorder=i+100)
+            line, = ax2.loglog(n, m/1024.0, lw=2, marker="o", ls="-",
+                       label=label, color=color, zorder=i+100)
+            if styles[library] == "dotted":
+                line.set_dashes([2, 2])
      
             expected_m = [m[0]*float(x)/n[0]/1024. for x in n]
-            ax2.loglog(n, expected_m, lw=4, c="#dddddd", zorder=i)
+            ax2.loglog(n, expected_m, lw=4, c=color, alpha=0.33, zorder=i)
             ax2.loglog(n, expected_m, lw=2, c="#eeeeee", zorder=i)
     
     fig1.subplots_adjust(left=0.14, bottom=0.1, right=0.96, top=0.91)
@@ -98,14 +102,14 @@ for connector in connectors:
     hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
     handles, labels = zip(*hl)
     ax1.legend(handles, labels, title="connector, library, slope",
-               fancybox=True, loc="best", numpoints=1)
+               fancybox=True, loc="best", numpoints=1, handlelength=2.2)
 
     handles, labels = ax2.get_legend_handles_labels()
     if len(handles) != 0:
         hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
         handles, labels = zip(*hl)
         ax2.legend(handles, labels, title="connector, library, slope",
-                   fancybox=True, loc="best", numpoints=1)
+                   fancybox=True, loc="best", numpoints=1, handlelength=2.2)
 
     fname = "CSAConnector_%s.svg" % connector
     fig1.savefig(fname)
@@ -139,7 +143,6 @@ for scaling_mode in ("weak", "strong"):
         np = int(d[7])
     
         if rank == 0:
-            print connector, pynn_component, library, n_neurons, time, np
             try:
                 data[connector][(pynn_component, library)].append((n_neurons, time, np))
             except: # connector not in data, or (pynn_component, library) not in data[connector]
@@ -156,18 +159,24 @@ for scaling_mode in ("weak", "strong"):
     
         for (i, ((pynn_component, library), values)) in enumerate(data[connector].items()):
     
-            v = numpy.sort(numpy.array(values),0)
+            arr = numpy.array(values)
+            v = arr[arr[:,2].argsort()]
             n, t, np = v[:,0], v[:,1], v[:,2]
             color = colors[pynn_component]
-            style = styles[library]
-    
-            slope, _ = numpy.polyfit(numpy.log(n), numpy.log(t), 1)
-            label = ", ".join((pynn_component, library, "%.2f" % slope))
-            ax1.semilogy(np, t, lw=2, marker="o", linestyle=style, label=label,
-                         color=color, zorder=i+100)
-    
-            expected_t = [t[0]*float(x)/n[0] for x in n]
-            ax1.semilogy(np, expected_t, lw=4, c="#dddddd", zorder=i)
+
+            slope, _ = numpy.polyfit(numpy.log(np), numpy.log(t), 1)
+            label = ", ".join((pynn_component, library, "%.2f" % abs(slope)))
+            line, = ax1.semilogy(np, t, lw=2, marker="o", ls="-", label=label,
+                                  color=color, zorder=i+100)
+            if styles[library] == "dotted":
+                line.set_dashes([2, 2])
+
+            if scaling_mode == "weak":
+                expected_t = [t[0] for _ in np]
+            else:
+                expected_t = [t[0]*np[0]/float(x) for x in np]
+
+            ax1.semilogy(np, expected_t, lw=4, c=color, alpha=0.33, zorder=i)
             ax1.semilogy(np, expected_t, lw=2, c="#eeeeee", zorder=i)
         
         fig1.subplots_adjust(left=0.14, bottom=0.1, right=0.96, top=0.91)
@@ -175,13 +184,25 @@ for scaling_mode in ("weak", "strong"):
         ax1.set_title("%s scaling of CSAConnector(%s)" % (scaling_mode.capitalize(), connector))
         ax1.set_xlabel("number of processes")
         ax1.set_ylabel("wallclock time (s)")
+
+        if scaling_mode == "strong":
+            ax1.set_ylim([10**0, 10**5])
+
+        ax1.set_xlim([1, 48])
+        ax1.set_xticks([1, 2, 4, 6, 12, 24, 48])
     
         handles, labels = ax1.get_legend_handles_labels()
         hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
         handles, labels = zip(*hl)
         ax1.legend(handles, labels, title="connector, library, slope",
-                   fancybox=True, loc="best", numpoints=1)
+                   fancybox=True, loc="best", numpoints=1, handlelength=2.2)
     
+        if scaling_mode == "weak":
+            ax1.text(0.5, 0.5, 'DRAFT\nDRAFT\nDRAFT', horizontalalignment='center',
+                     verticalalignment='center', transform=ax1.transAxes,
+                     fontsize=80, weight="bold", color="#cccccc", zorder=1000,
+                     alpha=0.75)
+
         fname = "CSAConnector_%s_scaling_%s.svg" % (scaling_mode, connector)
         fig1.savefig(fname)
         print "saved '%s'" % fname
