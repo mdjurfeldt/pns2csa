@@ -81,16 +81,20 @@
 \begin{abstract} % maximum 2000 characters including spaces
 
 Most neuronal network simulators provide simulator-specific methods
-for specifying connectivity. In addition, several universal
-description languages for neuronal network models (e.g. PyNN, NeuroML
-and NineML) have been developed. Usually, there is a choice between
-explicitly specifying individual connections or selecting one of a
-predefined set of connection primitives. Such primitives are well
-suited for building random balanced networks, synfire chains and
-recurrent networks without much structure. However, they often either
-lack the required expressiveness or their implementations lack the
-required computational efficiency to specify the connectivity of
-complex hierarchical network models now under investigation.
+for specifying connectivity. This has the effects that modelers need
+to learn the ways of each simulator and that descriptions of
+connectivity are not easily moved between simulators.  To accomodate
+this, several universal description languages for neuronal network
+models (e.g. PyNN, NeuroML and NineML) have been developed.
+
+There is commonly a choice between explicitly specifying individual
+connections or selecting one of a predefined set of connection
+primitives. Such primitives are usually well suited for building
+random balanced networks, synfire chains and recurrent networks
+without much structure, however they often either lack the required
+expressiveness or their implementations lack the required
+computational efficiency to specify the connectivity of complex
+hierarchical network models now under investigation.
 
 The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
 for specifying the connectivity of neuronal network models. CSA
@@ -150,37 +154,61 @@ results that demonstrate the excellent scaling of the implementation
 of the interface and close with a discussion of the interface and an
 outlook to further extensions.
 
-%----------------------------------------------------------------------
+\subsection{NeuroML and NineML}
 
-\subsection{NineML}
-\tbw{To be written}
-\subsection{NeuroML}
-\tbw{To be written}
+
 \subsection{CSA}
-\tbw{To be written}
+The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
+for network connectivity which can be used both when describing a
+network to a fellow researcher and when implementing a model for a
+simulator.  It is currently focused on connectivity which has a
+constructive or statistical element, but it can also be used when all
+network connections are given, or in cases where only elements of the
+connectivity is pre-specified.
 
-%----------------------------------------------------------------------
+Some of the distinguishing aspects of CSA are:
+\begin{itemize}
+\item It is abstract. CSA deals with sets of \emph{connections}. A
+  connection is basically just an edge in a graph, with associated
+  parameters. There is a clean separation between CSA and other
+  aspects of model or simulator infrastructure.
+\item A connection-set can represent a \emph{type} of
+  connectivity---a connectivity pattern---in addition to the connectivity
+  of a specific network.
+\item It is that it is an algebra: There are pre-existing
+  connection-sets and operators to define new connection-sets in terms
+  of existing.
+\item It enables a succinct and precise description and definition of
+  connectivity in terms of such algebraic expressions.
+\item There are ways to implement CSA on a computer which are both
+  efficient and scalable on a parallel computer.
+\end{itemize}
 
 \subsection{PyNN}
 
 PyNN \citep[http://www.neuralensemble.org/PyNN;][]{Davison09} is a
-community effort to provide a simulator-independent API to describe
-neuronal networks in Python. In PyNN, the network is built from
-Populations of neurons and Projections between them. Each Projection
-is created by a Connector, which knows how to set up the single
-connections. Different Connectors exist and allow to set up a variety
-of different connection patterns.
+community effort to provide a simulator-independent API for describing
+neuronal networks in Python. Given a PyNN/Python model description,
+the user can choose which simulator to use without a need for changes
+to the model script. This is achieved through a set of \emph{simulator
+backends} which are part of the PyNN code base. A backend adapts
+PyNN to a specific simulator.
 
-However, one of the regular problems with this approach is, that PyNN
-needs to break up the compact description of connectivity given by
-users into the commands understood by the respective backend. These
-are often already too low-level (e.g. convergent or divergent
-connects, one-to-one connects) and thus entail a certain performance
-penalty due to data transfer and function call overhead. This is
-especially problematic when randomly parametrized parameters are used
-(and drawn in Python), because this makes one-to-one connects the only
-possibility for transferring the connection information into the
-simulator.
+In PyNN, a neuronal network is built from Populations of neurons and
+Projections between them. Each Projection is created by a Connector,
+which knows how to set up the single connections. Different Connectors
+exist and allow to set up a variety of different connection patterns.
+
+However, one of the regular problems with this approach is that PyNN
+needs to break up the compact high-level description of connectivity
+given by users into the commands understood by the respective
+backend. These are often already too low-level (e.g. convergent or
+divergent connects, one-to-one connects) and thus entail a certain
+performance penalty due to data transfer and function call
+overhead. This is especially problematic when randomly parametrized
+parameters are used (and drawn in Python), because this makes
+one-to-one connects the only possibility for transferring the
+connection information into the simulator.
 
 The problem of excessive data transfers between PyNN and the simulator
 can be solved by passing a compact description of (possibly random)
@@ -258,32 +286,6 @@ Generator interface for NEST is explained in section
 %----------------------------------------------------------------------
 
 \section{The Connection-set Algebra}\label{sec:csa}
-
-The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
-for network connectivity which can be used both when describing a
-network to a fellow researcher and when implementing a model for a
-simulator.  It is currently focused on connectivity which has a
-constructive or statistical element, but it can also be used when all
-network connections are given, or in cases where only elements of the
-connectivity is pre-specified.
-
-Some of the distinguishing aspects of CSA are:
-\begin{itemize}
-\item It is abstract. CSA deals with sets of \emph{connections}. A
-  connection is basically just an edge in a graph, with associated
-  parameters. There is a clean separation between CSA and other
-  aspects of model or simulator infrastructure.
-\item A connection-set can represent a \emph{type} of
-  connectivity---a connectivity pattern---in addition to the connectivity
-  of a specific network.
-\item It is that it is an algebra: There are pre-existing
-  connection-sets and operators to define new connection-sets in terms
-  of existing.
-\item It enables a succinct and precise description and definition of
-  connectivity in terms of such algebraic expressions.
-\item There are ways to implement CSA on a computer which are both
-  efficient and scalable on a parallel computer.
-\end{itemize}
 
 \subsection{Basic concepts}
 
