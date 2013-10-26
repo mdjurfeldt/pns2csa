@@ -161,12 +161,13 @@ models. It aims to describe the biophysics, anatomy and network
 architecture of neuronal systems at multiple scales and to facilitate
 the exchange of complex neuronal models between researchers. Although
 NeuroML is, to the extent that XML allows, human readable it can also
-be read and written by, for example, XML editors, graphical model
-construction environments \citep{gleeson07} and neuronal
-simulators. The NetworkML layer of NeuroML allows for either explicit
-lists of connections or implicit specification of connections through
-selection from a limited palette of algorithms such as all-to-all,
-one-to-one or different forms of random connectivity.
+be read and written by software tools such as
+%XML editors,
+graphical model construction environments \citep{gleeson07} and
+neuronal simulators. The NetworkML layer of NeuroML allows for either
+explicit lists of connections or implicit specification of connections
+through selection from a limited palette of algorithms such as
+all-to-all, one-to-one or different forms of random connectivity.
 %Thus, NeuroML can play the
 %role of an interface, not only between researchers but also between
 %software tools. This enables modularity and software re-use in the
@@ -203,9 +204,8 @@ network to a fellow researcher and when implementing a model for a
 simulator.  It is currently focused on connectivity which has a
 constructive or statistical element, but it can also be used when all
 network connections are given, or in cases where only elements of the
-connectivity is pre-specified.
-
-Some of the distinguishing aspects of CSA are:
+connectivity is pre-specified.  Some of the distinguishing aspects of
+CSA are:
 \begin{itemize}
 \item It is abstract. CSA deals with sets of \emph{connections}. A
   connection is basically just an edge in a graph, with associated
@@ -221,6 +221,8 @@ Some of the distinguishing aspects of CSA are:
 \item There are ways to implement CSA on a computer which are both
   efficient and scalable on a parallel computer.
 \end{itemize}
+There exists multiple implementations of CSA (see section
+\ref{sec:impl}).
 
 \subsection{PyNN}
 
@@ -357,7 +359,7 @@ holds information regarding the existence of connections
 %\subsection{Examples}
 %  \textbf{Figure 2.}{An example of using CSA.}\label{fig:02}
 %\subsection{Parallelization}
-\subsection{Implementation}
+\subsection{Implementation}\label{sec:impl}
 
 There currently exists three implementations of CSA.  The original
 implementation is written in C++ and is part of the SPLIT simulation
