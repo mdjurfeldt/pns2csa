@@ -8,6 +8,9 @@
 % Own stuff
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
+\usepackage{xspace}
+\usepackage{textcomp}
+\newcommand{\permil}{\,\textperthousand\xspace}
 \newcommand{\tbw}[1]{{\bf\parindent0pt\color{red}#1}}
 \usepackage{minted}
 \newminted{python}{showspaces=false,
@@ -56,7 +59,6 @@
 
 % \color{FrontiersColor} Is the color used in the Journal name, in the
 % title, and the names of the sections
-
 
 \begin{document}
 \onecolumn
@@ -386,15 +388,27 @@ consists of the following functions:
 
 \section{NEST connection generators}\label{sec:conn_gen_nest}
 
-To support the Connection Generator interface in NEST, the user
-interfaces (SLI and PyNEST) have been extended by the function
-\texttt{CGConnect}. It takes a ConnectionGenerator, pre- and a
-post-synaptic populations, and a parameter map as arguments. The
-ConnectionGenerator object contains the rules how to connect indices
-in the pre-synaptic population with those from the post-synaptic
-population. The parameter map maps parameter names (e.g.
-\emph{weight}, \emph{delay}) to their index in the value set
-corresponding to the source-target pair in the ConnectionGenerator.
+To support the Connection Generator interface in NEST, we created the
+ConnectionGeneratorModule, a plugin which can be turned on and off at
+compile time of NEST and extended the user interfaces SLI and PyNEST
+by the following functions:
+
+\begin{unlist}
+\item[\tt CGConnect\ ] takes a ConnectionGenerator, the indices of pre-
+  and a post-synaptic populations, and a parameter map and creates the
+  connections prescribed by the rules containes in the
+  ConnectionGenerator object. The parameter map maps parameter names
+  (e.g.  \emph{weight}, \emph{delay}) to their index in the value set
+  corresponding to the source-target pair in the ConnectionGenerator.
+\item[\tt CGSelectImplementation\ ] selects a library to provide the
+  connection generation functionality based on an XML tag, which
+  represents the parent node of a serialized connection generator a
+  the name of a library to provide a parser for such an XML file.
+\end{unlist}
+
+% On many supercomputers, Python is not available on the compute
+% nodes, or the memory and performance hits are not acceptable, which
+% would render a purely Python based CSA interface unusable.
 
 When PyNEST is used, the ConnectionGenerator can be created by the
 user in Python using the Python wrapper of libcsa. In the call to
@@ -424,21 +438,158 @@ re-instantiate the object, which can then be given to the
   the ConnectionGenerator. \textcircled{\footnotesize 3} The NEST
   kernel iterates the ConnectionGenerator by calling \texttt{next()}
   until there are no more connection. For each connection it receives,
-  it creates the connection by calling
-  \texttt{Network::connect()}.}\label{fig:sequence_diagram_nest}
+  it creates the connection by calling \texttt{Network::connect()}. If
+  a non-empty \emph{param\_map} was given, the connection's weight and
+  delay are taken from the value-set attached to
+  \emph{cg}}\label{fig:sequence_diagram_nest}
 \end{figure}
 
-Figure \ref{fig:sequence_diagram_nest} shows the different objects in
-NEST that are involved in a user call to \texttt{CGConnect()}. After
-setting the masks for the ConnectionGenerator, the NEST kernel
-iteratively calls \texttt{next()}, which returns the source index,
-target index of the next connection and the parameters of the
-connection. The connections are established by calling NEST's basic
-\texttt{Network::connect()} function. The extraction of contiguous
-ranges and the index translation for the creation of masks is detailed
-in section \ref{sec:creating_masks}.
+Figure \ref{fig:sequence_diagram_nest} shows the different entities in
+NEST involved in a user call to \texttt{CGConnect()}. After setting
+the masks for the ConnectionGenerator, the NEST kernel iteratively
+calls \texttt{next()}, which returns the source and target index of
+the next connection and the parameters for the connection. The
+connections are established one by one by calling NEST's basic
+\texttt{Network::connect()} function.
 
-\subsection{Creating masks}\label{sec:creating_masks}
+The extraction of contiguous ranges from the population supplied as
+user arguments and the index translation for the creation of masks is
+detailed in section \ref{sec:creating_masks}.
+
+%----------------------------------------------------------------------
+
+\section{PyNN connection generators}\label{sec:conn_gen_pynn}
+\tbw{To be written}
+
+%----------------------------------------------------------------------
+
+\section{Benchmarks}\label{sec:benchmarks}
+
+We ran a series of benchmarks, in order to assess the performance and
+compare the different implementations of CSA (see section
+\ref{sec:csa}) and the different implementations of the CSAConnector
+for PyNN (see section \ref{sec:conn_gen_pynn}). In particular, the
+following combinations were tested:
+
+\begin{itemize}
+\item \textbf{PyNN, csa} This used PyNN's original CSAConnector that
+  is available for all backends in combination with the Python CSA
+  implementation (as gotten from the INCF software center via SVN).
+  The CSAConnector intersects the csa object with a mask consisting of
+  the nodes in the Projection and iterates the csa object on the
+  Python level and connects by sending one ConvergentConnect call per
+  source and target (Andrew, why not plain Connects?) to PyNEST.
+\item \textbf{nest, csa} This used my new CSAConnector for the NEST
+  backend (from py personal github form of PyNN at
+  https://github.com/jougs/PyNN) and the Python CSA
+  implementation. The CSAConnector just passes down the csa object as
+  ConnectionGenerator to PyNEST, which iterates it from the C++ level
+  by issueing callbacks to the corresponding Python functions.
+\item \textbf{nest, libcsa} This used my new CSAConnector for the NEST
+  backend and the C++ CSA implementation libcsa (from your private
+  git). The object is instantiated from Python and passed down by
+  PyNN. However, all iterations happen completely in C++, with only
+  little overhead added by function calls in PyNN, PyNEST and SLI.
+\end{itemize}
+
+Indeed, we cannot run the fourth combination (PyNN, libcsa) due to the
+error described in a previous mail (see attachment). Due to sleep
+deprivation and the prospect of explaining stuff(tm) to 30k visitors
+at the open day at the Research Center tomorrow, I don't fully
+understand what you propose, but assume that this is what you write
+about below.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=.7]{benchmarks/CSAConnector/CSAConnector.pdf}
+\caption{Benchmark results for the use of CSA in NEST through PyNN
+  comparing the two CSAConnector implementations explained in section
+  \ref{sec:conn_gen_pynn} and the two CSA implementations explained in
+  section \ref{sec:csa}. Color and dash codes are given in the
+  legends, slope is the slope between the first and the last data
+  point shown. Gray lines denote the expected scaling behavior.
+  \textbf{A} shows the run time for connecting a network using CSAs
+  \emph{random} mask with a probality of 0.1 for different numbers of
+  neurons. \textbf{B} shows the same as in A, but using CSAs
+  \emph{oneToOne} mask. \textbf{C} shows a strong scaling experiment,
+  wiring a network of 48,000 neurons using CSAs \emph{random} mask
+  with a probality of 0.1 and varying the number of MPI processes from
+  1 to 48. \textbf{D} shows the results of a weak scaling experiment,
+  wiring a network of 1,000 neurons per MPI process connected and run
+  in the same way as the experiment in C.}\label{fig:pynn_benchmarks}
+\end{figure}
+
+The choice of 1,2,4,6,12,24,48 MPI processes is to prevent artifacts
+because of the machine used for benchmarking. It used 4 AMD Operon
+Magny Cours processors that are organized into 8 NUMA domains with 6
+cores each. No additional measures (e.g. pinning of processes to
+cores, altering the affinity of threads to cores) to avoid distortions
+of the benchmark results were taken.
+
+Runtime benchmarks (figure \ref{fig:pynn_benchmarks} A and B) used one
+MPI process and varied the number of neurons from $10^2$ to $10^5$
+with one sample per order of magnitude.
+
+To demonstrate the excellent scalability of the implementations, we
+also carried out scaling benchmarks. Both weak and strong scaling
+benchmarks were run using CSA's \emph{random} mask with a probality of
+$0.1$.
+
+In the strong scaling benchmark, the number of MPI processes was
+varied (see below), while keeping the total number of neurons in the
+network fixed at $48 \cdot 10^3$.
+
+The weak scaling benchmark
+
+Please note that the number of connection grows quadratically with the
+number of neurons when using CSA's \emph{random} mask with a fixed
+probality. To linearly scale up the workload (i.e. the number of
+connections to be created) with the number of MPI processes, the
+number of neurons per process was increased with the square root of
+the desired number of connections. In the realm of natural numbers,
+this leads to a slight error, which was well acceptable with values
+between $-0.05$\permil and $+0.06$\permil.
+
+% from numpy import array, ones, sqrt
+% num_conn_optimal = [48000**2*0.1/(48/x) for x in (1,2,4,6,12,24,48)]
+% num_neurons = [sqrt(x*10) for x in num_conn_optimal]
+% num_conn_real = [round(x)**2*0.1 for x in num_neurons]
+% error = ones(7) - array(num_conn_real) / array(num_conn_optimal) * 1000
+% print "num_neurons for 1,2,4,6,12,24,48 processes:", array(num_neurons).round()
+% print "error in percent: min=%f, max=%f" % (min(error), max(error))
+
+\tbw{To be written}
+
+%----------------------------------------------------------------------
+
+\section{Discussion and outlook}
+
+\begin{itemize}
+\item Allow more than 2 parameters to be created by CSA (e.g. for
+  synapse models with more variables, like STDP, Tsodyks; NEST: make
+  number of parameters explicit and check against this value)
+\item We are investigating if the code for finding contiguous ranges
+  and to do the index translation can be extracted from NEST's
+  ConnectionGeneratorModule and made available to other simulators as
+  part of libneurosim
+\end{itemize}
+
+%----------------------------------------------------------------------
+
+\section*{Conflict-of-Interest Statement}
+The authors declare that the research was conducted in the absence of
+any commercial or financial relationships that could be construed as a
+potential conflict of interest.
+
+\section*{Acknowledgement}
+Partially supported by the Helmholtz Association: HASB and portfolio
+theme SMHB, the Jülich Aachen Research Alliance (JARA), the VSR
+computation time grant JINB33 on the JUQUEEN supercomputer in Jülich,
+and EU Grant 269921 (BrainScaleS). The authors would like to thank
+Randall Munroe of http://www.xkcd.org for granting the permission to
+use his drawings in the sequence diagrams throughout this article.
+
+\section*{Appendix A: Creating masks in NEST}\label{sec:creating_masks}
 
 As explained in section \ref{sec:csa}, CSA needs to know about which
 neurons in the pre- and post-synaptic population are local to the MPI
@@ -449,7 +600,7 @@ last index of each contiguous range of indices plus an additional skip
 value, which is used to describes the ``turn-around'' for a round-robin
 distributions of neurons onto MPI processes.
 
-\subsubsection*{Identifying contiguous ranges:}
+\subsection*{Identifying contiguous ranges}
 
 All elements (neurons or devices) in NEST are identified uniquely by
 an integer number, their global id (\emph{gid}). All connection
@@ -557,7 +708,7 @@ is the basis of the binary search.
             step /= 2
 \end{pythoncode}
 
-\subsubsection*{Index translation:}
+\subsection*{Index translation}
 
 All elements in NEST are identified by their global id and thus the
 range-finding procedure explained in the previous section returns the
@@ -580,103 +731,11 @@ index-translation renders the resulting range empty (i.e. because the
 first local id is beyond the last element of the range), the range is
 not added to the mask.
 
-%\subsection{Deserialization}
-%On many supercomputers, Python is not available on the compute nodes,
-%which would render a purely Python based CSA interface unusable.
+\section*{Appendix B: Software versions used}
 
+These benchmarks were using PyNN as available on gitub and NEST
+revision XXXX from the internal SVN. PyNN...
 
-%----------------------------------------------------------------------
-
-\section{PyNN connection generators}\label{sec:conn_gen_pynn}
-\tbw{To be written}
-
-%----------------------------------------------------------------------
-
-\section{Benchmarks}\label{sec:benchmarks}
-
-We ran a series of benchmarks, in order to assess and compare the
-different implementations of CSA (see section \ref{sec:csa}) and the
-different implementations of the CSAConnector for PyNN (see section
-\ref{sec:conn_gen_pynn}). These benchmarks were using PyNN as
-available, In particular, the following combinations were tested:
-
-\begin{itemize}
-\item PyNN's original CSAConnector that is available for all backends
-  in combination with the Python CSA implementation (as gotten from
-  the INCF software center via SVN)
-
-\textbf{PyNN, csa} This used  and
-  the . The CSAConnector intersects the csa object with a
-  mask consisting of the nodes in the Projection and iterates the csa
-  object on the Python level and connects by sending one
-  ConvergentConnect call per source and target (Andrew, why not plain
-  Connects?) to PyNEST.
-\item \textbf{nest, csa} This used my new CSAConnector for the NEST
-  backend (from py personal github form of PyNN at
-  https://github.com/jougs/PyNN) and the Python CSA
-  implementation. The CSAConnector just passes down the csa object as
-  ConnectionGenerator to PyNEST, which iterates it from the C++ level
-  by issueing callbacks to the corresponding Python functions.
-\item \textbf{nest, libcsa} This used my new CSAConnector for the NEST
-  backend and the C++ CSA implementation libcsa (from your private
-  git). The object is instantiated from Python and passed down by
-  PyNN. However, all iterations happen completely in C++, with only
-  little overhead added by function calls in PyNN, PyNEST and SLI.
-\end{itemize}
-
-Indeed, we cannot run the fourth combination (PyNN, libcsa) due to the
-error described in a previous mail (see attachment). Due to sleep
-deprivation and the prospect of explaining stuff(tm) to 30k visitors
-at the open day at the Research Center tomorrow, I don't fully
-understand what you propose, but assume that this is what you write
-about below.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=.7]{benchmarks/CSAConnector/CSAConnector.pdf}
-\caption{Benchmark results for the use of CSA in NEST through PyNN
-  comparing the two CSAConnector implementations explained in section
-  \ref{sec:conn_gen_pynn} and the two CSA implementations explained in
-  section \ref{sec:csa}. Color and dash codes are given in the
-  legends, slope is the slope between the first and the last data
-  point shown. Gray lines denote the expected scaling behavior.
-  \textbf{A} shows the run time for connecting a network using CSAs
-  \emph{random} mask with a probality of 0.1 for different numbers of
-  neurons. \textbf{B} shows the same as in A, but using CSAs
-  \emph{oneToOne} mask. \textbf{C} shows a strong scaling experiment,
-  wiring a network of 48,000 neurons using CSAs \emph{random} mask
-  with a probality of 0.1 and varying the number of MPI processes from
-  1 to 48. \textbf{D} shows the results of a weak scaling experiment,
-  wiring a network of 1,000 neurons per MPI process connected and run
-  in the same way as the experiment in C.}\label{fig:pynn_benchmarks}
-\end{figure}
-
-\tbw{To be written}
-
-%----------------------------------------------------------------------
-
-\section{Discussion and outlook}
-\tbw{To be written}
-
-%Allow more than 2 parameters to be created by CSA (NEST: make
-%number of parameters explicit and check against this value)
-
-%----------------------------------------------------------------------
-
-\section*{Conflict-of-Interest Statement}
-The authors declare that the research was conducted in the absence of
-any commercial or financial relationships that could be construed as a
-potential conflict of interest.
-
-\section*{Acknowledgement}
-Partially supported by the Helmholtz Association: HASB and portfolio
-theme SMHB, the Jülich Aachen Research Alliance (JARA), the VSR
-computation time grant JINB33 on the JUQUEEN supercomputer in Jülich,
-and EU Grant 269921 (BrainScaleS). The authors would like to thank
-Randall Munroe of http://www.xkcd.org for granting the permission to
-use his drawings in the sequence diagrams throughout this article.
-
-%\section*{Supplemental Data}
 
 \bibliographystyle{frontiersinSCNS&ENG}
 \bibliography{pns2csa13}
