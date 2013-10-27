@@ -344,15 +344,15 @@ axon hillock of a neuron and forming one of its synaptic contacts on
 the spine/dendrite of a receiving neuron.  The basic concept of a CSA
 connection-set, in the context of neuronal network simulation, is
 defined as the set of connections between $P_s$ and $P_t$, along with
-zero or more connection parameters, such as \emph{delay} or
+zero or more per-connection parameters, such as \emph{delay} or
 \emph{synaptic efficacy}.
 
 In order to create an abstraction barrier between the actual neurons
 of a population $P$ and the CSA, we enumerate $P$ using non-negative
 integers from an index set $\mathcal{I}$ and let a CSA connection from
 $P_s$ to $P_t$ be represented by the pair $(i, j)$, where $i \in
-\mathcal{I}_s, j \in \mathcal{I}_s$.  Such indices can be likened with
-the GIDs (Global IDentifier) of the NEURON and NEST simulators, but
+\mathcal{I}_s, j \in \mathcal{I}_t$.  Such indices can be likened with
+the GIDs (Global IDentifiers) of the NEURON and NEST simulators, but
 normally start at 0 and runs consecutively for each population.
 Introducing this abstraction, in the form of a mapping from objects in
 the simulation domain to integers, gives at least two major
