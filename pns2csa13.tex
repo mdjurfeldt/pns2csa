@@ -133,10 +133,10 @@ developers. Especially in a parallel environment, this is not a
 trivial pursuit. One way to ease this problem is the use of general
 connection-generating libraries like the Connection-set Algebra
 \citep[CSA;][]{djurfeldt12} or the graph library developed for NineML
-\citep{raikov10}. They allow a simulator-independent specification of
-connectivity and comprise a compact description of connectivity, which
-can be efficiently transferred between different levels of simulation
-description languages.
+\citep{raikov10}. They allow simulator-independent specification of
+connectivity and enable high-level descriptions which can be passed to
+a simulator core for efficient, parallelized, setup of connectivity,
+avoiding the overhead associated with scripted algorithms.
 
 To take account of the fact that different users prefer different
 simulators and also might prefer different libraries to create
