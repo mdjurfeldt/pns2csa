@@ -302,23 +302,27 @@ For such cases, the connection functions \texttt{ConvergentConnect()}
 and \texttt{DivergentConnect()} can be used to create multiple
 connections with a single call. In addition, random variants for both
 functions exist to support the user in creating networks on the basis
-of statistic knowledge. However, random parameters (e.g. weight,
-delay) for the connections need to be drawn manually by the user and
-supplied to NEST after the creation of connections.
+of knowledge of connectivity statistics. However, random connection
+parameters (e.g. weight, delay) need to be drawn manually by the user
+and supplied to NEST after the creation of connections.
 
 \tbw{Should we add a figure here? Maybe the ones
-  from\\ http://nest-initiative.org/index.php/Connection\_Management?}
+  from\\ http://nest-initiative.org/index.php/Connection\_Management?\\
+Mikael: I think we should first write all text and then prioritize
+what the most important needed figures are.}
 
 \subsubsection*{Topology module:}
 
 To ease the creation of networks with topological relations between
 the neurons and organizations of neurons into layers and areas, NEST
 provides a Topology module \citep{Plesser_13}. It supports the user in
-connecting neurons and randomly initialize synapse parameters based on
-toplogical measures in the network.
+connecting neurons and randomly initializing synapse parameters based
+on toplogical measures in the network.
 
 \tbw{Should we add a code listing or some more information on how to
-  use the Toplogy module?}
+  use the Toplogy module?\\
+Mikael: Only if we include Topology benchmarks, I think. If not, we
+also need to modify the text below.}
 
 A comparison of the performance of the Topology module to the native
 connection routines and to the novel CSA interface to NEST is given in
