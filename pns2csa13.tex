@@ -238,8 +238,9 @@ PyNN to a specific simulator.
 
 In PyNN, a neuronal network is built from Populations of neurons and
 Projections between them. Each Projection is created by a Connector,
-which knows how to set up the single connections. Different Connectors
-exist and allow to set up a variety of different connection patterns.
+which knows how to set up the individual connections. Different
+Connectors exist and allow to set up a variety of different connection
+patterns.
 
 However, one of the regular problems with this approach is that PyNN
 needs to break up the compact high-level description of connectivity
@@ -247,20 +248,20 @@ given by users into the commands understood by the respective
 backend. These are often already too low-level (e.g. convergent or
 divergent connects, one-to-one connects) and thus entail a certain
 performance penalty due to data transfer and function call
-overhead. This is especially problematic when randomly parametrized
-parameters are used (and drawn in Python), because this makes
-one-to-one connects the only possibility for transferring the
-connection information into the simulator.
+overhead. This is especially problematic when random connection
+parameters are used (and drawn in Python), because this makes one by
+one connects the only possibility for transferring the connection
+information into the simulator.
 
 The problem of excessive data transfers between PyNN and the simulator
-can be solved by passing a compact description of (possibly random)
+can be solved by passing a high-level description of (possibly random)
 connectivity to the simulator. This representation can then be
-iterated and expanded only on the simulator level and thus avoid
-overhead. Moreover, this also allows the efficient parallelization on
-the lower software layers.
+iterated and expanded at the simulator level and thus avoid
+overhead. Moreover, this also allows efficient parallelization at the
+lower software layers.
 
 Since version 0.7, PyNN provides the CSAConnector, which can iterate a
-CSA connection set and issue one-to-one connect calls at the different
+CSA connection set and issue one by one connect calls in the different
 backends. During this study, we extended PyNN with a new and
 specialized CSAConnector, which passes the complete CSA object down to
 the simulator to reduce the overhead. The details of this effienct
