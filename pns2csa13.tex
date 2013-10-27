@@ -125,17 +125,18 @@ good scalability when transferred to the simulator.
 \section{Introduction}
 
 Currently, most simulators use their own methods for describing
-connections between neurons. This makes it hard for users to port
-models from one simulator to another and leaves the efficient
-implementation of connection-generating functions as a task to the
-simulator developers. Especially in a parallel environment, this is
-not a trivial pursuit. One way to ease this problem is the use of
-general connection-generating libraries like the Connection-set
-Algebra \citep[CSA;][]{djurfeldt12} or the graph library developed for
-NineML \citep{raikov10}. They allow a simulator-independent
-specification of connectivity and comprise a compact description of
-connectivity, which can be efficiently transferred between different
-levels of simulation description languages.
+connections between neurons. This requires users to learn the ways of
+each simulator.  Furthermore it makes it hard to port models from one
+simulator to another and leaves the efficient implementation of
+connection-generating functions as a task to the simulator
+developers. Especially in a parallel environment, this is not a
+trivial pursuit. One way to ease this problem is the use of general
+connection-generating libraries like the Connection-set Algebra
+\citep[CSA;][]{djurfeldt12} or the graph library developed for NineML
+\citep{raikov10}. They allow a simulator-independent specification of
+connectivity and comprise a compact description of connectivity, which
+can be efficiently transferred between different levels of simulation
+description languages.
 
 To take account of the fact that different users prefer different
 simulators and also might prefer different libraries to create
@@ -202,10 +203,10 @@ The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
 for network connectivity which can be used both when describing a
 network to a fellow researcher and when implementing a model for a
 simulator.  It is currently focused on connectivity which has a
-constructive or statistical element, but it can also be used when all
-network connections are given, or in cases where only elements of the
-connectivity is pre-specified.  Some of the distinguishing aspects of
-CSA are:
+constructive or statistical element such that it can be specified by
+an algorithm, but it can also be used when all network connections are
+given, or in cases where only some elements of the connectivity are
+explicitly specified. The distinguishing aspects of CSA are:
 \begin{itemize}
 \item It is abstract. CSA deals with sets of \emph{connections}. A
   connection is basically just an edge in a graph, with associated
