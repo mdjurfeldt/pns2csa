@@ -336,14 +336,16 @@ Generator interface for NEST is explained in section
 
 \subsection{Basic concepts}
 
-In neuronal network simulations, we often want to connect a source
-population of neurons $P_s$ to a target population $P_t$.  In nature,
-such a connection corresponds to an axon arising from the axon hillock
-of a neuron and forming one of its synaptic contacts on the dendrite
-of a receiving neuron.  The basic concept of a CSA connection-set, in
-the setting of a neuronal simulation, is as the set of connections
-between $P_s$ and $P_t$, along with zero or more connection
-parameters, such as \emph{delay} or \emph{synaptic efficacy}.
+In neuronal network simulations, we often want to specify a projection
+between a source population of neurons $P_s$ to a target population
+$P_t$.  A projection consists of many individual connections.  In
+nature, one such connection corresponds to an axon arising from the
+axon hillock of a neuron and forming one of its synaptic contacts on
+the spine/dendrite of a receiving neuron.  The basic concept of a CSA
+connection-set, in the context of neuronal network simulation, is
+defined as the set of connections between $P_s$ and $P_t$, along with
+zero or more connection parameters, such as \emph{delay} or
+\emph{synaptic efficacy}.
 
 In order to create an abstraction barrier between the actual neurons
 of a population $P$ and the CSA, we enumerate $P$ using non-negative
