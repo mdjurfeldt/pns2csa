@@ -5,17 +5,33 @@ These benchmarks will compare the performance of PyNN's CSAConnector
 and the CSAConnector from the NEST backend using Python CSA (csa) and
 the C++ version of CSA (libcsa). The benchmarks are run for different
 numbers of neurons by the script do_bench.sh. Please adapt them as
-needed.
+needed. To instrument NEST to do timing measurement on diffetrent
+parts of CGConnect, cg_connect_instrumentation_r10722.patch has to be
+applied on the NEST checkout.
+
+
+Running
+-------
+To run the benchmark on hambach, it is enough to run the script
+
+    run_bench.sh
+
+It will qsub all .jdf files in this directory. They in turn set the
+environment, allocate a machine with 48 cores, and run the do_bench
+scripts. After the jobs are finished, the data can be extracted from
+the log files by running the script
+
+    data/extract_data.sh
+
+It greps for the data output and redirects the data into the data
+files in the data directory.
+
 
 Plotting
 --------
-The graphs are created by the script plot_bench.sh. To extract the
-data from the files created by do_bench.sh, use
-
-    grep -h \.CSAConnector *.log > data.log
-
-The plotting script uses svg_utils for Python to assemble multiple
-panels into one publication ready figure. svg_utils is available from
+The graphs are created by the script plot_bench.sh. The plotting
+script uses svg_utils for Python to assemble multiple panels into one
+publication ready figure. The module svg_utils is available from
 https://github.com/btel/svg_utils. Convert the resulting SVG files to
 PDF using something like
 

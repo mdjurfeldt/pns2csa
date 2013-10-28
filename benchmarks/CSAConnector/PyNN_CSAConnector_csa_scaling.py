@@ -18,8 +18,11 @@ start = time()
 cset = csa.random(0.1)
 connector = CSAConnector(cset)
 proj = Projection(pop, pop, connector)
+
 rank = nest.Rank()
-print "PyNN CSAConnector random(0.1) csa %i %f %i %i" % (n, time() - start, rank, np)
+nc = nest.GetKernelStatus("num_connections")
+t = time() - start
+print "PyNN CSAConnector random(0.1) csa %i %i %f 0.0 %f %i %i" % (n, nc, t, t, rank, np)
 
 #import nest.visualization as vis
 #vis.plot_network(pop.all_cells, "PyNN_CSAConnector_csa_scaling.pdf")
