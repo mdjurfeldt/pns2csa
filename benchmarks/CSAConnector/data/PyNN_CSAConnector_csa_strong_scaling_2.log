@@ -2,7 +2,7 @@
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -16,7 +16,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -26,5 +26,5 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 48000 1389.933910 1 2
-PyNN CSAConnector random(0.1) csa 48000 1457.947498 0 2
+PyNN CSAConnector random(0.1) csa 48000 115207600 1537.523572 0.0 1537.523572 1 2
+PyNN CSAConnector random(0.1) csa 48000 115177958 1537.480019 0.0 1537.480019 0 2

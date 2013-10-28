@@ -17,8 +17,12 @@ start = time()
 cset = csa.random(0.1)
 connector = CSAConnector(cset)
 proj = Projection(pop, pop, connector)
+
 rank = nest.Rank()
-print "nest CSAConnector random(0.1) libcsa %i %f %i %i" % (n, time() - start, rank, np)
+nc = nest.GetKernelStatus("num_connections")
+nest.sli_run("preptime"); preptime = nest.sli_pop()
+nest.sli_run("itertime"); itertime = nest.sli_pop()
+print "nest CSAConnector random(0.1) libcsa %i %i %f %f %f %i %i" % (n, nc, time() - start, preptime, itertime, rank, np)
 
 #import nest.visualization as vis
 #vis.plot_network(pop.all_cells, "nest_CSAConnector_libcsa_scaling.pdf")

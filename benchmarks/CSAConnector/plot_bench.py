@@ -27,13 +27,18 @@ for line in rawdata:
 
     d = line.split()
 
+    # format is "pynn_comp CSAConnector connector library n nc time preptime itertime mem"
+    # see the *_runtime.py scripts for details.
     pynn_component = d[0]
     connector = d[2]
     connectors.add(connector)
     library = d[3]
     n_neurons = int(d[4])
-    time = float(d[5])
-    memory = int(d[6])
+    n_connections = int(d[5])
+    time = float(d[6])
+    preptime = float(d[7])
+    itertime = float(d[8])
+    memory = int(d[9])
 
     try:
         data[connector][(pynn_component, library)].append((n_neurons, time, memory))
@@ -132,15 +137,20 @@ for scaling_mode in ("weak", "strong"):
     for line in rawdata:
     
         d = line.split()
-    
+
+        # format is "pynn_comp CSAConnector connector library n nc time preptime itertime rank np
+        # see the *_scaling.py scripts for details.
         pynn_component = d[0]
         connector = d[2]
         connectors.add(connector)
         library = d[3]
         n_neurons = int(d[4])
-        time = float(d[5])
-        rank = int(d[6])
-        np = int(d[7])
+        n_connections = int(d[5])
+        time = float(d[6])
+        preptime = float(d[7])
+        itertime = float(d[8])
+        rank = int(d[9])
+        np = int(d[10])
     
         if rank == 0:
             try:
@@ -197,12 +207,6 @@ for scaling_mode in ("weak", "strong"):
         ax1.legend(handles, labels, title="connector, library, slope",
                    fancybox=True, loc="best", numpoints=1, handlelength=2.2)
     
-        if scaling_mode == "weak":
-            ax1.text(0.5, 0.5, 'DRAFT\nDRAFT\nDRAFT', horizontalalignment='center',
-                     verticalalignment='center', transform=ax1.transAxes,
-                     fontsize=80, weight="bold", color="#cccccc", zorder=1000,
-                     alpha=0.75)
-
         fname = "CSAConnector_%s_scaling_%s.svg" % (scaling_mode, connector)
         fig1.savefig(fname)
         print "saved '%s'" % fname

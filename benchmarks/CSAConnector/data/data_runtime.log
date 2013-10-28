@@ -1,36 +1,36 @@
-nest CSAConnector random(0.1) csa 100000 5332.781091 102735400
-nest CSAConnector oneToOne csa 100000 0.364467 0
-nest CSAConnector random(0.1) csa 10000 45.272881 1092380
-nest CSAConnector oneToOne csa 10000 0.029550 0
-nest CSAConnector random(0.1) csa 1000 0.446298 520888
-nest CSAConnector oneToOne csa 1000 0.004621 0
-nest CSAConnector random(0.1) csa 100 0.006998 513244
-nest CSAConnector oneToOne csa 100 0.001659 0
-nest CSAConnector random(0.1) csa 25000 293.623733 5071720
-nest CSAConnector oneToOne csa 25000 0.083832 0
-nest CSAConnector random(0.1) csa 50000 1184.740439 19221572
-nest CSAConnector oneToOne csa 50000 0.179877 0
-nest CSAConnector random(0.1) libcsa 100000 1075.070192 102058300
-nest CSAConnector oneToOne libcsa 100000 0.335208 0
-nest CSAConnector random(0.1) libcsa 10000 7.670265 1024636
-nest CSAConnector oneToOne libcsa 10000 0.024029 0
-nest CSAConnector random(0.1) libcsa 1000 0.076382 524408
-nest CSAConnector oneToOne libcsa 1000 0.003429 0
-nest CSAConnector random(0.1) libcsa 100 0.002955 517384
-nest CSAConnector oneToOne libcsa 100 0.001405 0
-nest CSAConnector random(0.1) libcsa 25000 51.915949 4713436
-nest CSAConnector oneToOne libcsa 25000 0.065454 0
-nest CSAConnector random(0.1) libcsa 50000 220.190928 17579012
-nest CSAConnector oneToOne libcsa 50000 0.134281 0
-PyNN CSAConnector random(0.1) csa 100000 9514.968266 110794252
-PyNN CSAConnector oneToOne csa 100000 1374.269615 0
-PyNN CSAConnector random(0.1) csa 10000 79.664562 1176632
-PyNN CSAConnector oneToOne csa 10000 6.450973 0
-PyNN CSAConnector random(0.1) csa 1000 1.016501 523760
-PyNN CSAConnector oneToOne csa 1000 0.271555 0
-PyNN CSAConnector random(0.1) csa 100 0.033825 513376
-PyNN CSAConnector oneToOne csa 100 0.024730 0
-PyNN CSAConnector random(0.1) csa 25000 506.664992 5572104
-PyNN CSAConnector oneToOne csa 25000 29.791886 0
-PyNN CSAConnector random(0.1) csa 50000 2126.200943 21223220
-PyNN CSAConnector oneToOne csa 50000 107.580998 0
+nest CSAConnector random(0.1) csa 100000 1000059315 5243.449866 0.000000 5241.670000 102720272
+nest CSAConnector oneToOne csa 100000 100000 1.338665 0.000000 0.210000 0
+nest CSAConnector random(0.1) csa 10000 9998817 44.190019 0.000000 44.150000 1092960
+nest CSAConnector oneToOne csa 10000 10000 0.048320 0.000000 0.020000 0
+nest CSAConnector random(0.1) csa 1000 100244 0.448113 0.000000 0.440000 520872
+nest CSAConnector oneToOne csa 1000 1000 0.005776 0.000000 0.000000 0
+nest CSAConnector random(0.1) csa 100 999 0.007495 0.000000 0.010000 513236
+nest CSAConnector oneToOne csa 100 100 0.002156 0.000000 0.000000 0
+nest CSAConnector random(0.1) csa 25000 62494132 286.942929 0.000000 286.810000 5076104
+nest CSAConnector oneToOne csa 25000 25000 0.222615 0.000000 0.050000 0
+nest CSAConnector random(0.1) csa 50000 250002885 1254.526596 0.000000 1253.850000 19183932
+nest CSAConnector oneToOne csa 50000 50000 0.788495 0.000000 0.110000 0
+nest CSAConnector random(0.1) libcsa 100000 1000011716 1058.987931 0.000000 1058.070000 102059440
+nest CSAConnector oneToOne libcsa 100000 100000 0.993209 0.000000 0.130000 0
+nest CSAConnector random(0.1) libcsa 10000 9999895 8.286572 0.000000 8.250000 1024620
+nest CSAConnector oneToOne libcsa 10000 10000 0.043554 0.000000 0.010000 0
+nest CSAConnector random(0.1) libcsa 1000 100041 0.084152 0.000000 0.080000 524384
+nest CSAConnector oneToOne libcsa 1000 1000 0.005365 0.000000 0.000000 0
+nest CSAConnector random(0.1) libcsa 100 1054 0.003515 0.000000 0.000000 517376
+nest CSAConnector oneToOne libcsa 100 100 0.001919 0.000000 0.000000 0
+nest CSAConnector random(0.1) libcsa 25000 62500584 51.838127 0.000000 51.750000 4713708
+nest CSAConnector oneToOne libcsa 25000 25000 0.166985 0.000000 0.030000 0
+nest CSAConnector random(0.1) libcsa 50000 250013320 226.778803 0.000000 226.390000 17579444
+nest CSAConnector oneToOne libcsa 50000 50000 0.444225 0.000000 0.050000 0
+PyNN CSAConnector random(0.1) csa 100000 999979140 9528.490824 0.0 9528.490824 111016032
+PyNN CSAConnector oneToOne csa 100000 100000 1360.527557 0.0 1360.527557 0
+PyNN CSAConnector random(0.1) csa 10000 10003343 78.151401 0.0 78.151401 1184448
+PyNN CSAConnector oneToOne csa 10000 10000 6.487375 0.0 6.487375 0
+PyNN CSAConnector random(0.1) csa 1000 99762 1.016134 0.0 1.016134 524072
+PyNN CSAConnector oneToOne csa 1000 1000 0.273174 0.0 0.273174 0
+PyNN CSAConnector random(0.1) csa 100 1055 0.034403 0.0 0.034403 513380
+PyNN CSAConnector oneToOne csa 100 100 0.025196 0.0 0.025196 0
+PyNN CSAConnector random(0.1) csa 25000 62506291 514.853184 0.0 514.853184 5569636
+PyNN CSAConnector oneToOne csa 25000 25000 29.824304 0.0 29.824304 0
+PyNN CSAConnector random(0.1) csa 50000 250007118 2144.891054 0.0 2144.891054 21409492
+PyNN CSAConnector oneToOne csa 50000 50000 107.295397 0.0 107.295397 0

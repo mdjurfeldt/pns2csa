@@ -1,4 +1,3 @@
-. /usr/local/mpi/openmpi/1.4.3/gcc64/bin/mpivars_openmpi-1.4.3_gcc64.sh
 
 for np in 1 2 4 6 12 24 48; do
 

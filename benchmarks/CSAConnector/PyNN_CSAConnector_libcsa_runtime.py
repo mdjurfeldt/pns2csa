@@ -17,16 +17,22 @@ start = time()
 cset = csa.random(0.1)
 connector = CSAConnector(cset)
 proj = Projection(pop, pop, connector)
+
 nest.sr("memory_thisjob")
 mem = nest.spp()
-print "PyNN CSAConnector random(0.1) libcsa %i %f %i" % (n, time() - start, mem)
+nc = nest.GetKernelStatus("num_connections")
+t = time() - start
+print "PyNN CSAConnector random(0.1) libcsa %i %i %f 0.0 %f %i" % (n, nc, t, t, mem)
 
 # measure one-to-one connectivity
 start = time()
 cset = csa.oneToOne
 connector = CSAConnector(cset)
 proj = Projection(pop, pop, connector)
-print "PyNN CSAConnector oneToOne libcsa %i %f 0" % (n, time() - start)
+
+nc = nest.GetKernelStatus("num_connections") - nc
+t = time() - start
+print "PyNN CSAConnector oneToOne libcsa %i %i %f 0.0 %f 0" % (n, nc, t, t)
 
 #import nest.visualization as vis
 #vis.plot_network(pop.all_cells, "PyNN_CSAConnector_libcsa_runtime.pdf")

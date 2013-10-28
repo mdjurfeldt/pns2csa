@@ -1,0 +1,114 @@
+Index: conngen/cg_connect.cpp
+===================================================================
+--- conngen/cg_connect.cpp	(revision 10722)
++++ conngen/cg_connect.cpp	(working copy)
+@@ -25,13 +25,26 @@
+ #include "network.h"
+ #include "communicator.h"
+ 
++#include "interpret.h"
++#include "doubledatum.h"
++#include "name.h"
++
++#include <time.h>
++#include <sys/time.h>  // required to fix header dependencies in OS X, HEP
++#include <sys/times.h>
++
+ namespace nest 
+ {
+-  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, index source_offset, RangeSet& targets, index target_offset, DictionaryDatum params_map, index syn)
++  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, index source_offset, RangeSet& targets, index target_offset, DictionaryDatum params_map, index syn, SLIInterpreter* i)
+   {
++    struct tms foo;
++    const clock_t preptime_start = times(&foo);
++
+     cg_set_masks(cg, sources, targets);
+     cg->start();
+ 
++    const clock_t preptime_end = times(&foo); 
++
+     int source, target, num_parameters = cg->arity();
+     if (num_parameters == 0)
+     {
+@@ -57,13 +70,25 @@
+       ConnectionGeneratorModule::get_network().message(SLIInterpreter::M_ERROR, "Connect", "Either two or no parameters in the Connection Set expected.");
+       throw DimensionMismatch();  
+     }
++
++    const clock_t itertime_end = times(&foo); 
++
++    double_t preptime = (double)(preptime_end-preptime_start) / sysconf(_SC_CLK_TCK);
++    i->basedef(Name("preptime"),  DoubleDatum(preptime));
++    double_t itertime = (double)(itertime_end-preptime_end) / sysconf(_SC_CLK_TCK);
++    i->basedef(Name("itertime"),  DoubleDatum(itertime));
+   }
+   
+-  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, std::vector<long>& source_gids, RangeSet& targets, std::vector<long>& target_gids, DictionaryDatum params_map, index syn)
++  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, std::vector<long>& source_gids, RangeSet& targets, std::vector<long>& target_gids, DictionaryDatum params_map, index syn, SLIInterpreter* i)
+   {
++    struct tms foo;
++    const clock_t preptime_start = times(&foo);
++
+     cg_set_masks(cg, sources, targets);
+     cg->start();
+ 
++    const clock_t preptime_end = times(&foo); 
++
+     int source, target, num_parameters = cg->arity();
+     if (num_parameters == 0)
+     {
+@@ -89,6 +114,13 @@
+       ConnectionGeneratorModule::get_network().message(SLIInterpreter::M_ERROR, "Connect", "Either two or no parameters in the Connection Set expected.");
+       throw DimensionMismatch();  
+     }
++
++    const clock_t itertime_end = times(&foo); 
++
++    double_t preptime = (double)(preptime_end-preptime_start) / sysconf(_SC_CLK_TCK);
++    i->basedef(Name("preptime"),  DoubleDatum(preptime));
++    double_t itertime = (double)(itertime_end-preptime_end) / sysconf(_SC_CLK_TCK);
++    i->basedef(Name("itertime"),  DoubleDatum(itertime));
+   }
+ 
+   /**
+Index: conngen/cg_connect.h
+===================================================================
+--- conngen/cg_connect.h	(revision 10722)
++++ conngen/cg_connect.h	(working copy)
+@@ -26,10 +26,12 @@
+ #include "conngenmodule.h"
+ #include "vector"
+ 
++class SLIInterpreter;
++
+ namespace nest
+ {
+-  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, index source_offset, RangeSet& targets, index target_offset, DictionaryDatum params_map, index syn);
+-  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, std::vector<long>& source_gids, RangeSet& targets, std::vector<long>& target_gids, DictionaryDatum params_map, index syn);
++  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, index source_offset, RangeSet& targets, index target_offset, DictionaryDatum params_map, index syn, SLIInterpreter* i);
++  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, std::vector<long>& source_gids, RangeSet& targets, std::vector<long>& target_gids, DictionaryDatum params_map, index syn, SLIInterpreter* i);
+ 
+   void cg_set_masks(ConnectionGeneratorDatum& cg, RangeSet& sources, RangeSet& targets);
+   void cg_create_masks(std::vector<ConnectionGenerator::Mask>* masks, RangeSet& sources, RangeSet& targets);
+Index: conngen/conngenmodule.cpp
+===================================================================
+--- conngen/conngenmodule.cpp	(revision 10722)
++++ conngen/conngenmodule.cpp	(working copy)
+@@ -165,7 +165,7 @@
+     RangeSet target_ranges;
+     target_ranges.push_back(Range(target_range.get_first_gid(), target_range.get_last_gid()));
+ 
+-    cg_connect(cg, source_ranges, source_offset, target_ranges, target_offset, params_map, synmodel_id);
++    cg_connect(cg, source_ranges, source_offset, target_ranges, target_offset, params_map, synmodel_id, i);
+     
+     i->OStack.pop(5);
+     i->EStack.pop();
+@@ -193,7 +193,7 @@
+     RangeSet target_ranges;
+     cg_get_ranges(target_ranges, (*targets));
+ 
+-    cg_connect(cg, source_ranges, (*sources), target_ranges, (*targets), params_map, synmodel_id);
++    cg_connect(cg, source_ranges, (*sources), target_ranges, (*targets), params_map, synmodel_id, i);
+ 
+     i->OStack.pop(5);
+     i->EStack.pop();
