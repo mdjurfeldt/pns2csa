@@ -590,19 +590,19 @@ detailed in section \ref{sec:creating_masks}.
 
 \section{Benchmarks}\label{sec:benchmarks}
 
-We ran a series of benchmarks, in order to assess the performance and
-compare the different implementations of CSA (see section
-\ref{sec:csa}) and the different implementations of the CSAConnector
+We ran a series of benchmarks in order to assess the performance of and
+compare two implementations of CSA (see section
+\ref{sec:csa}) and the two implementations of the CSAConnector
 for PyNN (see section \ref{sec:conn_gen_pynn}). In particular, the
 following combinations were tested:
 
 \begin{itemize}
 \item \textbf{PyNN, csa} This used PyNN's original CSAConnector that
   is available for all backends in combination with the Python CSA
-  implementation (as gotten from the INCF software center via SVN).
+  implementation (retrieved from the INCF software center via SVN).
   The CSAConnector intersects the csa object with a mask consisting of
   the nodes in the Projection and iterates the csa object on the
-  Python level and connects by sending one ConvergentConnect call per
+  Python level. It connects by sending one ConvergentConnect call per
   source and target (Andrew, why not plain Connects?) to PyNEST.
 \item \textbf{nest, csa} This used my new CSAConnector for the NEST
   backend (from py personal github form of PyNN at
