@@ -359,10 +359,7 @@ the simulation domain to integers, gives at least two major
 advantages: 1. The CSA does not need to care about the nature of the
 objects in $P$---they could just as well be synaptic boutons as neurons.
 2. The index set $\mathcal{I}$ can be chosen to be infinite.  The
-gain of this will be shown shortly.
-
-A connection-set with zero parameters is called a \emph{mask}. A mask
-holds information regarding the existence of connections
+gain of this will be demonstrated in section \ref{sec:algebra}.
 
 \begin{figure}[ht]
 \centering
@@ -382,6 +379,42 @@ holds information regarding the existence of connections
   connectivity without self-connections.
 }\label{fig:csa} 
 \end{figure}
+
+A connection-set with zero parameters is called a \emph{mask}. A mask
+tells which connections exist.  Let's take the mask $\overline{M} =
+\{(0,1), (1,1), (1,2), (3,2), (2,3), (0,4)\}$ as an example.  We can
+regard the mask either as a connection matrix (see Figure
+\ref{fig:csa}A) or as a boolean indicator function:
+\begin{equation}
+\overline{M} : \mathcal{I}_s \times \mathcal{I}_t \rightarrow \{ \mathcal{F},
+\mathcal{T} \}
+\end{equation}
+In our example $\overline{M}(0,0) = \mathcal{F}$ while
+$\overline{M}(1,1) = \mathcal{T}$. If we combine the mask with a
+source population $P_s$ and a target population $P_t$, we get the
+network $(P_s, P_t, \overline{M})$ shown in Figure \ref{fig:csa}B.
+
+In CSA, connections can be parameterized through functions mapping
+connections to values:
+\begin{equation}
+V : \mathcal{I}_s \times \mathcal{I}_t \rightarrow \mathcal{V}
+\end{equation}
+where $\mathcal{V}$ is some codomain. In the original CSA paper
+\citep{djurfeldt12}, such a function is, somewhat inconsistently,
+called a \emph{value set}. En example of a value set is connection
+parameters sampled from a random normal distribution. Value sets are
+typically used to assign a synaptic efficacy or delay to connections.
+
+A CSA \emph{connection-set}, $C$, is a tuple of a mask and zero or
+more value sets:
+\begin{equation}
+C = (\overline{M}, V_0, V_1, ...)
+\end{equation}
+The number of value sets of a connection-set is called its
+\emph{arity}. A connection-set with arity 0 is for all purposes
+equivalent to a mask and they can be used interchangeably.
+
+\subsection{An algebra for connectivity structure}\label{sec:algebra}
 
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
