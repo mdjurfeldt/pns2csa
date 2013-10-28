@@ -2,7 +2,7 @@
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -16,7 +16,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -30,7 +30,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -44,7 +44,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -58,7 +58,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -72,7 +72,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -86,7 +86,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -100,7 +100,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -114,7 +114,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -128,7 +128,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -142,7 +142,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -156,7 +156,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -166,15 +166,15 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 48000 926.741417 6 12
-PyNN CSAConnector random(0.1) csa 48000 934.498614 11 12
-PyNN CSAConnector random(0.1) csa 48000 947.014489 4 12
-PyNN CSAConnector random(0.1) csa 48000 947.252540 9 12
-PyNN CSAConnector random(0.1) csa 48000 947.660352 8 12
-PyNN CSAConnector random(0.1) csa 48000 954.320649 5 12
-PyNN CSAConnector random(0.1) csa 48000 958.647573 7 12
-PyNN CSAConnector random(0.1) csa 48000 962.297818 1 12
-PyNN CSAConnector random(0.1) csa 48000 964.663320 10 12
-PyNN CSAConnector random(0.1) csa 48000 967.000803 2 12
-PyNN CSAConnector random(0.1) csa 48000 975.088989 3 12
-PyNN CSAConnector random(0.1) csa 48000 1045.130984 0 12
+PyNN CSAConnector random(0.1) csa 48000 19196827 975.741443 0.0 975.741443 6 12
+PyNN CSAConnector random(0.1) csa 48000 19196523 975.745405 0.0 975.745405 3 12
+PyNN CSAConnector random(0.1) csa 48000 19195928 975.763961 0.0 975.763961 11 12
+PyNN CSAConnector random(0.1) csa 48000 19202738 975.750443 0.0 975.750443 7 12
+PyNN CSAConnector random(0.1) csa 48000 19205420 975.751731 0.0 975.751731 1 12
+PyNN CSAConnector random(0.1) csa 48000 19194803 975.771069 0.0 975.771069 0 12
+PyNN CSAConnector random(0.1) csa 48000 19200954 975.740521 0.0 975.740521 8 12
+PyNN CSAConnector random(0.1) csa 48000 19194443 975.703190 0.0 975.703190 2 12
+PyNN CSAConnector random(0.1) csa 48000 19198634 975.764588 0.0 975.764588 4 12
+PyNN CSAConnector random(0.1) csa 48000 19202394 975.726172 0.0 975.726172 5 12
+PyNN CSAConnector random(0.1) csa 48000 19199352 975.736762 0.0 975.736762 9 12
+PyNN CSAConnector random(0.1) csa 48000 19193517 975.745048 0.0 975.745048 10 12

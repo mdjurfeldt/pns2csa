@@ -1,291 +1,291 @@
-nest CSAConnector random(0.1) csa 48000 88.095816 5 12
-nest CSAConnector random(0.1) csa 48000 89.474214 3 12
-nest CSAConnector random(0.1) csa 48000 90.911529 8 12
-nest CSAConnector random(0.1) csa 48000 92.442222 11 12
-nest CSAConnector random(0.1) csa 48000 92.745421 4 12
-nest CSAConnector random(0.1) csa 48000 93.509530 9 12
-nest CSAConnector random(0.1) csa 48000 94.136462 10 12
-nest CSAConnector random(0.1) csa 48000 96.807943 1 12
-nest CSAConnector random(0.1) csa 48000 96.882042 0 12
-nest CSAConnector random(0.1) csa 48000 97.045261 2 12
-nest CSAConnector random(0.1) csa 48000 97.660516 6 12
-nest CSAConnector random(0.1) csa 48000 98.903352 7 12
-nest CSAConnector random(0.1) csa 48000 1111.832372 0 1
-nest CSAConnector random(0.1) csa 48000 44.680527 0 24
-nest CSAConnector random(0.1) csa 48000 45.400603 1 24
-nest CSAConnector random(0.1) csa 48000 45.462366 3 24
-nest CSAConnector random(0.1) csa 48000 45.752889 20 24
-nest CSAConnector random(0.1) csa 48000 45.786662 4 24
-nest CSAConnector random(0.1) csa 48000 45.801459 8 24
-nest CSAConnector random(0.1) csa 48000 45.831064 22 24
-nest CSAConnector random(0.1) csa 48000 46.117772 19 24
-nest CSAConnector random(0.1) csa 48000 46.217958 11 24
-nest CSAConnector random(0.1) csa 48000 46.391375 5 24
-nest CSAConnector random(0.1) csa 48000 46.585372 18 24
-nest CSAConnector random(0.1) csa 48000 46.600379 10 24
-nest CSAConnector random(0.1) csa 48000 46.692737 9 24
-nest CSAConnector random(0.1) csa 48000 46.644182 7 24
-nest CSAConnector random(0.1) csa 48000 46.710468 6 24
-nest CSAConnector random(0.1) csa 48000 46.964801 15 24
-nest CSAConnector random(0.1) csa 48000 47.201451 21 24
-nest CSAConnector random(0.1) csa 48000 47.242796 12 24
-nest CSAConnector random(0.1) csa 48000 47.416765 13 24
-nest CSAConnector random(0.1) csa 48000 47.525312 14 24
-nest CSAConnector random(0.1) csa 48000 47.616652 16 24
-nest CSAConnector random(0.1) csa 48000 47.658767 17 24
-nest CSAConnector random(0.1) csa 48000 47.946298 2 24
-nest CSAConnector random(0.1) csa 48000 48.872777 23 24
-nest CSAConnector random(0.1) csa 48000 523.423435 1 2
-nest CSAConnector random(0.1) csa 48000 572.719396 0 2
-nest CSAConnector random(0.1) csa 48000 23.025783 4 48
-nest CSAConnector random(0.1) csa 48000 22.999455 1 48
-nest CSAConnector random(0.1) csa 48000 23.382391 14 48
-nest CSAConnector random(0.1) csa 48000 23.358419 43 48
-nest CSAConnector random(0.1) csa 48000 23.361863 20 48
-nest CSAConnector random(0.1) csa 48000 23.409435 25 48
-nest CSAConnector random(0.1) csa 48000 23.413464 38 48
-nest CSAConnector random(0.1) csa 48000 23.398006 7 48
-nest CSAConnector random(0.1) csa 48000 23.454915 32 48
-nest CSAConnector random(0.1) csa 48000 23.359001 23 48
-nest CSAConnector random(0.1) csa 48000 23.536619 12 48
-nest CSAConnector random(0.1) csa 48000 23.556617 44 48
-nest CSAConnector random(0.1) csa 48000 23.542354 28 48
-nest CSAConnector random(0.1) csa 48000 23.567624 26 48
-nest CSAConnector random(0.1) csa 48000 23.591074 46 48
-nest CSAConnector random(0.1) csa 48000 23.692154 8 48
-nest CSAConnector random(0.1) csa 48000 23.627894 11 48
-nest CSAConnector random(0.1) csa 48000 23.659526 47 48
-nest CSAConnector random(0.1) csa 48000 23.655117 9 48
-nest CSAConnector random(0.1) csa 48000 23.650310 21 48
-nest CSAConnector random(0.1) csa 48000 23.358985 2 48
-nest CSAConnector random(0.1) csa 48000 23.692473 33 48
-nest CSAConnector random(0.1) csa 48000 23.739390 13 48
-nest CSAConnector random(0.1) csa 48000 23.732340 36 48
-nest CSAConnector random(0.1) csa 48000 23.770988 16 48
-nest CSAConnector random(0.1) csa 48000 23.735351 10 48
-nest CSAConnector random(0.1) csa 48000 23.792556 31 48
-nest CSAConnector random(0.1) csa 48000 23.515134 6 48
-nest CSAConnector random(0.1) csa 48000 23.817845 29 48
-nest CSAConnector random(0.1) csa 48000 23.816367 39 48
-nest CSAConnector random(0.1) csa 48000 23.553327 5 48
-nest CSAConnector random(0.1) csa 48000 23.831556 0 48
-nest CSAConnector random(0.1) csa 48000 23.860975 41 48
-nest CSAConnector random(0.1) csa 48000 23.911211 17 48
-nest CSAConnector random(0.1) csa 48000 24.008044 18 48
-nest CSAConnector random(0.1) csa 48000 24.030725 27 48
-nest CSAConnector random(0.1) csa 48000 23.793970 35 48
-nest CSAConnector random(0.1) csa 48000 23.787691 22 48
-nest CSAConnector random(0.1) csa 48000 24.039630 40 48
-nest CSAConnector random(0.1) csa 48000 23.844770 45 48
-nest CSAConnector random(0.1) csa 48000 24.096558 42 48
-nest CSAConnector random(0.1) csa 48000 24.113261 30 48
-nest CSAConnector random(0.1) csa 48000 24.130479 19 48
-nest CSAConnector random(0.1) csa 48000 23.941014 15 48
-nest CSAConnector random(0.1) csa 48000 24.005280 24 48
-nest CSAConnector random(0.1) csa 48000 23.826538 37 48
-nest CSAConnector random(0.1) csa 48000 24.344950 3 48
-nest CSAConnector random(0.1) csa 48000 24.417207 34 48
-nest CSAConnector random(0.1) csa 48000 262.492589 1 4
-nest CSAConnector random(0.1) csa 48000 273.264137 3 4
-nest CSAConnector random(0.1) csa 48000 274.320120 2 4
-nest CSAConnector random(0.1) csa 48000 274.507917 0 4
-nest CSAConnector random(0.1) csa 48000 182.955693 4 6
-nest CSAConnector random(0.1) csa 48000 185.477586 2 6
-nest CSAConnector random(0.1) csa 48000 188.229737 5 6
-nest CSAConnector random(0.1) csa 48000 189.977408 1 6
-nest CSAConnector random(0.1) csa 48000 193.041803 0 6
-nest CSAConnector random(0.1) csa 48000 195.371322 3 6
-nest CSAConnector random(0.1) libcsa 48000 14.158981 8 12
-nest CSAConnector random(0.1) libcsa 48000 14.304489 5 12
-nest CSAConnector random(0.1) libcsa 48000 14.340802 6 12
-nest CSAConnector random(0.1) libcsa 48000 14.624112 7 12
-nest CSAConnector random(0.1) libcsa 48000 14.925616 10 12
-nest CSAConnector random(0.1) libcsa 48000 14.979230 9 12
-nest CSAConnector random(0.1) libcsa 48000 15.015546 3 12
-nest CSAConnector random(0.1) libcsa 48000 15.092320 1 12
-nest CSAConnector random(0.1) libcsa 48000 15.095566 2 12
-nest CSAConnector random(0.1) libcsa 48000 15.308827 4 12
-nest CSAConnector random(0.1) libcsa 48000 15.687377 0 12
-nest CSAConnector random(0.1) libcsa 48000 16.338975 11 12
-nest CSAConnector random(0.1) libcsa 48000 205.387767 0 1
-nest CSAConnector random(0.1) libcsa 48000 7.046042 13 24
-nest CSAConnector random(0.1) libcsa 48000 7.157663 3 24
-nest CSAConnector random(0.1) libcsa 48000 7.173697 6 24
-nest CSAConnector random(0.1) libcsa 48000 7.245844 16 24
-nest CSAConnector random(0.1) libcsa 48000 7.236140 9 24
-nest CSAConnector random(0.1) libcsa 48000 7.277724 22 24
-nest CSAConnector random(0.1) libcsa 48000 7.303383 17 24
-nest CSAConnector random(0.1) libcsa 48000 7.304699 20 24
-nest CSAConnector random(0.1) libcsa 48000 7.309777 11 24
-nest CSAConnector random(0.1) libcsa 48000 7.351842 1 24
-nest CSAConnector random(0.1) libcsa 48000 7.355680 7 24
-nest CSAConnector random(0.1) libcsa 48000 7.336587 15 24
-nest CSAConnector random(0.1) libcsa 48000 7.953395 23 24
-nest CSAConnector random(0.1) libcsa 48000 7.975653 12 24
-nest CSAConnector random(0.1) libcsa 48000 8.021298 5 24
-nest CSAConnector random(0.1) libcsa 48000 8.040317 4 24
-nest CSAConnector random(0.1) libcsa 48000 8.062018 19 24
-nest CSAConnector random(0.1) libcsa 48000 8.067882 21 24
-nest CSAConnector random(0.1) libcsa 48000 8.083616 10 24
-nest CSAConnector random(0.1) libcsa 48000 8.155221 14 24
-nest CSAConnector random(0.1) libcsa 48000 8.161443 2 24
-nest CSAConnector random(0.1) libcsa 48000 8.245249 18 24
-nest CSAConnector random(0.1) libcsa 48000 8.208961 0 24
-nest CSAConnector random(0.1) libcsa 48000 8.214042 8 24
-nest CSAConnector random(0.1) libcsa 48000 95.368196 1 2
-nest CSAConnector random(0.1) libcsa 48000 102.859620 0 2
-nest CSAConnector random(0.1) libcsa 48000 3.521211 0 48
-nest CSAConnector random(0.1) libcsa 48000 3.595164 4 48
-nest CSAConnector random(0.1) libcsa 48000 3.553460 6 48
-nest CSAConnector random(0.1) libcsa 48000 3.642112 32 48
-nest CSAConnector random(0.1) libcsa 48000 3.594923 7 48
-nest CSAConnector random(0.1) libcsa 48000 3.578501 1 48
-nest CSAConnector random(0.1) libcsa 48000 3.696246 45 48
-nest CSAConnector random(0.1) libcsa 48000 3.640391 3 48
-nest CSAConnector random(0.1) libcsa 48000 3.707495 39 48
-nest CSAConnector random(0.1) libcsa 48000 3.625509 18 48
-nest CSAConnector random(0.1) libcsa 48000 3.632991 14 48
-nest CSAConnector random(0.1) libcsa 48000 3.656462 23 48
-nest CSAConnector random(0.1) libcsa 48000 3.672790 12 48
-nest CSAConnector random(0.1) libcsa 48000 3.702634 36 48
-nest CSAConnector random(0.1) libcsa 48000 3.653240 26 48
-nest CSAConnector random(0.1) libcsa 48000 3.669250 19 48
-nest CSAConnector random(0.1) libcsa 48000 3.662441 15 48
-nest CSAConnector random(0.1) libcsa 48000 3.706520 5 48
-nest CSAConnector random(0.1) libcsa 48000 3.687557 35 48
-nest CSAConnector random(0.1) libcsa 48000 3.649885 31 48
-nest CSAConnector random(0.1) libcsa 48000 3.677028 46 48
-nest CSAConnector random(0.1) libcsa 48000 3.711316 17 48
-nest CSAConnector random(0.1) libcsa 48000 3.701493 30 48
-nest CSAConnector random(0.1) libcsa 48000 3.679907 40 48
-nest CSAConnector random(0.1) libcsa 48000 3.681516 43 48
-nest CSAConnector random(0.1) libcsa 48000 3.727891 44 48
-nest CSAConnector random(0.1) libcsa 48000 3.721565 47 48
-nest CSAConnector random(0.1) libcsa 48000 3.723015 37 48
-nest CSAConnector random(0.1) libcsa 48000 3.742566 41 48
-nest CSAConnector random(0.1) libcsa 48000 3.738810 27 48
-nest CSAConnector random(0.1) libcsa 48000 3.735923 22 48
-nest CSAConnector random(0.1) libcsa 48000 3.789576 29 48
-nest CSAConnector random(0.1) libcsa 48000 3.802693 20 48
-nest CSAConnector random(0.1) libcsa 48000 3.782306 24 48
-nest CSAConnector random(0.1) libcsa 48000 3.871626 28 48
-nest CSAConnector random(0.1) libcsa 48000 3.977130 33 48
-nest CSAConnector random(0.1) libcsa 48000 3.924819 9 48
-nest CSAConnector random(0.1) libcsa 48000 3.966082 42 48
-nest CSAConnector random(0.1) libcsa 48000 4.074602 21 48
-nest CSAConnector random(0.1) libcsa 48000 4.093717 2 48
-nest CSAConnector random(0.1) libcsa 48000 4.128985 11 48
-nest CSAConnector random(0.1) libcsa 48000 4.124787 25 48
-nest CSAConnector random(0.1) libcsa 48000 4.140215 16 48
-nest CSAConnector random(0.1) libcsa 48000 4.143650 10 48
-nest CSAConnector random(0.1) libcsa 48000 4.200377 8 48
-nest CSAConnector random(0.1) libcsa 48000 4.225963 13 48
-nest CSAConnector random(0.1) libcsa 48000 4.204098 34 48
-nest CSAConnector random(0.1) libcsa 48000 4.269059 38 48
-nest CSAConnector random(0.1) libcsa 48000 48.508642 2 4
-nest CSAConnector random(0.1) libcsa 48000 51.010767 0 4
-nest CSAConnector random(0.1) libcsa 48000 51.734686 1 4
-nest CSAConnector random(0.1) libcsa 48000 52.304375 3 4
-nest CSAConnector random(0.1) libcsa 48000 29.260578 4 6
-nest CSAConnector random(0.1) libcsa 48000 29.284363 0 6
-nest CSAConnector random(0.1) libcsa 48000 29.603133 3 6
-nest CSAConnector random(0.1) libcsa 48000 31.067643 1 6
-nest CSAConnector random(0.1) libcsa 48000 31.449226 2 6
-nest CSAConnector random(0.1) libcsa 48000 31.512563 5 6
-PyNN CSAConnector random(0.1) csa 48000 926.741417 6 12
-PyNN CSAConnector random(0.1) csa 48000 934.498614 11 12
-PyNN CSAConnector random(0.1) csa 48000 947.014489 4 12
-PyNN CSAConnector random(0.1) csa 48000 947.252540 9 12
-PyNN CSAConnector random(0.1) csa 48000 947.660352 8 12
-PyNN CSAConnector random(0.1) csa 48000 954.320649 5 12
-PyNN CSAConnector random(0.1) csa 48000 958.647573 7 12
-PyNN CSAConnector random(0.1) csa 48000 962.297818 1 12
-PyNN CSAConnector random(0.1) csa 48000 964.663320 10 12
-PyNN CSAConnector random(0.1) csa 48000 967.000803 2 12
-PyNN CSAConnector random(0.1) csa 48000 975.088989 3 12
-PyNN CSAConnector random(0.1) csa 48000 1045.130984 0 12
-PyNN CSAConnector random(0.1) csa 48000 2087.829507 0 1
-PyNN CSAConnector random(0.1) csa 48000 868.716263 6 24
-PyNN CSAConnector random(0.1) csa 48000 876.195634 5 24
-PyNN CSAConnector random(0.1) csa 48000 882.210551 7 24
-PyNN CSAConnector random(0.1) csa 48000 882.687580 16 24
-PyNN CSAConnector random(0.1) csa 48000 884.991311 3 24
-PyNN CSAConnector random(0.1) csa 48000 891.114217 8 24
-PyNN CSAConnector random(0.1) csa 48000 892.555066 15 24
-PyNN CSAConnector random(0.1) csa 48000 892.748759 21 24
-PyNN CSAConnector random(0.1) csa 48000 893.006156 22 24
-PyNN CSAConnector random(0.1) csa 48000 894.126992 19 24
-PyNN CSAConnector random(0.1) csa 48000 894.527824 11 24
-PyNN CSAConnector random(0.1) csa 48000 897.161580 20 24
-PyNN CSAConnector random(0.1) csa 48000 898.078736 2 24
-PyNN CSAConnector random(0.1) csa 48000 900.050958 9 24
-PyNN CSAConnector random(0.1) csa 48000 901.187791 12 24
-PyNN CSAConnector random(0.1) csa 48000 901.328570 4 24
-PyNN CSAConnector random(0.1) csa 48000 901.771832 14 24
-PyNN CSAConnector random(0.1) csa 48000 901.941154 0 24
-PyNN CSAConnector random(0.1) csa 48000 904.103323 17 24
-PyNN CSAConnector random(0.1) csa 48000 904.572010 1 24
-PyNN CSAConnector random(0.1) csa 48000 908.874067 10 24
-PyNN CSAConnector random(0.1) csa 48000 910.184134 18 24
-PyNN CSAConnector random(0.1) csa 48000 914.900700 23 24
-PyNN CSAConnector random(0.1) csa 48000 916.388013 13 24
-PyNN CSAConnector random(0.1) csa 48000 1389.933910 1 2
-PyNN CSAConnector random(0.1) csa 48000 1457.947498 0 2
-PyNN CSAConnector random(0.1) csa 48000 838.088140 3 48
-PyNN CSAConnector random(0.1) csa 48000 846.765079 9 48
-PyNN CSAConnector random(0.1) csa 48000 855.674564 22 48
-PyNN CSAConnector random(0.1) csa 48000 858.719916 31 48
-PyNN CSAConnector random(0.1) csa 48000 859.844043 43 48
-PyNN CSAConnector random(0.1) csa 48000 860.765538 39 48
-PyNN CSAConnector random(0.1) csa 48000 862.044417 46 48
-PyNN CSAConnector random(0.1) csa 48000 863.138895 1 48
-PyNN CSAConnector random(0.1) csa 48000 863.412843 47 48
-PyNN CSAConnector random(0.1) csa 48000 863.513161 14 48
-PyNN CSAConnector random(0.1) csa 48000 863.642402 8 48
-PyNN CSAConnector random(0.1) csa 48000 865.661695 40 48
-PyNN CSAConnector random(0.1) csa 48000 867.089783 38 48
-PyNN CSAConnector random(0.1) csa 48000 868.334163 18 48
-PyNN CSAConnector random(0.1) csa 48000 870.222912 20 48
-PyNN CSAConnector random(0.1) csa 48000 871.530948 30 48
-PyNN CSAConnector random(0.1) csa 48000 872.349518 44 48
-PyNN CSAConnector random(0.1) csa 48000 872.764432 10 48
-PyNN CSAConnector random(0.1) csa 48000 873.702708 24 48
-PyNN CSAConnector random(0.1) csa 48000 874.241003 19 48
-PyNN CSAConnector random(0.1) csa 48000 876.259221 13 48
-PyNN CSAConnector random(0.1) csa 48000 876.322721 7 48
-PyNN CSAConnector random(0.1) csa 48000 876.423605 21 48
-PyNN CSAConnector random(0.1) csa 48000 876.583937 28 48
-PyNN CSAConnector random(0.1) csa 48000 878.975769 17 48
-PyNN CSAConnector random(0.1) csa 48000 878.964590 0 48
-PyNN CSAConnector random(0.1) csa 48000 879.881506 5 48
-PyNN CSAConnector random(0.1) csa 48000 881.043630 2 48
-PyNN CSAConnector random(0.1) csa 48000 881.379582 42 48
-PyNN CSAConnector random(0.1) csa 48000 881.658666 35 48
-PyNN CSAConnector random(0.1) csa 48000 883.556357 6 48
-PyNN CSAConnector random(0.1) csa 48000 883.749471 37 48
-PyNN CSAConnector random(0.1) csa 48000 885.054930 25 48
-PyNN CSAConnector random(0.1) csa 48000 885.624814 45 48
-PyNN CSAConnector random(0.1) csa 48000 885.643535 34 48
-PyNN CSAConnector random(0.1) csa 48000 887.251570 12 48
-PyNN CSAConnector random(0.1) csa 48000 887.565975 27 48
-PyNN CSAConnector random(0.1) csa 48000 888.591050 26 48
-PyNN CSAConnector random(0.1) csa 48000 889.724593 36 48
-PyNN CSAConnector random(0.1) csa 48000 890.152868 11 48
-PyNN CSAConnector random(0.1) csa 48000 890.395683 15 48
-PyNN CSAConnector random(0.1) csa 48000 891.465692 23 48
-PyNN CSAConnector random(0.1) csa 48000 897.435671 33 48
-PyNN CSAConnector random(0.1) csa 48000 900.023537 16 48
-PyNN CSAConnector random(0.1) csa 48000 907.737185 32 48
-PyNN CSAConnector random(0.1) csa 48000 915.160630 41 48
-PyNN CSAConnector random(0.1) csa 48000 923.963192 29 48
-PyNN CSAConnector random(0.1) csa 48000 931.329044 4 48
-PyNN CSAConnector random(0.1) csa 48000 1083.515861 2 4
-PyNN CSAConnector random(0.1) csa 48000 1106.306950 1 4
-PyNN CSAConnector random(0.1) csa 48000 1159.020195 0 4
-PyNN CSAConnector random(0.1) csa 48000 1188.105700 3 4
-PyNN CSAConnector random(0.1) csa 48000 1004.411188 4 6
-PyNN CSAConnector random(0.1) csa 48000 1016.061750 1 6
-PyNN CSAConnector random(0.1) csa 48000 1023.031145 3 6
-PyNN CSAConnector random(0.1) csa 48000 1035.545552 0 6
-PyNN CSAConnector random(0.1) csa 48000 1038.606829 2 6
-PyNN CSAConnector random(0.1) csa 48000 1065.497046 5 6
+nest CSAConnector random(0.1) csa 48000 19215319 97.977636 0.290000 95.120000 11 12
+nest CSAConnector random(0.1) csa 48000 19198670 97.970493 0.280000 90.630000 7 12
+nest CSAConnector random(0.1) csa 48000 19202140 97.983968 0.290000 94.390000 10 12
+nest CSAConnector random(0.1) csa 48000 19195205 97.971201 0.280000 90.350000 0 12
+nest CSAConnector random(0.1) csa 48000 19201730 97.986131 0.290000 93.290000 1 12
+nest CSAConnector random(0.1) csa 48000 19197206 97.975464 0.290000 90.330000 8 12
+nest CSAConnector random(0.1) csa 48000 19197747 97.939765 0.310000 92.650000 5 12
+nest CSAConnector random(0.1) csa 48000 19202700 97.985157 0.270000 97.420000 3 12
+nest CSAConnector random(0.1) csa 48000 19198170 97.978956 0.280000 96.300000 4 12
+nest CSAConnector random(0.1) csa 48000 19192269 97.998597 0.280000 96.290000 2 12
+nest CSAConnector random(0.1) csa 48000 19201410 97.982000 0.290000 90.930000 6 12
+nest CSAConnector random(0.1) csa 48000 19202813 97.994631 0.270000 90.520000 9 12
+nest CSAConnector random(0.1) csa 48000 230387353 1113.433950 0.000000 1112.910000 0 1
+nest CSAConnector random(0.1) csa 48000 9602474 48.162655 0.300000 44.560000 10 24
+nest CSAConnector random(0.1) csa 48000 9600321 48.159292 0.300000 44.800000 20 24
+nest CSAConnector random(0.1) csa 48000 9600544 48.140889 0.310000 45.840000 0 24
+nest CSAConnector random(0.1) csa 48000 9597855 48.157083 0.300000 45.660000 19 24
+nest CSAConnector random(0.1) csa 48000 9596787 48.151966 0.310000 47.210000 7 24
+nest CSAConnector random(0.1) csa 48000 9594993 48.126428 0.330000 47.110000 5 24
+nest CSAConnector random(0.1) csa 48000 9605721 48.137996 0.320000 45.730000 18 24
+nest CSAConnector random(0.1) csa 48000 9603751 48.137289 0.310000 46.850000 12 24
+nest CSAConnector random(0.1) csa 48000 9598390 48.154620 0.300000 45.940000 4 24
+nest CSAConnector random(0.1) csa 48000 9599667 48.174758 0.310000 47.650000 1 24
+nest CSAConnector random(0.1) csa 48000 9596869 48.158587 0.300000 44.710000 2 24
+nest CSAConnector random(0.1) csa 48000 9601262 48.121318 0.320000 45.670000 22 24
+nest CSAConnector random(0.1) csa 48000 9595943 48.132773 0.310000 45.340000 11 24
+nest CSAConnector random(0.1) csa 48000 9601138 48.151273 0.300000 45.730000 8 24
+nest CSAConnector random(0.1) csa 48000 9603632 48.154161 0.290000 46.310000 23 24
+nest CSAConnector random(0.1) csa 48000 9601358 48.113262 0.330000 46.240000 14 24
+nest CSAConnector random(0.1) csa 48000 9600826 48.154862 0.300000 45.910000 3 24
+nest CSAConnector random(0.1) csa 48000 9600553 48.137690 0.300000 45.930000 16 24
+nest CSAConnector random(0.1) csa 48000 9604811 48.140162 0.310000 45.740000 13 24
+nest CSAConnector random(0.1) csa 48000 9599089 48.156307 0.300000 45.200000 6 24
+nest CSAConnector random(0.1) csa 48000 9594002 48.128635 0.310000 45.590000 17 24
+nest CSAConnector random(0.1) csa 48000 9605087 48.193211 0.280000 45.560000 15 24
+nest CSAConnector random(0.1) csa 48000 9599679 48.133528 0.320000 45.870000 21 24
+nest CSAConnector random(0.1) csa 48000 9600610 48.163534 0.300000 46.050000 9 24
+nest CSAConnector random(0.1) csa 48000 115196537 554.148617 0.260000 546.280000 0 2
+nest CSAConnector random(0.1) csa 48000 115207822 554.192350 0.250000 553.540000 1 2
+nest CSAConnector random(0.1) csa 48000 4801554 24.744991 0.330000 22.680000 7 48
+nest CSAConnector random(0.1) csa 48000 4800245 24.633891 0.290000 22.810000 11 48
+nest CSAConnector random(0.1) csa 48000 4799859 24.758098 0.320000 23.540000 33 48
+nest CSAConnector random(0.1) csa 48000 4801876 24.768379 0.320000 23.320000 1 48
+nest CSAConnector random(0.1) csa 48000 4798283 24.477649 0.290000 22.680000 27 48
+nest CSAConnector random(0.1) csa 48000 4795843 24.753797 0.320000 23.160000 22 48
+nest CSAConnector random(0.1) csa 48000 4798730 24.792922 0.310000 22.840000 42 48
+nest CSAConnector random(0.1) csa 48000 4792727 24.779754 0.300000 23.110000 2 48
+nest CSAConnector random(0.1) csa 48000 4800348 24.783263 0.310000 23.190000 47 48
+nest CSAConnector random(0.1) csa 48000 4799359 24.756064 0.310000 23.170000 4 48
+nest CSAConnector random(0.1) csa 48000 4803050 24.723691 0.320000 22.740000 26 48
+nest CSAConnector random(0.1) csa 48000 4799713 24.725194 0.330000 22.960000 12 48
+nest CSAConnector random(0.1) csa 48000 4799309 24.770924 0.320000 23.190000 37 48
+nest CSAConnector random(0.1) csa 48000 4800789 24.754026 0.320000 24.240000 9 48
+nest CSAConnector random(0.1) csa 48000 4803460 24.743784 0.320000 22.900000 13 48
+nest CSAConnector random(0.1) csa 48000 4802431 24.658330 0.300000 22.680000 10 48
+nest CSAConnector random(0.1) csa 48000 4796678 24.797407 0.300000 23.190000 3 48
+nest CSAConnector random(0.1) csa 48000 4803253 24.763540 0.330000 22.610000 14 48
+nest CSAConnector random(0.1) csa 48000 4797287 24.748757 0.330000 23.280000 17 48
+nest CSAConnector random(0.1) csa 48000 4799795 24.742938 0.340000 22.820000 6 48
+nest CSAConnector random(0.1) csa 48000 4799785 24.769457 0.320000 23.160000 8 48
+nest CSAConnector random(0.1) csa 48000 4799283 24.741239 0.330000 23.540000 15 48
+nest CSAConnector random(0.1) csa 48000 4796990 24.757225 0.330000 23.540000 45 48
+nest CSAConnector random(0.1) csa 48000 4799803 24.764455 0.320000 23.040000 21 48
+nest CSAConnector random(0.1) csa 48000 4797851 24.733414 0.330000 22.530000 34 48
+nest CSAConnector random(0.1) csa 48000 4799504 24.765749 0.330000 23.100000 23 48
+nest CSAConnector random(0.1) csa 48000 4799763 24.748274 0.320000 23.190000 5 48
+nest CSAConnector random(0.1) csa 48000 4799936 24.769731 0.310000 22.900000 31 48
+nest CSAConnector random(0.1) csa 48000 4799566 24.830315 0.270000 23.270000 25 48
+nest CSAConnector random(0.1) csa 48000 4795998 24.790363 0.310000 23.250000 18 48
+nest CSAConnector random(0.1) csa 48000 4798140 24.759483 0.310000 23.020000 16 48
+nest CSAConnector random(0.1) csa 48000 4798097 24.821290 0.280000 23.520000 0 48
+nest CSAConnector random(0.1) csa 48000 4800616 24.761626 0.330000 22.720000 20 48
+nest CSAConnector random(0.1) csa 48000 4805574 24.734374 0.330000 24.160000 29 48
+nest CSAConnector random(0.1) csa 48000 4799297 24.763202 0.320000 22.710000 28 48
+nest CSAConnector random(0.1) csa 48000 4800816 24.779243 0.310000 22.620000 32 48
+nest CSAConnector random(0.1) csa 48000 4801452 24.769782 0.320000 22.950000 35 48
+nest CSAConnector random(0.1) csa 48000 4801305 24.786395 0.300000 22.680000 30 48
+nest CSAConnector random(0.1) csa 48000 4802177 24.741918 0.330000 22.710000 46 48
+nest CSAConnector random(0.1) csa 48000 4799381 24.774545 0.310000 23.250000 36 48
+nest CSAConnector random(0.1) csa 48000 4801173 24.737006 0.340000 22.800000 39 48
+nest CSAConnector random(0.1) csa 48000 4803293 24.752512 0.320000 22.960000 19 48
+nest CSAConnector random(0.1) csa 48000 4798779 24.800584 0.290000 22.740000 40 48
+nest CSAConnector random(0.1) csa 48000 4801034 24.798784 0.300000 22.860000 24 48
+nest CSAConnector random(0.1) csa 48000 4800422 24.769310 0.320000 23.580000 41 48
+nest CSAConnector random(0.1) csa 48000 4800827 24.823422 0.280000 23.210000 44 48
+nest CSAConnector random(0.1) csa 48000 4799831 24.799843 0.290000 22.610000 43 48
+nest CSAConnector random(0.1) csa 48000 4796251 24.797204 0.300000 23.850000 38 48
+nest CSAConnector random(0.1) csa 48000 57593815 275.382129 0.270000 265.640000 1 4
+nest CSAConnector random(0.1) csa 48000 57599975 275.449369 0.250000 268.340000 3 4
+nest CSAConnector random(0.1) csa 48000 57595791 275.332593 0.300000 274.790000 2 4
+nest CSAConnector random(0.1) csa 48000 57597496 275.327815 0.290000 270.930000 0 4
+nest CSAConnector random(0.1) csa 48000 38387663 180.975316 0.280000 176.610000 2 6
+nest CSAConnector random(0.1) csa 48000 38398957 180.973250 0.270000 176.010000 4 6
+nest CSAConnector random(0.1) csa 48000 38401694 180.950638 0.280000 179.020000 1 6
+nest CSAConnector random(0.1) csa 48000 38399339 181.008266 0.260000 173.780000 0 6
+nest CSAConnector random(0.1) csa 48000 38396423 180.990708 0.270000 175.520000 5 6
+nest CSAConnector random(0.1) csa 48000 38404275 180.961220 0.280000 180.460000 3 6
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.651140 0.000000 16.190000 6 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.671629 0.000000 14.960000 5 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.674425 0.000000 15.310000 0 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.629643 0.000000 14.840000 7 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.656864 0.000000 15.700000 2 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.658538 0.000000 15.130000 4 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.627873 0.000000 14.820000 1 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.638893 0.000000 15.100000 11 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.696461 0.000000 15.230000 3 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.651574 0.000000 14.390000 8 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.618977 0.000000 14.670000 9 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 16.614297 0.000000 16.500000 10 12
+nest CSAConnector random(0.1) libcsa 48000 230420326 185.822504 0.000000 185.460000 0 1
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.449555 0.000000 7.440000 12 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.471364 0.000000 7.070000 2 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.449639 0.000000 7.320000 17 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.466994 0.000000 7.230000 0 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.439217 0.000000 7.090000 4 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.400347 0.000000 7.790000 1 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.454434 0.000000 7.330000 18 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.433624 0.000000 7.710000 3 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.431258 0.000000 8.020000 22 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.430571 0.000000 7.940000 8 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.434502 0.000000 8.060000 10 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.416484 0.000000 7.140000 9 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.467868 0.000000 7.130000 7 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.452489 0.000000 8.030000 13 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.434539 0.000000 8.260000 11 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.431972 0.000000 7.670000 14 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.442415 0.000000 7.360000 6 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.460445 0.000000 8.150000 15 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.452117 0.000000 7.280000 16 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.467098 0.000000 7.970000 5 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.426185 0.000000 7.410000 20 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.449532 0.000000 7.390000 23 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.419515 0.000000 8.310000 19 24
+nest CSAConnector random(0.1) libcsa 48000 9600223 8.481603 0.000000 7.350000 21 24
+nest CSAConnector random(0.1) libcsa 48000 115201522 95.710230 0.000000 93.830000 1 2
+nest CSAConnector random(0.1) libcsa 48000 115201522 95.751380 0.000000 95.560000 0 2
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.441327 0.000000 3.720000 15 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.395543 0.000000 3.650000 1 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.437683 0.000000 4.000000 6 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.352842 0.000000 3.690000 26 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.406718 0.000000 4.200000 36 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.406005 0.000000 3.690000 40 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.410877 0.000000 4.180000 39 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.449250 0.000000 3.640000 2 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.438713 0.000000 3.650000 18 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.422811 0.000000 3.960000 8 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.377217 0.000000 3.790000 47 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.400659 0.000000 3.930000 5 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.422096 0.000000 3.960000 9 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.412141 0.000000 4.190000 11 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.420559 0.000000 3.820000 35 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.398467 0.000000 3.720000 29 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.465675 0.000000 3.860000 16 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.374461 0.000000 3.700000 13 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.393663 0.000000 3.970000 19 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.382970 0.000000 4.240000 43 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.290621 0.000000 4.120000 31 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.436253 0.000000 4.050000 14 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.384960 0.000000 3.600000 7 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.412391 0.000000 3.680000 21 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.412133 0.000000 4.280000 45 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.418378 0.000000 3.640000 32 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.452164 0.000000 3.700000 24 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.443130 0.000000 4.010000 46 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.451833 0.000000 3.760000 27 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.454470 0.000000 3.640000 12 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.393449 0.000000 3.730000 25 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.427767 0.000000 4.320000 22 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.399178 0.000000 3.680000 33 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.416909 0.000000 3.700000 28 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.394180 0.000000 4.050000 17 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.406186 0.000000 3.710000 30 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.419078 0.000000 3.830000 34 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.384988 0.000000 3.740000 37 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.394407 0.000000 3.770000 3 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.417633 0.000000 3.690000 38 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.409716 0.000000 3.740000 42 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.434443 0.000000 4.300000 44 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.391732 0.000000 3.690000 23 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.435428 0.000000 3.660000 20 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.373138 0.000000 4.050000 4 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.385109 0.000000 3.680000 0 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.426156 0.000000 3.810000 10 48
+nest CSAConnector random(0.1) libcsa 48000 4799323 4.279674 0.000000 3.750000 41 48
+nest CSAConnector random(0.1) libcsa 48000 57601502 51.663363 0.000000 46.850000 2 4
+nest CSAConnector random(0.1) libcsa 48000 57601502 51.666653 0.000000 46.350000 1 4
+nest CSAConnector random(0.1) libcsa 48000 57601502 51.625238 0.000000 50.310000 0 4
+nest CSAConnector random(0.1) libcsa 48000 57601502 51.648223 0.000000 51.450000 3 4
+nest CSAConnector random(0.1) libcsa 48000 38401539 30.898619 0.000000 29.300000 4 6
+nest CSAConnector random(0.1) libcsa 48000 38401539 30.892003 0.000000 29.150000 5 6
+nest CSAConnector random(0.1) libcsa 48000 38401539 30.895158 0.000000 29.640000 3 6
+nest CSAConnector random(0.1) libcsa 48000 38401539 30.882215 0.000000 30.750000 0 6
+nest CSAConnector random(0.1) libcsa 48000 38401539 30.931606 0.000000 30.030000 1 6
+nest CSAConnector random(0.1) libcsa 48000 38401539 30.902485 0.000000 30.390000 2 6
+PyNN CSAConnector random(0.1) csa 48000 19196827 975.741443 0.0 975.741443 6 12
+PyNN CSAConnector random(0.1) csa 48000 19196523 975.745405 0.0 975.745405 3 12
+PyNN CSAConnector random(0.1) csa 48000 19195928 975.763961 0.0 975.763961 11 12
+PyNN CSAConnector random(0.1) csa 48000 19202738 975.750443 0.0 975.750443 7 12
+PyNN CSAConnector random(0.1) csa 48000 19205420 975.751731 0.0 975.751731 1 12
+PyNN CSAConnector random(0.1) csa 48000 19194803 975.771069 0.0 975.771069 0 12
+PyNN CSAConnector random(0.1) csa 48000 19200954 975.740521 0.0 975.740521 8 12
+PyNN CSAConnector random(0.1) csa 48000 19194443 975.703190 0.0 975.703190 2 12
+PyNN CSAConnector random(0.1) csa 48000 19198634 975.764588 0.0 975.764588 4 12
+PyNN CSAConnector random(0.1) csa 48000 19202394 975.726172 0.0 975.726172 5 12
+PyNN CSAConnector random(0.1) csa 48000 19199352 975.736762 0.0 975.736762 9 12
+PyNN CSAConnector random(0.1) csa 48000 19193517 975.745048 0.0 975.745048 10 12
+PyNN CSAConnector random(0.1) csa 48000 230406755 2089.893798 0.0 2089.893798 0 1
+PyNN CSAConnector random(0.1) csa 48000 9598147 911.012420 0.0 911.012420 21 24
+PyNN CSAConnector random(0.1) csa 48000 9600291 911.020787 0.0 911.020787 14 24
+PyNN CSAConnector random(0.1) csa 48000 9595893 911.048308 0.0 911.048308 22 24
+PyNN CSAConnector random(0.1) csa 48000 9598568 911.014389 0.0 911.014389 20 24
+PyNN CSAConnector random(0.1) csa 48000 9606976 911.038985 0.0 911.038985 1 24
+PyNN CSAConnector random(0.1) csa 48000 9598206 911.055966 0.0 911.055966 4 24
+PyNN CSAConnector random(0.1) csa 48000 9600491 911.047322 0.0 911.047322 0 24
+PyNN CSAConnector random(0.1) csa 48000 9599061 911.046108 0.0 911.046108 6 24
+PyNN CSAConnector random(0.1) csa 48000 9597127 911.040791 0.0 911.040791 19 24
+PyNN CSAConnector random(0.1) csa 48000 9605483 911.021705 0.0 911.021705 2 24
+PyNN CSAConnector random(0.1) csa 48000 9602909 911.028968 0.0 911.028968 9 24
+PyNN CSAConnector random(0.1) csa 48000 9602791 911.047015 0.0 911.047015 3 24
+PyNN CSAConnector random(0.1) csa 48000 9602706 911.032824 0.0 911.032824 7 24
+PyNN CSAConnector random(0.1) csa 48000 9600222 911.059092 0.0 911.059092 5 24
+PyNN CSAConnector random(0.1) csa 48000 9594822 911.055073 0.0 911.055073 11 24
+PyNN CSAConnector random(0.1) csa 48000 9599239 911.038273 0.0 911.038273 13 24
+PyNN CSAConnector random(0.1) csa 48000 9593944 911.054951 0.0 911.054951 15 24
+PyNN CSAConnector random(0.1) csa 48000 9599633 911.015337 0.0 911.015337 18 24
+PyNN CSAConnector random(0.1) csa 48000 9606983 911.036041 0.0 911.036041 10 24
+PyNN CSAConnector random(0.1) csa 48000 9602570 911.049738 0.0 911.049738 23 24
+PyNN CSAConnector random(0.1) csa 48000 9597019 911.052989 0.0 911.052989 12 24
+PyNN CSAConnector random(0.1) csa 48000 9598202 911.023238 0.0 911.023238 17 24
+PyNN CSAConnector random(0.1) csa 48000 9605305 911.063368 0.0 911.063368 8 24
+PyNN CSAConnector random(0.1) csa 48000 9604454 911.058360 0.0 911.058360 16 24
+PyNN CSAConnector random(0.1) csa 48000 115207600 1537.523572 0.0 1537.523572 1 2
+PyNN CSAConnector random(0.1) csa 48000 115177958 1537.480019 0.0 1537.480019 0 2
+PyNN CSAConnector random(0.1) csa 48000 4798973 925.342951 0.0 925.342951 0 48
+PyNN CSAConnector random(0.1) csa 48000 4798013 925.731455 0.0 925.731455 28 48
+PyNN CSAConnector random(0.1) csa 48000 4801019 925.547009 0.0 925.547009 2 48
+PyNN CSAConnector random(0.1) csa 48000 4800813 925.681797 0.0 925.681797 33 48
+PyNN CSAConnector random(0.1) csa 48000 4803087 925.741545 0.0 925.741545 1 48
+PyNN CSAConnector random(0.1) csa 48000 4797007 925.728678 0.0 925.728678 14 48
+PyNN CSAConnector random(0.1) csa 48000 4802139 925.709971 0.0 925.709971 37 48
+PyNN CSAConnector random(0.1) csa 48000 4801114 925.281449 0.0 925.281449 4 48
+PyNN CSAConnector random(0.1) csa 48000 4800018 925.719972 0.0 925.719972 41 48
+PyNN CSAConnector random(0.1) csa 48000 4796856 925.708153 0.0 925.708153 39 48
+PyNN CSAConnector random(0.1) csa 48000 4797796 925.700529 0.0 925.700529 3 48
+PyNN CSAConnector random(0.1) csa 48000 4798504 925.708921 0.0 925.708921 5 48
+PyNN CSAConnector random(0.1) csa 48000 4796510 925.738283 0.0 925.738283 43 48
+PyNN CSAConnector random(0.1) csa 48000 4798114 925.710397 0.0 925.710397 13 48
+PyNN CSAConnector random(0.1) csa 48000 4799431 925.685197 0.0 925.685197 12 48
+PyNN CSAConnector random(0.1) csa 48000 4799146 925.705809 0.0 925.705809 7 48
+PyNN CSAConnector random(0.1) csa 48000 4800633 925.593131 0.0 925.593131 44 48
+PyNN CSAConnector random(0.1) csa 48000 4798126 925.697585 0.0 925.697585 9 48
+PyNN CSAConnector random(0.1) csa 48000 4799304 925.713242 0.0 925.713242 45 48
+PyNN CSAConnector random(0.1) csa 48000 4799630 925.699595 0.0 925.699595 17 48
+PyNN CSAConnector random(0.1) csa 48000 4799196 925.749176 0.0 925.749176 15 48
+PyNN CSAConnector random(0.1) csa 48000 4800773 925.738268 0.0 925.738268 8 48
+PyNN CSAConnector random(0.1) csa 48000 4800660 925.745789 0.0 925.745789 22 48
+PyNN CSAConnector random(0.1) csa 48000 4797297 925.732411 0.0 925.732411 16 48
+PyNN CSAConnector random(0.1) csa 48000 4795381 925.723397 0.0 925.723397 19 48
+PyNN CSAConnector random(0.1) csa 48000 4798918 925.365395 0.0 925.365395 11 48
+PyNN CSAConnector random(0.1) csa 48000 4798874 925.754820 0.0 925.754820 21 48
+PyNN CSAConnector random(0.1) csa 48000 4799458 925.700622 0.0 925.700622 10 48
+PyNN CSAConnector random(0.1) csa 48000 4797820 925.712094 0.0 925.712094 24 48
+PyNN CSAConnector random(0.1) csa 48000 4800747 925.349227 0.0 925.349227 47 48
+PyNN CSAConnector random(0.1) csa 48000 4801769 925.700385 0.0 925.700385 23 48
+PyNN CSAConnector random(0.1) csa 48000 4800882 925.690284 0.0 925.690284 25 48
+PyNN CSAConnector random(0.1) csa 48000 4799334 925.757612 0.0 925.757612 27 48
+PyNN CSAConnector random(0.1) csa 48000 4800405 925.729032 0.0 925.729032 18 48
+PyNN CSAConnector random(0.1) csa 48000 4800904 925.720591 0.0 925.720591 30 48
+PyNN CSAConnector random(0.1) csa 48000 4800270 925.712669 0.0 925.712669 34 48
+PyNN CSAConnector random(0.1) csa 48000 4800596 925.636148 0.0 925.636148 35 48
+PyNN CSAConnector random(0.1) csa 48000 4800012 925.703824 0.0 925.703824 32 48
+PyNN CSAConnector random(0.1) csa 48000 4801879 925.706371 0.0 925.706371 29 48
+PyNN CSAConnector random(0.1) csa 48000 4799343 925.709981 0.0 925.709981 38 48
+PyNN CSAConnector random(0.1) csa 48000 4802122 925.714734 0.0 925.714734 36 48
+PyNN CSAConnector random(0.1) csa 48000 4803528 925.701428 0.0 925.701428 6 48
+PyNN CSAConnector random(0.1) csa 48000 4801484 925.705709 0.0 925.705709 20 48
+PyNN CSAConnector random(0.1) csa 48000 4800477 925.745479 0.0 925.745479 26 48
+PyNN CSAConnector random(0.1) csa 48000 4797484 925.557925 0.0 925.557925 46 48
+PyNN CSAConnector random(0.1) csa 48000 4803606 925.747743 0.0 925.747743 40 48
+PyNN CSAConnector random(0.1) csa 48000 4800998 925.680286 0.0 925.680286 31 48
+PyNN CSAConnector random(0.1) csa 48000 4803081 925.700687 0.0 925.700687 42 48
+PyNN CSAConnector random(0.1) csa 48000 57593141 1117.706807 0.0 1117.706807 2 4
+PyNN CSAConnector random(0.1) csa 48000 57601288 1117.682889 0.0 1117.682889 0 4
+PyNN CSAConnector random(0.1) csa 48000 57609066 1117.740814 0.0 1117.740814 1 4
+PyNN CSAConnector random(0.1) csa 48000 57607662 1117.702228 0.0 1117.702228 3 4
+PyNN CSAConnector random(0.1) csa 48000 38400310 1061.798697 0.0 1061.798697 4 6
+PyNN CSAConnector random(0.1) csa 48000 38407522 1061.814522 0.0 1061.814522 2 6
+PyNN CSAConnector random(0.1) csa 48000 38399809 1061.809133 0.0 1061.809133 0 6
+PyNN CSAConnector random(0.1) csa 48000 38401403 1061.801577 0.0 1061.801577 3 6
+PyNN CSAConnector random(0.1) csa 48000 38401597 1061.841139 0.0 1061.841139 5 6
+PyNN CSAConnector random(0.1) csa 48000 38400084 1061.837584 0.0 1061.837584 1 6

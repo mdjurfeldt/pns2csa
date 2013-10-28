@@ -2,7 +2,7 @@
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -16,7 +16,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -30,7 +30,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -44,7 +44,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -58,7 +58,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -72,7 +72,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -82,9 +82,9 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 6000 2.713589 5 6
-nest CSAConnector random(0.1) csa 6000 2.718664 3 6
-nest CSAConnector random(0.1) csa 6000 2.738842 4 6
-nest CSAConnector random(0.1) csa 6000 2.753611 2 6
-nest CSAConnector random(0.1) csa 6000 2.764020 1 6
-nest CSAConnector random(0.1) csa 6000 2.818363 0 6
+nest CSAConnector random(0.1) csa 16970 4797538 23.023850 0.050000 22.000000 5 6
+nest CSAConnector random(0.1) csa 16970 4796867 23.018080 0.060000 21.360000 0 6
+nest CSAConnector random(0.1) csa 16970 4799739 23.024576 0.050000 21.960000 3 6
+nest CSAConnector random(0.1) csa 16970 4799545 23.020662 0.060000 22.910000 1 6
+nest CSAConnector random(0.1) csa 16970 4803190 23.031719 0.060000 22.570000 2 6
+nest CSAConnector random(0.1) csa 16970 4799239 23.019486 0.060000 22.780000 4 6

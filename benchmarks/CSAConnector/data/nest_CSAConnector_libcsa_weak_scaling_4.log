@@ -2,7 +2,7 @@
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -16,7 +16,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -30,7 +30,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -44,7 +44,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -54,7 +54,7 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) libcsa 4000 0.307057 3 4
-nest CSAConnector random(0.1) libcsa 4000 0.306644 1 4
-nest CSAConnector random(0.1) libcsa 4000 0.303958 2 4
-nest CSAConnector random(0.1) libcsa 4000 0.316283 0 4
+nest CSAConnector random(0.1) libcsa 13856 4799051 4.156873 0.000000 3.680000 2 4
+nest CSAConnector random(0.1) libcsa 13856 4799051 4.166472 0.000000 3.730000 3 4
+nest CSAConnector random(0.1) libcsa 13856 4799051 4.164575 0.000000 4.000000 0 4
+nest CSAConnector random(0.1) libcsa 13856 4799051 4.162431 0.000000 4.130000 1 4

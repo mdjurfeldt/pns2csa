@@ -2,7 +2,7 @@
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -16,7 +16,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -30,7 +30,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -44,7 +44,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -58,7 +58,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -72,7 +72,7 @@ Type 'nest.help()' to find out more about NEST.
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -82,9 +82,9 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 6000 15.269164 2 6
-PyNN CSAConnector random(0.1) csa 6000 15.539419 4 6
-PyNN CSAConnector random(0.1) csa 6000 15.568652 0 6
-PyNN CSAConnector random(0.1) csa 6000 15.599504 5 6
-PyNN CSAConnector random(0.1) csa 6000 15.805792 1 6
-PyNN CSAConnector random(0.1) csa 6000 15.879210 3 6
+PyNN CSAConnector random(0.1) csa 16970 4795442 131.997733 0.0 131.997733 0 6
+PyNN CSAConnector random(0.1) csa 16970 4799580 132.001057 0.0 132.001057 4 6
+PyNN CSAConnector random(0.1) csa 16970 4797091 132.026786 0.0 132.026786 1 6
+PyNN CSAConnector random(0.1) csa 16970 4797854 131.999763 0.0 131.999763 2 6
+PyNN CSAConnector random(0.1) csa 16970 4800262 132.010542 0.0 132.010542 5 6
+PyNN CSAConnector random(0.1) csa 16970 4800328 131.985211 0.0 131.985211 3 6

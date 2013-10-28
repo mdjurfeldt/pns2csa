@@ -2,7 +2,7 @@
               -- N E S T --
 
   Copyright (C) 2004 The NEST Initiative
-  Version 2.3.svn Sep 28 2013 00:21:47
+  Version 2.3.svn Oct 27 2013 21:50:58
 
 This program is provided AS IS and comes with
 NO WARRANTY. See the file LICENSE for details.
@@ -12,5 +12,5 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) libcsa 50000 220.190928 17579012
-nest CSAConnector oneToOne libcsa 50000 0.134281 0
+nest CSAConnector random(0.1) libcsa 50000 250013320 226.778803 0.000000 226.390000 17579444
+nest CSAConnector oneToOne libcsa 50000 50000 0.444225 0.000000 0.050000 0
