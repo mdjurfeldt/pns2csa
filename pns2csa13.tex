@@ -417,6 +417,7 @@ equivalent to a mask and the two can be used interchangeably.
 
 \subsection{An algebra for connectivity structure}\label{sec:algebra}
 
+\tbw{To be written by Mikael...}
 
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
@@ -439,7 +440,7 @@ using a novel C++ implementation.
 %\subsubsection{Masks}
 %\subsection{Python wrapper}
 %\subsection{Serialization/deserialization}
-\tbw{To be continued...}
+\tbw{To be continued by Mikael...}
 
 %----------------------------------------------------------------------
 
@@ -462,7 +463,7 @@ simulator and the connectivity description library replaceable.
   tasks.}\label{fig:block_diagram_conngen}
 \end{figure}
 
-\tbw{To be written}
+\tbw{To be written by Mikael?}
 
 \subsection{The interface}
 
@@ -491,19 +492,23 @@ consists of the following functions:
 \subsection{libneurosim}
 Where does the \verb|ConnectionGenerator| interface definition (in the
 form of a C++ header file plus supporting code) belong?  If it is put
-either in the simulator or connection generating library source trees,
-it will be duplicated.  As new versions of the interface are
-developed, the situation will quickly cease to be maintainable.  In
-fact, the \verb|ConnectionGenerator| is unusual in that it is a
-symmetric abstraction barrier: it both allows the use of any library
-providing the API from a given simulator \emph{and} allows the same
-library to be used from any simulator supporting the API.
+in the simulator or connection generating library source trees, it
+will be duplicated over simulators or libraries.  As new versions of
+the interface are developed, the situation will quickly become
+unmanageable.  In fact, the \verb|ConnectionGenerator| is unusual in
+that it is a symmetric abstraction barrier: it both allows the use of
+any library providing the API from a given simulator \emph{and} allows
+the same library to be used from any simulator supporting the API.
 
 In order to create a space where to put interfaces and other code of
 generic use for neuronal network simulation software, we have
 developed the neurosim library
-(\url{http://software.incf.org/software/libneurosim}).  This library
-currently consists of two main components.
+(\url{http://software.incf.org/software/libneurosim}).  More
+precisely, libneurosim is a software package which currently consists
+of two main components: libneurosim, providing C++ level support code
+and libpyneurosim, providing Python support code.
+
+\tbw{To be continued by Mikael...}
 
 \section{NEST connection generators}\label{sec:conn_gen_nest}
 
@@ -578,7 +583,7 @@ detailed in section \ref{sec:creating_masks}.
 %----------------------------------------------------------------------
 
 \section{PyNN connection generators}\label{sec:conn_gen_pynn}
-\tbw{To be written}
+\tbw{To be written by Jochen}
 
 %----------------------------------------------------------------------
 
@@ -669,7 +674,7 @@ the desired number of connections. In the realm of natural numbers,
 this leads to a slight error, which was well acceptable with values
 between $-0.05$\permil and $+0.06$\permil.
 
-\tbw{To be written}
+\tbw{To be written by Jochen}
 
 %----------------------------------------------------------------------
 
