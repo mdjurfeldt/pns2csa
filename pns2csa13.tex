@@ -551,7 +551,7 @@ re-instantiate the object, which can then be given to the
 \includegraphics[scale=.8]{figures/sequence_diagram_nest.pdf}
 \caption{Sequence diagram of connection generation in NEST using the
   Connection Generator interface. The user first creates a
-  ConnectionGenerator object. He then calls PyNEST's function
+  \texttt{ConnectionGenerator} object. He then calls PyNEST's function
   \texttt{CGConnect()}. \textcircled{\footnotesize 1} The function
   \texttt{cg\_get\_ranges()} returns all contiguous ranges of gids in
   the given list as vector of closed intervals, still using the gid
@@ -562,10 +562,10 @@ re-instantiate the object, which can then be given to the
   (\emph{pre\_mask} and \emph{post\_mask}) is used to set the masks on
   the ConnectionGenerator. \textcircled{\footnotesize 3} The NEST
   kernel iterates the ConnectionGenerator by calling \texttt{next()}
-  until there are no more connection. For each connection it receives,
+  until there are no more connections. For each connection it receives,
   it creates the connection by calling \texttt{Network::connect()}. If
   a non-empty \emph{param\_map} was given, the connection's weight and
-  delay are taken from the value-set attached to
+  delay are taken from the value-sets attached to
   \emph{cg}}\label{fig:sequence_diagram_nest}
 \end{figure}
 
@@ -573,11 +573,11 @@ Figure \ref{fig:sequence_diagram_nest} shows the different entities in
 NEST involved in a user call to \texttt{CGConnect()}. After setting
 the masks for the ConnectionGenerator, the NEST kernel iteratively
 calls \texttt{next()}, which returns the source and target index of
-the next connection and the parameters for the connection. The
+the next connection and parameter values for the connection. The
 connections are established one by one by calling NEST's basic
 \texttt{Network::connect()} function.
 
-The extraction of contiguous ranges from the population supplied as
+The extraction of contiguous ranges from the populations supplied as
 user arguments and the index translation for the creation of masks is
 detailed in section \ref{sec:creating_masks}.
 
