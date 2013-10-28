@@ -465,7 +465,7 @@ simulator and the connectivity description library replaceable.
 
 \tbw{To be written by Mikael?}
 
-\subsection{The interface}
+\subsection{The interface}\label{sec:cgint}
 
 The interface is designed as an abstract base class in C++ and
 consists of the following functions:
@@ -518,14 +518,15 @@ compile time of NEST and extended the user interfaces SLI and PyNEST
 by the following functions:
 
 \begin{unlist}
-\item[\tt CGConnect\ ] takes a ConnectionGenerator, the indices of pre-
-  and a post-synaptic populations, and a parameter map and creates the
-  connections prescribed by the rules containes in the
+\item[\tt CGConnect\ ] takes a ConnectionGenerator, the indices of
+  pre- and a post-synaptic populations, and a parameter map and
+  creates the connections prescribed by the rules contained in the
   ConnectionGenerator object. The parameter map maps parameter names
-  (e.g.  \emph{weight}, \emph{delay}) to their index in the value set
-  corresponding to the source-target pair in the ConnectionGenerator.
+  (e.g.  \emph{weight}, \emph{delay}) to the index of the parameter
+  value vector of the \verb|next| call (see section \ref{sec:cgint})
+  in the \verb|ConnectionGenerator| interface.
 \item[\tt CGSelectImplementation\ ] selects a library to provide the
-  connection generation functionality based on an XML tag, which
+  connection generation functionality based on an XML tag which
   represents the parent node of a serialized connection generator a
   the name of a library to provide a parser for such an XML file.
 \end{unlist}
