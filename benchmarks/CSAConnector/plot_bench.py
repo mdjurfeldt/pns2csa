@@ -197,6 +197,8 @@ for scaling_mode in ("weak", "strong"):
 
         if scaling_mode == "strong":
             ax1.set_ylim([10**0, 10**5])
+        else:
+            ax1.set_ylim([10**0, 10**5])
 
         ax1.set_xlim([1, 48])
         ax1.set_xticks([1, 2, 4, 6, 12, 24, 48])
