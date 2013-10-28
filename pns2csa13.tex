@@ -228,7 +228,7 @@ There exists multiple implementations of CSA (see section
 
 \subsection{PyNN}
 
-PyNN \citep[http://www.neuralensemble.org/PyNN;][]{Davison09} is a
+PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is a
 community effort to provide a simulator-independent API for describing
 neuronal networks in Python. Given a PyNN/Python model description,
 the user can choose which simulator to use without a need for changes
@@ -274,7 +274,7 @@ routines.
 
 NEST is a simulator for large networks of point neurons or neuron
 models with few electrical compartments
-\citep[http://www.nest-initiative.org;][]{Gewaltig_07_11204}. It is
+\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It is
 suited for a broad range of neuronal network modeling approaches and
 runs on a large variety of computer architectures. NEST is
 parallelized using OpenMP \citep{OpenMPSpec} and MPI
@@ -365,7 +365,8 @@ gain of this will be demonstrated in section \ref{sec:algebra}.
 \centering
 \includegraphics[scale=.7]{figures/csa-pane.pdf}
 \caption{
-  \textbf{A} A CSA mask can be considered as a connection
+  \textbf{A} The mask $\overline{M} =
+  \{(0,1), (1,1), (1,2), (3,2), (2,3), (0,4)\}$ shown as a connection
   matrix. Grey squares represent existing connections.
   \textbf{B} Network connectivity when the mask in A is applied to
   source population $P_s$ and target population
@@ -412,9 +413,10 @@ C = (\overline{M}, V_0, V_1, ...)
 \end{equation}
 The number of value sets of a connection-set is called its
 \emph{arity}. A connection-set with arity 0 is for all purposes
-equivalent to a mask and they can be used interchangeably.
+equivalent to a mask and the two can be used interchangeably.
 
 \subsection{An algebra for connectivity structure}\label{sec:algebra}
+
 
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
@@ -443,8 +445,8 @@ using a novel C++ implementation.
 
 \section{The Connection Generator API}
 
-To allow users to flexibly chose between simulators and the library,
-which generates connectivity, we developed an interface (the
+To allow users to flexibly choose among simulators and libraries
+which generate connectivity, we developed an interface (the
 \emph{Connection Generator}) that abstracts the simulator and the
 connection generating library from each other, making both the
 simulator and the connectivity description library replaceable.
@@ -487,7 +489,21 @@ consists of the following functions:
 \end{unlist}
 
 \subsection{libneurosim}
-\tbw{To be written}
+Where does the \verb|ConnectionGenerator| interface definition (in the
+form of a C++ header file plus supporting code) belong?  If it is put
+either in the simulator or connection generating library source trees,
+it will be duplicated.  As new versions of the interface are
+developed, the situation will quickly cease to be maintainable.  In
+fact, the \verb|ConnectionGenerator| is unusual in that it is a
+symmetric abstraction barrier: it both allows the use of any library
+providing the API from a given simulator \emph{and} allows the same
+library to be used from any simulator supporting the API.
+
+In order to create a space where to put interfaces and other code of
+generic use for neuronal network simulation software, we have
+developed the neurosim library
+(\url{http://software.incf.org/software/libneurosim}).  This library
+currently consists of two main components.
 
 \section{NEST connection generators}\label{sec:conn_gen_nest}
 
@@ -584,7 +600,7 @@ following combinations were tested:
   source and target (Andrew, why not plain Connects?) to PyNEST.
 \item \textbf{nest, csa} This used my new CSAConnector for the NEST
   backend (from py personal github form of PyNN at
-  https://github.com/jougs/PyNN) and the Python CSA
+  \url{https://github.com/jougs/PyNN}) and the Python CSA
   implementation. The CSAConnector just passes down the csa object as
   ConnectionGenerator to PyNEST, which iterates it from the C++ level
   by issueing callbacks to the corresponding Python functions.
@@ -669,6 +685,22 @@ between $-0.05$\permil and $+0.06$\permil.
   part of libneurosim
 \end{itemize}
 
+If every single piece of generically useful functionality, such as the
+\verb|ConnectionGenerator| interface, was distributed in a separate
+library, the library dependencies of simulation software would grow
+unmanageable.  Libneurosim could therefore become a place where to put
+other interfaces and supporting code than the
+\verb|ConnectionGenerator| interface.  Every neuronal network
+simulator generates random numbers. The GNU Scientific Library (GSL;
+\url{http://www.gnu.org/software/gsl}) provides random number
+generators, but there are still needs specific to neuronal network
+simulators which could be served by a specialized RNG library. Should
+such a library be provided through libneurosim or the libneurosim
+software package?  We believe that the answer to this and similar
+questions is a matter of judgement. It would certainly not make sense
+to collect all generically useful functionality in one monolithic
+library.
+
 %----------------------------------------------------------------------
 
 \section*{Conflict-of-Interest Statement}
@@ -681,7 +713,7 @@ Partially supported by the Helmholtz Association: HASB and portfolio
 theme SMHB, the Jülich Aachen Research Alliance (JARA), the VSR
 computation time grant JINB33 on the JUQUEEN supercomputer in Jülich,
 and EU Grant 269921 (BrainScaleS). The authors would like to thank
-Randall Munroe of http://www.xkcd.org for granting the permission to
+Randall Munroe of \url{http://www.xkcd.org} for granting the permission to
 use his drawings in the sequence diagrams throughout this article.
 
 \section*{Appendix A: Creating masks in NEST}\label{sec:creating_masks}
