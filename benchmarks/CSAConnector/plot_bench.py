@@ -195,10 +195,8 @@ for scaling_mode in ("weak", "strong"):
         ax1.set_xlabel("number of processes")
         ax1.set_ylabel("wallclock time (s)")
 
-        if scaling_mode == "strong":
-            ax1.set_ylim([10**0, 10**5])
-        else:
-            ax1.set_ylim([10**0, 10**5])
+        # This is only to get the legends not overlapped by the data
+        ax1.set_ylim([10**0, 10**5])
 
         ax1.set_xlim([1, 48])
         ax1.set_xticks([1, 2, 4, 6, 12, 24, 48])
