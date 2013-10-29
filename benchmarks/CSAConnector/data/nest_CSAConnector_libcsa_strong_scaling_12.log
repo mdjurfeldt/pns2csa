@@ -166,15 +166,39 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.651140 0.000000 16.190000 6 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.671629 0.000000 14.960000 5 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.674425 0.000000 15.310000 0 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.629643 0.000000 14.840000 7 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.656864 0.000000 15.700000 2 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.658538 0.000000 15.130000 4 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.627873 0.000000 14.820000 1 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.638893 0.000000 15.100000 11 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.696461 0.000000 15.230000 3 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.651574 0.000000 14.390000 8 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.618977 0.000000 14.670000 9 12
-nest CSAConnector random(0.1) libcsa 48000 19200326 16.614297 0.000000 16.500000 10 12
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=9.177e-06
+itertime_ts.tv_sec=14, itertime_ts.tv_sec/1e9=0.385564
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.0353e-05
+itertime_ts.tv_sec=14, itertime_ts.tv_sec/1e9=0.672717
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.0513e-05
+itertime_ts.tv_sec=15, itertime_ts.tv_sec/1e9=0.156744
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=7.919e-06
+itertime_ts.tv_sec=15, itertime_ts.tv_sec/1e9=0.29331
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=9.531e-06
+itertime_ts.tv_sec=15, itertime_ts.tv_sec/1e9=0.383763
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=8.942e-06
+itertime_ts.tv_sec=15, itertime_ts.tv_sec/1e9=0.413079
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=8.57e-06
+itertime_ts.tv_sec=16, itertime_ts.tv_sec/1e9=0.168769
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.1916e-05
+itertime_ts.tv_sec=16, itertime_ts.tv_sec/1e9=0.401737
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.2168e-05
+itertime_ts.tv_sec=16, itertime_ts.tv_sec/1e9=0.46248
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=9.903e-06
+itertime_ts.tv_sec=16, itertime_ts.tv_sec/1e9=0.589971
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=9.188e-06
+itertime_ts.tv_sec=16, itertime_ts.tv_sec/1e9=0.596595
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.2304e-05
+itertime_ts.tv_sec=17, itertime_ts.tv_sec/1e9=0.0769248
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.208014 0.000010 14.672717 0 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.223190 0.000008 15.293310 11 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.238159 0.000009 14.385564 6 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.246618 0.000009 16.168769 10 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.211884 0.000009 15.413079 2 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.243415 0.000012 16.401737 5 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.215240 0.000012 16.462480 7 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.232100 0.000009 16.596595 1 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.235692 0.000010 16.589971 9 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.203096 0.000011 15.156744 8 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.215554 0.000010 15.383763 3 12
+nest CSAConnector random(0.1) libcsa 48000 19200326 17.222445 0.000012 17.076925 4 12

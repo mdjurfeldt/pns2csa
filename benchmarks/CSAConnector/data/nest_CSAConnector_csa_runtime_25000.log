@@ -12,5 +12,9 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 25000 62494132 286.942929 0.000000 286.810000 5076104
-nest CSAConnector oneToOne csa 25000 25000 0.222615 0.000000 0.050000 0
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.000273507
+itertime_ts.tv_sec=291, itertime_ts.tv_sec/1e9=0.862214
+nest CSAConnector random(0.1) csa 25000 62513198 292.548333 0.000274 291.862214 5078904
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.000228367
+itertime_ts.tv_sec=0, itertime_ts.tv_sec/1e9=0.0462111
+nest CSAConnector oneToOne csa 25000 25000 0.214071 0.000228 0.046211 0

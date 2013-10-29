@@ -82,9 +82,21 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 48000 38387663 180.975316 0.280000 176.610000 2 6
-nest CSAConnector random(0.1) csa 48000 38398957 180.973250 0.270000 176.010000 4 6
-nest CSAConnector random(0.1) csa 48000 38401694 180.950638 0.280000 179.020000 1 6
-nest CSAConnector random(0.1) csa 48000 38399339 181.008266 0.260000 173.780000 0 6
-nest CSAConnector random(0.1) csa 48000 38396423 180.990708 0.270000 175.520000 5 6
-nest CSAConnector random(0.1) csa 48000 38404275 180.961220 0.280000 180.460000 3 6
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.284588
+itertime_ts.tv_sec=175, itertime_ts.tv_sec/1e9=0.198559
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.280173
+itertime_ts.tv_sec=176, itertime_ts.tv_sec/1e9=0.419806
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.28114
+itertime_ts.tv_sec=177, itertime_ts.tv_sec/1e9=0.291693
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.275648
+itertime_ts.tv_sec=177, itertime_ts.tv_sec/1e9=0.72208
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.276544
+itertime_ts.tv_sec=181, itertime_ts.tv_sec/1e9=0.74221
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.26397
+itertime_ts.tv_sec=182, itertime_ts.tv_sec/1e9=0.282346
+nest CSAConnector random(0.1) csa 48000 38411452 182.845774 0.275648 177.722080 1 6
+nest CSAConnector random(0.1) csa 48000 38406437 182.839692 0.280173 176.419806 4 6
+nest CSAConnector random(0.1) csa 48000 38394842 182.828079 0.281140 177.291693 3 6
+nest CSAConnector random(0.1) csa 48000 38400974 182.839569 0.276544 181.742210 5 6
+nest CSAConnector random(0.1) csa 48000 38398429 182.826826 0.284588 175.198559 0 6
+nest CSAConnector random(0.1) csa 48000 38381684 182.866075 0.263970 182.282346 2 6

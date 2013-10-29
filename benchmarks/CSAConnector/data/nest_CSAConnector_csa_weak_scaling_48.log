@@ -670,51 +670,147 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 48000 4800874 25.279927 0.320000 23.490000 47 48
-nest CSAConnector random(0.1) csa 48000 4800569 25.281175 0.320000 22.840000 29 48
-nest CSAConnector random(0.1) csa 48000 4798939 25.291041 0.330000 22.800000 1 48
-nest CSAConnector random(0.1) csa 48000 4800901 25.288356 0.320000 22.650000 15 48
-nest CSAConnector random(0.1) csa 48000 4800038 25.334138 0.290000 22.740000 5 48
-nest CSAConnector random(0.1) csa 48000 4799039 25.227528 0.320000 22.900000 3 48
-nest CSAConnector random(0.1) csa 48000 4799193 25.272290 0.330000 23.540000 10 48
-nest CSAConnector random(0.1) csa 48000 4798806 25.332908 0.290000 23.080000 13 48
-nest CSAConnector random(0.1) csa 48000 4800877 25.289695 0.310000 23.040000 4 48
-nest CSAConnector random(0.1) csa 48000 4801007 25.278396 0.310000 22.680000 11 48
-nest CSAConnector random(0.1) csa 48000 4803677 25.278293 0.320000 23.460000 9 48
-nest CSAConnector random(0.1) csa 48000 4800062 25.265525 0.340000 23.060000 16 48
-nest CSAConnector random(0.1) csa 48000 4800538 25.286237 0.310000 23.160000 7 48
-nest CSAConnector random(0.1) csa 48000 4796381 25.277928 0.310000 22.930000 18 48
-nest CSAConnector random(0.1) csa 48000 4800688 25.262181 0.330000 22.800000 43 48
-nest CSAConnector random(0.1) csa 48000 4796085 25.223873 0.320000 22.860000 41 48
-nest CSAConnector random(0.1) csa 48000 4798577 25.289509 0.310000 23.250000 32 48
-nest CSAConnector random(0.1) csa 48000 4798640 25.281113 0.320000 22.830000 44 48
-nest CSAConnector random(0.1) csa 48000 4800063 25.282178 0.320000 23.460000 24 48
-nest CSAConnector random(0.1) csa 48000 4803071 25.244799 0.340000 23.200000 28 48
-nest CSAConnector random(0.1) csa 48000 4801506 25.265796 0.340000 23.060000 20 48
-nest CSAConnector random(0.1) csa 48000 4798225 25.305327 0.300000 23.600000 30 48
-nest CSAConnector random(0.1) csa 48000 4795985 25.265450 0.320000 24.770000 19 48
-nest CSAConnector random(0.1) csa 48000 4798077 25.275023 0.330000 22.870000 23 48
-nest CSAConnector random(0.1) csa 48000 4794719 25.248110 0.320000 23.270000 26 48
-nest CSAConnector random(0.1) csa 48000 4801655 25.209710 0.320000 23.060000 40 48
-nest CSAConnector random(0.1) csa 48000 4801927 25.263438 0.320000 22.870000 34 48
-nest CSAConnector random(0.1) csa 48000 4803639 25.302739 0.300000 23.080000 46 48
-nest CSAConnector random(0.1) csa 48000 4797744 25.275242 0.320000 24.000000 22 48
-nest CSAConnector random(0.1) csa 48000 4795640 25.231195 0.340000 23.060000 39 48
-nest CSAConnector random(0.1) csa 48000 4799101 25.259820 0.320000 23.430000 27 48
-nest CSAConnector random(0.1) csa 48000 4794341 25.263628 0.320000 22.680000 6 48
-nest CSAConnector random(0.1) csa 48000 4801176 25.249521 0.320000 24.640000 8 48
-nest CSAConnector random(0.1) csa 48000 4796377 25.246940 0.340000 22.590000 12 48
-nest CSAConnector random(0.1) csa 48000 4800757 25.276570 0.320000 23.840000 17 48
-nest CSAConnector random(0.1) csa 48000 4798833 25.263105 0.320000 23.260000 14 48
-nest CSAConnector random(0.1) csa 48000 4798892 25.221219 0.340000 22.750000 38 48
-nest CSAConnector random(0.1) csa 48000 4799064 25.257700 0.320000 23.080000 21 48
-nest CSAConnector random(0.1) csa 48000 4801456 25.322607 0.290000 23.110000 45 48
-nest CSAConnector random(0.1) csa 48000 4798321 25.252230 0.320000 23.280000 31 48
-nest CSAConnector random(0.1) csa 48000 4802426 25.267441 0.330000 23.280000 35 48
-nest CSAConnector random(0.1) csa 48000 4803141 25.202809 0.310000 23.570000 33 48
-nest CSAConnector random(0.1) csa 48000 4801580 25.289252 0.320000 22.940000 25 48
-nest CSAConnector random(0.1) csa 48000 4799963 25.263446 0.340000 23.300000 36 48
-nest CSAConnector random(0.1) csa 48000 4800547 25.277496 0.320000 23.090000 37 48
-nest CSAConnector random(0.1) csa 48000 4800053 25.239269 0.330000 22.910000 42 48
-nest CSAConnector random(0.1) csa 48000 4802059 25.224496 0.340000 23.620000 0 48
-nest CSAConnector random(0.1) csa 48000 4795267 25.197387 0.320000 23.120000 2 48
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.322078
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.352267
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.325709
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.370688
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.306663
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.555325
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.307784
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.545168
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.3214
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.536221
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.321276
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.581434
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.3251
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.58441
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.319698
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.628334
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.328365
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.582289
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.31879
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.637511
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.318837
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.641703
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.317448
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.650894
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.328261
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.569087
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.317205
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.72193
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.289121
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.826064
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.31662
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.771163
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.331798
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.732229
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.310066
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.894088
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.331419
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.845224
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.331147
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.916756
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.327319
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.972646
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.306015
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0357431
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.323345
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.978852
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.326978
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0079618
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.296341
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0766214
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.30608
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0959492
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.332834
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0212622
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.300699
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.119204
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.3193
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0589958
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.320606
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0756392
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.295644
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.182779
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.3229
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.140816
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.28975
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.213663
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.310137
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.180275
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.33256
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0789877
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.314523
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.164518
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.307721
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.282764
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.301329
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.358496
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.336003
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.275307
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.330779
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.322509
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.320343
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.369145
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.308325
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.452677
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.31119
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.547685
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.311341
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.648216
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.313928
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.832469
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.313479
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.896241
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.330252
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.910291
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.316734
+itertime_ts.tv_sec=24, itertime_ts.tv_sec/1e9=0.0266101
+nest CSAConnector random(0.1) csa 48000 4800669 24.536529 0.311341 23.648216 8 48
+nest CSAConnector random(0.1) csa 48000 4800998 24.480295 0.330779 23.322509 42 48
+nest CSAConnector random(0.1) csa 48000 4800584 24.511819 0.317205 22.721930 39 48
+nest CSAConnector random(0.1) csa 48000 4802133 24.496852 0.336003 23.275307 12 48
+nest CSAConnector random(0.1) csa 48000 4794809 24.541137 0.306015 23.035743 28 48
+nest CSAConnector random(0.1) csa 48000 4798614 24.538403 0.296341 23.076621 13 48
+nest CSAConnector random(0.1) csa 48000 4797529 24.559183 0.289750 23.213663 46 48
+nest CSAConnector random(0.1) csa 48000 4799646 24.512192 0.322078 22.352267 30 48
+nest CSAConnector random(0.1) csa 48000 4802291 24.549232 0.301329 23.358496 23 48
+nest CSAConnector random(0.1) csa 48000 4798155 24.543271 0.300699 23.119204 40 48
+nest CSAConnector random(0.1) csa 48000 4799089 24.528048 0.310066 22.894088 41 48
+nest CSAConnector random(0.1) csa 48000 4796931 24.491282 0.319300 23.058996 7 48
+nest CSAConnector random(0.1) csa 48000 4800739 24.499596 0.320343 23.369145 19 48
+nest CSAConnector random(0.1) csa 48000 4800921 24.496188 0.331419 22.845224 25 48
+nest CSAConnector random(0.1) csa 48000 4803548 24.495493 0.323345 22.978852 6 48
+nest CSAConnector random(0.1) csa 48000 4796311 24.519986 0.311190 23.547685 2 48
+nest CSAConnector random(0.1) csa 48000 4798165 24.508643 0.321276 22.581434 22 48
+nest CSAConnector random(0.1) csa 48000 4800269 24.508180 0.318837 22.641703 16 48
+nest CSAConnector random(0.1) csa 48000 4798882 24.514880 0.314523 23.164518 18 48
+nest CSAConnector random(0.1) csa 48000 4803247 24.501907 0.327319 22.972646 44 48
+nest CSAConnector random(0.1) csa 48000 4803105 24.526524 0.308325 23.452677 32 48
+nest CSAConnector random(0.1) csa 48000 4796584 24.504416 0.318790 22.637511 20 48
+nest CSAConnector random(0.1) csa 48000 4797935 24.466498 0.332560 23.078988 27 48
+nest CSAConnector random(0.1) csa 48000 4797152 24.513875 0.321400 22.536221 0 48
+nest CSAConnector random(0.1) csa 48000 4797748 24.487306 0.325709 22.370688 1 48
+nest CSAConnector random(0.1) csa 48000 4800887 24.470533 0.328365 22.582289 17 48
+nest CSAConnector random(0.1) csa 48000 4797790 24.526618 0.307721 23.282764 14 48
+nest CSAConnector random(0.1) csa 48000 4799877 24.568707 0.289121 22.826064 37 48
+nest CSAConnector random(0.1) csa 48000 4797478 24.519968 0.319698 22.628334 29 48
+nest CSAConnector random(0.1) csa 48000 4800670 24.498574 0.326978 23.007962 11 48
+nest CSAConnector random(0.1) csa 48000 4799451 24.556541 0.306663 22.555325 38 48
+nest CSAConnector random(0.1) csa 48000 4800031 24.494679 0.330252 23.910291 43 48
+nest CSAConnector random(0.1) csa 48000 4799671 24.506876 0.325100 22.584410 3 48
+nest CSAConnector random(0.1) csa 48000 4800596 24.533208 0.310137 23.180275 5 48
+nest CSAConnector random(0.1) csa 48000 4796958 24.513507 0.313928 23.832469 33 48
+nest CSAConnector random(0.1) csa 48000 4798784 24.526520 0.307784 22.545168 26 48
+nest CSAConnector random(0.1) csa 48000 4800060 24.518978 0.322900 23.140816 34 48
+nest CSAConnector random(0.1) csa 48000 4802733 24.502863 0.331147 22.916756 10 48
+nest CSAConnector random(0.1) csa 48000 4797919 24.507323 0.316620 22.771163 21 48
+nest CSAConnector random(0.1) csa 48000 4797375 24.504282 0.317448 22.650894 15 48
+nest CSAConnector random(0.1) csa 48000 4799010 24.485081 0.328261 22.569087 36 48
+nest CSAConnector random(0.1) csa 48000 4802003 24.542778 0.295644 23.182779 45 48
+nest CSAConnector random(0.1) csa 48000 4800693 24.552042 0.306080 23.095949 35 48
+nest CSAConnector random(0.1) csa 48000 4798168 24.472172 0.331798 22.732229 31 48
+nest CSAConnector random(0.1) csa 48000 4799923 24.510560 0.313479 23.896241 47 48
+nest CSAConnector random(0.1) csa 48000 4802239 24.496209 0.332834 23.021262 24 48
+nest CSAConnector random(0.1) csa 48000 4797342 24.502411 0.320606 23.075639 9 48
+nest CSAConnector random(0.1) csa 48000 4799712 24.527916 0.316734 24.026610 4 48

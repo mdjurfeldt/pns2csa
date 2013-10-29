@@ -12,5 +12,5 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 50000 250007118 2144.891054 0.0 2144.891054 21409492
-PyNN CSAConnector oneToOne csa 50000 50000 107.295397 0.0 107.295397 0
+PyNN CSAConnector random(0.1) csa 50000 250009063 2137.282651 0.0 2137.282651 21245856
+PyNN CSAConnector oneToOne csa 50000 50000 107.470488 0.0 107.470488 0
