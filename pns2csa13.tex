@@ -189,9 +189,10 @@ of the language into a user layer (UL), corresponding to the level of
 specification used in NeuroML, and an abstraction layer (AL),
 providing the ability to unambiguously give definitions of the
 concepts used in the UL. The UL defines the syntax for supplying
-parameter values to abstract connectivity patterns. In the NineML
-prototype implementation, such patterns can be defined in the AL using
-connection-set algebra.
+parameter values to abstract connectivity patterns. In the NineML DAE
+tools prototype implementation, such patterns can be defined in the AL
+using connection-set algebra, but the framework allows for alternative
+XML-based connectivity descriptions.
 
 This work inspired similar developments in NeuroML resulting in LEMS,
 an XML-based language corresponding to the level of specification used
@@ -359,7 +360,7 @@ the simulation domain to integers, gives at least two major
 advantages: 1. The CSA does not need to care about the nature of the
 objects in $P$---they could just as well be synaptic boutons as neurons.
 2. The index set $\mathcal{I}$ can be chosen to be infinite.  The
-gain of this will be demonstrated in section \ref{sec:algebra}.
+gain of this will be demonstrated in section \ref{sec:structure}.
 
 \begin{figure}[ht]
 \centering
@@ -415,9 +416,55 @@ The number of value sets of a connection-set is called its
 \emph{arity}. A connection-set with arity 0 is for all purposes
 equivalent to a mask and the two can be used interchangeably.
 
-\subsection{An algebra for connectivity structure}\label{sec:algebra}
+\subsection{An algebra for connectivity structure}\label{sec:structure}
 
-\tbw{To be written by Mikael...}
+In CSA, the basic concepts defined in the previous section have been
+developed into a formalism for describing connectivity structure.
+Assume that a mask is applied to a single population such that $P_s =
+P_t = P$ and that we are interested in describing self-connections,
+i.e. every neuron in $P$ should be connected to itself.  If the size
+of $P$ is 4, the mask $\{(0, 0), (1, 1), (2, 2), (3, 3)\}$ could be
+used.  If it is half that size, a mask $\{(0, 0), (1, 1)\}$ would be
+appropriate. Such masks do not only contain information about
+connectivity structure but also about population size. We can
+generalize by stripping off the population size information and
+allowing the index set $\mathcal{I}$ and mask to be infinite, defining
+the one-to-one mask $\bar{\delta}$:
+\begin{equation}
+  \bar{\delta}(i, j) =
+      \begin{cases}
+        \mathcal{T}& \text{if $i = j$},\\
+        \mathcal{F}& \text{otherwise}.
+      \end{cases}
+      \quad i, j \in \mathcal{I} = \mathbb{N}_0
+\end{equation}
+Now $\bar{\delta}$ only encapsulates the concept of self- or
+one-to-one connectivity structure (depending on whether the source and
+target population is the same or different).  Finite portions can be
+cut out of such infinite connection-sets when applied to finite
+populations (see Figure \ref{fig:csa}C).
+
+CSA provides a set of elementary connection-sets such as
+$\bar{\delta}$. Another example is the random mask $\bar{\rho}$, a
+parameterized connection-set, or, more strictly, a mask-valued
+function $\bar{\rho}(p)$ where the parameter $p$ is the probability
+that a given connection $(i, j)$ exists.  That is, for each
+combination of pre- and postsynaptic neurons, a Bernoulli trial
+determines whether they are connected.
+\begin{equation}
+  \bar{\rho} (p) (i, j) =
+  \begin{cases}
+    \mathcal{T}& \text{with probability $p$},\\
+    \mathcal{F}& \text{otherwise}.
+  \end{cases}
+  \quad i, j \in \mathbb{N}_0
+\end{equation}
+By using CSA \emph{operators} such as intersection, $\cap$, union,
+$\cup$, and set difference, $-$, connection-sets can be combined into
+expressions. For example, the idea of ``random Erd\H{o}s-R\'enyi
+connectivity without self-connections'' can be represented by the CSA
+expression $\bar{\rho}(p) - \bar{\delta}$ (see Figure
+\ref{fig:csa}D).
 
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
