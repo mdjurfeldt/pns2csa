@@ -360,7 +360,7 @@ the simulation domain to integers, gives at least two major
 advantages: 1. The CSA does not need to care about the nature of the
 objects in $P$---they could just as well be synaptic boutons as neurons.
 2. The index set $\mathcal{I}$ can be chosen to be infinite.  The
-gain of this will be demonstrated in section \ref{sec:algebra}.
+gain of this will be demonstrated in section \ref{sec:structure}.
 
 \begin{figure}[ht]
 \centering
@@ -416,7 +416,7 @@ The number of value sets of a connection-set is called its
 \emph{arity}. A connection-set with arity 0 is for all purposes
 equivalent to a mask and the two can be used interchangeably.
 
-\subsection{An algebra for connectivity structure}\label{sec:algebra}
+\subsection{An algebra for connectivity structure}\label{sec:structure}
 
 In CSA, the basic concepts defined in the previous section have been
 developed into a formalism for describing connectivity structure.
@@ -443,6 +443,28 @@ one-to-one connectivity structure (depending on whether the source and
 target population is the same or different).  Finite portions can be
 cut out of such infinite connection-sets when applied to finite
 populations (see Figure \ref{fig:csa}C).
+
+CSA provides a set of elementary connection-sets such as
+$\bar{\delta}$. Another example is the random mask $\bar{\rho}$, a
+parameterized connection-set, or, more strictly, a mask-valued
+function $\bar{\rho}(p)$ where the parameter $p$ is the probability
+that a given connection $(i, j)$ exists.  That is, for each
+combination of pre- and postsynaptic neurons, a Bernoulli trial
+determines whether they are connected.
+\begin{equation}
+  \bar{\rho} (p) (i, j) =
+  \begin{cases}
+    \mathcal{T}& \text{with probability $p$},\\
+    \mathcal{F}& \text{otherwise}.
+  \end{cases}
+  \quad i, j \in \mathbb{N}_0
+\end{equation}
+By using CSA \emph{operators} such as intersection, $\cap$, union,
+$\cup$, and set difference, $-$, connection-sets can be combined into
+expressions. For example, the idea of ``random Erd\H{o}s-R\'enyi
+connectivity without self-connections'' can be represented by the CSA
+expression $\bar{\rho}(p) - \bar{\delta}$ (see Figure
+\ref{fig:csa}D).
 
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
