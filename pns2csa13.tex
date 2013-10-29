@@ -275,9 +275,9 @@ routines.
 
 NEST is a simulator for large networks of point neurons or neuron
 models with few electrical compartments
-\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It is
-suited for a broad range of neuronal network modeling approaches and
-runs on a large variety of computer architectures. NEST is
+\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It
+is suited for a broad range of neuronal network modeling approaches
+and runs on a large variety of computer architectures. NEST is
 parallelized using OpenMP \citep{OpenMPSpec} and MPI
 \citep{MPIForum94} and scales well on large clusters of multi-core
 processors and supercomputers \citep{Helias12_26}.
@@ -307,10 +307,8 @@ of knowledge of connectivity statistics. However, random connection
 parameters (e.g. weight, delay) need to be drawn manually by the user
 and supplied to NEST after the creation of connections.
 
-\tbw{Should we add a figure here? Maybe the ones
-  from\\ http://nest-initiative.org/index.php/Connection\_Management?\\ Mikael:
-  I think we should first write all text and then prioritize what the
-  most important needed figures are.}
+\tbw{Add figure as we see fits once the text is there. Candidate:\\
+  http://nest-initiative.org/index.php/Connection\_Management}
 
 \subsubsection*{Topology module:}
 
@@ -320,16 +318,12 @@ provides a Topology module \citep{Plesser_13}. It supports the user in
 connecting neurons and randomly initializing synapse parameters based
 on toplogical measures in the network.
 
-\tbw{Should we add a code listing or some more information on how to
-  use the Toplogy module?\\
-Mikael: Only if we include Topology benchmarks, I think. If not, we
-also need to modify the text below.}
-
-A comparison of the performance of the Topology module to the native
-connection routines and to the novel CSA interface to NEST is given in
-section \ref{sec:benchmarks}. The implementation of the Connection
-Generator interface for NEST is explained in section
-\ref{sec:conn_gen_nest}.
+The design of the novel ConnectionGenerator interface for NEST is
+explained in section \ref{sec:conn_gen_nest}. In section
+\ref{sec:benchmarks}, we provide benchmarks for different use case
+scenarios of the interface. A comparison of the performance of the
+novel CSA interface, the native connection routines, and the Topology
+module of NEST, is subject to further work.
 
 %----------------------------------------------------------------------
 
@@ -510,7 +504,7 @@ simulator and the connectivity description library replaceable.
   tasks.}\label{fig:block_diagram_conngen}
 \end{figure}
 
-\tbw{To be written by Mikael?}
+\tbw{To be written by Mikael...}
 
 \subsection{The interface}\label{sec:cgint}
 
@@ -610,10 +604,10 @@ of the \verb|CGConnect| function.
 \centering
 \includegraphics[scale=.8]{figures/sequence_diagram_nest.pdf}
 \caption{Sequence diagram showing the function calls during the use of
-  the ConnectionGenerator interface in NEST. A user first creates a
-  \verb|ConnectionGenerator| object \emph{cg}. She then calls
-  PyNEST's \verb|CGConnect()| function. \textcircled{\footnotesize
-    1} The function \verb|cg_get_ranges()| returns all contiguous
+  the ConnectionGenerator interface in NEST. The user first creates a
+  \texttt{ConnectionGenerator} object \emph{cg}. She then calls
+  PyNEST's \texttt{CGConnect()} function. \textcircled{\footnotesize
+    1} The function \texttt{cg\_get\_ranges()} returns all contiguous
   ranges of global IDs (GIDs) in the given list as vector of closed
   intervals, still using the GID representation.
   \textcircled{\footnotesize 2} At this point in time, the
@@ -622,12 +616,11 @@ of the \verb|CGConnect| function.
   \emph{pre}- and \emph{post}-synaptic populations. The result of the
   translation (\emph{pre\_mask} and \emph{post\_mask}) is used to set
   the masks on \emph{cg}. \textcircled{\footnotesize 3} The NEST
-  kernel iterates the ConnectionGenerator by calling \verb|next()|
-  until there are no more connections. For each connection it
-  receives, it creates the connection by calling
-  \verb|Network::connect()|. If a non-empty \emph{param\_map} was
-  given to \verb|CGConnect|, the connection's weight and delay are
-  taken from the value-set in
+  kernel iterates the ConnectionGenerator by calling \texttt{next()}
+  until there are no more connections. For each received connection,
+  it creates the connection by calling \texttt{Network::connect()}. If
+  a non-empty \emph{param\_map} was given to \texttt{CGConnect}, the
+  connection's weight and delay are taken from the value-set in
   \emph{cg}.}\label{fig:sequence_diagram_nest}
 \end{figure}
 
@@ -646,7 +639,7 @@ detailed in appendix A.
 %----------------------------------------------------------------------
 
 \section{PyNN connection generators}\label{sec:conn_gen_pynn}
-\tbw{To be written by Jochen}
+\tbw{To be written by Jochen...}
 
 %----------------------------------------------------------------------
 
@@ -737,7 +730,7 @@ the desired number of connections. In the realm of natural numbers,
 this leads to a slight error, which was well acceptable with values
 between $-0.05$\permil and $+0.06$\permil.
 
-\tbw{To be written by Jochen}
+\tbw{To be written by Jochen...}
 
 %----------------------------------------------------------------------
 
