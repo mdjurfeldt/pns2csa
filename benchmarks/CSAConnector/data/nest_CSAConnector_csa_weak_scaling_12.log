@@ -166,15 +166,39 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) csa 24000 4802903 23.369800 0.180000 21.490000 3 12
-nest CSAConnector random(0.1) csa 24000 4799208 23.380036 0.180000 22.810000 0 12
-nest CSAConnector random(0.1) csa 24000 4801682 23.373704 0.180000 22.960000 4 12
-nest CSAConnector random(0.1) csa 24000 4800508 23.361917 0.180000 21.690000 5 12
-nest CSAConnector random(0.1) csa 24000 4799149 23.370039 0.170000 23.000000 11 12
-nest CSAConnector random(0.1) csa 24000 4797415 23.359262 0.180000 23.110000 9 12
-nest CSAConnector random(0.1) csa 24000 4800693 23.356458 0.190000 22.600000 1 12
-nest CSAConnector random(0.1) csa 24000 4800338 23.376747 0.210000 22.700000 7 12
-nest CSAConnector random(0.1) csa 24000 4804825 23.372765 0.180000 22.530000 6 12
-nest CSAConnector random(0.1) csa 24000 4798233 23.376284 0.180000 21.680000 2 12
-nest CSAConnector random(0.1) csa 24000 4797968 23.371486 0.180000 21.600000 8 12
-nest CSAConnector random(0.1) csa 24000 4801128 23.362154 0.180000 22.840000 10 12
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.182835
+itertime_ts.tv_sec=21, itertime_ts.tv_sec/1e9=0.752772
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.169031
+itertime_ts.tv_sec=21, itertime_ts.tv_sec/1e9=0.908153
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.184083
+itertime_ts.tv_sec=21, itertime_ts.tv_sec/1e9=0.885865
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.183575
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.0213166
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.180966
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.217968
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.182076
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.25537
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.177153
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.445498
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.196027
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.363515
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.189178
+itertime_ts.tv_sec=22, itertime_ts.tv_sec/1e9=0.785482
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.191336
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0583703
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.194451
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.0796864
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=0.174583
+itertime_ts.tv_sec=23, itertime_ts.tv_sec/1e9=0.908787
+nest CSAConnector random(0.1) csa 24000 4801735 24.160757 0.177153 22.445498 9 12
+nest CSAConnector random(0.1) csa 24000 4799252 24.158259 0.183575 22.021317 4 12
+nest CSAConnector random(0.1) csa 24000 4800536 24.157911 0.182835 21.752772 7 12
+nest CSAConnector random(0.1) csa 24000 4798595 24.142694 0.194451 23.079686 10 12
+nest CSAConnector random(0.1) csa 24000 4797722 24.159899 0.180966 22.217968 6 12
+nest CSAConnector random(0.1) csa 24000 4799100 24.170804 0.169031 21.908153 1 12
+nest CSAConnector random(0.1) csa 24000 4799128 24.130307 0.196027 22.363515 0 12
+nest CSAConnector random(0.1) csa 24000 4804160 24.149075 0.184083 21.885865 8 12
+nest CSAConnector random(0.1) csa 24000 4800661 24.151109 0.189178 22.785482 5 12
+nest CSAConnector random(0.1) csa 24000 4801727 24.146259 0.182076 22.255370 11 12
+nest CSAConnector random(0.1) csa 24000 4798861 24.148117 0.191336 23.058370 3 12
+nest CSAConnector random(0.1) csa 24000 4797878 24.164129 0.174583 23.908787 2 12

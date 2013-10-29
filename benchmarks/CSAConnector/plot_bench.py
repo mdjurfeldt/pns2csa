@@ -41,12 +41,12 @@ for line in rawdata:
     memory = int(d[9])
 
     try:
-        data[connector][(pynn_component, library)].append((n_neurons, time, memory))
+        data[connector][(pynn_component, library)].append((n_neurons, itertime, memory))
     except: # connector not in data, or (pynn_component, library) not in data[connector]
         try:
-            data[connector][(pynn_component, library)] = [(n_neurons, time, memory)]    
+            data[connector][(pynn_component, library)] = [(n_neurons, itertime, memory)]    
         except: # connector not in data
-            data[connector] = {(pynn_component, library): [(n_neurons, time, memory)]}
+            data[connector] = {(pynn_component, library): [(n_neurons, itertime, memory)]}
 
 for connector in connectors:
 
@@ -154,12 +154,12 @@ for scaling_mode in ("weak", "strong"):
     
         if rank == 0:
             try:
-                data[connector][(pynn_component, library)].append((n_neurons, time, np))
+                data[connector][(pynn_component, library)].append((n_neurons, itertime, np))
             except: # connector not in data, or (pynn_component, library) not in data[connector]
                 try:
-                    data[connector][(pynn_component, library)] = [(n_neurons, time, np)]    
+                    data[connector][(pynn_component, library)] = [(n_neurons, itertime, np)]    
                 except: # connector not in data
-                    data[connector] = {(pynn_component, library): [(n_neurons, time, np)]}
+                    data[connector] = {(pynn_component, library): [(n_neurons, itertime, np)]}
     
     for connector in connectors:
     
@@ -195,10 +195,8 @@ for scaling_mode in ("weak", "strong"):
         ax1.set_xlabel("number of processes")
         ax1.set_ylabel("wallclock time (s)")
 
-        if scaling_mode == "strong":
-            ax1.set_ylim([10**0, 10**5])
-        else:
-            ax1.set_ylim([10**0, 10**5])
+        # This is only to get the legends not overlapped by the data
+        ax1.set_ylim([10**0, 10**5])
 
         ax1.set_xlim([1, 48])
         ax1.set_xticks([1, 2, 4, 6, 12, 24, 48])

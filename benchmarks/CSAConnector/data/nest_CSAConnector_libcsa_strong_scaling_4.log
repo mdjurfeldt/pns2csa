@@ -54,7 +54,15 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) libcsa 48000 57601502 51.663363 0.000000 46.850000 2 4
-nest CSAConnector random(0.1) libcsa 48000 57601502 51.666653 0.000000 46.350000 1 4
-nest CSAConnector random(0.1) libcsa 48000 57601502 51.625238 0.000000 50.310000 0 4
-nest CSAConnector random(0.1) libcsa 48000 57601502 51.648223 0.000000 51.450000 3 4
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=7.206e-06
+itertime_ts.tv_sec=45, itertime_ts.tv_sec/1e9=0.577933
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=5.315e-06
+itertime_ts.tv_sec=46, itertime_ts.tv_sec/1e9=0.380391
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=7.835e-06
+itertime_ts.tv_sec=46, itertime_ts.tv_sec/1e9=0.349807
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=8.386e-06
+itertime_ts.tv_sec=48, itertime_ts.tv_sec/1e9=0.322461
+nest CSAConnector random(0.1) libcsa 48000 57601502 48.494651 0.000008 46.349807 2 4
+nest CSAConnector random(0.1) libcsa 48000 57601502 48.513112 0.000007 45.577933 0 4
+nest CSAConnector random(0.1) libcsa 48000 57601502 48.536374 0.000005 46.380391 1 4
+nest CSAConnector random(0.1) libcsa 48000 57601502 48.496023 0.000008 48.322461 3 4

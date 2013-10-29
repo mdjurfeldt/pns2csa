@@ -2,7 +2,7 @@ Index: conngen/cg_connect.cpp
 ===================================================================
 --- conngen/cg_connect.cpp	(revision 10722)
 +++ conngen/cg_connect.cpp	(working copy)
-@@ -25,13 +25,26 @@
+@@ -25,13 +25,37 @@
  #include "network.h"
  #include "communicator.h"
  
@@ -11,62 +11,79 @@ Index: conngen/cg_connect.cpp
 +#include "name.h"
 +
 +#include <time.h>
-+#include <sys/time.h>  // required to fix header dependencies in OS X, HEP
-+#include <sys/times.h>
++
++timespec diff(timespec start, timespec end)
++{
++  timespec temp;
++  if ((end.tv_nsec-start.tv_nsec)<0) {
++    temp.tv_sec = end.tv_sec-start.tv_sec-1;
++    temp.tv_nsec = 1000000000+end.tv_nsec-start.tv_nsec;
++  } else {
++    temp.tv_sec = end.tv_sec-start.tv_sec;
++    temp.tv_nsec = end.tv_nsec-start.tv_nsec;
++  }
++  return temp;
++}
 +
  namespace nest 
  {
 -  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, index source_offset, RangeSet& targets, index target_offset, DictionaryDatum params_map, index syn)
 +  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, index source_offset, RangeSet& targets, index target_offset, DictionaryDatum params_map, index syn, SLIInterpreter* i)
    {
-+    struct tms foo;
-+    const clock_t preptime_start = times(&foo);
++    timespec preptime_start, preptime_end, itertime_end;
++    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &preptime_start);
 +
      cg_set_masks(cg, sources, targets);
      cg->start();
  
-+    const clock_t preptime_end = times(&foo); 
++    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &preptime_end);
 +
      int source, target, num_parameters = cg->arity();
      if (num_parameters == 0)
      {
-@@ -57,13 +70,25 @@
+@@ -57,13 +81,28 @@
        ConnectionGeneratorModule::get_network().message(SLIInterpreter::M_ERROR, "Connect", "Either two or no parameters in the Connection Set expected.");
        throw DimensionMismatch();  
      }
 +
-+    const clock_t itertime_end = times(&foo); 
++    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &itertime_end);
 +
-+    double_t preptime = (double)(preptime_end-preptime_start) / sysconf(_SC_CLK_TCK);
++    timespec preptime_ts = diff(preptime_start, preptime_end);
++    double_t preptime = preptime_ts.tv_sec + preptime_ts.tv_nsec / 1e9;
 +    i->basedef(Name("preptime"),  DoubleDatum(preptime));
-+    double_t itertime = (double)(itertime_end-preptime_end) / sysconf(_SC_CLK_TCK);
++
++    timespec itertime_ts = diff(preptime_end, itertime_end);
++    double_t itertime = itertime_ts.tv_sec + itertime_ts.tv_nsec / 1e9;
 +    i->basedef(Name("itertime"),  DoubleDatum(itertime));
    }
    
 -  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, std::vector<long>& source_gids, RangeSet& targets, std::vector<long>& target_gids, DictionaryDatum params_map, index syn)
 +  void cg_connect(ConnectionGeneratorDatum& cg, RangeSet& sources, std::vector<long>& source_gids, RangeSet& targets, std::vector<long>& target_gids, DictionaryDatum params_map, index syn, SLIInterpreter* i)
    {
-+    struct tms foo;
-+    const clock_t preptime_start = times(&foo);
++    timespec preptime_start, preptime_end, itertime_end;
++    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &preptime_start);
 +
      cg_set_masks(cg, sources, targets);
      cg->start();
  
-+    const clock_t preptime_end = times(&foo); 
++    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &preptime_end);
 +
      int source, target, num_parameters = cg->arity();
      if (num_parameters == 0)
      {
-@@ -89,6 +114,13 @@
+@@ -89,6 +128,16 @@
        ConnectionGeneratorModule::get_network().message(SLIInterpreter::M_ERROR, "Connect", "Either two or no parameters in the Connection Set expected.");
        throw DimensionMismatch();  
      }
 +
-+    const clock_t itertime_end = times(&foo); 
++    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &itertime_end);
 +
-+    double_t preptime = (double)(preptime_end-preptime_start) / sysconf(_SC_CLK_TCK);
++    timespec preptime_ts = diff(preptime_start, preptime_end);
++    double_t preptime = preptime_ts.tv_sec + preptime_ts.tv_nsec / 1e9;
 +    i->basedef(Name("preptime"),  DoubleDatum(preptime));
-+    double_t itertime = (double)(itertime_end-preptime_end) / sysconf(_SC_CLK_TCK);
++
++    timespec itertime_ts = diff(preptime_end, itertime_end);
++    double_t itertime = itertime_ts.tv_sec + itertime_ts.tv_nsec / 1e9;
 +    i->basedef(Name("itertime"),  DoubleDatum(itertime));
    }
  

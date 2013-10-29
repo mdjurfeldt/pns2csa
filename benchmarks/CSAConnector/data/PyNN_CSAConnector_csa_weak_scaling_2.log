@@ -26,5 +26,5 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 9797 4799780 55.422762 0.0 55.422762 1 2
-PyNN CSAConnector random(0.1) csa 9797 4798631 55.433588 0.0 55.433588 0 2
+PyNN CSAConnector random(0.1) csa 9797 4799239 57.947205 0.0 57.947205 1 2
+PyNN CSAConnector random(0.1) csa 9797 4798429 57.960522 0.0 57.960522 0 2
