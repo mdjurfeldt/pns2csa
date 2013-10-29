@@ -82,9 +82,9 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-PyNN CSAConnector random(0.1) csa 16970 4795442 131.997733 0.0 131.997733 0 6
-PyNN CSAConnector random(0.1) csa 16970 4799580 132.001057 0.0 132.001057 4 6
-PyNN CSAConnector random(0.1) csa 16970 4797091 132.026786 0.0 132.026786 1 6
-PyNN CSAConnector random(0.1) csa 16970 4797854 131.999763 0.0 131.999763 2 6
-PyNN CSAConnector random(0.1) csa 16970 4800262 132.010542 0.0 132.010542 5 6
-PyNN CSAConnector random(0.1) csa 16970 4800328 131.985211 0.0 131.985211 3 6
+PyNN CSAConnector random(0.1) csa 16970 4798001 131.640110 0.0 131.640110 3 6
+PyNN CSAConnector random(0.1) csa 16970 4797572 131.634174 0.0 131.634174 0 6
+PyNN CSAConnector random(0.1) csa 16970 4801574 131.633931 0.0 131.633931 4 6
+PyNN CSAConnector random(0.1) csa 16970 4797105 131.621486 0.0 131.621486 1 6
+PyNN CSAConnector random(0.1) csa 16970 4802418 131.626649 0.0 131.626649 2 6
+PyNN CSAConnector random(0.1) csa 16970 4799102 131.645715 0.0 131.645715 5 6

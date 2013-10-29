@@ -334,27 +334,75 @@ Problems or suggestions?
   Mailing list: nest_user@nest-initiative.org
 
 Type 'nest.help()' to find out more about NEST.
-nest CSAConnector random(0.1) libcsa 33941 4801987 4.260785 0.000000 4.140000 5 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.256735 0.000000 3.700000 15 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.274033 0.000000 4.190000 1 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.257695 0.000000 4.030000 17 24
-nest CSAConnector random(0.1) libcsa 33941 4801987 4.269224 0.000000 3.650000 4 24
-nest CSAConnector random(0.1) libcsa 33941 4801987 4.257504 0.000000 3.690000 6 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.256306 0.000000 3.660000 10 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.265756 0.000000 3.760000 22 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.256439 0.000000 4.100000 19 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.251968 0.000000 4.080000 14 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.260991 0.000000 4.100000 2 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.266678 0.000000 4.100000 9 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.260793 0.000000 3.690000 16 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.272390 0.000000 3.640000 0 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.265685 0.000000 3.700000 23 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.261854 0.000000 3.750000 8 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.271606 0.000000 4.090000 11 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.257824 0.000000 3.720000 20 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.254118 0.000000 3.760000 12 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.272137 0.000000 3.700000 13 24
-nest CSAConnector random(0.1) libcsa 33941 4801987 4.262008 0.000000 4.060000 7 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.261384 0.000000 4.140000 18 24
-nest CSAConnector random(0.1) libcsa 33941 4798617 4.261556 0.000000 4.200000 21 24
-nest CSAConnector random(0.1) libcsa 33941 4801987 4.260356 0.000000 3.760000 3 24
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.3006e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.708592
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.5304e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.740813
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.3898e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.758185
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.6932e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.755755
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.5999e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.780521
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4437e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.785886
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.368e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.789634
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4383e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.842127
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.2264e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.835732
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4664e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.853291
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.471e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.888466
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.3525e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.902853
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.3394e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.877812
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4094e-05
+itertime_ts.tv_sec=3, itertime_ts.tv_sec/1e9=0.893434
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4903e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.037092
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4488e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.0769449
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.5231e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.140275
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.3248e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.187336
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.2937e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.222564
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4267e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.22075
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4737e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.261607
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.6482e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.274688
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.4088e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.302162
+preptime_ts.tv_sec=0, preptime_ts.tv_sec/1e9=1.409e-05
+itertime_ts.tv_sec=4, itertime_ts.tv_sec/1e9=0.350032
+nest CSAConnector random(0.1) libcsa 33941 4801987 4.420262 0.000015 4.261607 6 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.432683 0.000015 4.140275 1 24
+nest CSAConnector random(0.1) libcsa 33941 4801987 4.419930 0.000017 3.755755 5 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.416385 0.000013 3.877812 11 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.430446 0.000013 4.222564 2 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.415429 0.000014 3.893434 23 24
+nest CSAConnector random(0.1) libcsa 33941 4801987 4.423775 0.000015 3.740813 7 24
+nest CSAConnector random(0.1) libcsa 33941 4801987 4.412474 0.000014 4.220750 3 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.428821 0.000013 4.187336 8 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.436270 0.000014 4.302162 13 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.422693 0.000014 3.785886 20 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.437968 0.000014 3.842127 15 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.427866 0.000015 3.888466 22 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.419661 0.000016 3.780521 0 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.423439 0.000013 3.708592 14 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.415517 0.000015 4.037092 12 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.412336 0.000012 3.835732 19 24
+nest CSAConnector random(0.1) libcsa 33941 4801987 4.423462 0.000014 3.789634 4 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.440694 0.000014 3.902853 16 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.429600 0.000014 3.758185 17 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.431506 0.000016 4.274688 10 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.424376 0.000014 4.076945 18 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.419176 0.000015 3.853291 9 24
+nest CSAConnector random(0.1) libcsa 33941 4798617 4.415241 0.000014 4.350032 21 24
