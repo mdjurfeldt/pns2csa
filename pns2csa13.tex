@@ -729,20 +729,20 @@ measured:
   legends, slope is the slope between the first and the last data
   point shown. Pale lines denote the expected scaling. \textbf{A}
   shows the run time for connecting a network using CSAs \emph{random}
-  mask with a probability of 0.1 for different numbers of neurons. This
-  connector creates $O(n^2)$ connections for $n$ neurons, the expected
-  slope is thus 2. \textbf{B} shows the same as in A, but using CSAs
-  \emph{oneToOne} mask, which creates $O(n)$ connections for $n$
-  neurons and has an expected slope of 1. \textbf{C} shows a strong
-  scaling experiment, wiring a network of 48,000 neurons using CSAs
-  \emph{random} mask with a probability of 0.1 and varying the number of
-  MPI processes from 1 to 48. The expected slope is -1, meaning that
-  the run time drops linearly with the number of processes. \textbf{D}
-  shows the results of a weak scaling experiment, increasing the
-  number of connections by approx. $48*10^6$ per additional MPI
-  process for 1 to 48 processes. The expected slope is 0, as the load
-  increases linearly with the number of
-  processes.}\label{fig:pynn_benchmarks}
+  mask with a probability of 0.1 for different numbers of
+  neurons. This connector creates $O(n^2)$ connections for $n$
+  neurons, the expected slope is thus 2. \textbf{B} shows the same as
+  in A, but using CSAs \emph{oneToOne} mask, which creates $O(n)$
+  connections for $n$ neurons and has an expected slope of
+  1. \textbf{C} shows a strong scaling experiment, wiring a network of
+  48,000 neurons using CSAs \emph{random} mask with a probability of
+  0.1 and varying the number of MPI processes from 1 to 48. The
+  expected slope is -1, meaning that the run time drops linearly with
+  the number of processes. \textbf{D} shows the results of a weak
+  scaling experiment, increasing the number of connections by
+  approx. $4.8 \cdot 10^6$ per additional MPI process for 1 to 48
+  processes. The expected slope is 0, as the load increases linearly
+  with the number of processes.}\label{fig:pynn_benchmarks}
 \end{figure}
 
 The runtime benchmarks (figure \ref{fig:pynn_benchmarks} A and B) used
