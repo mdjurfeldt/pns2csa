@@ -1,0 +1,15 @@
+
+              -- N E S T --
+
+  Copyright (C) 2004 The NEST Initiative
+  Version 2.3.svn Oct 27 2013 21:50:58
+
+This program is provided AS IS and comes with
+NO WARRANTY. See the file LICENSE for details.
+
+Problems or suggestions?
+  Website     : http://www.nest-initiative.org
+  Mailing list: nest_user@nest-initiative.org
+
+Type 'nest.help()' to find out more about NEST.
+PyNN CSAConnector random(0.1) libcsa 6928 4799051 23.686729 0.0 23.686729 0 1
