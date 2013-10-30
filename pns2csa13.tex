@@ -578,15 +578,59 @@ that it is a symmetric abstraction barrier: it both allows the use of
 any library providing the API from a given simulator \emph{and} allows
 the same library to be used from any simulator supporting the API.
 
-In order to create a space in which to put interfaces and other code of
-generic use for neuronal network simulation software, we have
+In order to create a space in which to put interfaces and other code
+of generic use for neuronal network simulation software, we have
 developed the neurosim library
 (\url{http://software.incf.org/software/libneurosim}).  More
 precisely, libneurosim is a software package which currently consists
-of two main components: libneurosim, providing C++ level support code
-and libpyneurosim, providing Python support code.
+of two main component libraries: \verb|libneurosim|, providing C++
+level support code and \verb|libpyneurosim|, providing Python support
+code.
 
-\tbw{To be continued by Mikael...}
+\verb|libneurosim| provides the ConnectionGenerator interface (Figure
+\ref{fig:block_diagram_conngen}, bottom). It also contains a registry
+for XML parser functions.  Different types of connection generators
+can be described by different XML-based languages.  For example, the
+\verb|csa| library can serialize connection-set expressions using a
+MathML-based language.  A connection generating library may provide
+a parser for one or more such languages.  Conversely, the same
+XML-based language might be used by one or more connection generating
+libraries.  The XML parser registry maps XML tags identifying specific
+languages to specific connection libraries.  The interface to the
+registry consists of two static methods in the ConnectionGenerator
+interface:
+
+\begin{unlist}
+\item[\tt void selectCGImplementation (std::string tag, std::string
+  library)]: Associate the parent node tag \verb|tag| with the library
+  \verb|library|.  The library named \verb|library| will be
+  dynamically loaded and will invoke the \verb|libneurosim| function
+  \verb|registerConnectionGeneratorLibrary| to register its XML
+  parser.
+\item[\tt ConnectionGenerator* fromXML (std::string xml)]: Parse the
+  XML representation \verb|xml| of a connection generator and return
+  it. The function dispatches to parsers of different libraries
+  depending on previous calls to \verb|selectCGImplementation|.
+\item[\tt ConnectionGenerator* fromXMLFile (std::string path)]: Same as
+  previous function, but read the XML stream from the file with
+  pathname \verb|path|.
+\end{unlist}
+
+\verb|libpyneurosim| currently contains generic support for
+registering new connection generator Python types and unwrapping
+instances of such objects:
+
+\begin{unlist}
+\item[\tt void registerConnectionGeneratorType (CheckFuncT,
+  UnpackFuncT)]: Register a new type checking and unwrapping
+  function.
+\item[\tt isConnectionGenerator (PyObject* pObj)]: Check if
+  \verb|pObj| is a known connection generator type (as identified by
+  previously registered checking functions).
+\item[\tt ConnectionGenerator* unpackConnectionGenerator (PyObject*
+  pObj)]: Unwrap the connection generator in \verb|pObj| and return
+  it.
+\end{unlist}
 
 \section{NEST connection generators}\label{sec:conn_gen_nest}
 
