@@ -227,15 +227,15 @@ explicitly specified. The distinguishing aspects of CSA are:
 There exists multiple implementations of CSA (see section
 \ref{sec:impl}).
 
-\subsection{PyNN}
+\subsection{PyNN}\label{sec:pynn}
 
-PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is a
-community effort to provide a simulator-independent API for describing
-neuronal networks in Python. Given a PyNN/Python model description,
-the user can choose which simulator to use without a need for changes
-to the model script. This is achieved through a set of \emph{simulator
-backends} which are part of the PyNN code base. A backend adapts
-PyNN to a specific simulator.
+PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is
+a community driven effort to provide a simulator-independent API for
+describing neuronal networks in Python. Given a PyNN/Python model
+description, the user can choose which simulator to use without a need
+for changes to the model script. This is achieved through a set of
+\emph{simulator backends} which are part of the PyNN code base. A
+backend adapts PyNN to a specific simulator.
 
 In PyNN, a neuronal network is built from Populations of neurons and
 Projections between them. Each Projection is created by a Connector,
@@ -256,20 +256,13 @@ information into the simulator.
 
 The problem of excessive data transfers between PyNN and the simulator
 can be solved by passing a high-level description of (possibly random)
-connectivity to the simulator. This representation can then be
-iterated and expanded at the simulator level and thus avoid
-overhead. Moreover, this also allows efficient parallelization at the
-lower software layers.
-
-Since version 0.7, PyNN provides the CSAConnector, which can iterate a
-CSA connection set and issue one by one connect calls in the different
-backends. During this study, we extended PyNN with a new and
-specialized CSAConnector, which passes the complete CSA object down to
-the simulator to reduce the overhead. The details of this effienct
-interface are described in section \ref{sec:conn_gen_pynn}. Section
-\ref{sec:benchmarks} contains benchmarking results of the different
-implementations of the CSAConnector and the native NEST connection
-routines.
+connectivity to the simulator. This representation can be iterated and
+expanded at the simulator level and thus avoid overhead. Moreover,
+this allows efficient parallelization at the lower software layers.
+The design of a new connector for the NEST backend that implements
+this solution is explained in section \ref{sec:conn_gen_pynn}. Section
+\ref{sec:benchmarks} contains runtime and scalability benchmarks for
+the new connector.
 
 \subsection{NEST}
 
@@ -640,98 +633,132 @@ detailed in appendix A.
 %----------------------------------------------------------------------
 
 \section{PyNN connection generators}\label{sec:conn_gen_pynn}
-\tbw{To be written by Jochen...}
+
+Since version 0.7, PyNN provides the generic CSAConnector, which can
+iterate a CSA connection set and issue one by one connect calls to
+the different backends. Internally, the connector executes the
+following two steps:
+\begin{itemize}
+\item Intersect the given connection set with a \emph{cross} mask
+  containing the neurons in the pre- and post-synaptic populations.
+\item Connect the neurons. The weight and delay are either PyNN's
+  default values or the ones from the connection set, depending on its
+  \emph{arity} (see section \ref{sec:csa}).
+\end{itemize}
+
+During this study, we extended the NEST backend for PyNN with a new
+and specialized CSAConnector, which passes the complete CSA object
+down to the simulator (by calling PyNEST's \verb|CGConnect()|), which
+then iterates it (see section \ref{sec:conn_gen_nest}). This greatly
+reduces the overhead and thus improves the runtime and scalability of
+connection generation (section \ref{sec:benchmarks}).
 
 %----------------------------------------------------------------------
 
 \section{Benchmarks}\label{sec:benchmarks}
 
-We ran a series of benchmarks in order to assess the performance of and
-compare two implementations of CSA (see section
-\ref{sec:csa}) and the two implementations of the CSAConnector
-for PyNN (see section \ref{sec:conn_gen_pynn}). In particular, the
-following combinations were tested:
+We ran a series of benchmarks in order to assess the performance of
+and compare the two implementations of CSA (see section \ref{sec:csa})
+and the two implementations of the CSAConnector for PyNN (see section
+\ref{sec:conn_gen_pynn}). Grouped by the software layer, on which the
+iteration of the ConnectionGenerator happens (either in Python by PyNN
+or in C++ by NEST) and the CSA implementation used (csa is the Python
+version, libcsa the C++ version), the following scenarios were
+measured:
 
 \begin{itemize}
-\item \textbf{PyNN, csa} This used PyNN's original CSAConnector that
+\item \textbf{Python, csa} used PyNN's original CSAConnector that
   is available for all backends in combination with the Python CSA
-  implementation (retrieved from the INCF software center via SVN).
-  The CSAConnector intersects the csa object with a mask consisting of
-  the nodes in the Projection and iterates the csa object on the
-  Python level. It connects by sending one ConvergentConnect call per
-  source and target (Andrew, why not plain Connects?) to PyNEST.
-\item \textbf{nest, csa} This used my new CSAConnector for the NEST
-  backend (from py personal github form of PyNN at
-  \url{https://github.com/jougs/PyNN}) and the Python CSA
-  implementation. The CSAConnector just passes down the csa object as
-  ConnectionGenerator to PyNEST, which iterates it from the C++ level
-  by issueing callbacks to the corresponding Python functions.
-\item \textbf{nest, libcsa} This used my new CSAConnector for the NEST
-  backend and the C++ CSA implementation libcsa (from your private
-  git). The object is instantiated from Python and passed down by
-  PyNN. However, all iterations happen completely in C++, with only
-  little overhead added by function calls in PyNN, PyNEST and SLI.
+  implementation (from the INCF software center via SVN, see
+  \url{http://software.incf.org/software/csa}). The CSAConnector
+  intersects the csa object with a mask containing the actual nodes in
+  the Projection and iterates the csa object on the Python level. It
+  connects the neurons by issuing one-to-one \verb|Connect()| calls to
+  PyNEST.
+\item \textbf{C++, csa} used the new CSAConnector for PyNN's NEST
+  backend, which is available from PyNN's git repository and the
+  Python CSA implementation. The new CSAConnector just passes down the
+  csa object as ConnectionGenerator to PyNEST, which iterates it on
+  the C++ level by executing the Python functions.
+\item \textbf{Python, libcsa} used the generic CSAConnector in PyNN and
+  the C++ CSA implementation libcsa. The CSA object is instantiated in
+  Python and passed down to NEST by PyNN. Please note, however, that
+  all iterations happen in C++, with only little overhead added by
+  function calls in PyNN, PyNEST and SLI.
+\item \textbf{C++, libcsa} used the new CSAConnector for PyNN's NEST
+  backend and the C++ CSA implementation libcsa.
 \end{itemize}
-
-Indeed, we cannot run the fourth combination (PyNN, libcsa) due to the
-error described in a previous mail (see attachment). Due to sleep
-deprivation and the prospect of explaining stuff(tm) to 30k visitors
-at the open day at the Research Center tomorrow, I don't fully
-understand what you propose, but assume that this is what you write
-about below.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.7]{benchmarks/CSAConnector/CSAConnector.pdf}
-\caption{Benchmark results for the use of CSA in NEST through PyNN
+\caption{Benchmark results for the use of CSA in NEST through PyNN,
   comparing the two CSAConnector implementations explained in section
   \ref{sec:conn_gen_pynn} and the two CSA implementations explained in
   section \ref{sec:csa}. Color and dash codes are given in the
   legends, slope is the slope between the first and the last data
-  point shown. Gray lines denote the expected scaling behavior.
-  \textbf{A} shows the run time for connecting a network using CSAs
-  \emph{random} mask with a probality of 0.1 for different numbers of
-  neurons. \textbf{B} shows the same as in A, but using CSAs
-  \emph{oneToOne} mask. \textbf{C} shows a strong scaling experiment,
-  wiring a network of 48,000 neurons using CSAs \emph{random} mask
-  with a probality of 0.1 and varying the number of MPI processes from
-  1 to 48. \textbf{D} shows the results of a weak scaling experiment,
-  wiring a network of 1,000 neurons per MPI process connected and run
-  in the same way as the experiment in C.}\label{fig:pynn_benchmarks}
+  point shown. Bold lines denote the expected scaling. \textbf{A}
+  shows the run time for connecting a network using CSAs \emph{random}
+  mask with a probality of 0.1 for different numbers of neurons. This
+  connector creates $O(n^2)$ connections for $n$ neurons, the expected
+  slope is thus 2. \textbf{B} shows the same as in A, but using CSAs
+  \emph{oneToOne} mask, which creates $O(n)$ connections for $n$
+  neurons and has an expected slope of 1. \textbf{C} shows a strong
+  scaling experiment, wiring a network of 48,000 neurons using CSAs
+  \emph{random} mask with a probality of 0.1 and varying the number of
+  MPI processes from 1 to 48. The expected slope is -1, meaning that
+  the run time drops linearly with the number of processes. \textbf{D}
+  shows the results of a weak scaling experiment, increasing the
+  number of connections by approx. $48*10^6$ per additional MPI
+  process for 1 to 48 processes. The expected slope is 0, as the load
+  increases linearly with the number of
+  processes.}\label{fig:pynn_benchmarks}
 \end{figure}
 
-The choice of 1,2,4,6,12,24,48 MPI processes is to prevent artifacts
-because of the machine used for benchmarking. It used 4 AMD Operon
-Magny Cours processors that are organized into 8 NUMA domains with 6
-cores each. No additional measures (e.g. pinning of processes to
-cores, altering the affinity of threads to cores) to avoid distortions
-of the benchmark results were taken.
+The runtime benchmarks (figure \ref{fig:pynn_benchmarks} A and B) used
+one MPI process and varied the number of neurons from $10^2$ to $10^5$
+with one sample per order of magnitude. All tested implementations of
+CSA (csa, libcsa) scale perfectly with slopes around 2 for the
+\emph{random}, independently of the software layer (C++ or Python), on
+which the iteration was carried out. However, the vertical offsets and
+the inferior scaling of the pure Python implementation for the
+\emph{oneToOne} mask suggest, that Python adds a significant overhead
+to the process of connection generation.
 
-Runtime benchmarks (figure \ref{fig:pynn_benchmarks} A and B) used one
-MPI process and varied the number of neurons from $10^2$ to $10^5$
-with one sample per order of magnitude.
+To demonstrate the scalability of the implementations, we carried out
+both weak and strong scaling benchmarks, using CSA's \emph{random}
+mask with a probality of $0.1$ (figure \ref{fig:pynn_benchmarks} C and
+D). For each of them, the number of MPI processes was varied from 1 to
+48.
 
-To demonstrate the excellent scalability of the implementations, we
-also carried out scaling benchmarks. Both weak and strong scaling
-benchmarks were run using CSA's \emph{random} mask with a probality of
-$0.1$.
+In the strong scaling benchmark (figure \ref{fig:pynn_benchmarks} C),
+the number of MPI processes was varied, while we kept the total number
+of neurons in the network fixed at $48 \cdot 10^3$. This resulted in
+approx. 230 million connections created. It is easily visible, that an
+iteration of the CSA object on the Python level is detrimental to the
+scalability. In contrast, it is possible to obtain perfect scaling if
+the iteration of the CSA object is carried out from the C++
+layer. Using the C++ implementation of CSA, it is, however, possible
+to gain another order of magnitude compared to the Python version.
 
-In the strong scaling benchmark, the number of MPI processes was
-varied (see below), while keeping the total number of neurons in the
-network fixed at $48 \cdot 10^3$.
-
-The weak scaling benchmark
-
+During the weak scaling benchmark (figure \ref{fig:pynn_benchmarks}
+C), the number of MPI processes was varied, while the work load was
+increased by a fixed number of connections per additional process.
 Please note that the number of connection grows quadratically with the
 number of neurons when using CSA's \emph{random} mask with a fixed
-probality. To linearly scale up the workload (i.e. the number of
-connections to be created) with the number of MPI processes, the
-number of neurons per process was increased with the square root of
-the desired number of connections. In the realm of natural numbers,
-this leads to a slight error, which was well acceptable with values
-between $-0.05$\permil and $+0.06$\permil.
+probality. The number of neurons per process was thus increased with
+the square root of the desired number of connections. In the realm of
+natural numbers, this leads to a slight error, which was, however,
+well acceptable with values between $-1.42$\permil and $+1.08$\permil.
 
-\tbw{To be written by Jochen...}
+The numbers of MPI processes was chosen as 1, 2, 4, 6, 12, 24, 48 to
+prevent a degradation of the quality of the measurements caused by the
+type of machine used for benchmarking. The machine is equipped with 4
+AMD Operon 6174 (Magny Cours) processors organized into 8 NUMA domains
+with 6 cores each. Other than the choice of MPI process numbers, no
+additional measures (e.g. pinning of processes to cores, altering the
+affinity of threads to cores, etc.) were taken to avoid distortions of
+the results.
 
 %----------------------------------------------------------------------
 
@@ -796,7 +823,7 @@ distributions of neurons onto MPI processes.
 
 All elements (neurons or devices) in NEST are identified uniquely by
 an integer number, their global id (\emph{GID}). All connection
-routines work either on single GISs or on lists of GIDs. When calling
+routines work either on single GIDs or on lists of GIDs. When calling
 \verb|CGConnect|, the user supplies two a sorted lists of neurons as
 pre- and post-synaptic populations. These lists do not necessarily
 have to contain coniguous GIDs.
