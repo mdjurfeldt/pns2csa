@@ -20,7 +20,7 @@ proj = Projection(pop, pop, connector)
 rank = nest.Rank()
 nc = nest.GetKernelStatus("num_connections")
 t = time() - start
-print "PyNN FixedProbabilityConnector 0.1 PyNN %i %i %f 0.0 %f %i %i" % (n, nc, t, t, rank, np)
+print "PyNN FixedProbabilityConnector nocsa %i %i %f 0.0 %f %i %i" % (n, nc, t, t, rank, np)
 
 #import nest.visualization as vis
-#vis.plot_network(pop.all_cells, "PyNN_CSAConnector_csa_scaling.pdf")
+#vis.plot_network(pop.all_cells, "PyNN_FixedProbabilityConnector_scaling.pdf")
