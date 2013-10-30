@@ -490,7 +490,7 @@ benchmarks in this article were performed using the latter two
 implementations in Python and C++, \verb|csa| and \verb|libcsa|.
 
 % MDJ: I think I'll keep it like that. This paper is so complex
-% conceptually anyway, so we don't need to desribe everything!
+% conceptually anyway. We don't need to desribe everything!
 
 %\subsubsection{Masks}
 %\subsection{Python wrapper}
@@ -518,7 +518,25 @@ simulator and the connectivity description library replaceable.
   library.}\label{fig:block_diagram_conngen}
 \end{figure}
 
-\tbw{To be written by Mikael...}
+The basic idea is that a connection generating library, such as
+\verb|csa| or \verb|libcsa| of section \ref{sec:impl}, is used to
+create an object representing network connectivity.  In the case of a
+CSA library, this object is a connection-set, but it could also be a
+graph made through graph primitives. The ConnectionGenerator interface
+provides a C++ level interface to such objects which allows software
+external to the connection generating library to efficiently iterate
+through connections represented by the object.  In the example shown
+in Figure \ref{fig:block_diagram_conngen}, the ConnectionGenerator
+interface is used to combine a Python scripted simulator with a Python
+scripted connection generating library. A connection generating object
+is assembled at the Python level.  If \verb|libcsa| is used, the
+resulting object will be a C++ object with a Python wrapper. (See
+lower two boxes to the right in the figure.) The object is used by a
+C++ simulator kernel (lower box to the left) to specify network
+connectivity. By providing connection generating software, with
+Connection Generator API, as dynamically linked libraries, multiple
+such libraries can be loaded into the Python runtime environment and
+used simultaneously without a need to recompile the simulator.
 
 \subsection{The interface}\label{sec:cgint}
 
@@ -526,25 +544,30 @@ The interface is designed as an abstract base class in C++ and
 consists of the following functions:
 
 \begin{unlist}
-\item[\tt int arity()]: Return the number of values associated with this
-  iterator. Values can be parameters like weight, delay, time
-  constants, or others.
+\item[\tt int arity()]: Return the number of per-connection values
+  associated with this generator. Values can be parameters like
+  weight, delay, time constants, or others.
 \item[\tt int size()]: Return the number of connections represented by
-  this iterator.
+  this generator.
 \item[\tt void setMask(Mask\& mask)]: Inform the generator about which
-  source and target indices exist. A mask represents a subset of the
-  nodes in the network.
-\item[\tt void setMask(std::vector$<$Mask$>$\& masks, int local)]: Some
-  connection generators need to know the masks for all ranks in the
-  parallel case.
+  source and target indices are available. A mask represents a subset
+  of the nodes in the network.
+\item[\tt void setMask(std::vector$<$Mask$>$\& masks, int local)]:
+  This version of \texttt{setMask} is used by parallel simulators and
+  informs the ConnectionGenerator on the \verb|local| rank about the
+  masks of all ranks. Some connection generators can use such
+  information to avoid the need for communication with other ranks.
 \item[\tt void start()]: Start an iteration. This function must be called
-  before the first call to next().
+  before the first call to \verb|next()|.
 \item[\tt bool next(int\& source, int\& target, double* value)]: Advance
   to the next connection or return false, if no more connections are
-  available within the iterator.
+  available within the iterator. Source and target indices of the
+  connection as well as associated parameters are written into
+  \verb|source|, \verb|target| and the array pointed to by
+  \verb|value|, respectively.
 \end{unlist}
 
-\subsection{libneurosim}
+\subsection{libneurosim}\label{sec:libneurosim}
 Where does the \verb|ConnectionGenerator| interface definition (in the
 form of a C++ header file plus supporting code) belong?  If it is put
 in the simulator or connection generating library source trees, it
