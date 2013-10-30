@@ -453,32 +453,48 @@ $\cup$, and set difference, $-$, connection-sets can be combined into
 expressions. For example, the idea of ``random Erd\H{o}s-R\'enyi
 connectivity without self-connections'' can be represented by the CSA
 expression $\bar{\rho}(p) - \bar{\delta}$ (see Figure
-\ref{fig:csa}D).
-
-%Cartesian product
+\ref{fig:csa}D). A mask representing all possible connections between
+two finite populations can be formed by taking the Cartesian product
+of their index sets, $\mathcal{I}_s \times
+\mathcal{I}_t$. Intersecting with this mask can turn an infinite
+connection-set, representing connectivity structure, into a connection
+matrix between the populations. For example, the finite part of the
+matrix in Figure \ref{fig:csa}C is $\{0..6\} \times \{0..6\} \cap
+\bar{\delta}$.
 
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
 %  \textbf{Figure 2.}{An example of using CSA.}\label{fig:02}
 %\subsection{Parallelization}
-\subsection{Implementation}\label{sec:impl}
+\subsection{Implementations}\label{sec:impl}
 
 There currently exist three implementations of CSA.  The original
 implementation is written in C++ and is part of the SPLIT simulation
 library \citep{djurfeldt05}.  It was used to specify the connectivity
 of the KTH cortex model \citep{djurfeldt08}---a model with three
 hierarchical levels of structure.  The second implementation is
-written in Python.  Here, the purposes were 1. to get an easily usable
-and extensible demonstration of CSA and 2. to experiment with new ways
-to implement CSA. This implementation has been released as free
-software under the GPL and is available at the INCF software center
-\citep{djurfeldt10}.  The benchmarks in this article are performed
-using a novel C++ implementation.
+written in Python and is available as the Python library \verb|csa|.
+Here, the purposes were 1. to get an easily usable and extensible
+demonstration of CSA and 2. to experiment with new ways to implement
+CSA. This implementation has been released as free software under the
+GPL license and is available at the INCF software center
+(\url{http://software.incf.org/software/csa}). A third implementation
+in C++, \verb|libcsa|, is currently under development and will also be
+released under the GPL license. It comes with Python bindings such
+that CSA objects can be formed by Python level expressions with
+similar syntax as used with the \verb|csa| library. For further
+information about this syntax, the reader is referred to the tutorial
+which is part of the \verb|csa| package. For a description of the CSA
+and basic principles of implementation, see \citet{djurfeldt10}.  The
+benchmarks in this article were performed using the latter two
+implementations in Python and C++, \verb|csa| and \verb|libcsa|.
+
+% MDJ: I think I'll keep it like that. This paper is so complex
+% conceptually anyway, so we don't need to desribe everything!
 
 %\subsubsection{Masks}
 %\subsection{Python wrapper}
 %\subsection{Serialization/deserialization}
-\tbw{To be continued by Mikael...}
 
 %----------------------------------------------------------------------
 
@@ -669,7 +685,7 @@ connection generation (section \ref{sec:benchmarks}).
 \section{Benchmarks}\label{sec:benchmarks}
 
 We ran a series of benchmarks in order to assess the performance of
-and compare the two implementations of CSA (see section \ref{sec:csa})
+and compare the two implementations of CSA (see section \ref{sec:impl})
 and the two implementations of the CSAConnector for PyNN (see section
 \ref{sec:conn_gen_pynn}). Grouped by the software layer, on which the
 iteration of the ConnectionGenerator happens (either in Python by PyNN
@@ -680,12 +696,10 @@ measured:
 \begin{itemize}
 \item \textbf{Python, csa} used PyNN's original CSAConnector that is
   available for all backends in combination with the Python CSA
-  implementation (from the INCF Software Center, see
-  \url{http://software.incf.org/software/csa}). The CSAConnector
-  intersects the csa object with a mask containing the actual nodes in
-  the Projection and iterates the csa object entirely at the Python
-  level. It connects the neurons by issuing \verb|ConvergentConnect()| calls to
-  PyNEST. 
+  implementation. The CSAConnector intersects the csa object with a
+  mask containing the actual nodes in the Projection and iterates the
+  csa object entirely at the Python level. It connects the neurons by
+  issuing \verb|ConvergentConnect()| calls to PyNEST.
   % AD: in the current implementation, whether these calls are 
   % one-to-one or many-to-one (with intermediate storage)
   % depends on the arity.
