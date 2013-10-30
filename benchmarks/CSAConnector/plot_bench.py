@@ -8,6 +8,7 @@ import pylab
 import numpy
 import operator
 
+labels = {"nest": "C++", "PyNN": "Python"}
 colors = {"nest": "#ff6633", "PyNN": "#31cd32"}
 styles = {"libcsa": "dotted", "csa": "solid"}
 
@@ -66,7 +67,7 @@ for connector in connectors:
         color = colors[pynn_component]
 
         slope, _ = numpy.polyfit(numpy.log(n), numpy.log(t), 1)
-        label = ", ".join((pynn_component, library, "%.2f" % slope))
+        label = ", ".join((labels[pynn_component], library, "%.2f" % slope))
         line, = ax1.loglog(n, t, lw=2, marker="o", ls="-",
                            label=label, color=color, zorder=i+100)
         if styles[library] == "dotted":
@@ -81,7 +82,7 @@ for connector in connectors:
 
         if sum(m) != 0:
             slope, _ = numpy.polyfit(numpy.log(n), numpy.log(m), 1)
-            label = ", ".join((pynn_component, library, "%.2f" % slope))
+            label = ", ".join((labels[pynn_component], library, "%.2f" % slope))
             line, = ax2.loglog(n, m/1024.0, lw=2, marker="o", ls="-",
                        label=label, color=color, zorder=i+100)
             if styles[library] == "dotted":
@@ -103,17 +104,17 @@ for connector in connectors:
     ax1.set_ylabel("wallclock time (s)")
     ax2.set_ylabel("memory consumption (MiB)")
 
-    handles, labels = ax1.get_legend_handles_labels()
-    hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
-    handles, labels = zip(*hl)
-    ax1.legend(handles, labels, title="connector, library, slope",
+    handles, legend_labels = ax1.get_legend_handles_labels()
+    hl = sorted(zip(handles, legend_labels), key=operator.itemgetter(1))
+    handles, legend_labels = zip(*hl)
+    ax1.legend(handles, legend_labels, title="iteration, library, slope",
                fancybox=True, loc="best", numpoints=1, handlelength=2.2)
 
-    handles, labels = ax2.get_legend_handles_labels()
+    handles, legend_labels = ax2.get_legend_handles_labels()
     if len(handles) != 0:
-        hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
-        handles, labels = zip(*hl)
-        ax2.legend(handles, labels, title="connector, library, slope",
+        hl = sorted(zip(handles, legend_labels), key=operator.itemgetter(1))
+        handles, legend_labels = zip(*hl)
+        ax2.legend(handles, legend_labels, title="iteration, library, slope",
                    fancybox=True, loc="best", numpoints=1, handlelength=2.2)
 
     fname = "CSAConnector_%s.svg" % connector
@@ -134,6 +135,7 @@ for scaling_mode in ("weak", "strong"):
     
     data = {}
     connectors = set()
+    n_connections = []
     for line in rawdata:
     
         d = line.split()
@@ -145,7 +147,7 @@ for scaling_mode in ("weak", "strong"):
         connectors.add(connector)
         library = d[3]
         n_neurons = int(d[4])
-        n_connections = int(d[5])
+        n_connections.append(float(d[5]))
         time = float(d[6])
         preptime = float(d[7])
         itertime = float(d[8])
@@ -160,6 +162,13 @@ for scaling_mode in ("weak", "strong"):
                     data[connector][(pynn_component, library)] = [(n_neurons, itertime, np)]    
                 except: # connector not in data
                     data[connector] = {(pynn_component, library): [(n_neurons, itertime, np)]}
+
+    if scaling_mode == "weak":
+        length = len(n_connections)
+        error = numpy.ones(length) - numpy.array(n_connections) / numpy.array([4800000]*length)
+        e_min = min(error) * 1000
+        e_max = max(error) * 1000
+        print "weak scaling error: min=%f permil, max=%f permil" % (e_min, e_max)
     
     for connector in connectors:
     
@@ -175,7 +184,7 @@ for scaling_mode in ("weak", "strong"):
             color = colors[pynn_component]
 
             slope, _ = numpy.polyfit(numpy.log(np), numpy.log(t), 1)
-            label = ", ".join((pynn_component, library, "%.2f" % abs(slope)))
+            label = ", ".join((labels[pynn_component], library, "%.2f" % slope))
             line, = ax1.semilogy(np, t, lw=2, marker="o", ls="-", label=label,
                                   color=color, zorder=i+100)
             if styles[library] == "dotted":
@@ -195,18 +204,16 @@ for scaling_mode in ("weak", "strong"):
         ax1.set_xlabel("number of processes")
         ax1.set_ylabel("wallclock time (s)")
 
-        if scaling_mode == "strong":
-            ax1.set_ylim([10**0, 10**5])
-        else:
-            ax1.set_ylim([10**0, 10**5])
+        # This is only to get the legends not overlapped by the data
+        ax1.set_ylim([10**0, 10**5])
 
         ax1.set_xlim([1, 48])
         ax1.set_xticks([1, 2, 4, 6, 12, 24, 48])
     
-        handles, labels = ax1.get_legend_handles_labels()
-        hl = sorted(zip(handles, labels), key=operator.itemgetter(1))
-        handles, labels = zip(*hl)
-        ax1.legend(handles, labels, title="connector, library, slope",
+        handles, legend_labels = ax1.get_legend_handles_labels()
+        hl = sorted(zip(handles, legend_labels), key=operator.itemgetter(1))
+        handles, legend_labels = zip(*hl)
+        ax1.legend(handles, legend_labels, title="iteration, library, slope",
                    fancybox=True, loc="best", numpoints=1, handlelength=2.2)
     
         fname = "CSAConnector_%s_scaling_%s.svg" % (scaling_mode, connector)
