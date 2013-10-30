@@ -75,7 +75,7 @@
 %Department X2, Organization X2, Street X2, City X2 , State XX2 (only
 %USA, Canada and Australia), Zip Code2, X2 Country X2,
 %email2@uni2.edu}
-\topic{Python in Neuroscience 2}
+\topic{Python in Neuroscience II}
 
 \maketitle
 \begin{abstract} % maximum 2000 characters including spaces
@@ -83,7 +83,7 @@
 Most neuronal network simulators provide simulator-specific methods
 for specifying connectivity. Thus, modelers need to learn the ways of
 each simulator and connectivity descriptions are not easily moved
-between them.  To accomodate this, several universal description
+between them.  To improve this situation, several universal description
 languages for neuronal network models (e.g. PyNN, NeuroML and NineML)
 have been developed.
 
@@ -94,9 +94,9 @@ random balanced networks, synfire chains and recurrent networks
 without much structure, however they often either lack the required
 expressiveness or their implementations lack the required
 computational efficiency to specify the connectivity of complex
-hierarchical network models now under investigation.
+hierarchical network models.
 
-The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
+The connection-set algebra is a formalism
 for specifying the connectivity of neuronal network models. CSA
 provides operators to combine simpler connectivities into more complex
 ones and also provides parameterization of such sets. The CSA is
@@ -108,11 +108,11 @@ representation of connectivity in parallel neuronal network
 simulators.
 
 Here, we describe the use of CSA and how it is coupled to the neural
-simulation tool NEST \citep{Gewaltig_07_11204} through the new
+simulation tool NEST through the new
 ConnectionGenerator interface provided by the libneurosim library. We
 demonstrate how CSA can be used for the specification of connectivity
 in simulator-independent neural specification language PyNN
-\citep{Davison09} and how using CSA, as a high-level representation of
+and how using CSA, as a high-level representation of
 connectivity patterns, avoids performance penalties and results in
 good scalability when transferred to the simulator.
 
