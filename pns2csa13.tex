@@ -227,15 +227,15 @@ explicitly specified. The distinguishing aspects of CSA are:
 There exists multiple implementations of CSA (see section
 \ref{sec:impl}).
 
-\subsection{PyNN}
+\subsection{PyNN}\label{sec:pynn}
 
-PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is a
-community effort to provide a simulator-independent API for describing
-neuronal networks in Python. Given a PyNN/Python model description,
-the user can choose which simulator to use without a need for changes
-to the model script. This is achieved through a set of \emph{simulator
-backends} which are part of the PyNN code base. A backend adapts
-PyNN to a specific simulator.
+PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is
+a community driven effort to provide a simulator-independent API for
+describing neuronal networks in Python. Given a PyNN/Python model
+description, the user can choose which simulator to use without a need
+for changes to the model script. This is achieved through a set of
+\emph{simulator backends} which are part of the PyNN code base. A
+backend adapts PyNN to a specific simulator.
 
 In PyNN, a neuronal network is built from Populations of neurons and
 Projections between them. Each Projection is created by a Connector,
@@ -256,20 +256,13 @@ information into the simulator.
 
 The problem of excessive data transfers between PyNN and the simulator
 can be solved by passing a high-level description of (possibly random)
-connectivity to the simulator. This representation can then be
-iterated and expanded at the simulator level and thus avoid
-overhead. Moreover, this also allows efficient parallelization at the
-lower software layers.
-
-Since version 0.7, PyNN provides the CSAConnector, which can iterate a
-CSA connection set and issue one by one connect calls in the different
-backends. During this study, we extended PyNN with a new and
-specialized CSAConnector, which passes the complete CSA object down to
-the simulator to reduce the overhead. The details of this effienct
-interface are described in section \ref{sec:conn_gen_pynn}. Section
-\ref{sec:benchmarks} contains benchmarking results of the different
-implementations of the CSAConnector and the native NEST connection
-routines.
+connectivity to the simulator. This representation can be iterated and
+expanded at the simulator level and thus avoid overhead. Moreover,
+this allows efficient parallelization at the lower software layers.
+The design of a new connector for the NEST backend that implements
+this solution is explained in section \ref{sec:conn_gen_pynn}. Section
+\ref{sec:benchmarks} contains runtime and scalability benchmarks for
+the new connector.
 
 \subsection{NEST}
 
@@ -639,7 +632,25 @@ detailed in appendix A.
 %----------------------------------------------------------------------
 
 \section{PyNN connection generators}\label{sec:conn_gen_pynn}
-\tbw{To be written by Jochen...}
+
+Since version 0.7, PyNN provides the generic CSAConnector, which can
+iterate a CSA connection set and issue one by one connect calls to
+the different backends. Internally, the connector executes the
+following two steps:
+\begin{itemize}
+\item Intersect the given connection set with a \emph{cross} mask
+  containing the neurons in the pre- and post-synaptic populations.
+\item Connect the neurons. The weight and delay are either PyNN's
+  default values or the ones from the connection set, depending on its
+  \emph{arity} (see section \ref{sec:csa}).
+\end{itemize}
+
+During this study, we extended the NEST backend for PyNN with a new
+and specialized CSAConnector, which passes the complete CSA object
+down to the simulator (by calling PyNEST's \verb|CGConnect()|), which
+then iterates it (see section \ref{sec:conn_gen_nest}). This greatly
+reduces the overhead and thus improves the runtime and scalability of
+connection generation (section \ref{sec:benchmarks}).
 
 %----------------------------------------------------------------------
 
