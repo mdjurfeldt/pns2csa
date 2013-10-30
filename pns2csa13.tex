@@ -453,6 +453,8 @@ connectivity without self-connections'' can be represented by the CSA
 expression $\bar{\rho}(p) - \bar{\delta}$ (see Figure
 \ref{fig:csa}D).
 
+%Cartesian product
+
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
 %\subsection{Examples}
 %  \textbf{Figure 2.}{An example of using CSA.}\label{fig:02}
@@ -547,19 +549,23 @@ and libpyneurosim, providing Python support code.
 
 \section{NEST connection generators}\label{sec:conn_gen_nest}
 
-The current trend towards neuronal network models, which integrate
-layers, columns and areas, brings with it the need for describing the
-required complex connectivity patterns. As described earlier, a few
-different libraries have been developed for this and the Connection
-Generator interface is a way to couple different such libraries to
-simulators.
+%MDJ: If we keep this section, it should go somewhere earlier
+%
+%The current trend towards neuronal network models which integrate
+%layers, columns and areas, brings with it the need for describing the
+%required complex connectivity patterns. As described earlier, a few
+%different libraries have been developed for this and the Connection
+%Generator interface is a way to couple different such libraries to
+%simulators.
 
-To support the Connection Generator interface in NEST and thereby
-grant the users more freedom for the choice of a connection generating
-library, we created the ConnectionGeneratorModule, a plugin for NEST,
-which can be (de-)activated at configure time. The module is built on
-top of \verb|libneurosim| and extends both user interfaces (SLI and
-PyNEST) by the following functions:
+To support the Connection Generator interface in NEST
+% and thereby
+%grant the users more freedom for the choice of a connection generating
+%library,
+we created the ConnectionGeneratorModule, a plugin for NEST which can
+be (de-)activated at configure time. The module is built on top of
+\verb|libneurosim| and extends both user interfaces (SLI and PyNEST)
+by the following functions:
 
 \begin{unlist}
 \item[\tt CGConnect], which takes a ConnectionGenerator \emph{cg}, the
@@ -638,13 +644,15 @@ Since version 0.7, PyNN provides the generic CSAConnector, which can
 iterate a CSA connection set and issue one by one connect calls to
 the different backends. Internally, the connector executes the
 following two steps:
-\begin{itemize}
-\item Intersect the given connection set with a \emph{cross} mask
-  containing the neurons in the pre- and post-synaptic populations.
+\begin{enumerate}
+\item Form a finite connection-set adapted to the actual sizes of the
+  populations by intersecting the given connection set with the
+  Cartesian product of the neuron indices of the pre- and
+  post-synaptic populations.
 \item Connect the neurons. The weight and delay are either PyNN's
   default values or the ones from the connection set, depending on its
   \emph{arity} (see section \ref{sec:csa}).
-\end{itemize}
+\end{enumerate}
 
 During this study, we extended the NEST backend for PyNN with a new
 and specialized CSAConnector, which passes the complete CSA object
@@ -667,26 +675,28 @@ version, libcsa the C++ version), the following scenarios were
 measured:
 
 \begin{itemize}
-\item \textbf{Python, csa} used PyNN's original CSAConnector that
-  is available for all backends in combination with the Python CSA
+\item \textbf{Python, csa} used PyNN's original CSAConnector that is
+  available for all backends in combination with the Python CSA
   implementation (from the INCF software center via SVN, see
   \url{http://software.incf.org/software/csa}). The CSAConnector
   intersects the csa object with a mask containing the actual nodes in
-  the Projection and iterates the csa object on the Python level. It
-  connects the neurons by issuing one-to-one \verb|Connect()| calls to
-  PyNEST.
+  the Projection and iterates the csa object entirely at the Python
+  level. It connects the neurons by issuing one-to-one
+  \verb|Connect()| calls to PyNEST.
 \item \textbf{C++, csa} used the new CSAConnector for PyNN's NEST
   backend, which is available from PyNN's git repository and the
-  Python CSA implementation. The new CSAConnector just passes down the
-  csa object as ConnectionGenerator to PyNEST, which iterates it on
-  the C++ level by executing the Python functions.
-\item \textbf{Python, libcsa} used the generic CSAConnector in PyNN and
-  the C++ CSA implementation libcsa. The CSA object is instantiated in
-  Python and passed down to NEST by PyNN. Please note, however, that
-  all iterations happen in C++, with only little overhead added by
-  function calls in PyNN, PyNEST and SLI.
+  Python CSA implementation. The csa object is passed down to NEST
+  through \verb|CGConnect ()|. The ConnectionGeneratorModule then
+  iterates it at the C++ level by repeatedly calling the Python level
+  iterator.
+\item \textbf{Python, libcsa} used the generic CSAConnector in PyNN
+  and the C++ CSA implementation libcsa. The CSAConnector iterates the
+  libcsa object at the Python level, repeatedly calling its C++
+  iterator.
 \item \textbf{C++, libcsa} used the new CSAConnector for PyNN's NEST
-  backend and the C++ CSA implementation libcsa.
+  backend and the C++ CSA implementation libcsa. The libcsa object is
+  passed down to NEST through \verb|CGConnect ()|. All iterations
+  happen in C++ in the ConnectionGeneratorModule.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -694,7 +704,7 @@ measured:
 \includegraphics[scale=.7]{benchmarks/CSAConnector/CSAConnector.pdf}
 \caption{Benchmark results for the use of CSA in NEST through PyNN,
   comparing the two CSAConnector implementations explained in section
-  \ref{sec:conn_gen_pynn} and the two CSA implementations explained in
+  \ref{sec:conn_gen_pynn} and the two CSA implementations mentioned in
   section \ref{sec:csa}. Color and dash codes are given in the
   legends, slope is the slope between the first and the last data
   point shown. Bold lines denote the expected scaling. \textbf{A}
@@ -722,7 +732,7 @@ CSA (csa, libcsa) scale perfectly with slopes around 2 for the
 \emph{random}, independently of the software layer (C++ or Python), on
 which the iteration was carried out. However, the vertical offsets and
 the inferior scaling of the pure Python implementation for the
-\emph{oneToOne} mask suggest, that Python adds a significant overhead
+\emph{oneToOne} mask suggest that Python adds a significant overhead
 to the process of connection generation.
 
 To demonstrate the scalability of the implementations, we carried out
@@ -734,18 +744,19 @@ D). For each of them, the number of MPI processes was varied from 1 to
 In the strong scaling benchmark (figure \ref{fig:pynn_benchmarks} C),
 the number of MPI processes was varied, while we kept the total number
 of neurons in the network fixed at $48 \cdot 10^3$. This resulted in
-approx. 230 million connections created. It is easily visible, that an
-iteration of the CSA object on the Python level is detrimental to the
+approx. 230 million connections created. It is easily visible that an
+iteration of the CSA object on the Python level in the current PyNN
+implementation of the original CSAConnector is detrimental to the
 scalability. In contrast, it is possible to obtain perfect scaling if
 the iteration of the CSA object is carried out from the C++
 layer. Using the C++ implementation of CSA, it is, however, possible
 to gain another order of magnitude compared to the Python version.
 
 During the weak scaling benchmark (figure \ref{fig:pynn_benchmarks}
-C), the number of MPI processes was varied, while the work load was
+C), the number of MPI processes was varied while the work load was
 increased by a fixed number of connections per additional process.
-Please note that the number of connection grows quadratically with the
-number of neurons when using CSA's \emph{random} mask with a fixed
+The number of connections grows quadratically with the number of
+neurons when using CSA's \emph{random} mask with a fixed
 probality. The number of neurons per process was thus increased with
 the square root of the desired number of connections. In the realm of
 natural numbers, this leads to a slight error, which was, however,
