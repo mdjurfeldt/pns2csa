@@ -124,6 +124,13 @@ good scalability when transferred to the simulator.
 
 \section{Introduction}
 
+%The current trend towards neuronal network models which integrate
+%layers, columns and areas, brings with it the need for describing the
+%required complex connectivity patterns. As described earlier, a few
+%different libraries have been developed for this and the Connection
+%Generator interface is a way to couple different such libraries to
+%simulators.
+
 Currently, most simulators use their own methods for describing
 connections between neurons. This requires users to learn the ways of
 each simulator.  Furthermore it makes it hard to port models from one
@@ -248,12 +255,7 @@ needs to break up the compact high-level description of connectivity
 given by users into the commands understood by the respective
 backend. These are often already too low-level (e.g. convergent or
 divergent connects, one-to-one connects) and thus entail a certain
-performance penalty due to data transfer and function call
-overhead. %This is especially problematic when random connection
-%parameters are used (and drawn in Python), because this makes one by
-%one connects the only possibility for transferring the connection
-%information into the simulator.
-% AD: this is not true.
+performance penalty due to data transfer and function call overhead.
 
 The problem of excessive data transfers between PyNN and the simulator
 can be solved by passing a high-level description of (possibly random)
@@ -300,10 +302,6 @@ functions exist to support the user in creating networks on the basis
 of knowledge of connectivity statistics. However, random connection
 parameters (e.g. weight, delay) need to be drawn manually by the user
 and supplied to NEST after the creation of connections.
-
-% AD: I don't think a figure is needed here
-%\tbw{Add figure as we see fits once the text is there. Candidate:\\
-%  http://nest-initiative.org/index.php/Connection\_Management}
 
 \subsubsection*{Topology module:}
 
@@ -590,21 +588,9 @@ and libpyneurosim, providing Python support code.
 
 \section{NEST connection generators}\label{sec:conn_gen_nest}
 
-%MDJ: If we keep this section, it should go somewhere earlier
-%
-%The current trend towards neuronal network models which integrate
-%layers, columns and areas, brings with it the need for describing the
-%required complex connectivity patterns. As described earlier, a few
-%different libraries have been developed for this and the Connection
-%Generator interface is a way to couple different such libraries to
-%simulators.
-
-To support the Connection Generator interface in NEST
-% and thereby
-%grant the users more freedom for the choice of a connection generating
-%library,
-we created the ConnectionGeneratorModule, a plugin for NEST which can
-be (de-)activated at configure time. The module is built on top of
+To support the Connection Generator interface in NEST we created the
+ConnectionGeneratorModule, a plugin for NEST which can be
+(de-)activated at configure time. The module is built on top of
 \verb|libneurosim| and extends both user interfaces (SLI and PyNEST)
 with the following functions:
 
@@ -691,9 +677,10 @@ following two steps:
   populations by intersecting the given connection set with the
   Cartesian product of the neuron indices of the pre- and
   post-synaptic populations.
-\item Connect the neurons. The weight, delay and any other synaptic parameters
-  are taken from the connection set, if supplied as value sets (see section \ref{sec:csa}),
-  and from the parameterisation of the synapse type otherwise.
+\item Connect the neurons. The weight, delay and any other synaptic
+  parameters are taken from the connection set, if supplied as value
+  sets (see section \ref{sec:csa}), and from the parameterisation of
+  the synapse type otherwise.
 \end{enumerate}
 
 During this study, we extended the NEST backend for PyNN with a new
@@ -723,13 +710,10 @@ measured:
   mask containing the actual nodes in the Projection and iterates the
   csa object entirely at the Python level. It connects the neurons by
   issuing \verb|ConvergentConnect()| calls to PyNEST.
-  % AD: in the current implementation, whether these calls are 
-  % one-to-one or many-to-one (with intermediate storage)
-  % depends on the arity.
 \item \textbf{C++, csa} used the new CSAConnector for PyNN's NEST
   backend, which is available in the development version of PyNN, and the
   Python CSA implementation. The csa object is passed down to NEST
-  through \verb|CGConnect ()|. The ConnectionGeneratorModule then
+  through \verb|CGConnect()|. The ConnectionGeneratorModule then
   iterates it at the C++ level by repeatedly calling the Python level
   iterator.
 \item \textbf{Python, libcsa} used the generic CSAConnector in PyNN
@@ -738,7 +722,7 @@ measured:
   iterator.
 \item \textbf{C++, libcsa} used the new CSAConnector for PyNN's NEST
   backend and the C++ CSA implementation libcsa. The libcsa object is
-  passed down to NEST through \verb|CGConnect ()|. All iterations
+  passed down to NEST through \verb|CGConnect()|. All iterations
   happen in C++ in the ConnectionGeneratorModule.
 \end{itemize}
 
@@ -805,41 +789,43 @@ the square root of the desired number of connections. In the realm of
 natural numbers, this leads to a slight error, which was, however,
 well acceptable with values between $-1.42$\permil and $+1.08$\permil.
 
-% AD: I don't understand the following sentence. What would be the
-%     mechanism of degradation, and how are these numbers magic?
-The numbers of MPI processes was chosen as 1, 2, 4, 6, 12, 24, 48 to
-prevent a degradation of the quality of the measurements caused by the
-type of machine used for benchmarking. The machine is equipped with 4
-AMD Operon 6174 (Magny Cours) processors organized into 8 NUMA domains
-with 6 cores each. Other than the choice of MPI process numbers, no
-additional measures (e.g. pinning of processes to cores, altering the
-affinity of threads to cores, etc.) were taken to avoid distortions of
-the results.
+The machine used for benchmarking was equipped with 4 12-core AMD
+Operon 6174 (Magny Cours) processors organized into 8 NUMA domains
+with 6 cores each. Other than the choice of the number of MPI
+processes in a NUMA-friendly way, no measures (like pinning of
+processes to cores, altering the affinity of threads to cores, etc.)
+were taken to avoid distortions of the results.
 
 %----------------------------------------------------------------------
 
 \section{Discussion and outlook}
 
-\begin{itemize}
-\item Allow more than 2 parameters to be created by CSA (e.g. for
-  synapse models with more variables, like STDP, Tsodyks; NEST: make
-  number of parameters explicit and check against this value)
-\item We are investigating if the code for finding contiguous ranges
-  and to do the index translation can be extracted from NEST's
-  ConnectionGeneratorModule and made available to other simulators as
-  part of libneurosim
-\item Tell that a comparison of the CG interface / CSA to topology
-  will be investigated and benchmarks will be published once the
-  optimizations of the topology module are publically available.
-\end{itemize}
+We have shown the design of a generic interface for coupling
+connection generating libraries to neuronal simulators and
+demonstrated the good scaling of the implementations in NEST and
+PyNN. The availability of these interfaces lets users flexibly chose a
+connection generating library independently of the simulator used, and
+thereby grants greater freedom for describing models.
+
+One current limitation of the interface is that value sets for the
+ConnectionGenerator can only be used if its arity is 0 or 2. This
+means that only values for weight and delay can be generated by the
+connection generating library. For many synapse models it would be
+beneficial to also set other parameters based on rules in the
+ConnectionGenerator. Examples for such synapse models are STDP or
+short-term facilitation and depression.
 
 If every single piece of generically useful functionality, such as the
 \verb|ConnectionGenerator| interface, was distributed in a separate
 library, the library dependencies of simulation software would grow
-unmanageable.  Libneurosim could therefore become a place within which to put
-other interfaces and supporting code besides the
-\verb|ConnectionGenerator| interface.  Every neuronal network
-simulator generates random numbers. The GNU Scientific Library (GSL;
+unmanageable.  Libneurosim could therefore become a place within which
+to put other interfaces and supporting code besides the
+\verb|ConnectionGenerator| interface. We are currently investigating
+if the code for finding contiguous ranges translating indices can be
+extracted from NEST and made available as part of libneurosim.
+
+Another possible extension could be code for the genration of random
+numbers. The GNU Scientific Library (GSL;
 \url{http://www.gnu.org/software/gsl}) provides random number
 generators, but there are still needs specific to neuronal network
 simulators which could be served by a specialized RNG library. Should
