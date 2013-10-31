@@ -1049,18 +1049,20 @@ Section \ref{sec:csa}). This means that we have to translate indices
 from NEST to CSA during the setting of the masks and back when we
 actually create the connections.
 
-As explained in Section \ref{sec:csa}, the masks for the sources must
-contain all local and remote nodes. The \emph{skip} of the mask is
-therefore always set to 1. For the sources, the same source mask is
-stored \emph{n\_proc} times on each process. The masks for the targets
-must only contain the local nodes. This is achieved by i) setting
-\emph{skip} to the number of MPI processes upon creation of the mask,
-and ii) by taking the index-translated ID of the first local neuron as
-the first entry of the mask for that range. Together with the skip
-this allows to find all local nodes in the range. If this
-index-translation renders the resulting range empty (i.e. because the
-first local ID is beyond the last element of the range), the range is
-not added to the mask.
+The masks for the sources must contain all local and remote nodes. The
+\emph{skip} of the mask is therefore always set to 1. In addition, the
+same source mask is stored \emph{n\_proc} times on each process.
+
+In contrast, the masks for the targets must only contain the local
+nodes in the population. This is achieved by 1. setting \emph{skip} to
+the number of MPI processes, and 2. assuming the index-translated ID
+of the first local neuron as the first entry of the mask for that
+range. Together with the skip this allows to find all local nodes in
+the range. However, it might happen that this procedure leads to a
+situation, where the resulting range is empty on a certain process,
+because the first local ID is already beyond the final element of the
+range. In this case, the range is not added to the mask on that
+particular process.
 
 \section*{Appendix B: Software versions used}
 
