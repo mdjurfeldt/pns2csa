@@ -944,27 +944,27 @@ The contiguous ranges inside the given lists are found using a binary
 search approach, where the left border of a range is always one past
 the end of the last range and the right border is searched for. The
 following listing contains the procedure to find all contiguous ranges
-in a sorted list \emph{n} as a Python script.
+in a sorted list \emph{ls} as a Python script.
 
 First, we initialize \emph{ranges} to an empty list, the left border
-(\emph{left}) to 0, and \emph{end} to the last index of \emph{n}.
+(\emph{left}) to 0, and \emph{end} to the last index of \emph{ls}.
 
 \begin{pythoncode}
 ranges = []
 left = 0
-end = len(n) - 1
+end = len(ls) - 1
 \end{pythoncode}
 
 The following loop will terminate the search when the \emph{end} of
-\emph{n} is reached. Until this happens, it always finds the next
+\emph{ls} is reached. Until this happens, it always finds the next
 right border using \emph{get\_right()} and adds the range between
 \emph{left} and \emph{right} to \emph{ranges}. If a new range is
 found, left is set to one past the end of the last found range.
 
 \begin{pythoncode}
 while True:
-    right = get_right(left, (len(n) - left) / 2)
-    ranges.append((n[left], n[right]))
+    right = get_right(left, (len(ls) - left) / 2)
+    ranges.append((ls[left], ls[right]))
     if right == end:
         break
     else:
@@ -972,10 +972,10 @@ while True:
 \end{pythoncode}
 
 The task of the \emph{get\_right()} function is to calculate and
-return the right border of the contiguous range of GIDs in \emph{n}
+return the right border of the contiguous range of GIDs in \emph{ls}
 starting at \emph{left}. The element is found using a binary search
 with stepsize \emph{step}. First, we check if \emph{left} is already
-the index of the last element in \emph{n}. If this is the case, we
+the index of the last element in \emph{ls}. If this is the case, we
 return \emph{left} as the right border.
 
 \begin{pythoncode}
@@ -987,7 +987,7 @@ def get_right(left, step):
 If there are numbers left to be considered, we set \emph{leftmost\_r},
 the leftmost right border touched during the search, to \emph{None} to
 mark it as unitialized. We then initialize the search index \emph{i}
-to the last valid index into \emph{n}, and \emph{last\_i} to \emph{i}.
+to the last valid index into \emph{ls}, and \emph{last\_i} to \emph{i}.
 
 \begin{pythoncode}
     leftmost_r = None
@@ -995,9 +995,9 @@ to the last valid index into \emph{n}, and \emph{last\_i} to \emph{i}.
 \end{pythoncode}
 
 In the following loop, we perform the search. If \emph{i} points to
-the end of \emph{n} and the distance between \emph{i} and \emph{left}
-is the same as between the values \emph{n[i]} and \emph{n[left]}
-(i.e. \emph{n[i+1]} equals \emph{n[i]+1} for all \emph{i}), or if
+the end of \emph{ls} and the distance between \emph{i} and \emph{left}
+is the same as between the values \emph{ls[i]} and \emph{ls[left]}
+(i.e. \emph{ls[i+1]} equals \emph{ls[i]+1} for all \emph{i}), or if
 \emph{i} is pointing at the position of the leftmost right border we
 found until now (i.e. we're back at an already visited index), we
 found the right border of the contiguous range (\emph{last\_i}) and
@@ -1005,7 +1005,7 @@ return it.
 
 \begin{pythoncode}
     while True:
-        match = n[i] - n[left] == i - left
+        match = ls[i] - ls[left] == i - left
         if (i == end and match) or i == leftmost_r:
             return last_i
 \end{pythoncode}
@@ -1017,7 +1017,7 @@ the current candidate for the right border.
         last_i = i 
 \end{pythoncode}
 
-If the range between \emph{n[left]} and \emph{n[i]} is contiguous, we
+If the range between \emph{ls[left]} and \emph{ls[i]} is contiguous, we
 set \emph{i} to the right by \emph{step} steps, else update the
 variable \emph{leftmost\_r} to the current \emph{i} (i.e. the known
 leftmost position) and set \emph{i} to the left by \emph{step} steps.
