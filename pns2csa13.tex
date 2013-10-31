@@ -433,7 +433,7 @@ $\bar{\delta}$. Another example is the random mask $\bar{\rho}$, a
 parameterized connection-set, or, more strictly, a mask-valued
 function $\bar{\rho}(p)$ where the parameter $p$ is the probability
 that a given connection $(i, j)$ exists.  That is, for each
-combination of pre- and postsynaptic neurons, a Bernoulli trial
+combination of pre- and post-synaptic neurons, a Bernoulli trial
 determines whether they are connected.
 \begin{equation}
   \bar{\rho} (p) (i, j) =
@@ -642,14 +642,15 @@ ConnectionGeneratorModule, a plugin for NEST which can be
 with the following functions:
 
 \begin{unlist}
-\item[\tt CGConnect], which takes a connection generator \emph{cg}, the
-  indices of \emph{pre}- and a \emph{post}-synaptic populations, and a
-  \emph{param\_map}. It creates the connections between neurons in
-  \emph{pre}- and a \emph{post} as prescribed by the rules in
-  \emph{cg}. The parameter map \emph{param\_map} maps parameter names
-  (e.g. \emph{weight}, \emph{delay}) to their index for the parameter
-  value vector created by the call to \verb|next()| in the
-  \verb|ConnectionGenerator| interface (see Section \ref{sec:cgint}).
+\item[\tt CGConnect], which takes a connection generator \emph{cg},
+  lists of GIDs for \emph{pre}- and a \emph{post}-synaptic
+  populations, and a \emph{param\_map}. It creates the connections
+  between neurons in \emph{pre}- and a \emph{post} as prescribed by
+  the rules in \emph{cg}. The parameter map \emph{param\_map} maps
+  parameter names (e.g. \emph{weight}, \emph{delay}) to their index
+  for the parameter value vector created by the call to \verb|next()|
+  in the \verb|ConnectionGenerator| interface (see Section
+  \ref{sec:cgint}).
 \item[\tt CGParse], which takes a serialized version of a connection
   generator in the string \emph{xml} and returns the corresponding
   object. A special use of this function exists on supercomputers,
@@ -709,9 +710,14 @@ connection and parameter values for the connection. The connections
 are established one by one by calling NEST's basic
 \verb|Network::connect()| function.
 
-The enumeration of neurons in the populations supplied as user
-arguments for use as CSA indices and the index translation for the
-creation of masks is detailed in Appendix A.
+A connection generator enumerates nodes of the network using source
+and target indices in ranges $[0, N_s-1]$ and $[0, N_t-1]$ where $N_s$
+is the number of source neurons and $N_t$ the number of target
+neurons, but NEST uses GIDs to identify neurons.  Internally,
+\verb|CGConnect()| needs to maintain a mapping between connection
+generator indices and GIDs.  Appendix A describes two aspects of this
+mapping, the detection of contiguous ranges in the lists of GIDs
+passed as arguments to \verb|CGConnect()| and index translation.
 
 %----------------------------------------------------------------------
 
@@ -923,15 +929,6 @@ permission to use one of his drawings in
 Figure~\ref{fig:sequence_diagram_nest}.
 
 \section*{Appendix A: Creating masks in NEST}\label{sec:creating_masks}
-
-As explained in Section \ref{sec:csa}, CSA needs to know about which
-neurons in the pre- and post-synaptic population are local to the MPI
-process, and which are remote. This information is contained in masks,
-which are created and set by each NEST process. The masks for CSA are
-handed over as a vector of closed intervals that contain the first and
-last index of each contiguous range of indices plus an additional skip
-value, which is used to describes the ``turn-around'' for a round-robin
-distributions of neurons onto MPI processes.
 
 \subsection*{Identifying contiguous ranges}
 
