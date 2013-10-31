@@ -123,26 +123,22 @@ to the simulator.
 
 \section{Introduction}
 
-%The current trend towards neuronal network models which integrate
-%layers, columns and areas, brings with it the need for describing the
-%required complex connectivity patterns. As described earlier, a few
-%different libraries have been developed for this and the Connection
-%Generator interface is a way to couple different such libraries to
-%simulators.
-
-Currently, most simulators use their own methods for describing
-connections between neurons. This requires users to learn the ways of
-each simulator.  Furthermore it makes it hard to port models from one
-simulator to another and leaves the efficient implementation of
-connection-generating functions as a task for simulator
-developers. Especially in a parallel environment, this is not a
-trivial undertaking. One way to ease this problem is the use of general
-connection-generating libraries like the Connection-set Algebra
-\citep[CSA;][]{djurfeldt12} or the graph library developed for NineML
-\citep{raikov10}. They allow simulator-independent specification of
-connectivity and enable high-level descriptions which can be passed to
-a simulator core for efficient, parallelized, setup of connectivity,
-avoiding the overhead associated with scripted algorithms.
+The current trend towards neuronal network models which integrate
+layers, columns and areas, brings with it the need for describing the
+required complex connectivity patterns. Currently, most simulators use
+their own methods for describing connections between neurons. This
+requires users to learn the ways of each simulator. Furthermore it
+makes it hard to port models from one simulator to another and leaves
+the efficient implementation of connection-generating functions as a
+task for simulator developers. Especially in a parallel environment,
+this is not a trivial undertaking. One way to ease this problem is the
+use of general connection-generating libraries like the Connection-set
+Algebra \citep[CSA;][]{djurfeldt12} or the graph library developed for
+NineML \citep{raikov10}. They allow simulator-independent
+specification of connectivity and enable high-level descriptions which
+can be passed to a simulator core for efficient, parallelized, setup
+of connectivity, avoiding the overhead associated with scripted
+algorithms.
 
 To take account of the fact that different users prefer different
 simulators and also might prefer different libraries to create
