@@ -109,7 +109,7 @@ simulators.
 
 Here, we describe the use of CSA and how it is coupled to the neural
 simulation tool NEST through the new
-ConnectionGenerator interface provided by the libneurosim library. We
+\verb|ConnectionGenerator| interface provided by the libneurosim library. We
 demonstrate how CSA can be used for the specification of connectivity
 in simulator-independent neural specification language PyNN
 and how using CSA, as a high-level representation of
@@ -311,7 +311,7 @@ provides a Topology module \citep{Plesser_13}. It supports the user in
 connecting neurons and randomly initializing synapse parameters based
 on toplogical measures in the network.
 
-The design of the novel ConnectionGenerator interface for NEST is
+The design of the novel \verb|ConnectionGenerator| interface for NEST is
 explained in section \ref{sec:conn_gen_nest}. In section
 \ref{sec:benchmarks}, we provide benchmarks for different use case
 scenarios of the interface. A comparison of the performance of the
@@ -509,7 +509,7 @@ simulator and the connectivity description library replaceable.
 \includegraphics[scale=.8]{figures/block_diagram_conngen.pdf}
 \caption{Block diagram of the Connection Generator interface and the
   components involved. The central component is the
-  ConnectionGenerator class itself. It can connect to different simulators
+  \verb|ConnectionGenerator| class itself. It can connect to different simulators
   (e.g. NEST) and to different connection generating libraries
   (e.g. CSA). In this example, Python is used as scripting language
   for both simulator and connection generating
@@ -520,11 +520,11 @@ The basic idea is that a connection generating library, such as
 \verb|csa| or \verb|libcsa| of section \ref{sec:impl}, is used to
 create an object representing network connectivity.  In the case of a
 CSA library, this object is a connection-set, but it could also be a
-graph made through graph primitives. The ConnectionGenerator interface
+graph made through graph primitives. The \verb|ConnectionGenerator| interface
 provides a C++ level interface to such objects which allows software
 external to the connection generating library to efficiently iterate
 through connections represented by the object.  In the example shown
-in Figure \ref{fig:block_diagram_conngen}, the ConnectionGenerator
+in Figure \ref{fig:block_diagram_conngen}, the \verb|ConnectionGenerator|
 interface is used to combine a Python scripted simulator with a Python
 scripted connection generating library. A connection generating object
 is assembled at the Python level.  If \verb|libcsa| is used, the
@@ -552,7 +552,7 @@ consists of the following functions:
   of the nodes in the network.
 \item[\tt void setMask(std::vector$<$Mask$>$\& masks, int local)]:
   This version of \texttt{setMask} is used by parallel simulators and
-  informs the ConnectionGenerator on the \verb|local| rank about the
+  informs the connection generator on the \verb|local| rank about the
   masks of all ranks. Some connection generators can use such
   information to avoid the need for communication with other ranks.
 \item[\tt void start()]: Start an iteration. This function must be called
@@ -572,7 +572,7 @@ form of a C++ header file plus supporting code) belong?  If it is put
 in the simulator or connection generating library source trees, it
 will be duplicated over simulators or libraries.  As new versions of
 the interface are developed, the situation will quickly become
-unmanageable.  In fact, the \verb|ConnectionGenerator| is unusual in
+unmanageable.  In fact, the \verb|ConnectionGenerator| interface is unusual in
 that it is a symmetric abstraction barrier: it both allows the use of
 any library providing the API from a given simulator \emph{and} allows
 the same library to be used from any simulator supporting the API.
@@ -586,7 +586,7 @@ of two main component libraries: \verb|libneurosim|, providing C++
 level support code and \verb|libpyneurosim|, providing Python support
 code.
 
-\verb|libneurosim| provides the ConnectionGenerator interface (Figure
+\verb|libneurosim| provides the \verb|ConnectionGenerator| interface (Figure
 \ref{fig:block_diagram_conngen}, bottom). It also contains a registry
 for XML parser functions.  Different types of connection generators
 can be described by different XML-based languages.  For example, the
@@ -596,7 +596,7 @@ a parser for one or more such languages.  Conversely, the same
 XML-based language might be used by one or more connection generating
 libraries.  The XML parser registry maps XML tags identifying specific
 languages to specific connection libraries.  The interface to the
-registry consists of two static methods in the ConnectionGenerator
+registry consists of two static methods in the \verb|ConnectionGenerator|
 interface:
 
 \begin{unlist}
@@ -640,7 +640,7 @@ ConnectionGeneratorModule, a plugin for NEST which can be
 with the following functions:
 
 \begin{unlist}
-\item[\tt CGConnect], which takes a ConnectionGenerator \emph{cg}, the
+\item[\tt CGConnect], which takes a connection generator \emph{cg}, the
   indices of \emph{pre}- and a \emph{post}-synaptic populations, and a
   \emph{param\_map}. It creates the connections between neurons in
   \emph{pre}- and a \emph{post} as prescribed by the rules in
@@ -649,7 +649,7 @@ with the following functions:
   value vector created by the call to \verb|next()| in the
   \verb|ConnectionGenerator| interface (see section \ref{sec:cgint}).
 \item[\tt CGParse], which takes a file name \emph{fname} and parses
-  the serialized version of a ConnectionGenerator contained therein. A
+  the serialized version of a connection generator contained therein. A
   special use of this function exists on supercomputers, where Python
   is often not available on the compute nodes, or where the memory and
   performance penalty would not be acceptable and a pure SLI-based
@@ -661,14 +661,14 @@ with the following functions:
   library should carry out the functionality for \verb|CGParse|.
 \end{unlist}
 
-When PyNEST is used, the ConnectionGenerator can be created by the
+When PyNEST is used, the connection generator can be created by the
 user in Python using the Python wrapper of libcsa. In the call to
-\verb|CGConnect()|, a pointer to the underlying ConnectionGenerator
+\verb|CGConnect()|, a pointer to the underlying \verb|ConnectionGenerator|
 object in C++ is converted into a SLI Datum, which can be shipped into
 NEST's simulation kernel and handled there using the C++ interface to
-the ConnectionGenerator. In SLI, there is no direct way of creating a
-ConnectionGenerator. However, the SLI function \verb|CGParse| can
-read a serialized version of a ConnectionGenerator from an XML file
+the connection generator. In SLI, there is no direct way of creating a
+connection generator. However, the SLI function \verb|CGParse| can
+read a serialized version of a connection generator from an XML file
 and reinstantiate the object, which can then be given to SLI's version
 of the \verb|CGConnect| function.
 
@@ -676,7 +676,7 @@ of the \verb|CGConnect| function.
 \centering
 \includegraphics[scale=.8]{figures/sequence_diagram_nest.pdf}
 \caption{Sequence diagram showing the function calls during the use of
-  the ConnectionGenerator interface in NEST. The user first creates a
+  the \verb|ConnectionGenerator| interface in NEST. The user first creates a
   \texttt{ConnectionGenerator} object \emph{cg}. She then calls
   PyNEST's \texttt{CGConnect()} function. \textcircled{\footnotesize
     1} The function \texttt{cg\_get\_ranges()} returns all contiguous
@@ -688,7 +688,7 @@ of the \verb|CGConnect| function.
   \emph{pre}- and \emph{post}-synaptic populations. The result of the
   translation (\emph{pre\_mask} and \emph{post\_mask}) is used to set
   the masks on \emph{cg}. \textcircled{\footnotesize 3} The NEST
-  kernel iterates the ConnectionGenerator by calling \texttt{next()}
+  kernel iterates the connection generator by calling \texttt{next()}
   until there are no more connections. For each received connection,
   it creates the connection by calling \texttt{Network::connect()}. If
   a non-empty \emph{param\_map} was given to \texttt{CGConnect}, the
@@ -698,7 +698,7 @@ of the \verb|CGConnect| function.
 
 Figure \ref{fig:sequence_diagram_nest} shows the different entities in
 NEST involved in a user call to \verb|CGConnect()|. After setting the
-masks for the ConnectionGenerator, the NEST kernel iteratively calls
+masks for the connection generator, the NEST kernel iteratively calls
 \verb|next()|, which returns the source and target index of the next
 connection and parameter values for the connection. The connections
 are established one by one by calling NEST's basic
@@ -743,7 +743,7 @@ We ran a series of benchmarks in order to assess the performance of
 and compare the two implementations of CSA (see section \ref{sec:impl})
 and the two implementations of the CSAConnector for PyNN (see section
 \ref{sec:conn_gen_pynn}). Grouped by the software layer, on which the
-iteration of the ConnectionGenerator happens (either in Python by PyNN
+iteration of the connection generator happens (either in Python by PyNN
 or in C++ by NEST) and the CSA implementation used (csa is the Python
 version, libcsa the C++ version), the following scenarios were
 measured:
@@ -870,11 +870,11 @@ interface versioning could be introduced.
 
 One limitation in the current implementations of the NEST
 ConnectionGeneratorModule and the PyNN CSAConnector is that value sets
-for the ConnectionGenerator can only be used if its arity is 0 or
+for the connection generator can only be used if its arity is 0 or
 2. This means that only values for weight and delay can be generated
 by the connection generating library. For many synapse models it would
 be beneficial to also set other parameters based on rules in the
-ConnectionGenerator. Examples of such synapse models are STDP or
+connection generator. Examples of such synapse models are STDP or
 short-term facilitation and depression.
 
 If every single piece of generically useful functionality, such as the
