@@ -710,7 +710,7 @@ connection and parameter values for the connection. The connections
 are established one by one by calling NEST's basic
 \verb|Network::connect()| function.
 
-A connection generator enumerates nodes of the network using source
+A connection generator identifies nodes of the network using source
 and target indices in ranges $[0, N_s-1]$ and $[0, N_t-1]$ where $N_s$
 is the number of source neurons and $N_t$ the number of target
 neurons, but NEST uses GIDs to identify neurons.  Internally,
