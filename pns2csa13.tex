@@ -6,6 +6,8 @@
 
 %----------------------------------------------------------------------
 % Own stuff
+\newcommand{\INLINEFIGS}{} % comment out for Frontiers submission
+%\usepackage{endfloat}
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
 \usepackage{xspace}
@@ -21,6 +23,11 @@
   frame=leftline,
   framerule=0pt,
   framesep=0mm}
+\ifdefined\INLINEFIGS
+\newcommand{\Figure}[2]{Figure~\ref{#2}}
+\else
+\newcommand{\Figure}[2]{Figure~#1}
+\fi
 %----------------------------------------------------------------------
 
 \copyrightyear{}
@@ -258,7 +265,7 @@ the simulator. This representation can be iterated and expanded at the
 simulator level and thus avoid overhead. Moreover, this allows
 efficient parallelization at the lower software layers.  The design of
 a new \verb|Connector| for the NEST backend that implements this
-solution is explained in Section \ref{sec:conn_gen_pynn}. Section
+solution is explained in Section~\ref{sec:conn_gen_pynn}. Section
 \ref{sec:benchmarks} contains runtime and scalability benchmarks for
 the new connector.
 
@@ -308,7 +315,7 @@ connecting neurons and randomly initializing synapse parameters based
 on geometry or topological relationships in the network.
 
 The design of the novel interface for using connection generators from
-NEST is explained in Section \ref{sec:conn_gen_nest}. In Section
+NEST is explained in Section~\ref{sec:conn_gen_nest}. In Section
 \ref{sec:benchmarks}, we provide benchmarks for different use case
 scenarios of the interface. A comparison of the performance of the
 novel CSA interface, the native connection routines and the Topology
@@ -342,8 +349,9 @@ the simulation domain to integers, gives at least two major
 advantages: 1. The CSA does not need to care about the nature of the
 objects in $P$---they could just as well be synaptic boutons as neurons.
 2. The index set $\mathcal{I}$ can be chosen to be infinite.  The
-gain of this will be demonstrated in Section \ref{sec:structure}.
+gain of this will be demonstrated in Section~\ref{sec:structure}.
 
+\ifdefined\INLINEFIGS
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.7]{figures/csa-pane.pdf}
@@ -363,11 +371,12 @@ gain of this will be demonstrated in Section \ref{sec:structure}.
   connectivity without self-connections.
 }\label{fig:csa} 
 \end{figure}
+\fi
 
 A connection-set with zero parameters is called a \emph{mask}. A mask
 tells which connections exist.  In the example of the mask
 $\overline{M} = \{(0,1), (1,1), (1,2), (3,2), (2,3), (0,4)\}$ it can
-be regarded either as a connection matrix (see Figure \ref{fig:csa}A)
+be regarded either as a connection matrix (see \Figure{1}{fig:csa}A)
 or as a boolean indicator function:
 \begin{equation}
 \overline{M} : \mathcal{I}_s \times \mathcal{I}_t \rightarrow \{ \mathcal{F},
@@ -376,7 +385,7 @@ or as a boolean indicator function:
 In the example $\overline{M}(0,0) = \mathcal{F}$ while
 $\overline{M}(1,1) = \mathcal{T}$. If the mask is combined with a
 source population $P_s$ and a target population $P_t$, the result is
-the network $(P_s, P_t, \overline{M})$ shown in Figure \ref{fig:csa}B.
+the network $(P_s, P_t, \overline{M})$ shown in \Figure{1}{fig:csa}B.
 
 In CSA, connections can be parameterized through functions mapping
 connections to values:
@@ -426,7 +435,7 @@ one-to-one connectivity structure (depending on whether the source and
 target populations are the same or different), i.e. we can describe a
 type of connectivity independently of any specific network.  Finite
 portions can be cut out of such infinite connection-sets when applied
-to finite populations (see Figure \ref{fig:csa}C).
+to finite populations (see \Figure{1}{fig:csa}C).
 
 CSA provides a set of elementary connection-sets such as
 $\bar{\delta}$. Another example is the random mask $\bar{\rho}$, a
@@ -454,7 +463,7 @@ of their index sets, $\mathcal{I}_s \times
 \mathcal{I}_t$. Intersecting with this mask can turn an infinite
 connection-set, representing connectivity structure, into a connection
 matrix between the populations. For example, the finite part of the
-matrix in Figure \ref{fig:csa}C is $\{0..6\} \times \{0..6\} \cap
+matrix in \Figure{1}{fig:csa}C is $\{0..6\} \times \{0..6\} \cap
 \bar{\delta}$. For a more in-depth description of the CSA and basic
 principles of implementation, see \citet{djurfeldt12}.
 
@@ -501,6 +510,7 @@ simulator and the connection generating library from each other,
 making both the simulator and the connectivity description library
 replaceable.
 
+\ifdefined\INLINEFIGS
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.8]{figures/block_diagram_conngen.pdf}
@@ -512,16 +522,17 @@ replaceable.
   language for both simulator and connection generating
   library.}\label{fig:block_diagram_conngen}
 \end{figure}
+\fi
 
 The basic idea is that a connection generating library, such as
-\verb|csa| or \verb|libcsa| of Section \ref{sec:impl}, is used to
+\verb|csa| or \verb|libcsa| of Section~\ref{sec:impl}, is used to
 create an object representing network connectivity.  In the case of a
 CSA library, this object is a connection-set, but it could also be a
 graph made through graph primitives. The \verb|ConnectionGenerator| interface
 provides a C++ level interface to such objects which allows software
 external to the connection generating library to efficiently iterate
 through connections represented by the object.  In the example shown
-in Figure \ref{fig:block_diagram_conngen}, the \verb|ConnectionGenerator|
+in \Figure{2}{fig:block_diagram_conngen}, the \verb|ConnectionGenerator|
 interface is used to combine a Python scripted simulator with a Python
 scripted connection generating library. A connection generating object
 is assembled at the Python level.  If \verb|libcsa| is used, the
@@ -589,7 +600,7 @@ level support code and \verb|libpyneurosim|, providing Python support
 code.
 
 \verb|Libneurosim| provides the \verb|ConnectionGenerator| interface
-(Figure \ref{fig:block_diagram_conngen}, bottom). It also contains a
+(\Figure{2}{fig:block_diagram_conngen}, bottom). It also contains a
 registry for XML parser functions.  Different types of connection
 generators can be described by different XML-based languages.  For
 example, the \verb|csa| library can serialize connection-set
@@ -678,6 +689,7 @@ serialized version of a connection generator from XML and
 reinstantiate the object, which can then be given to SLI's version of
 the \verb|CGConnect| function.
 
+\ifdefined\INLINEFIGS
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.8]{figures/sequence_diagram_nest.pdf}
@@ -701,8 +713,9 @@ the \verb|CGConnect| function.
   connection's weight and delay are taken from the value-set in
   \emph{cg}.}\label{fig:sequence_diagram_nest}
 \end{figure}
+\fi
 
-Figure \ref{fig:sequence_diagram_nest} shows the different entities in
+\Figure{3}{fig:sequence_diagram_nest} shows the different entities in
 NEST involved in a user call to \verb|CGConnect()|. After setting the
 masks for the connection generator, the NEST kernel iteratively calls
 \verb|next()| which returns the source and target index of the next
@@ -736,7 +749,7 @@ following two steps:
   post-synaptic populations.
 \item Connect the neurons. The weight, delay and any other synaptic
   parameters are taken from the connection set, if supplied as value
-  sets (see Section \ref{sec:csa}), and from the parameterization of
+  sets (see Section~\ref{sec:csa}), and from the parameterization of
   the synapse type otherwise.
 \end{enumerate}
 
@@ -744,16 +757,16 @@ During this study, we extended the NEST backend for PyNN with a new
 and specialized \verb|CSAConnector| which passes the complete
 connection generator object down to the simulator (by calling PyNEST's
 \verb|CGConnect()| function). The iteration over the connections can
-then take place in NEST (see Section \ref{sec:conn_gen_nest}). This
+then take place in NEST (see Section~\ref{sec:conn_gen_nest}). This
 greatly reduces the overhead and thus improves the runtime and
-scalability of connection generation (Section \ref{sec:benchmarks}).
+scalability of connection generation (Section~\ref{sec:benchmarks}).
 
 %----------------------------------------------------------------------
 
 \section{Benchmarks}\label{sec:benchmarks}
 
 We ran a series of benchmarks in order to assess the performance of
-and compare two implementations of CSA (see Section \ref{sec:impl})
+and compare two implementations of CSA (see Section~\ref{sec:impl})
 and the two implementations of the \verb|CSAConnector| for PyNN (see Section
 \ref{sec:conn_gen_pynn}). Grouped by the software layer on which the
 iteration of the connection generator happens (either in Python by PyNN
@@ -786,13 +799,14 @@ measured:
   ConnectionGeneratorModule.
 \end{itemize}
 
+\ifdefined\INLINEFIGS
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.7]{benchmarks/CSAConnector.pdf}
 \caption{Benchmark results for the use of CSA in NEST through PyNN,
   comparing the two \texttt{CSAConnector} implementations explained in
-  Section \ref{sec:conn_gen_pynn} and two of the CSA implementations
-  mentioned in Section \ref{sec:csa}. Color and dash codes are given
+  Section~\ref{sec:conn_gen_pynn} and two of the CSA implementations
+  mentioned in Section~\ref{sec:csa}. Color and dash codes are given
   in the legends. Slope is the ratio of logarithms of the last and
   first data point shown. Pale lines denote the expected
   scaling. \textbf{A} shows the run time for connecting a network
@@ -812,14 +826,15 @@ measured:
   increases linearly with the number of
   processes.}\label{fig:pynn_benchmarks}
 \end{figure}
+\fi
 
-The population size benchmarks (Figure \ref{fig:pynn_benchmarks}A and
+The population size benchmarks (\Figure{4}{fig:pynn_benchmarks}A and
 B) used one MPI process and varied the number of neurons from $10^2$
 to $10^5$ with about one sample per order of magnitude. All tested
 implementations of CSA (\verb|csa|, \verb|libcsa|) scale perfectly
 with slopes around 2 for the \emph{random} mask, independently of the
 software layer (C++ or Python), on which the iteration was carried
-out. However, in Figure \ref{fig:pynn_benchmarks}, the vertical
+out. However, in \Figure{4}{fig:pynn_benchmarks}, the vertical
 offsets and the increasing slopes of the curves for the generic
 \verb|CSAConnector| which iterates at the Python/PyNN level suggest
 that the current implementation of this connector together with calls
@@ -828,11 +843,11 @@ a significant overhead to the process of connection generation.
 
 To demonstrate the scalability of the implementations, we carried out
 both strong and weak scaling benchmarks, using CSA's \emph{random}
-mask with a probability of $0.1$ (Figure \ref{fig:pynn_benchmarks}C
+mask with a probability of $0.1$ (\Figure{4}{fig:pynn_benchmarks}C
 and D). For each of them, the number of MPI processes was varied from
 1 to 48.
 
-In the strong scaling benchmark (Figure \ref{fig:pynn_benchmarks}C),
+In the strong scaling benchmark (\Figure{4}{fig:pynn_benchmarks}C),
 the number of MPI processes was varied while keeping the total number
 of neurons in the network fixed at $48000$. This resulted in
 approx. 230 million connections being created. It is easily visible
@@ -843,7 +858,7 @@ scaling if the iteration of the CSA object is carried out from the C++
 layer. Using the C++ implementation of CSA, it is, however, possible
 to gain another order of magnitude compared to the Python version.
 
-During the weak scaling benchmark (Figure \ref{fig:pynn_benchmarks}C),
+During the weak scaling benchmark (\Figure{4}{fig:pynn_benchmarks}C),
 the number of MPI processes was varied while the work load was
 increased by a fixed number of connections per additional process.
 The number of connections grows quadratically with the number of
@@ -1026,7 +1041,7 @@ is executed on multiple MPI processes, however, the set of target
 indices in one rank is a \emph{subset} of the full index range,
 because only connections to target neurons actually represented on the
 local rank should be realized. This is the basis for the good scaling
-seen in Section \ref{sec:benchmarks}.  This consequence is that we
+seen in Section~\ref{sec:benchmarks}.  This consequence is that we
 have to translate NEST GIDs to connection generator indices during the
 specification of the masks and back when we create the
 connections. (The latter also holds for the serial case.)
