@@ -715,9 +715,10 @@ and target indices in ranges $[0, N_s-1]$ and $[0, N_t-1]$ where $N_s$
 is the number of source neurons and $N_t$ the number of target
 neurons, but NEST uses GIDs to identify neurons.  Internally,
 \verb|CGConnect()| needs to maintain a mapping between connection
-generator indices and GIDs.  Appendix A describes two aspects of this
-mapping, the detection of contiguous ranges in the lists of GIDs
-passed as arguments to \verb|CGConnect()| and index translation.
+generator indices and GIDs.  Appendix A describes two algorithms
+required for this mapping, the detection of contiguous ranges in the
+lists of GIDs passed as arguments to \verb|CGConnect()| and index
+translation when preparing \verb|ConnectionGenerator| masks.
 
 %----------------------------------------------------------------------
 
@@ -937,129 +938,109 @@ an integer number, their global id (\emph{GID}). All connection
 routines work either on single GIDs or on lists of GIDs. When calling
 \verb|CGConnect|, the user supplies two sorted lists of neurons as
 pre- and post-synaptic populations. These lists do not necessarily
-have to contain contiguous GIDs.
+have to contain contiguous GIDs.  Here we describe an $O(Nlog(n))$
+algorithm for finding $N$ intervals of contiguous GIDs for a
+population of $n$ neurons.  The contiguous ranges inside the given
+lists are found one by one using binary search.
 
-The contiguous ranges inside the given lists are found using a binary
-search approach, where the left border of a range is always one past
-the end of the last range and the right border is searched for. The
-following listing contains the procedure to find all contiguous ranges
-in a sorted list \emph{ls} using Python syntax.
+The following listing contains the algorithm to find all contiguous
+ranges in a sorted list \emph{ls} using Python syntax. The variables
+\emph{left} and \emph{right} represent the start and end positions for
+one contiguos range in \emph{ls}.  The ranges discovered are collected
+in \emph{ranges}.
 
-First, we initialize \emph{ranges} to an empty list, the left border
-(\emph{left}) to 0, and \emph{end} to the last index of \emph{ls}.
+First, we initialize \emph{ranges} to an empty list and the left
+border (\emph{left}) to the first position 0.
 
 \begin{pythoncode}
 ranges = []
 left = 0
-end = len(ls) - 1
 \end{pythoncode}
 
-The following loop will terminate the search when the \emph{end} of
-\emph{ls} is reached. Until this happens, it always finds the next
-right border using \emph{get\_right()} and adds the range between
-\emph{left} and \emph{right} to \emph{ranges}. If a new range is
-found, \emph{left} is set to one past the end of the last found range.
+The following loop will iterate over contiguous ranges of GIDs found
+in \emph{ls}, each range identified by the first position of the
+range, \emph{left}. The search is terminated when \emph{left} has
+reached the end of \emph{ls}.  For each range, its last position is
+found by the function \emph{get\_right()}. \emph{left} is then updated
+to point to next range after the end of the one found.
 
 \begin{pythoncode}
-while True:
-    right = get_right(left, (len(ls) - left) / 2)
+while left < len (ls):
+    right = get_right (left, len (ls))
     ranges.append((ls[left], ls[right]))
-    if right == end:
-        break
-    else:
-        left = right + 1
+    left = right + 1
 \end{pythoncode}
 
-The task of the \emph{get\_right()} function is to calculate and
-return the right border of the contiguous range of GIDs in \emph{ls}
-starting at \emph{left}. The element is found using a binary search
-with stepsize \emph{step}. First, we check if \emph{left} is already
-the index of the last element in \emph{ls}. If this is the case, we
-return \emph{left} as the right border.
+The task of the \emph{get\_right()} function is to find and return the
+right border of the contiguous range of GIDs in \emph{ls} with lower
+and upper search boundaries \emph{low} and \emph{high}. The position
+is found using binary search. As search criterium, we check the offset
+between the position in \emph{ls} and the GID stored at that
+position. We begin by computing the correct offset, unique for the
+range.
 
 \begin{pythoncode}
-def get_right(left, step):
-    if left == end:
-        return left
+def get_right(low, high):
+    offset = ls[low] - low
 \end{pythoncode}
 
-If there are numbers left to be considered, we set \emph{leftmost\_r},
-the leftmost right border touched during the search, to \emph{None} to
-mark it as unitialized. We then initialize the search index \emph{i}
-to the last valid index into \emph{ls}, and \emph{last\_i} to \emph{i}.
+In the following loop the binary search is performed. The half-open
+interval $[low, high)$ is successively reduced until it contains at
+most one element. If the element found in the middle of the
+interval, $mid$, has the correct offset, we continue the search with
+$mid + 1$ as lower boundary, otherwise $mid$ is taken as the upper
+boundary for next iteration.
 
 \begin{pythoncode}
-    leftmost_r = None
-    i = last_i = end
-\end{pythoncode}
-
-In the following loop, we perform the search. If \emph{i} points to
-the end of \emph{ls} and the distance between \emph{i} and \emph{left}
-is the same as between the values \emph{ls[i]} and \emph{ls[left]}
-(i.e. \emph{ls[i+1]} equals \emph{ls[i]+1} for all \emph{i}), or if
-\emph{i} is pointing at the position of the leftmost right border we
-found until now (i.e. we are back at an already visited index), we
-found the right border of the contiguous range (\emph{last\_i}) and
-return it.
-
-\begin{pythoncode}
-    while True:
-        match = ls[i] - ls[left] == i - left
-        if (i == end and match) or i == leftmost_r:
-            return last_i
-\end{pythoncode}
-
-We now store the current value of \emph{i} in \emph{last\_i}. This is
-the current candidate for the right border.
-
-\begin{pythoncode}
-        last_i = i 
-\end{pythoncode}
-
-If the range between \emph{ls[left]} and \emph{ls[i]} is contiguous, we
-set \emph{i} to the right by \emph{step} steps, else update the
-variable \emph{leftmost\_r} to the current \emph{i} (i.e. the known
-leftmost position) and set \emph{i} to the left by \emph{step} steps.
-
-\begin{pythoncode}
-        if match:
-            i += step
+    while high - low > 1:
+        mid = (low + high) // 2
+        if ls[mid] - mid == offset:
+            low = mid + 1
         else:
-            leftmost_r = i
-            i -= step
+            high = mid
 \end{pythoncode}
 
-If we reach this point, we have to reduce the search interval
-(\emph{step}) to half its size if it is still $>$ 1. This adaptation
-is the basis of the binary search.
+$low$ can now point either to the element with the correct offset, in
+which case it is the right border to be found, or to the right of this
+position, in which case we need to subtract by 1.
 
 \begin{pythoncode}
-        if step != 1:
-            step /= 2
+    if low < len (ls) and ls[low] - low != offset:
+        return low - 1
+    else:
+        return low
 \end{pythoncode}
 
 \subsection*{Index translation}
 
 All elements in NEST are identified by their global id and thus the
 range-finding procedure explained in the previous section returns the
-ranges in the domain of GIDs. CSA however, expects neuron indices to
-start at 0, i.e. it expects the indices into the pre- and
-post-synaptic populations instead of the GIDs at that positions (see
-Section \ref{sec:csa}). This means that we have to translate indices
-from NEST to CSA during the setting of the masks and back when we
-actually create the connections.
+ranges in the domain of GIDs. A connection generator, however, expects
+neuron indices to start at 0 and contiguously enumerate a full
+population.  The \verb|ConnectionGenerator| interface (Section
+\ref{sec:cgint}) expects a mask consisting of the source and target
+index sets to be specified.  For source indices and for target indices
+in the serial case, determining these sets is trivial (lower bound is
+0, upper bound is population size minus one).  When the NEST simulator
+is executed on multiple MPI processes, however, the set of target
+indices in one rank is a \emph{subset} of the full index range,
+because only connections to target neurons actually represented on the
+local rank should be realized. This is the basis for the good scaling
+seen in Section \ref{sec:benchmarks}.  This consequence is that we
+have to translate NEST GIDs to connection generator indices during the
+specification of the masks and back when we create the
+connections. (The latter also holds for the serial case.)
 
-The masks for the sources must contain all local and remote nodes. The
-\emph{skip} of the mask is therefore always set to 1. In addition, the
-same source mask is stored \emph{n\_proc} times on each process.
-
-In contrast, the masks for the targets must only contain the local
-nodes in the population. This is achieved by 1. setting \emph{skip} to
-the number of MPI processes, and 2. assuming the index-translated ID
-of the first local neuron as the first entry of the mask for that
-range. Together with the skip this allows to find all local nodes in
-the range. However, it might happen that this procedure leads to a
-situation, where the resulting range is empty on a certain process,
+Index sets in a \verb|ConnectionGenerator| mask are specified as
+vectors of index ranges plus a \emph{skip} value which corresponds to
+the turn-around for round-robin distribution of neurons onto MPI
+processes.  The target masks only contain the local nodes in the
+population. This is achieved by 1. setting \emph{skip} to the number
+of MPI processes, and 2. assuming the index-translated ID of the first
+local neuron as the first entry of the mask for that range. Together
+with the skip this allows to find all local nodes in the
+range. However, it might happen that this procedure leads to a
+situation where the resulting range is empty on a certain process,
 because the first local ID is already beyond the final element of the
 range. In this case, the range is not added to the mask on that
 particular process.
