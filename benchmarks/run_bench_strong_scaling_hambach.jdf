@@ -1,8 +1,8 @@
 #PBS -l nodes=1:ppn=48
 #PBS -q medium
-#PBS -o /users/eppler/CSA/CSAConnector/${PBS_JOBID}.o
-#PBS -e /users/eppler/CSA/CSAConnector/${PBS_JOBID}.e
+#PBS -o /users/eppler/CSA/benchmarks/${PBS_JOBID}.o
+#PBS -e /users/eppler/CSA/benchmarks/${PBS_JOBID}.e
 
-. /users/eppler/CSA/CSAConnector/enable_csa_hambach.sh
-cd /users/eppler/CSA/CSAConnector
+. /users/eppler/CSA/benchmarks/enable_csa_hambach.sh
+cd /users/eppler/CSA/benchmarks
 bash do_bench_strong_scaling.sh

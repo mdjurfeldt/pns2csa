@@ -13,7 +13,8 @@ pop = nest.Create("iaf_neuron", n)
 
 # measure random connectivity
 start = time()
-nest.RandomConvergentConnect(pop, pop[:1], int(n*n*0.1))
+for neuron in pop:
+    nest.RandomConvergentConnect(pop, [neuron], int(n*0.1))
 
 rank = nest.Rank()
 nc = nest.GetKernelStatus("num_connections")
