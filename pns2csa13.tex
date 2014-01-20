@@ -130,84 +130,44 @@ to the simulator.
 
 \section{Introduction}
 
-The current trend towards neuronal network models which integrate
-layers, columns and areas, brings with it the need for describing the
-associated complex connectivity patterns. Currently, most simulators
-use their own methods for describing connections between neurons. This
-requires users to learn the ways of each simulator. Furthermore it
-makes it hard to port models from one simulator to another and leaves
-the efficient implementation of connection-generating functions as a
-task for simulator developers. Especially in a parallel environment,
-this is not a trivial undertaking. One way to ease this problem is the
-use of general connection-generating libraries like the Connection-set
-Algebra \citep[CSA;][]{djurfeldt12} or the graph library developed for
-NineML \citep{raikov10}. They allow simulator-independent
-specification of connectivity and enable high-level descriptions which
-can be passed to a simulator core for efficient, parallelized, setup
-of connectivity, avoiding the overhead associated with scripted
-algorithms.
+The central nervous systems of vertebrates and many invertebrates have complex patterns of connections.
+In developing neuronal network models of such systems, there are two main tasks related to connection patterns.
+The first is to express the connectivity in a machine-readable format, e.g. in code or in a configuration file.
+The second is to explain the connectivity unambiguously in prose in an article or book,
+so that the model can be understood and reproduced by someone else \citep{nordlie-2009_e1000456}.
 
-To take account of the fact that different users prefer different
-simulators and also might prefer different libraries to create
-connectivity, we created a generic \emph{connection generator}
-interface. It enables the use of CSA and similar libraries in
-different neuronal simulators. The interface makes both the simulator
-and the connection-generating library replaceable and therefore gives
-maximum flexibility to the user.
+For expressing connectivity in code, three methods are commonly used:
+(i) procedural code written by the modeller, using low-level operations such as connecting pairs of neurons or connecting a single neuron to a group;
+(ii) a library of pre-defined, parameterized connection routines;
+(iii) an explicit list of connections. 
+Each of these have their limitations. 
+Procedural code and libraries limit the connectivity descriptions to a single language and often a single simulator, making it hard to port models from one simulator to another. 
+Procedural code takes time to write, and will have more bugs than a library, since library code is likely to be more thoroughly tested and reused. 
+On the other hand, the connectivity patterns available from a library are inevitably more limited than those that can be achieved with user-written code. 
+Using an explicit list of connections is largely independent of a particular simulator or programming language,
+but may cause problems of storage and input/output efficiency,
+and does not enable conceptual descriptions of connectivity.
+All of these methods make it difficult to explain the connectivity in a scientific text. [ref Crook et al 2013 somewhere in here?]
 
-The remainder of this section will introduce related work and the
-different components (CSA, PyNN, NEST) that were made to work with the
-connection generator interface. The remaining sections will give a
-short introduction to CSA, explain the interface itself and our
-modifications and extensions to the components and the interplay
-between them. We provide benchmark results that demonstrate the
-excellent scaling of the implementation of the interface and close
-with a discussion of the interface and an outlook to further
-extensions.
+These problems can be reduced or avoided by using a general purpose connection-generating software library such as the Connection-set Algebra \citep[CSA;][]{djurfeldt12} or the NineML graph library \citep{raikov10}.
+Such libraries allow simulator-independent specification of connectivity and enable high-level, declarative descriptions which do not constrain how the connectivity should be realized in code and hence give scope for optimization and parallelization within the simulator software.
+The CSA in addition supports succinct, unambiguous descriptions of connectivity in text, using a mathematical notation.
 
-\subsection{NeuroML and NineML}
-NeuroML \citep{gleeson10,goddard01} is a declarative, XML-based, model
-description language with a main focus on biologically detailed
-models. It aims to describe the biophysics, anatomy and network
-architecture of neuronal systems at multiple scales and to facilitate
-the exchange of complex neuronal models between researchers. Although
-NeuroML is, to the extent that XML allows, human readable it can also
-be read and written by software tools such as
-%XML editors,
-graphical model construction environments \citep{gleeson07} and
-neuronal simulators. The NetworkML layer of NeuroML allows for either
-explicit lists of connections or implicit specification of connections
-through selection from a limited palette of algorithms such as
-all-to-all, one-to-one or different forms of random connectivity.
-%Thus, NeuroML can play the
-%role of an interface, not only between researchers but also between
-%software tools. This enables modularity and software re-use in the
-%sense that model construction and simulation can be performed using
-%different tools.
+The adoption of new, simulator-independent methods for expressing connectivity, such as CSA, is hindered by the effort needed to add support for a given connection-generating library to a simulator.
+This effort must, in general, be repeated for each simulator that wishes to support the library.
+The exception to this is if using a simulator-independent modelling interface such as PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09}, which supports multiple simulators;
+PyNN however is written in Python, which means that processing the CSA description will be slower than if using C/C++ (the languages in which many simulators are written).
+Furthermore, whether using a simulator-independent interface or not, a new programming effort is needed if another new method for expressing connectivity is developed.
 
-In 2008, the oversight committee for the INCF Multiscale Modeling
-Program identified two needs which were not fulfilled by other
-declarative neuronal network model description languages at the time:
-1. unambiguous specification of arbitrary models of synapse and neuron
-dynamics, 2. specification of arbitrary network layout and
-connectivity algorithms.  A task force was assembled to develop the
-declarative, XML-based language NineML \citep{raikov11} which had an
-initial focus on spiking neuronal network models with
-integrate-and-fire dynamics.  One of the innovations was the division
-of the language into a user layer (UL), corresponding to the level of
-specification used in NeuroML, and an abstraction layer (AL),
-providing the ability to unambiguously give definitions of the
-concepts used in the UL. The UL defines the syntax for supplying
-parameter values to abstract connectivity patterns. In the NineML DAE
-tools \citep{nikolic10} prototype implementation, such patterns can be
-defined in the AL using connection-set algebra, but the framework
-allows for alternative XML-based connectivity descriptions.
+To minimize the effort required of simulator software developers,
+and allow modellers to flexibly choose among simulators and libraries which generate connectivity,
+we have developed a generic \emph{connection generator} interface,
+which enables the use of CSA and similar libraries in different neuronal simulators.
+The interface makes both the simulator and the connection-generating library replaceable and therefore gives maximum flexibility to the modeller.
 
-This work inspired similar developments in NeuroML resulting in LEMS,
-an XML-based language corresponding to the level of specification used
-in the NineML AL.  Methods for declarative specification of
-connectivity-patterns in LEMS are under development.  For example, the
-all-to-all pattern can be defined using the \verb|ForEach| construct.
+In this article we first give a brief overview of CSA and of different software libraries that support using CSA in Python and C++ code.
+We then describe the connection generator interface, before explaining how the interface is used in the NEST simulator \citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204} and in the PyNN framework.
+Finally, we provide benchmarks for different use case scenarios of the interface.
 
 \subsection{CSA}
 The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
@@ -646,6 +606,20 @@ instances of such objects:
 
 \section{Using connection generators in NEST}\label{sec:conn_gen_nest}
 
+NEST is a simulator for large networks of point neurons or neuron
+models with few electrical compartments
+\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It
+is suited for a broad range of neuronal network modeling approaches
+and runs on a large variety of computer architectures. NEST is
+parallelized using OpenMP \citep{OpenMPSpec} and MPI
+\citep{MPIForum94} and scales well on large clusters of multi-core
+processors and supercomputers \citep{Helias12_26}.
+
+The network description is a script, written either in SLI, NEST's
+built-in simulation language, or in Python, using the Python interface
+to NEST \citep[PyNEST;][]{Eppler09_12}. The following description uses
+the PyNEST syntax if not noted otherwise.
+
 To support the Connection Generator interface in NEST we created the
 ConnectionGeneratorModule, a plugin for NEST which can be
 (de-)activated at configure time. The module is built on top of
@@ -737,6 +711,20 @@ translation when preparing \verb|ConnectionGenerator| masks.
 
 \section{Using connection generators in PyNN}\label{sec:conn_gen_pynn}
 
+PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is
+a community driven effort to provide a simulator-independent API for
+describing neuronal networks in Python. Given a PyNN/Python model
+description, the user can choose which simulator to use without a need
+for changes to the model script. This is achieved through a set of
+\emph{simulator backends} which may be part of the PyNN code base or
+distributed separately. A backend adapts PyNN to a specific simulator.
+
+In PyNN, a neuronal network is built from \verb|Population|s of
+neurons and \verb|Projection|s between them. Each \verb|Projection| is
+created by a \verb|Connector|, which knows how to set up the individual
+connections. Different \verb|Connector|s exist and allow to set up a variety
+of different connection patterns.
+
 Since version 0.7, PyNN has provided the generic \verb|CSAConnector|, which can
 iterate a CSA connection set and issue one by one connect calls to
 the different backends. Internally, the connector executes the
@@ -753,6 +741,18 @@ following two steps:
   the synapse type otherwise.
 \end{enumerate}
 
+However, one of the regular problems with this approach is that PyNN
+needs to break up the compact high-level description of connectivity
+given by users into the commands understood by the respective
+backend. These are often already too low-level (e.g. convergent or
+divergent connects, one-to-one connects) and thus entail a certain
+performance penalty due to data transfer and function call overhead.
+
+The problem of excessive data transfers between PyNN and the simulator
+can be solved by passing a high-level description of connectivity to
+the simulator. This representation can be iterated and expanded at the
+simulator level and thus avoid overhead. Moreover, this allows
+efficient parallelization at the lower software layers.
 During this study, we extended the NEST backend for PyNN with a new
 and specialized \verb|CSAConnector| which passes the complete
 connection generator object down to the simulator (by calling PyNEST's
