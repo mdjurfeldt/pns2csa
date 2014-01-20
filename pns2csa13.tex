@@ -836,11 +836,11 @@ measured:
 The population size benchmarks (\Figure{4}{fig:pynn_benchmarks}A and
 B) used one MPI process and varied the number of neurons from $10^2$
 to $10^5$ with about one sample per order of magnitude. All tested
-implementations of CSA (\verb|csa|, \verb|libcsa|) scale perfectly
+implementations of CSA (\verb|csa|, \verb|libcsa|) scale excellently
 with slopes around 2 for the \emph{random} mask, independently of the
 software layer (C++ or Python), on which the iteration was carried
-out. However, in \Figure{4}{fig:pynn_benchmarks}, the vertical
-offsets and the increasing slopes of the curves for the generic
+out. However, in \Figure{4}{fig:pynn_benchmarks}, the vertical offsets
+and the increasing slopes of the curves for the generic
 \verb|CSAConnector| which iterates at the Python/PyNN level suggest
 that the current implementation of this connector together with calls
 through different software layers to setup individual connections adds
@@ -878,7 +878,9 @@ Operon 6174 (Magny Cours) processors, organized into 8 NUMA domains
 with 6 cores each. Other than the choice of the number of MPI
 processes in a NUMA-friendly way, no measures (like pinning of
 processes to cores, altering the affinity of threads to cores, etc.)
-were taken to avoid distortions of the results.
+were taken to avoid distortions of the results. Users are, however,
+free to benefit from such techniques to improve the performance of
+their simulations.
 
 %----------------------------------------------------------------------
 
@@ -900,8 +902,8 @@ communicator.  Instead of using a fixed iteration order, the order
 could be specified by the simulator. Iteration order could also be
 unspecified, giving opportunities for more optimal iteration on the
 part of the connection generating library.  In order to maintain
-backward compatibility as new revisions of the interface is developed,
-interface versioning could be introduced.
+backward compatibility as new revisions of the interface are
+developed, interface versioning could be introduced.
 
 One limitation in the current implementations of the NEST
 ConnectionGeneratorModule and the PyNN \verb|CSAConnector| is that
