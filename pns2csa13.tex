@@ -1,8 +1,9 @@
 
 \documentclass{frontiersSCNS} % for Science articles
 
-\usepackage{url,lineno}
-%\linenumbers
+\usepackage{url}
+\usepackage[modulo]{lineno}
+\linenumbers
 
 %----------------------------------------------------------------------
 % Own stuff
@@ -186,7 +187,7 @@ explicitly specified. The distinguishing aspects of CSA are:
 \item A connection-set can represent a \emph{type} of
   connectivity---a connectivity pattern---in addition to the connectivity
   of a specific network.
-\item It is an algebra: There are pre-existing connection-sets and
+\item It is an algebra: there are pre-existing connection-sets and
   operators to define new connection-sets in terms of existing ones.
 \item It enables a succinct and precise description and definition of
   connectivity in terms of such algebraic expressions.
@@ -204,7 +205,11 @@ describing neuronal networks in Python. Given a PyNN/Python model
 description, the user can choose which simulator to use without a need
 for changes to the model script. This is achieved through a set of
 \emph{simulator backends} which may be part of the PyNN code base or
-distributed separately. A backend adapts PyNN to a specific simulator.
+distributed separately. Each backend is a Python module that adapts
+PyNN to a specific simulator by providing a mapping from standard
+model names and units in PyNN to the simulator specific ones. In
+addition, a backend can supply connector implementations that are more
+efficient than using the basic connection routines of the simulator.
 
 In PyNN, a neuronal network is built from \verb|Population|s of
 neurons and \verb|Projection|s between them. Each \verb|Projection| is
@@ -215,9 +220,10 @@ of different connection patterns.
 However, one of the regular problems with this approach is that PyNN
 needs to break up the compact high-level description of connectivity
 given by users into the commands understood by the respective
-backend. These are often already too low-level (e.g. convergent or
-divergent connects, one-to-one connects) and thus entail a certain
-performance penalty due to data transfer and function call overhead.
+backend. These are often already too low-level (e.g. one-to-one or
+convergent/divergent connects) and thus entail a certain performance
+penalty due to transfer of source/target lists and connection
+parameters and function call overhead.
 
 The problem of excessive data transfers between PyNN and the simulator
 can be solved by passing a high-level description of connectivity to
@@ -225,9 +231,9 @@ the simulator. This representation can be iterated and expanded at the
 simulator level and thus avoid overhead. Moreover, this allows
 efficient parallelization at the lower software layers.  The design of
 a new \verb|Connector| for the NEST backend that implements this
-solution is explained in Section~\ref{sec:conn_gen_pynn}. Section
-\ref{sec:benchmarks} contains runtime and scalability benchmarks for
-the new connector.
+solution is explained in Section~\ref{sec:conn_gen_pynn}.
+Section~\ref{sec:benchmarks} contains runtime and scalability
+benchmarks for the new connector.
 
 \subsection{NEST}
 
@@ -262,9 +268,8 @@ and \verb|DivergentConnect()| can be used to create multiple
 connections with a single call. In addition, random variants for both
 functions exist to support the user in creating networks on the basis
 of knowledge of connectivity statistics. However, random connection
-parameters (e.g. \emph{weight} or \emph{delay}) need to be drawn
-manually by the user and supplied to NEST after the creation of
-connections.
+parameters (e.g. \emph{weight} or \emph{delay}) need to be specifiec
+by user code and supplied to NEST after the creation of connections.
 
 \subsubsection*{Topology module:}
 
