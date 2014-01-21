@@ -131,44 +131,75 @@ to the simulator.
 
 \section{Introduction}
 
-The central nervous systems of vertebrates and many invertebrates have complex patterns of connections.
-In developing neuronal network models of such systems, there are two main tasks related to connection patterns.
-The first is to express the connectivity in a machine-readable format, e.g. in code or in a configuration file.
-The second is to explain the connectivity unambiguously in prose in an article or book,
-so that the model can be understood and reproduced by someone else \citep{nordlie-2009_e1000456}.
+The central nervous systems of vertebrates and many invertebrates have
+complex patterns of connections.  In developing neuronal network
+models of such systems, there are two main tasks related to connection
+patterns.  The first is to express the connectivity in a
+machine-readable format, e.g. in code or in a configuration file.  The
+second is to explain the connectivity unambiguously in prose in an
+article or book, so that the model can be understood and reproduced by
+someone else \citep{nordlie-2009_e1000456}.
 
 For expressing connectivity in code, three methods are commonly used:
-(i) procedural code written by the modeller, using low-level operations such as connecting pairs of neurons or connecting a single neuron to a group;
-(ii) a library of pre-defined, parameterized connection routines;
-(iii) an explicit list of connections. 
-Each of these have their limitations. 
-Procedural code and libraries limit the connectivity descriptions to a single language and often a single simulator, making it hard to port models from one simulator to another. 
-Procedural code takes time to write, and will have more bugs than a library, since library code is likely to be more thoroughly tested and reused. 
-On the other hand, the connectivity patterns available from a library are inevitably more limited than those that can be achieved with user-written code. 
-Using an explicit list of connections is largely independent of a particular simulator or programming language,
-but may cause problems of storage and input/output efficiency,
-and does not enable conceptual descriptions of connectivity.
-All of these methods make it difficult to explain the connectivity in a scientific text. [ref Crook et al 2013 somewhere in here?]
+(i) procedural code written by the modeller, using low-level
+operations such as connecting pairs of neurons or connecting a single
+neuron to a group; (ii) a library of pre-defined, parameterized
+connection routines; (iii) an explicit list of connections.  Each of
+these have their limitations.  Procedural code and libraries limit the
+connectivity descriptions to a single language and often a single
+simulator, making it hard to port models from one simulator to
+another.  Procedural code takes time to write, and will have more bugs
+than a library, since library code is likely to be more thoroughly
+tested and reused.  On the other hand, the connectivity patterns
+available from a library are inevitably more limited than those that
+can be achieved with user-written code.  Using an explicit list of
+connections is largely independent of a particular simulator or
+programming language, but may cause problems of storage and
+input/output efficiency, and does not enable conceptual descriptions
+of connectivity.  All of these methods make it difficult to explain
+the connectivity in a scientific text. [ref Crook et al 2013 somewhere
+  in here?]
 
-These problems can be reduced or avoided by using a general purpose connection-generating software library such as the Connection-set Algebra \citep[CSA;][]{djurfeldt12} or the NineML graph library \citep{raikov10}.
-Such libraries allow simulator-independent specification of connectivity and enable high-level, declarative descriptions which do not constrain how the connectivity should be realized in code and hence give scope for optimization and parallelization within the simulator software.
-The CSA in addition supports succinct, unambiguous descriptions of connectivity in text, using a mathematical notation.
+These problems can be reduced or avoided by using a general purpose
+connection-generating software library such as the Connection-set
+Algebra \citep[CSA;][]{djurfeldt12} or the NineML graph library
+\citep{raikov10}.  Such libraries allow simulator-independent
+specification of connectivity and enable high-level, declarative
+descriptions which do not constrain how the connectivity should be
+realized in code and hence give scope for optimization and
+parallelization within the simulator software.  The CSA in addition
+supports succinct, unambiguous descriptions of connectivity in text,
+using a mathematical notation.
 
-The adoption of new, simulator-independent methods for expressing connectivity, such as CSA, is hindered by the effort needed to add support for a given connection-generating library to a simulator.
-This effort must, in general, be repeated for each simulator that wishes to support the library.
-The exception to this is if using a simulator-independent modelling interface such as PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09}, which supports multiple simulators;
-PyNN however is written in Python, which means that processing the CSA description will be slower than if using C/C++ (the languages in which many simulators are written).
-Furthermore, whether using a simulator-independent interface or not, a new programming effort is needed if another new method for expressing connectivity is developed.
+The adoption of new, simulator-independent methods for expressing
+connectivity, such as CSA, is hindered by the effort needed to add
+support for a given connection-generating library to a simulator.
+This effort must, in general, be repeated for each simulator that
+wishes to support the library.  The exception to this is if using a
+simulator-independent modelling interface such as PyNN
+\citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09}, which
+supports multiple simulators; PyNN however is written in Python, which
+means that processing the CSA description will be slower than if using
+C/C++ (the languages in which many simulators are written).
+Furthermore, whether using a simulator-independent interface or not, a
+new programming effort is needed if another new method for expressing
+connectivity is developed.
 
-To minimize the effort required of simulator software developers,
-and allow modellers to flexibly choose among simulators and libraries which generate connectivity,
-we have developed a generic \emph{connection generator} interface,
-which enables the use of CSA and similar libraries in different neuronal simulators.
-The interface makes both the simulator and the connection-generating library replaceable and therefore gives maximum flexibility to the modeller.
+To minimize the effort required of simulator software developers, and
+allow modellers to flexibly choose among simulators and libraries
+which generate connectivity, we have developed a generic
+\emph{connection generator} interface, which enables the use of CSA
+and similar libraries in different neuronal simulators.  The interface
+makes both the simulator and the connection-generating library
+replaceable and therefore gives maximum flexibility to the modeller.
 
-In this article we first give a brief overview of CSA and of different software libraries that support using CSA in Python and C++ code.
-We then describe the connection generator interface, before explaining how the interface is used in the NEST simulator \citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204} and in the PyNN framework.
-Finally, we provide benchmarks for different use case scenarios of the interface.
+In this article we first give a brief overview of CSA and of different
+software libraries that support using CSA in Python and C++ code.  We
+then describe the connection generator interface, before explaining
+how the interface is used in the NEST simulator
+\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204} and
+in the PyNN framework.  Finally, we provide benchmarks for different
+use case scenarios of the interface.
 
 \subsection{CSA}
 The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
