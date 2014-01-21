@@ -160,7 +160,7 @@ of connectivity.  All of these methods make it difficult to explain
 the connectivity in a scientific text \citep{crook12}.
 
 These problems can be reduced or avoided by using a general purpose
-connection-generating software library such as the Connection-set
+connectivity-generating software library such as the Connection-set
 Algebra \citep[CSA;][]{djurfeldt12} or the NineML graph library
 \citep{raikov10}.  Such libraries allow simulator-independent
 specification of connectivity and enable high-level, declarative
@@ -172,7 +172,7 @@ using a mathematical notation.
 
 The adoption of new, simulator-independent methods for expressing
 connectivity, such as CSA, is hindered by the effort needed to add
-support for a given connection-generating library to a simulator.
+support for a given connectivity-generating library to a simulator.
 This effort must, in general, be repeated for each simulator that
 wishes to support the library.  The exception to this is if using a
 simulator-independent modelling interface such as PyNN
@@ -189,11 +189,11 @@ allow modellers to flexibly choose among simulators and libraries
 which generate connectivity, we have developed a generic
 \emph{connection generator} interface, which enables the use of CSA
 and similar libraries in different neuronal simulators.  The interface
-makes both the simulator and the connection-generating library
+makes both the simulator and the connectivity-generating library
 replaceable and therefore gives maximum flexibility to the modeller.
 
 In this article we first describe the connection generator interface.
-As an example of a connection generating library, we then give a brief
+As an example of a connectivity-generating library, we then give a brief
 overview of CSA and of different software libraries that support using
 CSA in Python and C++ code. We show how the connection generator
 interface has been integrated in the NEST simulator
@@ -205,11 +205,11 @@ scenarios of the interface.
 
 %----------------------------------------------------------------------
 
-\section{The Connection Generator API}\label{sec:conn_gen}
+\section{The Connection Generator interface}\label{sec:conn_gen}
 
 To allow users to flexibly choose among simulators and libraries which
-generate connectivity, we developed an interface that abstracts the
-simulator and the connection generating library from each other,
+generate connectivity, we have developed an interface that abstracts the
+simulator and the connectivity-generating library from each other,
 making both the simulator and the connectivity description library
 replaceable.
 
@@ -220,57 +220,72 @@ replaceable.
 \caption{Block diagram of the connection generator interface and the
   components involved. The central component is the
   \texttt{ConnectionGenerator} class itself. It can connect to different
-  simulators (e.g. NEST) and to different connection generating
+  simulators (e.g. NEST) and to different connectivity-generating
   libraries (e.g. CSA). In this example, Python is used as scripting
-  language for both simulator and connection generating
+  language for both simulator and connectivity-generating
   library.}\label{fig:block_diagram_conngen}
 \end{figure}
 \fi
 
-A connection generating library, such as
+A connectivity-generating library, such as
 \verb|csa| or \verb|libcsa| of Section~\ref{sec:impl}, is used to
 create an object representing network connectivity.  In the case of a
 CSA library, this object is a connection-set, but it could also be a
 graph made through graph primitives. The \verb|ConnectionGenerator| interface
 provides a C++ level interface to such objects which allows software
-external to the connection generating library to efficiently iterate
+external to the connectivity-generating library to efficiently iterate
 through connections represented by the object.  In the example shown
 in \Figure{2}{fig:block_diagram_conngen}, the \verb|ConnectionGenerator|
 interface is used to combine a Python scripted simulator with a Python
-scripted connection generating library. A connection generating object
+scripted connectivity-generating library. A connection generating object
 is assembled at the Python level.  If \verb|libcsa| is used, the
-resulting object will be a C++ object with a Python wrapper. (See
-lower two boxes to the right in the figure.) The object is used by a
+resulting object will be a C++ object with a Python wrapper (see
+lower two boxes to the right in the figure). The object is used by a
 C++ simulator kernel (lower box to the left) to specify network
-connectivity. By providing connection generating software, with
-Connection Generator API, as dynamically linked libraries, multiple
+connectivity. By providing connectivity-generating software that implements the
+Connection Generator interface as dynamically linked libraries, multiple
 such libraries can be loaded into the Python runtime environment and
 even used simultaneously without a need to recompile the simulator.
 
 \subsection{The interface}\label{sec:cgint}
 
-In neuronal network simulations, we often want to specify a projection
-between a source population of neurons $P_s$ to a target population
-$P_t$.  A projection consists of many individual connections between
-the source and target populations.  In nature, one such connection
+In neuronal network simulations we often want to specify a ``projection''
+between a source population of neurons and a target population.
+A projection consists of many individual connections between
+the populations.  In nature, one such connection
 corresponds to an axon forming a synaptic contact on the
 spine/dendrite of a receiving neuron.  A connection generator object
-is modeled on concept of a projection.  The source and target
-populations are each enumerated using integer indices.  These indices
-are then used to specify source and target neuron identity and
-constitutes an abstraction barrier between the elements of a
+is modeled on the concept of a projection.  The source and target
+populations are each enumerated using consecutive, non-negative integer indices
+starting from 0.
+These indices
+are used to specify source and target neuron identity for a connection
+and constitute an abstraction barrier between the actual elements of a
 population and the connection generator.  This allows the elements to
-be other types of objects than neurons, for example dendritic
-sites.
+be either neurons (appropriate for networks of point neurons) or individual synapses 
+(appropriate for networks with morphologically-detailed neurons).
 
 The principle of operation of the \verb|ConnectionGenerator| interface
-is an iteration over all connections represented by the object.  A
+is an iteration over connections represented by the object.  A
 simulator, or other software using a connection generator, repeatedly
 calls a function \verb|next()| until boolean \verb|false| is
-returned. Connections are represented by source and target index of
-connection, together with zero or more connection parameters.  The
+returned. Connections are represented by source and target index,
+together with zero or more connection parameters.  The
 number of parameters is called the \emph{arity} of the connection
-generator.  The interface is designed as an abstract base class in C++
+generator.
+
+Connection generators can be flexible with regard to the sizes of the
+source and target populations. The source and target index sets that
+should be iterated over for the populations at hand are each specified
+through the interface as a \emph{mask}.  In the case of a parallel
+simulator, a specific mask is given per MPI rank.  Typically, the source
+index set is the same in all such masks while the target index sets
+are unique for each rank and non-overlapping.  Each rank should
+provide all masks (i.e. the set of masks for all ranks). Some
+connection generators can use such information to avoid the need for
+communication with other ranks.
+
+The interface is designed as an abstract base class in C++
 and consists of the following virtual functions:
 
 \begin{unlist}
@@ -304,11 +319,11 @@ and consists of the following virtual functions:
 
 \subsection{libneurosim}\label{sec:libneurosim}
 If the C++ header file for the \verb|ConnectionGenerator| interface
-definition and its supporting code is put
-in the simulator or connection generating library source trees, it
+definition and its supporting code is placed
+in the simulator or connectivity-generating library source trees, it
 will be duplicated over simulators or libraries.  As new versions of
 the interface are developed, the situation will quickly become
-unmanageable.  In fact, the \verb|ConnectionGenerator| interface is
+unmanageable.  The \verb|ConnectionGenerator| interface is
 unusual in that it is a symmetric abstraction barrier: it both allows
 a given simulator to use any library supporting the API \emph{and}
 allows the same library to be used from any simulator supporting the
@@ -328,10 +343,10 @@ code.
 registry for XML parser functions.  Different types of connection
 generators can be described by different XML-based languages.  For
 example, the \verb|csa| library can serialize connection-set
-expressions using a MathML-based language.  A connection generating
+expressions using a MathML-based language.  A connectivity-generating
 library may provide a parser for one or more such languages.
 Conversely, the same XML-based language might be used by one or more
-connection generating libraries.  The XML parser registry maps XML
+connectivity-generating libraries.  The XML parser registry maps XML
 tags identifying specific languages to specific connection libraries.
 The interface to the registry consists of three static methods in the
 \verb|ConnectionGenerator| interface:
@@ -371,9 +386,9 @@ instances of such objects:
 \section{The Connection-set Algebra}\label{sec:csa}
 
 The \verb|ConnectionGenerator| interface described in the previous
-section enables the simulators use external connection generating
+section enables the simulators to use external connectivity-generating
 libraries. The benchmarks in Section \ref{sec:benchmarks} use the
-interface to couple NEST to the connection generating libraries
+interface to couple NEST to the connectivity-generating libraries
 \verb|csa| and \verb|libcsa| which we now introduce.
 
 The connection-set algebra is a formalism for network connectivity
@@ -381,7 +396,7 @@ which can be used both when describing a network to a fellow
 researcher and when implementing a model for a simulator.  It is
 currently focused on connectivity which has a constructive or
 statistical element such that it can be specified by an algorithm, but
-it can also be used when all network connections are given or in cases
+it can also be used when all network connections are listed explicitly or in cases
 where only some elements of the connectivity are explicitly
 specified. The distinguishing aspects of CSA are:
 \begin{itemize}
@@ -446,7 +461,7 @@ in Section~\ref{sec:structure}.
 \fi
 
 A connection-set with zero parameters is called a \emph{mask}. A mask
-tells which connections exist.  In the example of the mask
+states which connections exist.  In the example of the mask
 $\overline{M} = \{(0,1), (1,1), (1,2), (3,2), (2,3), (0,4)\}$ it can
 be regarded either as a connection matrix (see \Figure{1}{fig:csa}A)
 or as a boolean indicator function:
@@ -483,12 +498,12 @@ equivalent to a mask and the two can be used interchangeably.
 
 In CSA, the concepts defined in the previous section have been
 developed into a formalism for describing connectivity structure.
-Assume that a mask is specifying connectivity for a single population
+Assume that a mask specifies connectivity for a single population
 such that $P_s = P_t = P$ and that we are interested in describing
 self-connections, i.e. every neuron in $P$ should be connected to
 itself.  If the size of $P$ is 4, the mask $\{(0, 0), (1, 1), (2, 2),
 (3, 3)\}$ could be used.  If the size is 2, the mask $\{(0, 0), (1,
-1)\}$ would be appropriate. Such masks do not only contain information
+1)\}$ would be appropriate. Such masks contain not only information
 about connectivity structure but also about population size. We can
 generalize by stripping off the population size information and
 allowing the index set $\mathcal{I}$ and mask to be infinite, defining
@@ -551,7 +566,7 @@ library \citep{djurfeldt05}.  It was used to specify the connectivity
 of the KTH cortex model \citep{djurfeldt08}---a model with three
 hierarchical levels of structure.  The second implementation is
 written in Python and is available as the Python library \verb|csa|.
-Here, the purposes were 1. to get an easily usable and extensible
+Here, the aims were 1. to get an easily usable and extensible
 demonstration of CSA and 2. to experiment with new ways to implement
 CSA. This implementation has been released as free software under the
 GPL and is available at the INCF software center
@@ -620,7 +635,7 @@ between the native connection routines, the Topology module of NEST,
 and the novel \verb|ConnectionGenerator| interface described below is
 subject to future work.
 
-\subsubsection{Connection generating libraries}
+\subsubsection{Connectivity-generating libraries}
 
 As detailed above, NEST has several methods for connecting neurons
 into a network built-in. However, while the native routines scale very
@@ -633,7 +648,7 @@ which is also reflected in the performance and scaling.
 
 To support the \verb|ConnectionGenerator| interface (see
 Section~\ref{sec:conn_gen}) in NEST and thus make more connection
-generating libraries available to the users, we created the
+connectivity-generating available to the users, we created the
 \verb|ConnectionGeneratorModule|. It is implemented as a plugin for
 NEST which extends both user interfaces SLI and PyNEST and builds on
 \verb|libneurosim| (see Section~\ref{sec:libneurosim}).
@@ -788,7 +803,7 @@ and thus improves the runtime and scalability of connection generation
 We ran a series of benchmarks in order to assess the performance of
 and compare two implementations of CSA (see Section~\ref{sec:impl})
 and the two implementations of the \verb|CSAConnector| for PyNN (see Section
-\ref{sec:conn_gen_pynn}). Grouped by the software layer on which the
+\ref{sec:conn_gen_pynn}). Grouped by the software layer in which the
 iteration of the connection generator happens (either in Python by PyNN
 or in C++ by NEST) and the CSA implementation used (\verb|csa| is the Python
 version, \verb|libcsa| the C++ version), the following scenarios were
@@ -976,16 +991,15 @@ is available from \url{https://github.com/mdjurfeldt/pns2csa}.
 
 \section{Discussion and outlook}
 
-We have demonstrated a novel way for a simulator to use code in an
-external software library for specifying connectivity in a neuronal
-network simulation.  Simulator and library are connected through a
-generic interface, the \verb|ConnectionGenerator| interface, which
-supports dynamic loading of connection generators without the need for
-recompilation.  Benchmarks show good scaling when using it in NEST and
-PyNN. The availability of this and associated interfaces lets users
-flexibly choose a connection generating library independently of the
-simulator used, and thereby grants greater freedom for describing
-models.
+We have developed and demonstrated a novel way to connect a simulator
+and external connectivity-generating software through the
+\verb|ConnectionGenerator| interface. It supports dynamic loading of
+connection generators without the need for recompilation of either
+simulator or generators. Benchmarks show good scaling when using
+connection-set algebra libraries from NEST and PyNN. The availability
+of this and associated interfaces lets users flexibly choose a
+connectivity-generating library independently of the simulator used,
+and thereby grants greater freedom for describing models.
 
 The first version of the interface presented here was intentionally
 made simple, as a proof of concept, and there are several possible
@@ -995,15 +1009,15 @@ types.  For parallel simulators, connection generators may need access
 to the MPI communicator.  Instead of using a fixed iteration order,
 the order could be specified by the simulator. Iteration order could
 also be unspecified, giving opportunities for more optimal iteration
-on the part of the connection generating library.  In order to
+on the part of the connectivity-generating library.  In order to
 maintain backward compatibility as new revisions of the interface are
 developed, interface versioning could be introduced.
 
-One arbitrary limitation in the current implementations of the NEST
+One temporary limitation in the current implementations of the NEST
 ConnectionGeneratorModule and the PyNN \verb|CSAConnector| is that
 value sets for the connection generator can only be used if its arity
 is 0 or 2. This means that only values for weight and delay can be
-generated by the connection generating library. For many synapse
+generated by the connectivity-generating library. For many synapse
 models it would be beneficial to also set other parameters based on
 rules in the connection generator. Examples of such synapse models are
 STDP or short-term facilitation and depression.
@@ -1015,11 +1029,11 @@ share common interfaces and make it a generally useful library also
 for the developers of other simulators than PyNN and NEST.
 
 The differences in run time and scalability between an iteration of
-the connection description in Python on the one side and the CSA
+the connection description in Python on the one hand and the CSA
 object iterated on the C++ level on the other suggests that a compact
-description of connectivity iterated solely on the level of the
+description of connectivity iterated solely at the level of the
 simulator indeed has a huge impact. NEST and other simulators can thus
-greatly benefit from the availability of compact desctiptions such as
+greatly benefit from the availability of compact descriptions such as
 enabled by the \verb|ConnectionGenerator| interface
 
 %----------------------------------------------------------------------
