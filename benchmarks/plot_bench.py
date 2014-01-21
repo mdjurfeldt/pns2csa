@@ -22,6 +22,8 @@ pylab.rc("font", size=12)
 pylab.rc("legend", fontsize=12)
 
 
+
+
 datafile_runtime = "data/data_runtime.log"
 with open(datafile_runtime) as f:
     rawdata = f.readlines()
@@ -131,6 +133,8 @@ for connector in connectors:
         print "saved '%s'" % fname
 
 
+
+
 scaling_data_csa = {}
 for scaling_mode in ("weak", "strong"):
 
@@ -173,7 +177,7 @@ for scaling_mode in ("weak", "strong"):
         error = numpy.ones(length) - numpy.array(n_connections) / numpy.array([4800000]*length)
         e_min = min(error) * 1000
         e_max = max(error) * 1000
-        print "weak scaling error: min=%f permil, max=%f permil" % (e_min, e_max)
+        print "weak scaling error using csa: min=%f permil, max=%f permil" % (e_min, e_max)
     
     for connector in connectors:
     
@@ -332,16 +336,118 @@ if len(handles) != 0:
     ax2.legend(handles, legend_labels,# title="connection method, slope",
                fancybox=True, loc="best", numpoints=1, handlelength=2.2)
 
-fname = "runtime_native_%s_%s.svg" % (simulator, function)
+fname = "runtime_native.svg"
 fig1.savefig(fname)
 print "saved '%s'" % fname
 
 if len(handles) != 0:
-    fname = "runtime_native_%s_%s_mem.svg" % (simulator, function)
+    fname = "runtime_native_mem.svg"
     fig2.savefig(fname)
     print "saved '%s'" % fname
 
-sys.exit()
+
+
+
+scaling_data_native = {}
+for scaling_mode in ("weak", "strong"):
+
+    datafile_runtime = "data/data_native_%s_scaling.log" % scaling_mode
+    with open(datafile_runtime) as f:
+        rawdata = f.readlines()
+
+    scaling_data_native[scaling_mode] = {}
+    n_connections = []
+    for line in rawdata:
+
+        d = line.split()
+
+        # format is "simulator function library n nc time preptime itertime rank np"
+        # for details see the scripts nest_RandomConvergentConnect_scaling.py
+        # and PyNN_FixedProbabilityConnector_scaling.py.
+        simulator = d[0]
+        function = d[1]
+        n_neurons = int(d[3])
+        n_connections.append(float(d[4]))
+        time = float(d[5])
+        preptime = float(d[6])
+        itertime = float(d[7])
+        rank = int(d[8])
+        np = int(d[9])
+    
+        if rank == 0:
+            try:
+                scaling_data_native[scaling_mode][simulator][function].append((n_neurons, itertime, np))
+            except: # connector not in scaling_data_native[scaling_mode], or function not in scaling_data_native[scaling_mode][simulator]
+                try:
+                    scaling_data_native[scaling_mode][simulator][function] = [(n_neurons, itertime, np)]    
+                except: # connector not in scaling_data_native[scaling_mode]
+                    scaling_data_native[scaling_mode][simulator] = {function: [(n_neurons, itertime, np)]}
+
+    if scaling_mode == "weak":
+        length = len(n_connections)
+        error = numpy.ones(length) - numpy.array(n_connections) / numpy.array([4800000]*length)
+        e_min = min(error) * 1000
+        e_max = max(error) * 1000
+        print "weak scaling error of native connection routines: min=%f permil, max=%f permil" % (e_min, e_max)
+
+    comp_data = {('PyNN', 'libcsa'): scaling_data_csa[scaling_mode]['random(0.1)'][('PyNN', 'libcsa')],
+                 ('nest', 'libcsa'): scaling_data_csa[scaling_mode]['random(0.1)'][('nest', 'libcsa')],
+                 ('PyNN', 'FixedProbabilityConnector'): scaling_data_native[scaling_mode]['PyNN']['FixedProbabilityConnector'],
+                 ('nest', 'RandomConvergentConnect'): scaling_data_native[scaling_mode]['nest']['RandomConvergentConnect']}
+    
+    fig1 = pylab.figure(figsize=(6,4))
+    ax1 = fig1.add_subplot(1,1,1)
+    ax1.yaxis.grid(color='gray', linestyle='dashed')
+    
+    for (i, ((simulator, function), values)) in enumerate(comp_data.items()):
+
+        arr = numpy.array(values)
+        v = arr[arr[:,2].argsort()]
+        n, t, np = v[:,0], v[:,1], v[:,2]
+        color = colors[simulator]
+
+        slope, _ = numpy.polyfit(numpy.log(np), numpy.log(t), 1)
+        if function == "libcsa":
+            label = ", ".join(("libcsa iter. in " + labels[simulator], "%.2f" % slope))
+        else:
+            label = ", ".join((sim_labels[simulator] + ".%s" % func_labels[function], "%.2f" % slope))
+        line, = ax1.semilogy(np, t, lw=2, marker="o", ls="-", label=label, color=color, zorder=i+100)
+
+        if function != "libcsa":
+            line.set_dashes([2, 2])
+
+        if scaling_mode == "weak":
+            expected_t = [t[0] for _ in np]
+        else:
+            expected_t = [t[0]*np[0]/float(x) for x in np]
+
+        ax1.semilogy(np, expected_t, lw=4, c=color, alpha=0.33, zorder=i)
+        ax1.semilogy(np, expected_t, lw=2, c="#eeeeee", zorder=i)
+        
+    fig1.subplots_adjust(left=0.14, bottom=0.1, right=0.96, top=0.91)
+        
+    ax1.set_title("%s scaling comparison native/CSA interface" % scaling_mode.capitalize())
+    ax1.set_xlabel("number of processes")
+    ax1.set_ylabel("wallclock time (s)")
+
+    # This is only to get the legends not overlapped by the data
+    ax1.set_ylim([10**0, 10**5])
+
+    ax1.set_xlim([1, 48])
+    ax1.set_xticks([1, 2, 4, 6, 12, 24, 48])
+    
+    handles, legend_labels = ax1.get_legend_handles_labels()
+    hl = sorted(zip(handles, legend_labels), key=operator.itemgetter(1))
+    handles, legend_labels = zip(*hl)
+    ax1.legend(handles, legend_labels,# title="connection method, slope",
+               fancybox=True, loc="best", numpoints=1, handlelength=2.2)
+    
+    fname = "%s_scaling_native.svg" % scaling_mode
+    fig1.savefig(fname)
+    print "saved '%s'" % fname
+
+
+
 
 import svgutils.transform as sg
 
@@ -369,3 +475,19 @@ fig = sg.SVGFigure("9.65in", "7in")
 fig.append([plot1, plot2, plot3, plot4])
 fig.append([txt1, txt2, txt3, txt4])
 fig.save("CSAConnector.svg")
+
+
+fig5 = sg.fromfile("runtime_native.svg")
+plot5 = fig5.getroot()
+plot5.moveto(0, 10)
+txt5 = sg.TextElement(10, 20, "A", size=18, weight="bold")
+
+fig6 = sg.fromfile("strong_scaling_native.svg")
+plot6 = fig6.getroot()
+plot6.moveto(430, 10)
+txt6 = sg.TextElement(440, 20, "B", size=18, weight="bold")
+
+fig = sg.SVGFigure("9.65in", "3.5in")
+fig.append([plot5, plot6])
+fig.append([txt5, txt6])
+fig.save("native_routines.svg")
