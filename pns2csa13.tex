@@ -260,7 +260,7 @@ The problem of excessive data transfers between PyNN and the simulator
 can be solved by passing a high-level description of connectivity to
 the simulator. This representation can be iterated and expanded at the
 simulator level and thus avoid overhead. Moreover, this allows
-efficient parallelization at the lower software layers.  The design of
+efficient parallelization at the lower software layers. The design of
 a new \verb|Connector| for the NEST backend that implements this
 solution is explained in Section~\ref{sec:conn_gen_pynn}.
 Section~\ref{sec:benchmarks} contains runtime and scalability
@@ -747,24 +747,10 @@ translation when preparing \verb|ConnectionGenerator| masks.
 
 \section{Using connection generators in PyNN}\label{sec:conn_gen_pynn}
 
-PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is
-a community driven effort to provide a simulator-independent API for
-describing neuronal networks in Python. Given a PyNN/Python model
-description, the user can choose which simulator to use without a need
-for changes to the model script. This is achieved through a set of
-\emph{simulator backends} which may be part of the PyNN code base or
-distributed separately. A backend adapts PyNN to a specific simulator.
-
-In PyNN, a neuronal network is built from \verb|Population|s of
-neurons and \verb|Projection|s between them. Each \verb|Projection| is
-created by a \verb|Connector|, which knows how to set up the individual
-connections. Different \verb|Connector|s exist and allow to set up a variety
-of different connection patterns.
-
-Since version 0.7, PyNN has provided the generic \verb|CSAConnector|, which can
-iterate a CSA connection set and issue one by one connect calls to
-the different backends. Internally, the connector executes the
-following two steps:
+Since version 0.7, PyNN has provided the generic \verb|CSAConnector|,
+which can iterate a CSA connection set and issue one by one connect
+calls to the different backends. Internally, the connector executes
+the following two steps:
 
 \begin{enumerate}
 \item Form a finite connection-set adapted to the actual sizes of the
@@ -777,18 +763,6 @@ following two steps:
   the synapse type otherwise.
 \end{enumerate}
 
-However, one of the regular problems with this approach is that PyNN
-needs to break up the compact high-level description of connectivity
-given by users into the commands understood by the respective
-backend. These are often already too low-level (e.g. convergent or
-divergent connects, one-to-one connects) and thus entail a certain
-performance penalty due to data transfer and function call overhead.
-
-The problem of excessive data transfers between PyNN and the simulator
-can be solved by passing a high-level description of connectivity to
-the simulator. This representation can be iterated and expanded at the
-simulator level and thus avoid overhead. Moreover, this allows
-efficient parallelization at the lower software layers.
 During this study, we extended the NEST backend for PyNN with a new
 and specialized \verb|CSAConnector| which passes the complete
 connection generator object down to the simulator (by calling PyNEST's
