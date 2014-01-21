@@ -88,40 +88,18 @@
 \maketitle
 \begin{abstract} % maximum 2000 characters including spaces
 
-Most neuronal network simulators provide simulator-specific methods
-for specifying connectivity. Thus, modelers need to learn the ways of
-each simulator and connectivity descriptions are not easily moved
-between them.  To improve this situation, several universal
-description languages for neuronal network models (e.g. PyNN, NeuroML
-and NineML) have been developed.
+Simulator-independent descriptions of connectivity in neuronal networks promise greater ease of model sharing, 
+improved reproducibility of simulation results, 
+and reduced programming effort for computational neuroscientists. 
+However, until now, enabling the use of such descriptions in a given simulator in a computationally efficient way has entailed considerable work for simulator developers, 
+which must be repeated for each new connectivity-generating library that is developed.
 
-There is commonly a choice between explicitly specifying individual
-connections or selecting one of a predefined set of connection
-primitives. Such primitives are usually well suited for building
-random balanced networks, synfire chains and recurrent networks
-without much structure, however they often either lack the required
-expressiveness or their implementations lack the required
-computational efficiency to specify the connectivity of complex
-hierarchical network models.
-
-The connection-set algebra is a formalism for specifying the
-connectivity of neuronal network models. CSA provides operators to
-combine simpler connectivities into more complex ones and also
-provides parameterization of such sets. The CSA is expressive enough
-to describe a wide range of connectivities and can serve as a concise
-notation for network structure in scientific writing as well as in
-model description code for neural simulations. CSA implementations
-allow for scalable and efficient representation of connectivity in
-parallel neuronal network simulators.
-
-Here, we describe the use of CSA and how it is coupled to the neural
-simulation tool NEST through the new \verb|ConnectionGenerator|
-interface provided by the \verb|libneurosim| library. We demonstrate
-how CSA can be used for the specification of connectivity in the
-simulator-independent neural specification language PyNN and how using
-CSA as a high-level representation of connectivity patterns avoids
-performance penalties and results in good scalability when transferred
-to the simulator.
+We have developed a generic connection generator interface which provides a standard way to connect a connectivity-generating library to a simulator, 
+such that one library can easily be replaced by another, according to the modeller's needs. 
+We have used the connection generator interface to connect C++ and Python implementations of the Connection-set Algebra to the NEST simulator. 
+We also demonstrate how the simulator-independent modelling framework PyNN can transparently make use of this, 
+passing a connection description through to the simulator layer for rapid processing in C++ where a simulator supports the connection generator interface and falling-back to slower iteration in Python otherwise. 
+A set of benchmarks demonstrates the good performance of the interface.
 
 \tiny
  \keyFont{ \section{Keywords:} model description, connectivity,
