@@ -1029,16 +1029,15 @@ is available from \url{https://github.com/mdjurfeldt/pns2csa}.
 
 \section{Discussion and outlook}
 
-We have demonstrated a novel way for a simulator to use code in an
-external software library for specifying connectivity in a neuronal
-network simulation.  Simulator and library are connected through a
-generic interface, the \verb|ConnectionGenerator| interface, which
-supports dynamic loading of connection generators without the need for
-recompilation.  Benchmarks show good scaling when using it in NEST and
-PyNN. The availability of this and associated interfaces lets users
-flexibly choose a connectivity-generating library independently of the
-simulator used, and thereby grants greater freedom for describing
-models.
+We have developed and demonstrated a novel way to connect a simulator
+and external connectivity-generating software through the
+\verb|ConnectionGenerator| interface. It supports dynamic loading of
+connection generators without the need for recompilation of either
+simulator or generators. Benchmarks show good scaling when using
+connection-set algebra libraries from NEST and PyNN. The availability
+of this and associated interfaces lets users flexibly choose a
+connectivity-generating library independently of the simulator used,
+and thereby grants greater freedom for describing models.
 
 The first version of the interface presented here was intentionally
 made simple, as a proof of concept, and there are several possible
@@ -1072,7 +1071,7 @@ the connection description in Python on the one side and the CSA
 object iterated on the C++ level on the other suggests that a compact
 description of connectivity iterated solely on the level of the
 simulator indeed has a huge impact. NEST and other simulators can thus
-greatly benefit from the availability of compact desctiptions such as
+greatly benefit from the availability of compact descriptions such as
 enabled by the \verb|ConnectionGenerator| interface
 
 %----------------------------------------------------------------------
