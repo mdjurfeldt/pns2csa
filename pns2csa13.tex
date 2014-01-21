@@ -72,8 +72,8 @@
 \onecolumn
 \firstpage{1}
 
-\title[CSA in NEST and PyNN]{Modeling connectivity: Connection-set
- Algebra in NEST and PyNN}
+\title[CSA in NEST and PyNN]{Efficient generation of connectivity in
+  neuronal networks from simulator-independent descriptions}
 \author[\firstAuthorLast ]{\Authors}
 \address{}
 \correspondance{}
@@ -587,16 +587,13 @@ processors and supercomputers \citep{Helias12_26}.
 
 The network description is a script, written either in SLI, NEST's
 built-in simulation language, or in Python, using the Python interface
-to NEST \citep[PyNEST;][]{Eppler09_12}. The following description uses
-the PyNEST syntax if not noted otherwise.
-
-To build a network in NEST,
+to NEST \citep[PyNEST;][]{Eppler09_12}. To build a network in NEST,
 the user first creates the neurons of the network and devices for
 stimulation and measurement using the \verb|Create()| function and
 then connects the elements with each other. NEST provides two basic
 ways for creating connectivity.
 
-\subsubsection{Native connection functions:}
+\subsubsection{Native connection functions}
 
 The most basic connect function, \verb|Connect()|, takes a list of
 pre-synaptic neurons (or devices) and a list of the same amount of
@@ -612,7 +609,7 @@ of knowledge of connectivity statistics. However, random connection
 parameters (e.g. \emph{weight} or \emph{delay}) need to be specifiec
 by user code and supplied to NEST after the creation of connections.
 
-\subsubsection{Topology module:}
+\subsubsection{Topology module}
 
 To ease the creation of networks with topological relations between
 the neurons and organizations of neurons into layers and areas, NEST
@@ -628,14 +625,17 @@ novel CSA interface, the native connection routines and the Topology
 module of NEST is subject to further work.
 
 
-As detailed in Section~\ref{sec:nest}, NEST has several methods for
-connecting neurons into a network built-in. However, while the native
-routines scale very well \citep{Helias12_26}, they are only suitable
-for creating simple patterns such as convergent/divergent connectivity
-without using them in an iterative manner. On the other hand, the
-topology module \citep{Plesser_13} allows to form more complex
-structures, but requires neurons to be organized in a layers. This has
-some overhead, which is also reflected in the performance and scaling.
+
+\subsubsection{Connection generating libraries}
+
+As detailed above, NEST has several methods for connecting neurons
+into a network built-in. However, while the native routines scale very
+well \citep{Helias12_26}, they are only suitable for creating simple
+patterns such as convergent/divergent connectivity without using them
+in an iterative manner. On the other hand, the topology module
+\citep{Plesser_13} allows to form more complex structures, but
+requires neurons to be organized in a layers. This has some overhead,
+which is also reflected in the performance and scaling.
 
 To support the Connection Generator interface in NEST and thus make
 more connection generating libraries available to the user, we created
@@ -734,18 +734,59 @@ describing neuronal networks in Python. Given a PyNN/Python model
 description, the user can choose which simulator to use without a need
 for changes to the model script. This is achieved through a set of
 \emph{simulator backends} which may be part of the PyNN code base or
-distributed separately. A backend adapts PyNN to a specific simulator.
+distributed separately. Each backend is a Python module that adapts
+PyNN to a specific simulator by providing a mapping from standard
+model names and units in PyNN to the simulator specific ones. In
+addition, a backend can supply connector implementations that are more
+efficient than using the basic connection routines of the simulator.
 
 In PyNN, a neuronal network is built from \verb|Population|s of
 neurons and \verb|Projection|s between them. Each \verb|Projection| is
-created by a \verb|Connector|, which knows how to set up the individual
-connections. Different \verb|Connector|s exist and allow to set up a variety
-of different connection patterns.
+created by a \verb|Connector|, which knows how to set up the
+individual connections. Different \verb|Connector|s exist and allow to
+set up a variety of different deterministic and probabalistic
+connection patterns.
 
-Since version 0.7, PyNN has provided the generic \verb|CSAConnector|,
-which can iterate a CSA connection set and issue one by one connect
-calls to the different backends. Internally, the connector executes
-the following two steps:
+However, one of the regular problems with this approach is that PyNN
+needs to break up the compact high-level description of connectivity
+given by users into the commands understood by the respective
+backend. These are often already too low-level (e.g. one-to-one or
+convergent/divergent connects) and thus entail a certain performance
+penalty due to transfer of source/target lists and connection
+parameters and function call overhead.
+
+The problem of excessive data transfers between PyNN and the simulator
+can be solved by passing a high-level description of connectivity to
+the simulator. This representation can be iterated and expanded at the
+simulator level and thus avoid overhead. Moreover, this allows
+efficient parallelization at the lower software layers. The design of
+a new \verb|Connector| for the NEST backend that implements this
+solution is explained in Section~\ref{sec:conn_gen_pynn}.
+Section~\ref{sec:benchmarks} contains runtime and scalability
+benchmarks for the new connector.
+
+
+
+The problem of excessive data transfers between PyNN and the simulator
+can be solved by passing a high-level description of connectivity to
+the simulator. This representation can be iterated and expanded at the
+simulator level and thus avoid overhead. Moreover, this allows
+efficient parallelization at the lower software layers.
+During this study, we extended the NEST backend for PyNN with a new
+and specialized \verb|CSAConnector| which passes the complete
+connection generator object down to the simulator (by calling PyNEST's
+\verb|CGConnect()| function). The iteration over the connections can
+then take place in NEST (see Section~\ref{sec:conn_gen_nest}). This
+greatly reduces the overhead and thus improves the runtime and
+scalability of connection generation (Section~\ref{sec:benchmarks}).
+
+
+
+In addition to the basic \verb|Connector|s described in
+Section~\ref{sec:pynn}, PyNN provides the generic \verb|CSAConnector|
+since version 0.7. It can iterate a CSA connection set and issue one
+by one connect calls to the different backends. Internally, the
+connector executes the following two steps:
 
 \begin{enumerate}
 \item Form a finite connection-set adapted to the actual sizes of the
