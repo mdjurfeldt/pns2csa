@@ -125,7 +125,7 @@ to the simulator.
 
 \tiny
  \keyFont{ \section{Keywords:} model description, connectivity,
- neural simulation, Python, large-scale modeling } %All article
+ neural simulation, CSA, NEST, PyNN, Python, large-scale modeling } %All article
  %types: you may provide up to 8 keywords; at least 5 are mandatory.
 \end{abstract}
 
@@ -157,8 +157,7 @@ connections is largely independent of a particular simulator or
 programming language, but may cause problems of storage and
 input/output efficiency, and does not enable conceptual descriptions
 of connectivity.  All of these methods make it difficult to explain
-the connectivity in a scientific text. [ref Crook et al 2013 somewhere
-  in here?]
+the connectivity in a scientific text \citep{crook12}.
 
 These problems can be reduced or avoided by using a general purpose
 connection-generating software library such as the Connection-set
@@ -372,10 +371,10 @@ instances of such objects:
 \section{The Connection-set Algebra}\label{sec:csa}
 
 The \verb|ConnectionGenerator| interface described in the previous
-section enables the simulator NEST to use the connection generating
-libraries \verb|csa| and \verb|libcsa|.  The performance of the
-coupled system is assessed by benchmarks in Section
-\ref{sec:benchmarks} and we now introduce these libraries.
+section enables the simulators use external connection generating
+libraries. The benchmarks in Section \ref{sec:benchmarks} use the
+interface to couple NEST to the connection generating libraries
+\verb|csa| and \verb|libcsa| which we now introduce.
 
 The connection-set algebra is a formalism for network connectivity
 which can be used both when describing a network to a fellow
@@ -484,13 +483,13 @@ equivalent to a mask and the two can be used interchangeably.
 
 In CSA, the concepts defined in the previous section have been
 developed into a formalism for describing connectivity structure.
-Assume that a mask is applied to a single population such that $P_s =
-P_t = P$ and that we are interested in describing self-connections,
-i.e. every neuron in $P$ should be connected to itself.  If the size
-of $P$ is 4, the mask $\{(0, 0), (1, 1), (2, 2), (3, 3)\}$ could be
-used.  If the size is 2, the mask $\{(0, 0), (1, 1)\}$ would be
-appropriate. Such masks do not only contain information about
-connectivity structure but also about population size. We can
+Assume that a mask is specifying connectivity for a single population
+such that $P_s = P_t = P$ and that we are interested in describing
+self-connections, i.e. every neuron in $P$ should be connected to
+itself.  If the size of $P$ is 4, the mask $\{(0, 0), (1, 1), (2, 2),
+(3, 3)\}$ could be used.  If the size is 2, the mask $\{(0, 0), (1,
+1)\}$ would be appropriate. Such masks do not only contain information
+about connectivity structure but also about population size. We can
 generalize by stripping off the population size information and
 allowing the index set $\mathcal{I}$ and mask to be infinite, defining
 the one-to-one mask $\bar{\delta}$:
@@ -504,8 +503,9 @@ the one-to-one mask $\bar{\delta}$:
 \end{equation}
 Now $\bar{\delta}$ only encapsulates the concept of self- or
 one-to-one connectivity structure (depending on whether the source and
-target populations are the same or different), i.e. we can describe a
-type of connectivity independently of any specific network.  Finite
+target populations are the same or different) without reference to
+size, i.e. we can describe a
+\emph{type} of connectivity independently of any specific network.  Finite
 portions can be cut out of such infinite connection-sets when applied
 to finite populations (see \Figure{1}{fig:csa}C).
 
@@ -901,7 +901,7 @@ a significant overhead to the process of connection generation.
 
 To demonstrate the scalability of the implementations, we carried out
 both strong and weak scaling benchmarks, using CSA's \emph{random}
-mask with a probability of $0.1$ (\Figure{4}{fig:pynn_benchmarks}C
+mask $\bar{\rho}(p)$ with a probability $p = 0.1$ (\Figure{4}{fig:pynn_benchmarks}C
 and D). For each of them, the number of MPI processes was varied from
 1 to 48.
 
@@ -933,10 +933,10 @@ to more traditional ways of setting up connectivity, we also performed
 performance and scaling benchmarks of the native interfaces for random
 connectivity in PyNN and NEST. \Figure{5}{fig:native_benchmarks}
 contrasts CSA's \emph{random} mask with a probability of $0.1$ with
-PyNN's \verb|FixedProbailityConnector| (FPC) and NEST's function
+PyNN's \verb|FixedProbabilityConnector| (FPC) and NEST's function
 \verb|RandomConvergentConnect| (RCC).
 
-Please note that NEST does not provide a Bernoulli trial based
+Note that NEST does not provide a Bernoulli trial based
 connection scheme such as used by FPC in PyNN and the \emph{random}
 mask in CSA and RCC was chosen because it is the closest function to
 resemble such a method. The use of RCC results, however, in a bias
@@ -969,15 +969,15 @@ PyNEST and the C++ implementation of RCC itself (data not shown).
 \end{figure}
 \fi
 
-The run time benchmark (\Figure{5}{fig:native_benchmarks}A) again used
+The population size benchmark (\Figure{5}{fig:native_benchmarks}A) again used
 one MPI process and varied the number of neurons from $10^2$ to $10^5$
 with about one sample per order of magnitude. It shows that all tested
 variants for setting up the connectivity scale equally well with
-slopes sloghtly below 2. The offset between NEST's RCC (written in
+slopes slightly below 2. The offset between NEST's RCC (written in
 C++, but called repeatedly from Python) to the CSA object iterated in
 C++ can be attributed to overhead in the additional software layers.
 
-As in (\Figure{4}{fig:pynn_benchmarks}C, the comparative strong
+As in \Figure{4}{fig:pynn_benchmarks}C, the comparative strong
 scaling benchmark shown in \Figure{5}{fig:native_benchmarks}B varied
 the number of MPI processes while keeping the total number of neurons
 in the network fixed at $48000$, resulting in a total of approx. 230
