@@ -193,13 +193,16 @@ and similar libraries in different neuronal simulators.  The interface
 makes both the simulator and the connection-generating library
 replaceable and therefore gives maximum flexibility to the modeller.
 
-In this article we first give a brief overview of CSA and of different
-software libraries that support using CSA in Python and C++ code.  We
-then describe the connection generator interface, before explaining
-how the interface is used in the NEST simulator
-\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204} and
-in the PyNN framework.  Finally, we provide benchmarks for different
-use case scenarios of the interface.
+In this article we first describe the connection generator interface.
+As an example of a connection generating library, we then give a brief
+overview of CSA and of different software libraries that support using
+CSA in Python and C++ code. We show how the connection generator
+interface has been integrated in the NEST simulator
+\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204},
+enabling the use of connection libraries such as CSA before describing
+its use from higher software layers, such as the PyNN framework.
+Finally, we provide benchmarks for different use case scenarios of the
+interface.
 
 \subsection{CSA}
 The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
@@ -319,6 +322,148 @@ module of NEST is subject to further work.
 
 %----------------------------------------------------------------------
 
+\section{The Connection Generator API}
+
+To allow users to flexibly choose among simulators and libraries which
+generate connectivity, we developed an interface that abstracts the
+simulator and the connection generating library from each other,
+making both the simulator and the connectivity description library
+replaceable.
+
+\ifdefined\INLINEFIGS
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=.8]{figures/block_diagram_conngen.pdf}
+\caption{Block diagram of the connection generator interface and the
+  components involved. The central component is the
+  \texttt{ConnectionGenerator} class itself. It can connect to different
+  simulators (e.g. NEST) and to different connection generating
+  libraries (e.g. CSA). In this example, Python is used as scripting
+  language for both simulator and connection generating
+  library.}\label{fig:block_diagram_conngen}
+\end{figure}
+\fi
+
+The basic idea is that a connection generating library, such as
+\verb|csa| or \verb|libcsa| of Section~\ref{sec:impl}, is used to
+create an object representing network connectivity.  In the case of a
+CSA library, this object is a connection-set, but it could also be a
+graph made through graph primitives. The \verb|ConnectionGenerator| interface
+provides a C++ level interface to such objects which allows software
+external to the connection generating library to efficiently iterate
+through connections represented by the object.  In the example shown
+in \Figure{2}{fig:block_diagram_conngen}, the \verb|ConnectionGenerator|
+interface is used to combine a Python scripted simulator with a Python
+scripted connection generating library. A connection generating object
+is assembled at the Python level.  If \verb|libcsa| is used, the
+resulting object will be a C++ object with a Python wrapper. (See
+lower two boxes to the right in the figure.) The object is used by a
+C++ simulator kernel (lower box to the left) to specify network
+connectivity. By providing connection generating software, with
+Connection Generator API, as dynamically linked libraries, multiple
+such libraries can be loaded into the Python runtime environment and
+even used simultaneously without a need to recompile the simulator.
+
+\subsection{The interface}\label{sec:cgint}
+
+The interface is designed as an abstract base class in C++ and
+consists of the following virtual functions:
+
+\begin{unlist}
+\item[\tt int arity()]: Return the number of per-connection values
+  associated with this generator. Values can be parameters like
+  weight, delay, time constants, or others.
+\item[\tt int size()]: Return the number of connections represented by
+  this generator.
+\item[\tt void setMask(Mask\& mask)]: Inform the generator about which
+  source and target indices are available. A
+  \verb|ConnectionGenerator| mask represents the available nodes in
+  the network for which to create connections.
+\item[\tt void setMask(std::vector$<$Mask$>$\& masks, int local)]:
+  This version of \texttt{setMask} is used by parallel simulators and
+  informs the connection generator on the \verb|local| rank about the
+  masks of all ranks. Different ranks usually have different masks
+  since they are responsible for different subsets of the connections
+  of the network. Some connection generators can use such information
+  to avoid the need for communication with other ranks.
+\item[\tt void start()]: Start an iteration. This function must be called
+  before the first call to \verb|next()|.
+\item[\tt bool next(int\& source, int\& target, double* value)]:
+  Advance to the next connection or return false, if no more
+  connections are available from the connection generator. Source and
+  target indices of the connection as well as associated parameters
+  are written into \verb|source|, \verb|target| and the array pointed
+  to by \verb|value|, respectively. The order of iteration is
+  according to increasing index, with all sources iterated over per
+  target.
+\end{unlist}
+
+\subsection{libneurosim}\label{sec:libneurosim}
+Where does the \verb|ConnectionGenerator| interface definition (in the
+form of a C++ header file plus supporting code) belong?  If it is put
+in the simulator or connection generating library source trees, it
+will be duplicated over simulators or libraries.  As new versions of
+the interface are developed, the situation will quickly become
+unmanageable.  In fact, the \verb|ConnectionGenerator| interface is
+unusual in that it is a symmetric abstraction barrier: it both allows
+a given simulator to use any library supporting the API \emph{and}
+allows the same library to be used from any simulator supporting the
+API.
+
+In order to create a space in which to put interfaces and other code
+of generic use for neuronal network simulation software, we have
+developed the neurosim library
+(\url{http://software.incf.org/software/libneurosim}).  More
+precisely, libneurosim is a software package which currently consists
+of two main component libraries: \verb|libneurosim|, providing C++
+level support code and \verb|libpyneurosim|, providing Python support
+code.
+
+\verb|Libneurosim| provides the \verb|ConnectionGenerator| interface
+(\Figure{2}{fig:block_diagram_conngen}, bottom). It also contains a
+registry for XML parser functions.  Different types of connection
+generators can be described by different XML-based languages.  For
+example, the \verb|csa| library can serialize connection-set
+expressions using a MathML-based language.  A connection generating
+library may provide a parser for one or more such languages.
+Conversely, the same XML-based language might be used by one or more
+connection generating libraries.  The XML parser registry maps XML
+tags identifying specific languages to specific connection libraries.
+The interface to the registry consists of three static methods in the
+\verb|ConnectionGenerator| interface:
+
+\begin{unlist}
+\item[\tt void selectCGImplementation (std::string tag, std::string
+  library)]:\\ Associate the parent node tag \verb|tag| with the library
+  \verb|library|.  The library named \verb|library| will be
+  dynamically loaded and will invoke the \verb|libneurosim| function
+  \verb|registerConnectionGeneratorLibrary| to register its XML
+  parser.
+\item[\tt ConnectionGenerator* fromXML (std::string xml)]: Parse the
+  XML representation \verb|xml| of a connection generator and return
+  it. The function dispatches to parsers of different libraries
+  depending on previous calls to \verb|selectCGImplementation|.
+\item[\tt ConnectionGenerator* fromXMLFile (std::string fname)]: Same
+  as previous function, but read the XML stream from the file with
+  pathname \verb|fname|.
+\end{unlist}
+
+\verb|libpyneurosim| currently contains generic support for
+registering new Python connection generator types and unwrapping
+instances of such objects:
+
+\begin{unlist}
+\item[\tt void registerConnectionGeneratorType (CheckFuncT,
+  UnpackFuncT)]: Register a new type checking and unwrapping
+  function.
+\item[\tt isConnectionGenerator (PyObject* pObj)]: Check if
+  \verb|pObj| is a known connection generator type (as identified by
+  previously registered checking functions).
+\item[\tt ConnectionGenerator* unpackConnectionGenerator (PyObject*
+  pObj)]: Unwrap the connection generator in \verb|pObj| and return
+  it.
+\end{unlist}
+
 \section{The Connection-set Algebra}\label{sec:csa}
 
 \subsection{Basic concepts}
@@ -327,11 +472,11 @@ In neuronal network simulations, we often want to specify a projection
 between a source population of neurons $P_s$ to a target population
 $P_t$.  A projection consists of many individual connections.  In
 nature, one such connection corresponds to an axon forming a synaptic
-contact on the spine/dendrite of a receiving neuron.  The basic
-concept of a CSA connection-set is in the context of neuronal network
-simulation defined as the set of connections between $P_s$ and $P_t$
-along with zero or more per-connection parameters such as weight or
-delay.
+contact on the spine/dendrite of a receiving neuron.  In the context
+of neuronal network simulation, the basic concept of a CSA
+connection-set is defined as the set of connections between $P_s$ and
+$P_t$ along with zero or more per-connection parameters such as weight
+or delay.
 
 In order to create an abstraction barrier between the actual neurons
 of a population $P$ and the CSA, we enumerate $P$ using non-negative
@@ -497,148 +642,6 @@ latter two implementations in Python and C++, \verb|csa| and
 %\subsection{Serialization/deserialization}
 
 %----------------------------------------------------------------------
-
-\section{The Connection Generator API}
-
-To allow users to flexibly choose among simulators and libraries which
-generate connectivity, we developed an interface that abstracts the
-simulator and the connection generating library from each other,
-making both the simulator and the connectivity description library
-replaceable.
-
-\ifdefined\INLINEFIGS
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=.8]{figures/block_diagram_conngen.pdf}
-\caption{Block diagram of the connection generator interface and the
-  components involved. The central component is the
-  \texttt{ConnectionGenerator} class itself. It can connect to different
-  simulators (e.g. NEST) and to different connection generating
-  libraries (e.g. CSA). In this example, Python is used as scripting
-  language for both simulator and connection generating
-  library.}\label{fig:block_diagram_conngen}
-\end{figure}
-\fi
-
-The basic idea is that a connection generating library, such as
-\verb|csa| or \verb|libcsa| of Section~\ref{sec:impl}, is used to
-create an object representing network connectivity.  In the case of a
-CSA library, this object is a connection-set, but it could also be a
-graph made through graph primitives. The \verb|ConnectionGenerator| interface
-provides a C++ level interface to such objects which allows software
-external to the connection generating library to efficiently iterate
-through connections represented by the object.  In the example shown
-in \Figure{2}{fig:block_diagram_conngen}, the \verb|ConnectionGenerator|
-interface is used to combine a Python scripted simulator with a Python
-scripted connection generating library. A connection generating object
-is assembled at the Python level.  If \verb|libcsa| is used, the
-resulting object will be a C++ object with a Python wrapper. (See
-lower two boxes to the right in the figure.) The object is used by a
-C++ simulator kernel (lower box to the left) to specify network
-connectivity. By providing connection generating software, with
-Connection Generator API, as dynamically linked libraries, multiple
-such libraries can be loaded into the Python runtime environment and
-even used simultaneously without a need to recompile the simulator.
-
-\subsection{The interface}\label{sec:cgint}
-
-The interface is designed as an abstract base class in C++ and
-consists of the following virtual functions:
-
-\begin{unlist}
-\item[\tt int arity()]: Return the number of per-connection values
-  associated with this generator. Values can be parameters like
-  weight, delay, time constants, or others.
-\item[\tt int size()]: Return the number of connections represented by
-  this generator.
-\item[\tt void setMask(Mask\& mask)]: Inform the generator about which
-  source and target indices are available. A
-  \verb|ConnectionGenerator| mask represents the available nodes in
-  the network for which to create connections.
-\item[\tt void setMask(std::vector$<$Mask$>$\& masks, int local)]:
-  This version of \texttt{setMask} is used by parallel simulators and
-  informs the connection generator on the \verb|local| rank about the
-  masks of all ranks. Different ranks usually have different masks
-  since they are responsible for different subsets of the connections
-  of the network. Some connection generators can use such information
-  to avoid the need for communication with other ranks.
-\item[\tt void start()]: Start an iteration. This function must be called
-  before the first call to \verb|next()|.
-\item[\tt bool next(int\& source, int\& target, double* value)]:
-  Advance to the next connection or return false, if no more
-  connections are available from the connection generator. Source and
-  target indices of the connection as well as associated parameters
-  are written into \verb|source|, \verb|target| and the array pointed
-  to by \verb|value|, respectively. The order of iteration is
-  according to increasing index, with all sources iterated over per
-  target.
-\end{unlist}
-
-\subsection{libneurosim}\label{sec:libneurosim}
-Where does the \verb|ConnectionGenerator| interface definition (in the
-form of a C++ header file plus supporting code) belong?  If it is put
-in the simulator or connection generating library source trees, it
-will be duplicated over simulators or libraries.  As new versions of
-the interface are developed, the situation will quickly become
-unmanageable.  In fact, the \verb|ConnectionGenerator| interface is
-unusual in that it is a symmetric abstraction barrier: it both allows
-a given simulator to use any library supporting the API \emph{and}
-allows the same library to be used from any simulator supporting the
-API.
-
-In order to create a space in which to put interfaces and other code
-of generic use for neuronal network simulation software, we have
-developed the neurosim library
-(\url{http://software.incf.org/software/libneurosim}).  More
-precisely, libneurosim is a software package which currently consists
-of two main component libraries: \verb|libneurosim|, providing C++
-level support code and \verb|libpyneurosim|, providing Python support
-code.
-
-\verb|Libneurosim| provides the \verb|ConnectionGenerator| interface
-(\Figure{2}{fig:block_diagram_conngen}, bottom). It also contains a
-registry for XML parser functions.  Different types of connection
-generators can be described by different XML-based languages.  For
-example, the \verb|csa| library can serialize connection-set
-expressions using a MathML-based language.  A connection generating
-library may provide a parser for one or more such languages.
-Conversely, the same XML-based language might be used by one or more
-connection generating libraries.  The XML parser registry maps XML
-tags identifying specific languages to specific connection libraries.
-The interface to the registry consists of three static methods in the
-\verb|ConnectionGenerator| interface:
-
-\begin{unlist}
-\item[\tt void selectCGImplementation (std::string tag, std::string
-  library)]:\\ Associate the parent node tag \verb|tag| with the library
-  \verb|library|.  The library named \verb|library| will be
-  dynamically loaded and will invoke the \verb|libneurosim| function
-  \verb|registerConnectionGeneratorLibrary| to register its XML
-  parser.
-\item[\tt ConnectionGenerator* fromXML (std::string xml)]: Parse the
-  XML representation \verb|xml| of a connection generator and return
-  it. The function dispatches to parsers of different libraries
-  depending on previous calls to \verb|selectCGImplementation|.
-\item[\tt ConnectionGenerator* fromXMLFile (std::string fname)]: Same
-  as previous function, but read the XML stream from the file with
-  pathname \verb|fname|.
-\end{unlist}
-
-\verb|libpyneurosim| currently contains generic support for
-registering new Python connection generator types and unwrapping
-instances of such objects:
-
-\begin{unlist}
-\item[\tt void registerConnectionGeneratorType (CheckFuncT,
-  UnpackFuncT)]: Register a new type checking and unwrapping
-  function.
-\item[\tt isConnectionGenerator (PyObject* pObj)]: Check if
-  \verb|pObj| is a known connection generator type (as identified by
-  previously registered checking functions).
-\item[\tt ConnectionGenerator* unpackConnectionGenerator (PyObject*
-  pObj)]: Unwrap the connection generator in \verb|pObj| and return
-  it.
-\end{unlist}
 
 \section{Using connection generators in NEST}\label{sec:conn_gen_nest}
 
