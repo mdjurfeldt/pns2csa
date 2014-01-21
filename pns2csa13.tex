@@ -228,7 +228,7 @@ replaceable.
 \end{figure}
 \fi
 
-The basic idea is that a connection generating library, such as
+A connection generating library, such as
 \verb|csa| or \verb|libcsa| of Section~\ref{sec:impl}, is used to
 create an object representing network connectivity.  In the case of a
 CSA library, this object is a connection-set, but it could also be a
@@ -381,7 +381,7 @@ given or in cases where only some elements of the connectivity are
 explicitly specified. The distinguishing aspects of CSA are:
 \begin{itemize}
 \item It is abstract. CSA deals with sets of \emph{connections}. A
-  connection is basically just an edge in a graph, with associated
+  connection is an edge in a graph, with associated
   parameters. There is a clean separation between CSA and other
   aspects of model or simulator infrastructure.
 \item A connection-set can represent a \emph{type} of
@@ -396,7 +396,7 @@ explicitly specified. The distinguishing aspects of CSA are:
 \end{itemize}
 
 
-\subsection{Basic concepts}
+\subsection{Connection-sets}
 
 Given source and target populations $P_s$ and $P_t$, a CSA
 connection-set is defined as the set of connections between $P_s$ and
@@ -474,7 +474,7 @@ equivalent to a mask and the two can be used interchangeably.
 
 \subsection{An algebra for connectivity structure}\label{sec:structure}
 
-In CSA, the basic concepts defined in the previous section have been
+In CSA, the concepts defined in the previous section have been
 developed into a formalism for describing connectivity structure.
 Assume that a mask is applied to a single population such that $P_s =
 P_t = P$ and that we are interested in describing self-connections,
@@ -528,7 +528,7 @@ of their index sets, $\mathcal{I}_s \times
 connection-set, representing connectivity structure, into a connection
 matrix between the populations. For example, the finite part of the
 matrix in \Figure{1}{fig:csa}C is $\{0..6\} \times \{0..6\} \cap
-\bar{\delta}$. For a more in-depth description of the CSA and basic
+\bar{\delta}$. For a more in-depth description of the CSA and
 principles of implementation, see \citet{djurfeldt12}.
 
 %  \textbf{Figure 1.}{CSA Connection Matrix.}\label{fig:01}
@@ -965,26 +965,30 @@ is available from \url{https://github.com/mdjurfeldt/pns2csa}.
 
 \section{Discussion and outlook}
 
-We have shown the design of a generic interface for coupling
-connection generating libraries to neuronal simulators and
-demonstrated good scaling when using it in NEST and PyNN. The
-availability of this and associated interfaces lets users flexibly
-choose a connection generating library independently of the simulator
-used, and thereby grants greater freedom for describing models.
+We have demonstrated a novel way for a simulator to use code in an
+external software library for specifying connectivity in a neuronal
+network simulation.  Simulator and library are connected through a
+generic interface, the \verb|ConnectionGenerator| interface, which
+supports dynamic loading of connection generators without the need for
+recompilation.  Benchmarks show good scaling when using it in NEST and
+PyNN. The availability of this and associated interfaces lets users
+flexibly choose a connection generating library independently of the
+simulator used, and thereby grants greater freedom for describing
+models.
 
-In the first version of the \verb|ConnectionGenerator| interface
-presented here, emphasis was put on simplicity. There are several
-possible directions of development. Currently, parameters are passed
-as \verb|double|s. This could be generalized to other data types.  For
-parallel simulators, connection generators may need access to the MPI
-communicator.  Instead of using a fixed iteration order, the order
-could be specified by the simulator. Iteration order could also be
-unspecified, giving opportunities for more optimal iteration on the
-part of the connection generating library.  In order to maintain
-backward compatibility as new revisions of the interface are
+The first version of the interface presented here was intentionally
+made simple, as a proof of concept, and there are several possible
+directions of development for its functionality. Currently, parameters
+are passed as \verb|double|s. This could be generalized to other data
+types.  For parallel simulators, connection generators may need access
+to the MPI communicator.  Instead of using a fixed iteration order,
+the order could be specified by the simulator. Iteration order could
+also be unspecified, giving opportunities for more optimal iteration
+on the part of the connection generating library.  In order to
+maintain backward compatibility as new revisions of the interface are
 developed, interface versioning could be introduced.
 
-One limitation in the current implementations of the NEST
+One arbitrary limitation in the current implementations of the NEST
 ConnectionGeneratorModule and the PyNN \verb|CSAConnector| is that
 value sets for the connection generator can only be used if its arity
 is 0 or 2. This means that only values for weight and delay can be
