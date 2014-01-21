@@ -199,76 +199,10 @@ overview of CSA and of different software libraries that support using
 CSA in Python and C++ code. We show how the connection generator
 interface has been integrated in the NEST simulator
 \citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204},
-enabling the use of connection libraries such as CSA before describing
-its use from higher software layers, such as the PyNN framework.
-Finally, we provide benchmarks for different use case scenarios of the
-interface.
-
-\subsection{CSA}
-The connection-set algebra \citep[CSA;][]{djurfeldt12} is a formalism
-for network connectivity which can be used both when describing a
-network to a fellow researcher and when implementing a model for a
-simulator.  It is currently focused on connectivity which has a
-constructive or statistical element such that it can be specified by
-an algorithm but it can also be used when all network connections are
-given or in cases where only some elements of the connectivity are
-explicitly specified. The distinguishing aspects of CSA are:
-\begin{itemize}
-\item It is abstract. CSA deals with sets of \emph{connections}. A
-  connection is basically just an edge in a graph, with associated
-  parameters. There is a clean separation between CSA and other
-  aspects of model or simulator infrastructure.
-\item A connection-set can represent a \emph{type} of
-  connectivity---a connectivity pattern---in addition to the connectivity
-  of a specific network.
-\item It is an algebra: there are pre-existing connection-sets and
-  operators to define new connection-sets in terms of existing ones.
-\item It enables a succinct and precise description and definition of
-  connectivity in terms of such algebraic expressions.
-\item There are ways to implement CSA on a computer which are both
-  efficient and scalable on a parallel computer.
-\end{itemize}
-There exist multiple implementations of CSA (see Section
-\ref{sec:impl}).
-
-\subsection{PyNN}\label{sec:pynn}
-
-PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is
-a community driven effort to provide a simulator-independent API for
-describing neuronal networks in Python. Given a PyNN/Python model
-description, the user can choose which simulator to use without a need
-for changes to the model script. This is achieved through a set of
-\emph{simulator backends} which may be part of the PyNN code base or
-distributed separately. Each backend is a Python module that adapts
-PyNN to a specific simulator by providing a mapping from standard
-model names and units in PyNN to the simulator specific ones. In
-addition, a backend can supply connector implementations that are more
-efficient than using the basic connection routines of the simulator.
-
-In PyNN, a neuronal network is built from \verb|Population|s of
-neurons and \verb|Projection|s between them. Each \verb|Projection| is
-created by a \verb|Connector|, which knows how to set up the
-individual connections. Different \verb|Connector|s exist and allow to
-set up a variety of different deterministic and probabalistic
-connection patterns.
-
-However, one of the regular problems with this approach is that PyNN
-needs to break up the compact high-level description of connectivity
-given by users into the commands understood by the respective
-backend. These are often already too low-level (e.g. one-to-one or
-convergent/divergent connects) and thus entail a certain performance
-penalty due to transfer of source/target lists and connection
-parameters and function call overhead.
-
-The problem of excessive data transfers between PyNN and the simulator
-can be solved by passing a high-level description of connectivity to
-the simulator. This representation can be iterated and expanded at the
-simulator level and thus avoid overhead. Moreover, this allows
-efficient parallelization at the lower software layers. The design of
-a new \verb|Connector| for the NEST backend that implements this
-solution is explained in Section~\ref{sec:conn_gen_pynn}.
-Section~\ref{sec:benchmarks} contains runtime and scalability
-benchmarks for the new connector.
+enabling the use of connection libraries such as CSA, before
+describing its use from higher software layers, such as the PyNN
+framework.  Finally, we provide benchmarks for different use case
+scenarios of the interface.
 
 \subsection{NEST}\label{sec:nest}
 
@@ -465,6 +399,30 @@ instances of such objects:
 \end{unlist}
 
 \section{The Connection-set Algebra}\label{sec:csa}
+
+The connection-set algebra is a formalism
+for network connectivity which can be used both when describing a
+network to a fellow researcher and when implementing a model for a
+simulator.  It is currently focused on connectivity which has a
+constructive or statistical element such that it can be specified by
+an algorithm but it can also be used when all network connections are
+given or in cases where only some elements of the connectivity are
+explicitly specified. The distinguishing aspects of CSA are:
+\begin{itemize}
+\item It is abstract. CSA deals with sets of \emph{connections}. A
+  connection is basically just an edge in a graph, with associated
+  parameters. There is a clean separation between CSA and other
+  aspects of model or simulator infrastructure.
+\item A connection-set can represent a \emph{type} of
+  connectivity---a connectivity pattern---in addition to the connectivity
+  of a specific network.
+\item It is an algebra: there are pre-existing connection-sets and
+  operators to define new connection-sets in terms of existing ones.
+\item It enables a succinct and precise description and definition of
+  connectivity in terms of such algebraic expressions.
+\item There are ways to implement CSA on a computer which are both
+  efficient and scalable on a parallel computer.
+\end{itemize}
 
 \subsection{Basic concepts}
 
@@ -745,11 +703,24 @@ connections are established one by one by calling NEST's basic
 
 \section{Using connection generators in PyNN}\label{sec:conn_gen_pynn}
 
-In addition to the basic \verb|Connector|s described in
-Section~\ref{sec:pynn}, PyNN provides the generic \verb|CSAConnector|
-since version 0.7. It can iterate a CSA connection set and issue one
-by one connect calls to the different backends. Internally, the
-connector executes the following two steps:
+PyNN \citep[\url{http://www.neuralensemble.org/PyNN};][]{Davison09} is
+a community driven effort to provide a simulator-independent API for
+describing neuronal networks in Python. Given a PyNN/Python model
+description, the user can choose which simulator to use without a need
+for changes to the model script. This is achieved through a set of
+\emph{simulator backends} which may be part of the PyNN code base or
+distributed separately. A backend adapts PyNN to a specific simulator.
+
+In PyNN, a neuronal network is built from \verb|Population|s of
+neurons and \verb|Projection|s between them. Each \verb|Projection| is
+created by a \verb|Connector|, which knows how to set up the individual
+connections. Different \verb|Connector|s exist and allow to set up a variety
+of different connection patterns.
+
+Since version 0.7, PyNN has provided the generic \verb|CSAConnector|,
+which can iterate a CSA connection set and issue one by one connect
+calls to the different backends. Internally, the connector executes
+the following two steps:
 
 \begin{enumerate}
 \item Form a finite connection-set adapted to the actual sizes of the
@@ -762,6 +733,18 @@ connector executes the following two steps:
   the synapse type otherwise.
 \end{enumerate}
 
+However, one of the regular problems with this approach is that PyNN
+needs to break up the compact high-level description of connectivity
+given by users into the commands understood by the respective
+backend. These are often already too low-level (e.g. convergent or
+divergent connects, one-to-one connects) and thus entail a certain
+performance penalty due to data transfer and function call overhead.
+
+The problem of excessive data transfers between PyNN and the simulator
+can be solved by passing a high-level description of connectivity to
+the simulator. This representation can be iterated and expanded at the
+simulator level and thus avoid overhead. Moreover, this allows
+efficient parallelization at the lower software layers.
 During this study, we extended the NEST backend for PyNN with a new
 and specialized \verb|CSAConnector| which simply passes the complete
 connection generator object down to the simulator (by calling PyNEST's
