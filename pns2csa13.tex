@@ -977,25 +977,11 @@ models it would be beneficial to also set other parameters based on
 rules in the connection generator. Examples of such synapse models are
 STDP or short-term facilitation and depression.
 
-If every single piece of generically useful functionality, such as the
-\verb|ConnectionGenerator| interface, was distributed in a separate
-library, the library dependencies of simulation software would grow
-unmanageable.  Libneurosim could therefore become a place within which
-to put other interfaces and supporting code besides the
-\verb|ConnectionGenerator| interface. We are currently investigating
-if the code for finding contiguous ranges and translating indices (see
-Appendix A) can be extracted from NEST and made available as part of
-\verb|libneurosim|.
-
-Another possible extension could be code for the generation of random
-numbers. The GNU Scientific Library (GSL;
-\url{http://www.gnu.org/software/gsl}) provides random number
-generators, but there are still needs specific to neuronal network
-simulators which could be served by a specialized RNG library. Should
-such a library be provided through the libneurosim software package?
-We believe that the answer to this and similar questions is a matter
-of judgement. It would certainly not make sense to collect all
-generically useful functionality in one monolithic library.
+At the moment, \verb|libneurosim| only contains the
+\verb|ConnectionGenerator| interface and some auxilliary code. For the
+future, we are planning to turn this into a community based effort to
+share common interfaces and make it a generally useful library for the
+developers of other simulators than PyNN and NEST.
 
 The differences in run time and scalability between an iteration of
 the connection description in Python on the one side and the CSA
