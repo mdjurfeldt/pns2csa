@@ -645,29 +645,28 @@ latter two implementations in Python and C++, \verb|csa| and
 
 \section{Using connection generators in NEST}\label{sec:conn_gen_nest}
 
-As detailed in Section~\ref{sec:nest}, NEST provides several built-in
-methods for connecting neurons into a network. However, while the
-native routines scale very well \citep{Helias12_26}, they are only
-available for creating simple patterns such as convergent/divergent
-connectivity. On the other hand, the topology module
-\citep{Plesser_13} allows to form more complex structures, but
-requires neurons to be organized in Layers and sheets. This leads to
-overhead, which is also reflected in the performance and scaling.
+As detailed in Section~\ref{sec:nest}, NEST has several methods for
+connecting neurons into a network built-in. However, while the native
+routines scale very well \citep{Helias12_26}, they are only suitable
+for creating simple patterns such as convergent/divergent connectivity
+without using them in an iterative manner. On the other hand, the
+topology module \citep{Plesser_13} allows to form more complex
+structures, but requires neurons to be organized in a layers. This has
+some overhead, which is also reflected in the performance and scaling.
 
 To support the Connection Generator interface in NEST and thus make
 more connection generating libraries available to the user, we created
-the ConnectionGeneratorModule. It is implemented as a plugin for NEST
-which extends both user interfaces (SLI and PyNEST) and builds on
-\verb|libneurosim| (see Section~\label{sec:libneurosim}).
+the \verb|ConnectionGeneratorModule|. It is implemented as a plugin
+for NEST which extends both user interfaces (SLI and PyNEST) and
+builds on \verb|libneurosim| (see Section~\label{sec:libneurosim}).
 
 All elements (neurons or devices) in NEST are identified uniquely by
 an integer number, their global id (\emph{GID}). As all existing
 connection routines in NEST work either on single GIDs or on lists of
 GIDs, we decided to also use this convention for the Connection
-Generator interface, although the library used though it might well
-use indices running from 0, as for example the CSA does (see
-Section~\label{sec:csa}). Our new Connection Generator interface for
-NEST contains the following functions:
+Generator interface in NEST, although that uses indices running from
+zero. Our new Connection Generator interface for NEST contains the
+following functions:
 
 \begin{unlist}
 \item[\tt CGConnect], which takes a connection generator \emph{cg},
@@ -678,7 +677,7 @@ NEST contains the following functions:
   parameter names (e.g. \emph{weight}, \emph{delay}) to their index
   for the parameter value vector created by the call to \verb|next()|
   in the \verb|ConnectionGenerator| interface (see Section
-  \ref{sec:cgint}). The basic implementation of \verb|CGConnection| is
+  \ref{sec:cgint}). The basic implementation of \verb|CGConnect| is
   explained below.
 \item[\tt CGParse], which takes a serialized version of a connection
   generator in the string \emph{xml} and returns the corresponding
@@ -703,9 +702,9 @@ Datum, which can be shipped into NEST's simulation kernel and handled
 there using the C++ interface to the connection generator. In SLI,
 there is no direct way of creating a connection generator. However,
 the SLI functions \verb|CGParse| and \verb|CGParseFile| can read a
-serialized version of a connection generator from XML and
-reinstantiate the object, which can then be given to SLI's version of
-the \verb|CGConnect| function.
+serialized version of a connection generator either from a string or
+from an XML file and reinstantiate the object, which can then be given
+to SLI's version of the \verb|CGConnect| function.
 
 \ifdefined\INLINEFIGS
 \begin{figure}[ht]
@@ -735,133 +734,12 @@ the \verb|CGConnect| function.
 
 \Figure{3}{fig:sequence_diagram_nest} shows the different entities in
 NEST involved in a user call to \verb|CGConnect()|. After setting the
-masks for the connection generator, the NEST kernel iteratively calls
-\verb|next()| which returns the source and target index of the next
-connection and parameter values for the connection. The connections
-are established one by one by calling NEST's basic
+masks for the connection generator to tell it which neurons are local
+and which are remote, the NEST kernel iteratively calls \verb|next()|.
+This function returns source and target indices and parameter values
+for the connection or NULL, if there are no connections anymore. The
+connections are established one by one by calling NEST's basic
 \verb|Network::connect()| function.
-
-A connection generator identifies nodes of the network using source
-and target indices in ranges $[0, N_s-1]$ and $[0, N_t-1]$ where $N_s$
-is the number of source neurons and $N_t$ the number of target
-neurons, but NEST uses GIDs to identify neurons.  Internally,
-\verb|CGConnect()| needs to maintain a mapping between connection
-generator indices and GIDs. The following sections describe two
-algorithms required for this mapping, the detection of contiguous
-ranges in the lists of GIDs passed as arguments to \verb|CGConnect()|
-and index translation when preparing \verb|ConnectionGenerator| masks.
-
-\subsection*{Identifying contiguous ranges}
-
-When calling \verb|CGConnect|, the user supplies two sorted lists of
-neurons as pre- and post-synaptic populations. These lists do not
-necessarily have to contain contiguous GIDs.  Here we describe an
-$O(Nlog(n))$ algorithm for finding $N$ intervals of contiguous GIDs
-for a population of $n$ neurons.  The contiguous ranges inside the
-given lists are found one by one using binary search.
-
-The following listing contains the algorithm to find all contiguous
-ranges in a sorted list \emph{ls} using Python syntax. The variables
-\emph{left} and \emph{right} represent the start and end positions for
-one contiguos range in \emph{ls}.  The ranges discovered are collected
-in \emph{ranges}.
-
-First, we initialize \emph{ranges} to an empty list and the left
-border (\emph{left}) to the first position 0.
-
-\begin{pythoncode}
-ranges = []
-left = 0
-\end{pythoncode}
-
-The following loop will iterate over contiguous ranges of GIDs found
-in \emph{ls}, each range identified by the first position of the
-range, \emph{left}. The search is terminated when \emph{left} has
-reached the end of \emph{ls}.  For each range, its last position is
-found by the function \emph{get\_right()}. \emph{left} is then updated
-to point to next range after the end of the one found.
-
-\begin{pythoncode}
-while left < len (ls):
-    right = get_right (left, len (ls))
-    ranges.append((ls[left], ls[right]))
-    left = right + 1
-\end{pythoncode}
-
-The task of the \emph{get\_right()} function is to find and return the
-right border of the contiguous range of GIDs in \emph{ls} with lower
-and upper search boundaries \emph{low} and \emph{high}. The position
-is found using binary search. As search criterium, we check the offset
-between the position in \emph{ls} and the GID stored at that
-position. We begin by computing the correct offset, unique for the
-range.
-
-\begin{pythoncode}
-def get_right(low, high):
-    offset = ls[low] - low
-\end{pythoncode}
-
-In the following loop the binary search is performed. The half-open
-interval $[low, high)$ is successively reduced until it contains at
-most one element. If the element found in the middle of the
-interval, $mid$, has the correct offset, we continue the search with
-$mid + 1$ as lower boundary, otherwise $mid$ is taken as the upper
-boundary for next iteration.
-
-\begin{pythoncode}
-    while high - low > 1:
-        mid = (low + high) // 2
-        if ls[mid] - mid == offset:
-            low = mid + 1
-        else:
-            high = mid
-\end{pythoncode}
-
-$low$ can now point either to the element with the correct offset, in
-which case it is the right border to be found, or to the right of this
-position, in which case we need to subtract by 1.
-
-\begin{pythoncode}
-    if low < len (ls) and ls[low] - low != offset:
-        return low - 1
-    else:
-        return low
-\end{pythoncode}
-
-\subsection*{Index translation}
-
-All elements in NEST are identified by their global id and thus the
-range-finding procedure explained in the previous section returns the
-ranges in the domain of GIDs. A connection generator, however, expects
-neuron indices to start at 0 and contiguously enumerate a full
-population.  The \verb|ConnectionGenerator| interface (Section
-\ref{sec:cgint}) expects a mask consisting of the source and target
-index sets to be specified.  For source indices and for target indices
-in the serial case, determining these sets is trivial (lower bound is
-0, upper bound is population size minus one).  When the NEST simulator
-is executed on multiple MPI processes, however, the set of target
-indices in one rank is a \emph{subset} of the full index range,
-because only connections to target neurons actually represented on the
-local rank should be realized. This is the basis for the good scaling
-seen in Section~\ref{sec:benchmarks}.  This consequence is that we
-have to translate NEST GIDs to connection generator indices during the
-specification of the masks and back when we create the
-connections. (The latter also holds for the serial case.)
-
-Index sets in a \verb|ConnectionGenerator| mask are specified as
-vectors of index ranges plus a \emph{skip} value which corresponds to
-the turn-around for round-robin distribution of neurons onto MPI
-processes.  The target masks only contain the local nodes in the
-population. This is achieved by 1. setting \emph{skip} to the number
-of MPI processes, and 2. assuming the index-translated ID of the first
-local neuron as the first entry of the mask for that range. Together
-with the skip this allows to find all local nodes in the
-range. However, it might happen that this procedure leads to a
-situation where the resulting range is empty on a certain process,
-because the first local ID is already beyond the final element of the
-range. In this case, the range is not added to the mask on that
-particular process.
-
 
 %----------------------------------------------------------------------
 
