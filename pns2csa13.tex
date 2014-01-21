@@ -920,13 +920,9 @@ The run time benchmark (\Figure{5}{fig:native_benchmarks}A) again used
 one MPI process and varied the number of neurons from $10^2$ to $10^5$
 with about one sample per order of magnitude. It shows that all tested
 variants for setting up the connectivity scale equally well with
-slopes sloghtly below 2. The vertical offset between the native
-interfaces and the CSA object iterated on the Python level on the one
-side and the CSA object iterated on the C++ level on the other
-suggests that NEST would benefit from a native implementation of a
-Bernoulli trial based connection routine to set up such connectivity
-patterns in order to avoid the overhead that results from using RCC in
-a loop involving multiple software layers.
+slopes sloghtly below 2. The offset between NEST's RCC (written in
+C++, but called repeatedly from Python) to the CSA object iterated in
+C++ can be attributed to overhead in the additional software layers.
 
 As in (\Figure{4}{fig:pynn_benchmarks}C, the comparative strong
 scaling benchmark shown in \Figure{5}{fig:native_benchmarks}B varied
@@ -935,12 +931,10 @@ in the network fixed at $48000$, resulting in a total of approx. 230
 million connections being created. The results are consistent with the
 data from \Figure{4}{fig:pynn_benchmarks}C in that scalability is
 destroyed if additional interpreted software layers are involved and
-that an iteration in C++ is favorable. Moreover, the data shows the
-same principal effect for NEST as \Figure{5}{fig:native_benchmarks}A,
-namely that the added software layers lead to an offset caused by
-function call overhead in the layers.
-
-[JE: I'll describe the scalability of NEST RCC when I have more data]
+that an iteration in C++ is favorable. The effect is even stronger for
+RCC, because its use to create a number of connections corresponding
+to that yielded by a Bernoulli trial scheme entails even more
+iterations through the additional software layers.
 
 The machine used for benchmarking was equipped with 4 12-core AMD
 Operon 6174 (Magny Cours) processors, organized into 8 NUMA domains
@@ -1002,6 +996,14 @@ such a library be provided through the libneurosim software package?
 We believe that the answer to this and similar questions is a matter
 of judgement. It would certainly not make sense to collect all
 generically useful functionality in one monolithic library.
+
+The differences in run time and scalability between an iteration of
+the connection description in Python on the one side and the CSA
+object iterated on the C++ level on the other suggests that a compact
+description of connectivity iterated solely on the level of the
+simulator indeed has a huge impact. NEST and other simulators can thus
+greatly benefit from the availability of compact desctiptions such as
+enabled by the \verb|ConnectionGenerator| interface
 
 %----------------------------------------------------------------------
 
