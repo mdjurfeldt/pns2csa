@@ -371,14 +371,20 @@ instances of such objects:
 
 \section{The Connection-set Algebra}\label{sec:csa}
 
-The connection-set algebra is a formalism
-for network connectivity which can be used both when describing a
-network to a fellow researcher and when implementing a model for a
-simulator.  It is currently focused on connectivity which has a
-constructive or statistical element such that it can be specified by
-an algorithm, but it can also be used when all network connections are
-given or in cases where only some elements of the connectivity are
-explicitly specified. The distinguishing aspects of CSA are:
+The \verb|ConnectionGenerator| interface described in the previous
+section enables the simulator NEST to use the connection generating
+libraries \verb|csa| and \verb|libcsa|.  The performance of the
+coupled system is assessed by benchmarks in Section
+\ref{sec:benchmarks} and we now introduce these libraries.
+
+The connection-set algebra is a formalism for network connectivity
+which can be used both when describing a network to a fellow
+researcher and when implementing a model for a simulator.  It is
+currently focused on connectivity which has a constructive or
+statistical element such that it can be specified by an algorithm, but
+it can also be used when all network connections are given or in cases
+where only some elements of the connectivity are explicitly
+specified. The distinguishing aspects of CSA are:
 \begin{itemize}
 \item It is abstract. CSA deals with sets of \emph{connections}. A
   connection is an edge in a graph, with associated
@@ -401,19 +407,22 @@ explicitly specified. The distinguishing aspects of CSA are:
 Given source and target populations $P_s$ and $P_t$, a CSA
 connection-set is defined as the set of connections between $P_s$ and
 $P_t$ along with zero or more per-connection parameters such as weight
-or delay. As for a connection generator, elements of populations are
-enumerated using non-negative integers. Thus, a population $P$ is
-represented by an index set $\mathcal{I}$. One connection from $P_s$
-to $P_t$ is represented by the pair $(i, j)$, where $i \in
-\mathcal{I}_s, j \in \mathcal{I}_t$.  Such indices are similar to the
-GIDs (Global IDentifiers) of the NEURON and NEST simulators but
-normally start at 0 and run consecutively for each population.
-Introducing this abstraction, in the form of a mapping from objects in
-the simulation domain to integers, gives at least two major
-advantages: 1. The CSA does not need to care about the nature of the
-objects in $P$---they could just as well be synaptic boutons as
-neurons.  2. The index set $\mathcal{I}$ can be chosen to be infinite.
-The gain of this will be demonstrated in Section~\ref{sec:structure}.
+or delay. Similarly as for the connection generator, elements of
+populations are enumerated using non-negative integers. Thus, a
+population $P$ is represented by an index set $\mathcal{I}$. One
+connection from $P_s$ to $P_t$ is represented by the pair $(i, j)$,
+where $i \in \mathcal{I}_s, j \in \mathcal{I}_t$.  Such indices are
+similar to the GIDs (Global IDentifiers) of the NEURON and NEST
+simulators but normally start at 0 and run consecutively for each
+population.  Introducing this abstraction, in the form of a mapping
+from objects in the simulation domain to integers, gives at least two
+major advantages: 1. The CSA does not need to care about the nature of
+the objects in $P$---they could just as well be synaptic boutons as
+neurons.  2. The index set $\mathcal{I}$ can be chosen to be
+infinite. This is useful when generically specifying a connectivity
+pattern independently of the sizes of the specific source and target
+populations for which it will later be used. This is further discussed
+in Section~\ref{sec:structure}.
 
 \ifdefined\INLINEFIGS
 \begin{figure}[ht]
