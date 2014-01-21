@@ -1,0 +1,10 @@
+nest RandomConvergentConnect nocsa 48000 230400000 2077.285556 0.0 2077.285556 0 1
+nest RandomConvergentConnect nocsa 48000 115200000 1782.306507 0.0 1782.306507 1 2
+nest RandomConvergentConnect nocsa 48000 115200000 1782.317570 0.0 1782.317570 0 2
+PyNN FixedProbabilityConnector nocsa 48000 230415590 1135.850149 0.0 1135.850149 0 1
+PyNN FixedProbabilityConnector nocsa 48000 115215405 633.110096 0.0 633.110096 0 2
+PyNN FixedProbabilityConnector nocsa 48000 115200185 633.143787 0.0 633.143787 1 2
+PyNN FixedProbabilityConnector nocsa 48000 57594646 347.807374 0.0 347.807374 3 4
+PyNN FixedProbabilityConnector nocsa 48000 57620444 347.856429 0.0 347.856429 0 4
+PyNN FixedProbabilityConnector nocsa 48000 57594961 347.865419 0.0 347.865419 2 4
+PyNN FixedProbabilityConnector nocsa 48000 57605539 347.856767 0.0 347.856767 1 4
