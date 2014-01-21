@@ -250,8 +250,29 @@ even used simultaneously without a need to recompile the simulator.
 
 \subsection{The interface}\label{sec:cgint}
 
-The interface is designed as an abstract base class in C++ and
-consists of the following virtual functions:
+In neuronal network simulations, we often want to specify a projection
+between a source population of neurons $P_s$ to a target population
+$P_t$.  A projection consists of many individual connections between
+the source and target populations.  In nature, one such connection
+corresponds to an axon forming a synaptic contact on the
+spine/dendrite of a receiving neuron.  A connection generator object
+is modeled on concept of a projection.  The source and target
+populations are each enumerated using integer indices.  These indices
+are then used to specify source and target neuron identity and
+constitutes an abstraction barrier between the elements of a
+population and the connection generator.  This allows the elements to
+be other types of objects than neurons, for example dendritic
+sites.
+
+The principle of operation of the \verb|ConnectionGenerator| interface
+is an iteration over all connections represented by the object.  A
+simulator, or other software using a connection generator, repeatedly
+calls a function \verb|next()| until boolean \verb|false| is
+returned. Connections are represented by source and target index of
+connection, together with zero or more connection parameters.  The
+number of parameters is called the \emph{arity} of the connection
+generator.  The interface is designed as an abstract base class in C++
+and consists of the following virtual functions:
 
 \begin{unlist}
 \item[\tt int arity()]: Return the number of per-connection values
@@ -355,7 +376,7 @@ for network connectivity which can be used both when describing a
 network to a fellow researcher and when implementing a model for a
 simulator.  It is currently focused on connectivity which has a
 constructive or statistical element such that it can be specified by
-an algorithm but it can also be used when all network connections are
+an algorithm, but it can also be used when all network connections are
 given or in cases where only some elements of the connectivity are
 explicitly specified. The distinguishing aspects of CSA are:
 \begin{itemize}
@@ -377,29 +398,22 @@ explicitly specified. The distinguishing aspects of CSA are:
 
 \subsection{Basic concepts}
 
-In neuronal network simulations, we often want to specify a projection
-between a source population of neurons $P_s$ to a target population
-$P_t$.  A projection consists of many individual connections.  In
-nature, one such connection corresponds to an axon forming a synaptic
-contact on the spine/dendrite of a receiving neuron.  In the context
-of neuronal network simulation, the basic concept of a CSA
+Given source and target populations $P_s$ and $P_t$, a CSA
 connection-set is defined as the set of connections between $P_s$ and
 $P_t$ along with zero or more per-connection parameters such as weight
-or delay.
-
-In order to create an abstraction barrier between the actual neurons
-of a population $P$ and the CSA, we enumerate $P$ using non-negative
-integers from an index set $\mathcal{I}$ and let a connection from
-$P_s$ to $P_t$ be represented by the pair $(i, j)$, where $i \in
-\mathcal{I}_s, j \in \mathcal{I}_t$.  Such indices are similar to
-the GIDs (Global IDentifiers) of the NEURON and NEST simulators but
+or delay. As for a connection generator, elements of populations are
+enumerated using non-negative integers. Thus, a population $P$ is
+represented by an index set $\mathcal{I}$. One connection from $P_s$
+to $P_t$ is represented by the pair $(i, j)$, where $i \in
+\mathcal{I}_s, j \in \mathcal{I}_t$.  Such indices are similar to the
+GIDs (Global IDentifiers) of the NEURON and NEST simulators but
 normally start at 0 and run consecutively for each population.
 Introducing this abstraction, in the form of a mapping from objects in
 the simulation domain to integers, gives at least two major
 advantages: 1. The CSA does not need to care about the nature of the
-objects in $P$---they could just as well be synaptic boutons as neurons.
-2. The index set $\mathcal{I}$ can be chosen to be infinite.  The
-gain of this will be demonstrated in Section~\ref{sec:structure}.
+objects in $P$---they could just as well be synaptic boutons as
+neurons.  2. The index set $\mathcal{I}$ can be chosen to be infinite.
+The gain of this will be demonstrated in Section~\ref{sec:structure}.
 
 \ifdefined\INLINEFIGS
 \begin{figure}[ht]
