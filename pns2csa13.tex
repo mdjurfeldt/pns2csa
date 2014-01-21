@@ -304,8 +304,8 @@ and consists of the following virtual functions:
 \end{unlist}
 
 \subsection{libneurosim}\label{sec:libneurosim}
-Where does the \verb|ConnectionGenerator| interface definition (in the
-form of a C++ header file plus supporting code) belong?  If it is put
+If the C++ header file for the \verb|ConnectionGenerator| interface
+definition and its supporting code is put
 in the simulator or connection generating library source trees, it
 will be duplicated over simulators or libraries.  As new versions of
 the interface are developed, the situation will quickly become
@@ -456,12 +456,11 @@ connections to values:
 \begin{equation}
 V : \mathcal{I}_s \times \mathcal{I}_t \rightarrow \mathcal{V}
 \end{equation}
-where $\mathcal{V}$ is some codomain. In the original CSA paper
-\citep{djurfeldt12}, such a function is, somewhat inconsistently,
-called a \emph{value set}. An example of a value set is distance
-dependent delays with added noise sampled from a clipped random normal
-distribution. Value sets are typically used to assign a weight or
-delay to connections.
+where $\mathcal{V}$ is some codomain. In \citet{djurfeldt12}, such a
+function is called a \emph{value set}. An example of a value set is
+distance dependent delays with added noise sampled from a clipped
+random normal distribution. Value sets are typically used to assign a
+weight or delay to connections.
 
 A CSA \emph{connection-set}, $C$, is a tuple of a mask and zero or
 more value sets:
@@ -549,7 +548,7 @@ CSA. This implementation has been released as free software under the
 GPL and is available at the INCF software center
 (\url{http://software.incf.org/software/csa}). A third implementation
 in C++, \verb|libcsa|, is currently under development and will also be
-released under the GPL. It comes with Python bindings such that CSA
+released under the GPL. It provides Python bindings such that CSA
 objects can be formed by Python level expressions with similar syntax
 as used with the \verb|csa| library. For further information about
 this syntax, the reader is referred to the tutorial in the \verb|csa|
