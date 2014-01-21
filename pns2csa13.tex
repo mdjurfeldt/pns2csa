@@ -873,6 +873,75 @@ the square root of the desired number of connections. In the realm of
 natural numbers, this leads to a slight error, which was, however,
 well acceptable with values between $-1.42$\permil and $+1.08$\permil.
 
+\subsection{Comparison to native interfaces}
+
+To compare the performance of the \verb|ConnectionGenerator| interface
+to more traditional ways of setting up connectivity, we also performed
+performance and scaling benchmarks of the native interfaces for random
+connectivity in PyNN and NEST. \Figure{5}{fig:native_benchmarks}
+contrasts CSA's \emph{random} mask with a probability of $0.1$ with
+PyNN's \verb|FixedProbailityConnector| (FPC) and NEST's function
+\verb|RandomConvergentConnect| (RCC).
+
+Please note that NEST does not provide a Bernoulli trial based
+connection scheme such as used by FPC in PyNN and the \emph{random}
+mask in CSA and RCC was chosen because it is the closest function to
+resemble such a method. The use of RCC results, however, in a bias
+towards the other methods over NEST, as it requires iterative calls to
+RCC from the Python level, which entail a certain overhead in SLI,
+PyNEST and the C++ implementation of RCC itself (data not shown).
+
+\ifdefined\INLINEFIGS
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=.7]{benchmarks/native_routines.pdf}
+\caption{Benchmark results comparing the use of CSA in NEST through
+  PyNN and the native interfaces for random connectivity in PyNN and
+  NEST. Color and dash codes are given in the legends. Slope is the
+  ratio of logarithms of the last and first data point shown. Pale
+  lines denote the expected scaling. \emph{PyNN.FCC} corresponds to
+  PyNN's \texttt{FixedProbailityConnector}, \emph{nest.RCC} to NEST's
+  function \texttt{RandomConvergentConnect}. \textbf{A} shows the run
+  time for connecting a network of different numbers of neurons. The
+  number of connections scales with $O(n^2)$ for $n$ neurons. The
+  expected slope is thus 2. The data for libcsa is the same as shown
+  in \Figure{4}{fig:pynn_benchmarks}A. \textbf{B} shows a strong
+  scaling experiment, wiring a network of 48,000 neurons using CSAs
+  \emph{random} mask with a probability of 0.1 and the corresponding
+  native functions of PyNN and NEST. The experiment varies the number
+  of MPI processes from 1 to 48. The expected slope is -1, meaning
+  that the run time drops linearly with the number of processes. The
+  data for libcsa is the same as shown in
+  \Figure{4}{fig:pynn_benchmarks}C.}\label{fig:native_benchmarks}
+\end{figure}
+\fi
+
+The run time benchmark (\Figure{5}{fig:native_benchmarks}A) again used
+one MPI process and varied the number of neurons from $10^2$ to $10^5$
+with about one sample per order of magnitude. It shows that all tested
+variants for setting up the connectivity scale equally well with
+slopes sloghtly below 2. The vertical offset between the native
+interfaces and the CSA object iterated on the Python level on the one
+side and the CSA object iterated on the C++ level on the other
+suggests that NEST would benefit from a native implementation of a
+Bernoulli trial based connection routine to set up such connectivity
+patterns in order to avoid the overhead that results from using RCC in
+a loop involving multiple software layers.
+
+As in (\Figure{4}{fig:pynn_benchmarks}C, the comparative strong
+scaling benchmark shown in \Figure{5}{fig:native_benchmarks}B varied
+the number of MPI processes while keeping the total number of neurons
+in the network fixed at $48000$, resulting in a total of approx. 230
+million connections being created. The results are consistent with the
+data from \Figure{4}{fig:pynn_benchmarks}C in that scalability is
+destroyed if additional interpreted software layers are involved and
+that an iteration in C++ is favorable. Moreover, the data shows the
+same principal effect for NEST as \Figure{5}{fig:native_benchmarks}A,
+namely that the added software layers lead to an offset caused by
+function call overhead in the layers.
+
+[JE: I'll describe the scalability of NEST RCC when I have more data]
+
 The machine used for benchmarking was equipped with 4 12-core AMD
 Operon 6174 (Magny Cours) processors, organized into 8 NUMA domains
 with 6 cores each. Other than the choice of the number of MPI
