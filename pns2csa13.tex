@@ -204,56 +204,6 @@ describing its use from higher software layers, such as the PyNN
 framework.  Finally, we provide benchmarks for different use case
 scenarios of the interface.
 
-\subsection{NEST}\label{sec:nest}
-
-NEST is a simulator for large networks of point neurons or neuron
-models with few electrical compartments
-\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It
-is suited for a broad range of neuronal network modeling approaches
-and runs on a large variety of computer architectures. NEST is
-parallelized using OpenMP \citep{OpenMPSpec} and MPI
-\citep{MPIForum94} and scales well on large clusters of multi-core
-processors and supercomputers \citep{Helias12_26}.
-
-The network description is a script, written either in SLI, NEST's
-built-in simulation language, or in Python, using the Python interface
-to NEST \citep[PyNEST;][]{Eppler09_12}. To build a network in NEST,
-the user first creates the neurons of the network and devices for
-stimulation and measurement using the \verb|Create()| function and
-then connects the elements with each other. NEST provides two basic
-ways for creating connectivity.
-
-\subsubsection{Native connection functions:}
-
-The most basic connect function, \verb|Connect()|, takes a list of
-pre-synaptic neurons (or devices) and a list of the same amount of
-post-synaptic neurons (or devices) and connects them in a one-to-one
-fashion. Because of the function call overhead, this function is not
-very efficient to use when creating large networks.
-
-For such cases, the connection functions \verb|ConvergentConnect()|
-and \verb|DivergentConnect()| can be used to create multiple
-connections with a single call. In addition, random variants for both
-functions exist to support the user in creating networks on the basis
-of knowledge of connectivity statistics. However, random connection
-parameters (e.g. \emph{weight} or \emph{delay}) need to be specifiec
-by user code and supplied to NEST after the creation of connections.
-
-\subsubsection{Topology module:}
-
-To ease the creation of networks with topological relations between
-the neurons and organizations of neurons into layers and areas, NEST
-provides a Topology module \citep{Plesser_13}. It supports the user in
-connecting neurons and randomly initializing synapse parameters based
-on geometry or topological relationships in the network.
-
-The design of the novel interface for using connection generators from
-NEST is explained in Section~\ref{sec:conn_gen_nest}. In Section
-\ref{sec:benchmarks}, we provide benchmarks for different use case
-scenarios of the interface. A comparison of the performance of the
-novel CSA interface, the native connection routines and the Topology
-module of NEST is subject to further work.
-
 %----------------------------------------------------------------------
 
 \section{The Connection Generator API}
@@ -416,13 +366,14 @@ explicitly specified. The distinguishing aspects of CSA are:
 \item A connection-set can represent a \emph{type} of
   connectivity---a connectivity pattern---in addition to the connectivity
   of a specific network.
-\item It is an algebra: there are pre-existing connection-sets and
+\item It is an algebra: There are pre-existing connection-sets and
   operators to define new connection-sets in terms of existing ones.
 \item It enables a succinct and precise description and definition of
   connectivity in terms of such algebraic expressions.
 \item There are ways to implement CSA on a computer which are both
   efficient and scalable on a parallel computer.
 \end{itemize}
+
 
 \subsection{Basic concepts}
 
@@ -603,6 +554,58 @@ latter two implementations in Python and C++, \verb|csa| and
 
 \section{Using connection generators in NEST}\label{sec:conn_gen_nest}
 
+NEST is a simulator for large networks of point neurons or neuron
+models with few electrical compartments
+\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It
+is suited for a broad range of neuronal network modeling approaches
+and runs on a large variety of computer architectures. NEST is
+parallelized using OpenMP \citep{OpenMPSpec} and MPI
+\citep{MPIForum94} and scales well on large clusters of multi-core
+processors and supercomputers \citep{Helias12_26}.
+
+The network description is a script, written either in SLI, NEST's
+built-in simulation language, or in Python, using the Python interface
+to NEST \citep[PyNEST;][]{Eppler09_12}. The following description uses
+the PyNEST syntax if not noted otherwise.
+
+To build a network in NEST,
+the user first creates the neurons of the network and devices for
+stimulation and measurement using the \verb|Create()| function and
+then connects the elements with each other. NEST provides two basic
+ways for creating connectivity.
+
+\subsubsection{Native connection functions:}
+
+The most basic connect function, \verb|Connect()|, takes a list of
+pre-synaptic neurons (or devices) and a list of the same amount of
+post-synaptic neurons (or devices) and connects them in a one-to-one
+fashion. Because of the function call overhead, this function is not
+very efficient to use when creating large networks.
+
+For such cases, the connection functions \verb|ConvergentConnect()|
+and \verb|DivergentConnect()| can be used to create multiple
+connections with a single call. In addition, random variants for both
+functions exist to support the user in creating networks on the basis
+of knowledge of connectivity statistics. However, random connection
+parameters (e.g. \emph{weight} or \emph{delay}) need to be specifiec
+by user code and supplied to NEST after the creation of connections.
+
+\subsubsection{Topology module:}
+
+To ease the creation of networks with topological relations between
+the neurons and organizations of neurons into layers and areas, NEST
+provides a Topology module \citep{Plesser_13}. It supports the user in
+connecting neurons and randomly initializing synapse parameters based
+on geometry or topological relationships in the network.
+
+The design of the novel interface for using connection generators from
+NEST is explained in Section~\ref{sec:conn_gen_nest}. In Section
+\ref{sec:benchmarks}, we provide benchmarks for different use case
+scenarios of the interface. A comparison of the performance of the
+novel CSA interface, the native connection routines and the Topology
+module of NEST is subject to further work.
+
+
 As detailed in Section~\ref{sec:nest}, NEST has several methods for
 connecting neurons into a network built-in. However, while the native
 routines scale very well \citep{Helias12_26}, they are only suitable
@@ -746,7 +749,7 @@ the simulator. This representation can be iterated and expanded at the
 simulator level and thus avoid overhead. Moreover, this allows
 efficient parallelization at the lower software layers.
 During this study, we extended the NEST backend for PyNN with a new
-and specialized \verb|CSAConnector| which simply passes the complete
+and specialized \verb|CSAConnector| which passes the complete
 connection generator object down to the simulator (by calling PyNEST's
 \verb|CGConnect()| function). The iteration over the connections can
 then take place in NEST (see Section~\ref{sec:conn_gen_nest}). This
