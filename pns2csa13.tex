@@ -244,9 +244,10 @@ efficient than using the basic connection routines of the simulator.
 
 In PyNN, a neuronal network is built from \verb|Population|s of
 neurons and \verb|Projection|s between them. Each \verb|Projection| is
-created by a \verb|Connector|, which knows how to set up the individual
-connections. Different \verb|Connector|s exist and allow to set up a variety
-of different connection patterns.
+created by a \verb|Connector|, which knows how to set up the
+individual connections. Different \verb|Connector|s exist and allow to
+set up a variety of different deterministic and probabalistic
+connection patterns.
 
 However, one of the regular problems with this approach is that PyNN
 needs to break up the compact high-level description of connectivity
@@ -266,7 +267,7 @@ solution is explained in Section~\ref{sec:conn_gen_pynn}.
 Section~\ref{sec:benchmarks} contains runtime and scalability
 benchmarks for the new connector.
 
-\subsection{NEST}
+\subsection{NEST}\label{sec:nest}
 
 NEST is a simulator for large networks of point neurons or neuron
 models with few electrical compartments
@@ -279,14 +280,13 @@ processors and supercomputers \citep{Helias12_26}.
 
 The network description is a script, written either in SLI, NEST's
 built-in simulation language, or in Python, using the Python interface
-to NEST \citep[PyNEST;][]{Eppler09_12}. The following description uses
-the PyNEST syntax if not noted otherwise. To build a network in NEST,
+to NEST \citep[PyNEST;][]{Eppler09_12}. To build a network in NEST,
 the user first creates the neurons of the network and devices for
 stimulation and measurement using the \verb|Create()| function and
 then connects the elements with each other. NEST provides two basic
 ways for creating connectivity.
 
-\subsubsection*{Native connection functions:}
+\subsubsection{Native connection functions:}
 
 The most basic connect function, \verb|Connect()|, takes a list of
 pre-synaptic neurons (or devices) and a list of the same amount of
@@ -302,7 +302,7 @@ of knowledge of connectivity statistics. However, random connection
 parameters (e.g. \emph{weight} or \emph{delay}) need to be specifiec
 by user code and supplied to NEST after the creation of connections.
 
-\subsubsection*{Topology module:}
+\subsubsection{Topology module:}
 
 To ease the creation of networks with topological relations between
 the neurons and organizations of neurons into layers and areas, NEST
@@ -642,25 +642,29 @@ instances of such objects:
 
 \section{Using connection generators in NEST}\label{sec:conn_gen_nest}
 
-NEST is a simulator for large networks of point neurons or neuron
-models with few electrical compartments
-\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It
-is suited for a broad range of neuronal network modeling approaches
-and runs on a large variety of computer architectures. NEST is
-parallelized using OpenMP \citep{OpenMPSpec} and MPI
-\citep{MPIForum94} and scales well on large clusters of multi-core
-processors and supercomputers \citep{Helias12_26}.
+As detailed in Section~\ref{sec:nest}, NEST provides several built-in
+methods for connecting neurons into a network. However, while the
+native routines scale very well \citep{Helias12_26}, they are only
+available for creating simple patterns such as convergent/divergent
+connectivity. On the other hand, the topology module
+\citep{Plesser_13} allows to form more complex structures, but
+requires neurons to be organized in Layers and sheets. This leads to
+overhead, which is also reflected in the performance and scaling.
 
-The network description is a script, written either in SLI, NEST's
-built-in simulation language, or in Python, using the Python interface
-to NEST \citep[PyNEST;][]{Eppler09_12}. The following description uses
-the PyNEST syntax if not noted otherwise.
+To support the Connection Generator interface in NEST and thus make
+more connection generating libraries available to the user, we created
+the ConnectionGeneratorModule. It is implemented as a plugin for NEST
+which extends both user interfaces (SLI and PyNEST) and builds on
+\verb|libneurosim| (see Section~\label{sec:libneurosim}).
 
-To support the Connection Generator interface in NEST we created the
-ConnectionGeneratorModule, a plugin for NEST which can be
-(de-)activated at configure time. The module is built on top of
-\verb|libneurosim| and extends both user interfaces (SLI and PyNEST)
-with the following functions:
+All elements (neurons or devices) in NEST are identified uniquely by
+an integer number, their global id (\emph{GID}). As all existing
+connection routines in NEST work either on single GIDs or on lists of
+GIDs, we decided to also use this convention for the Connection
+Generator interface, although the library used though it might well
+use indices running from 0, as for example the CSA does (see
+Section~\label{sec:csa}). Our new Connection Generator interface for
+NEST contains the following functions:
 
 \begin{unlist}
 \item[\tt CGConnect], which takes a connection generator \emph{cg},
@@ -671,7 +675,8 @@ with the following functions:
   parameter names (e.g. \emph{weight}, \emph{delay}) to their index
   for the parameter value vector created by the call to \verb|next()|
   in the \verb|ConnectionGenerator| interface (see Section
-  \ref{sec:cgint}).
+  \ref{sec:cgint}). The basic implementation of \verb|CGConnection| is
+  explained below.
 \item[\tt CGParse], which takes a serialized version of a connection
   generator in the string \emph{xml} and returns the corresponding
   object. A special use of this function exists on supercomputers,
@@ -745,15 +750,12 @@ and index translation when preparing \verb|ConnectionGenerator| masks.
 
 \subsection*{Identifying contiguous ranges}
 
-All elements (neurons or devices) in NEST are identified uniquely by
-an integer number, their global id (\emph{GID}). All connection
-routines work either on single GIDs or on lists of GIDs. When calling
-\verb|CGConnect|, the user supplies two sorted lists of neurons as
-pre- and post-synaptic populations. These lists do not necessarily
-have to contain contiguous GIDs.  Here we describe an $O(Nlog(n))$
-algorithm for finding $N$ intervals of contiguous GIDs for a
-population of $n$ neurons.  The contiguous ranges inside the given
-lists are found one by one using binary search.
+When calling \verb|CGConnect|, the user supplies two sorted lists of
+neurons as pre- and post-synaptic populations. These lists do not
+necessarily have to contain contiguous GIDs.  Here we describe an
+$O(Nlog(n))$ algorithm for finding $N$ intervals of contiguous GIDs
+for a population of $n$ neurons.  The contiguous ranges inside the
+given lists are found one by one using binary search.
 
 The following listing contains the algorithm to find all contiguous
 ranges in a sorted list \emph{ls} using Python syntax. The variables
@@ -862,10 +864,11 @@ particular process.
 
 \section{Using connection generators in PyNN}\label{sec:conn_gen_pynn}
 
-Since version 0.7, PyNN has provided the generic \verb|CSAConnector|,
-which can iterate a CSA connection set and issue one by one connect
-calls to the different backends. Internally, the connector executes
-the following two steps:
+In addition to the basic \verb|Connector|s described in
+Section~\ref{sec:pynn}, PyNN provides the generic \verb|CSAConnector|
+since version 0.7. It can iterate a CSA connection set and issue one
+by one connect calls to the different backends. Internally, the
+connector executes the following two steps:
 
 \begin{enumerate}
 \item Form a finite connection-set adapted to the actual sizes of the
@@ -879,7 +882,7 @@ the following two steps:
 \end{enumerate}
 
 During this study, we extended the NEST backend for PyNN with a new
-and specialized \verb|CSAConnector| which passes the complete
+and specialized \verb|CSAConnector| which simply passes the complete
 connection generator object down to the simulator (by calling PyNEST's
 \verb|CGConnect()| function). The iteration over the connections can
 then take place in NEST (see Section~\ref{sec:conn_gen_nest}). This
@@ -1056,15 +1059,7 @@ RCC, because its use to create a number of connections corresponding
 to that yielded by a Bernoulli trial scheme entails even more
 iterations through the additional software layers.
 
-\subsection{Software versions used}
-
-These benchmarks were using csa revision 119, libcsa from an internal
-git repository (git@wand.pdc.kth.se:libcsa.git, version 3ef2db519a),
-the development version of PyNN from
-https://github.com/NeuralEnsemble/PyNN/ (version db76c748cd) and NEST
-revision r10722 from the internal Subversion repository.
-
-\subsection{Hardware system used}
+\subsection{Benchmark environment}
 
 The machine used for benchmarking was equipped with 4 12-core AMD
 Operon 6174 (Magny Cours) processors, organized into 8 NUMA domains
@@ -1074,6 +1069,14 @@ processes to cores, altering the affinity of threads to cores, etc.)
 were taken to avoid distortions of the results. Users are, however,
 free to benefit from such techniques to improve the performance of
 their simulations.
+
+\subsection{Software versions used}
+
+These benchmarks were using csa revision 119, libcsa from an internal
+git repository (git@wand.pdc.kth.se:libcsa.git, version 3ef2db519a),
+the development version of PyNN from
+https://github.com/NeuralEnsemble/PyNN/ (version db76c748cd) and NEST
+revision r10722 from the internal Subversion repository.
 
 %----------------------------------------------------------------------
 
