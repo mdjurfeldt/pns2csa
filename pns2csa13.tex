@@ -72,10 +72,8 @@
 \onecolumn
 \firstpage{1}
 
-\title[CSA in NEST and PyNN]{Efficient generation of connectivity in
-  neuronal networks from simulator-independent descriptions}
-%Modeling connectivity: Connection-set
-%Algebra in NEST and PyNN}
+\title[CSA in NEST and PyNN]{Modeling connectivity: Connection-set
+ Algebra in NEST and PyNN}
 \author[\firstAuthorLast ]{\Authors}
 \address{}
 \correspondance{}
@@ -253,42 +251,27 @@ even used simultaneously without a need to recompile the simulator.
 \subsection{The interface}\label{sec:cgint}
 
 In neuronal network simulations, we often want to specify a projection
-between a source population of neurons to a target population.
-A projection consists of many individual connections between
-the populations.  In nature, one such connection
+between a source population of neurons $P_s$ to a target population
+$P_t$.  A projection consists of many individual connections between
+the source and target populations.  In nature, one such connection
 corresponds to an axon forming a synaptic contact on the
 spine/dendrite of a receiving neuron.  A connection generator object
-is modeled on the concept of a projection.  The source and target
-populations are each enumerated using consecutive, non-negative integer indices
-starting from 0.
-These indices
-are used to specify source and target neuron identity for a connection
-and constitutes an abstraction barrier between the actual elements of a
+is modeled on concept of a projection.  The source and target
+populations are each enumerated using integer indices.  These indices
+are then used to specify source and target neuron identity and
+constitutes an abstraction barrier between the elements of a
 population and the connection generator.  This allows the elements to
 be other types of objects than neurons, for example dendritic
-sites or synapses.
+sites.
 
 The principle of operation of the \verb|ConnectionGenerator| interface
-is an iteration over connections represented by the object.  A
+is an iteration over all connections represented by the object.  A
 simulator, or other software using a connection generator, repeatedly
 calls a function \verb|next()| until boolean \verb|false| is
-returned. Connections are represented by source and target index,
-together with zero or more connection parameters.  The
+returned. Connections are represented by source and target index of
+connection, together with zero or more connection parameters.  The
 number of parameters is called the \emph{arity} of the connection
-generator.
-
-Connection generators can be flexible with regard to the sizes of the
-source and target populations. Which source and target index sets that
-are relevant to iterate over for the populations at hand are specified
-through the interface as a \emph{mask}.  In the case of a parallel
-simulator, a specific mask is given per rank.  Typically, the source
-index set is the same in all such masks while the target index sets
-are unique for each rank and non-overlapping.  Each rank should
-provide all masks (i.e. the set of masks for all ranks). Some
-connection generators can use such information to avoid the need for
-communication with other ranks.
-
-The interface is designed as an abstract base class in C++
+generator.  The interface is designed as an abstract base class in C++
 and consists of the following virtual functions:
 
 \begin{unlist}
@@ -658,7 +641,7 @@ To support the Connection Generator interface in NEST and thus make
 more connection generating libraries available to the user, we created
 the \verb|ConnectionGeneratorModule|. It is implemented as a plugin
 for NEST which extends both user interfaces (SLI and PyNEST) and
-builds on \verb|libneurosim| (see Section~\label{sec:libneurosim}).
+builds on \verb|libneurosim| (see Section~\ref{sec:libneurosim}).
 
 All elements (neurons or devices) in NEST are identified uniquely by
 an integer number, their global id (\emph{GID}). As all existing
