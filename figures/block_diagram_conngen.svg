@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="480"
-   height="160"
+   height="165"
    id="svg3034"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0659496"
-     inkscape:cx="334.53913"
-     inkscape:cy="9.0830483"
+     inkscape:zoom="2.1318992"
+     inkscape:cx="264.03457"
+     inkscape:cy="-6.2525855"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -44,8 +44,8 @@
      inkscape:snap-bbox-midpoints="false"
      inkscape:object-nodes="false"
      inkscape:snap-smooth-nodes="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="713"
+     inkscape:window-width="1920"
+     inkscape:window-height="1139"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -62,7 +62,7 @@
        snapvisiblegridlinesonly="true"
        dotted="true"
        originx="-150px"
-       originy="-450px" />
+       originy="-449.98718px" />
   </sodipodi:namedview>
   <metadata
      id="metadata3039">
@@ -80,7 +80,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-150,-442.36218)">
+     transform="translate(-150,-437.375)">
     <rect
        transform="scale(-1,1)"
        style="fill:#eeeeec;stroke:#0251a0;stroke-width:0.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -91,12 +91,17 @@
        y="547.86218"
        rx="2.5"
        ry="2.5" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4098"
+       d="m 508.1,574.86218 -186.20001,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <rect
        ry="2.5"
        rx="2.5"
-       y="442.86218"
+       y="437.86221"
        x="-629.5"
-       height="99.000031"
+       height="104"
        width="479"
        id="rect4982-9"
        style="fill:#eeeeec;stroke:#0251a0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -112,55 +117,25 @@
          x="154.01562"
          y="561.0575"
          id="tspan3054">C++</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
-       x="154.01562"
-       y="456.0575"
-       id="text3060"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3062"
-         x="154.01562"
-         y="456.0575">Python</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 270,477.86215 0,19.00003"
-       id="path3318"
-       inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path4088"
-       d="m 270,532.42558 0,24.95958"
-       style="fill:none;stroke:#000000;stroke-width:0.99999988;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path4090"
-       d="m 560,477.86215 0,19.00003"
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       d="m 270,463.39804 0,98.99989"
+       style="fill:none;stroke:#000000;stroke-width:0.99999982;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.99999988;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 560,532.42558 0,24.95958"
+       d="m 560,463.26645 0,98.99998"
        id="path4092"
        inkscape:connector-curvature="0" />
     <rect
        ry="2.5"
        rx="2.4999995"
-       y="497.86215"
+       y="482.86221"
        x="210.5"
-       height="34.000031"
+       height="49"
        width="119"
        id="rect3219"
        style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3231"
-       width="409.2265"
-       height="24"
-       x="210.47464"
-       y="452.86218"
-       rx="2.5000002"
-       ry="2.4999998" />
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3302"
@@ -183,9 +158,9 @@
        style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3310"
        width="119"
-       height="34.000031"
+       height="49"
        x="500.5"
-       y="497.86215"
+       y="482.86221"
        rx="2.4999995"
        ry="2.5" />
     <rect
@@ -209,46 +184,70 @@
          id="tspan3304">Simulator kernel</tspan></text>
     <text
        id="text3215"
-       y="510.46472"
-       x="270.12012"
+       y="504.15128"
+       x="269.72461"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
        xml:space="preserve"><tspan
-         y="510.46472"
-         x="270.12012"
-         sodipodi:role="line"
-         id="tspan3298">Simulator Python</tspan><tspan
          id="tspan3221"
-         y="525.46472"
-         x="270.12012"
-         sodipodi:role="line">bindings</tspan></text>
+         y="504.15128"
+         x="269.72461"
+         sodipodi:role="line">Python bindings</tspan><tspan
+         y="519.15125"
+         x="269.72461"
+         sodipodi:role="line"
+         id="tspan3022">for simulator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
+       x="154.01562"
+       y="451.0575"
+       id="text3060"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3062"
+         x="154.01562"
+         y="451.0575">Python</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#025153;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3231"
+       width="409.2265"
+       height="24"
+       x="210.47464"
+       y="447.86218"
+       rx="2.5000002"
+       ry="2.4999998" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
        x="415"
-       y="467.96472"
+       y="462.96472"
        id="text3225"><tspan
          sodipodi:role="line"
          id="tspan3227"
          x="415"
-         y="467.96472">User level / simulation scripts</tspan><tspan
+         y="462.96472">User level / simulation scripts</tspan><tspan
          sodipodi:role="line"
          x="415"
-         y="482.96472"
+         y="477.96472"
          id="tspan3229" /></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans"
-       x="559.61328"
-       y="510.46472"
+       x="559.75977"
+       y="495.46475"
        id="text3235"><tspan
          sodipodi:role="line"
-         x="559.61328"
-         y="510.46472"
-         id="tspan3239">Python bindings for</tspan><tspan
+         x="559.75977"
+         y="495.46475"
+         id="tspan3239">Python bindings</tspan><tspan
          id="tspan3263"
          sodipodi:role="line"
-         x="559.61328"
-         y="525.46472">conn.-gen. library</tspan></text>
+         x="559.75977"
+         y="510.46475">for connectivity-</tspan><tspan
+         sodipodi:role="line"
+         x="559.75977"
+         y="525.46472"
+         id="tspan3024">generating library</tspan></text>
     <text
        id="text3245"
        y="570.46472"
@@ -258,7 +257,7 @@
          id="tspan3249"
          y="570.46472"
          x="560.08496"
-         sodipodi:role="line">Connection</tspan><tspan
+         sodipodi:role="line">Connectivity-</tspan><tspan
          id="tspan3255"
          y="585.46472"
          x="560.08496"
@@ -277,15 +276,5 @@
          sodipodi:role="line"
          x="414.80078"
          y="586.65125">interface</tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       id="path4098"
-       d="m 349.50003,574.86218 -19.00003,0"
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 499.50003,574.86218 -19.00003,0"
-       id="path4100"
-       inkscape:connector-curvature="0" />
   </g>
 </svg>
