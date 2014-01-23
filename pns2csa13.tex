@@ -171,11 +171,11 @@ makes both the simulator and the connectivity-generating library
 replaceable and therefore gives maximum flexibility to the modeller.
 
 In this article we first describe the connection generator interface.
-As an example of a connectivity-generating library, we then give a brief
-overview of CSA and of different software libraries that support using
-CSA in Python and C++ code. We show how the connection generator
+As an example of a connectivity-generating library, we then give a
+brief overview of CSA and of different software libraries that support
+using CSA in Python and C++ code. We show how the connection generator
 interface has been integrated in the NEST simulator
-\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204},
+\citep[\url{http://www.nest-simulator.org};][]{Gewaltig_07_11204},
 enabling the use of connection libraries such as CSA, before
 describing its use from higher software layers, such as the PyNN
 framework.  Finally, we provide benchmarks for different use case
@@ -571,38 +571,40 @@ latter two implementations in Python and C++, \verb|csa| and
 
 NEST is a simulator for large networks of point neurons or neuron
 models with few electrical compartments
-\citep[\url{http://www.nest-initiative.org};][]{Gewaltig_07_11204}. It
+\citep[\url{http://www.nest-simulator.org};][]{Gewaltig_07_11204}. It
 is suited for a broad range of neuronal network modeling approaches
 and runs on a large variety of computer architectures. NEST is
 parallelized using OpenMP \citep{OpenMPSpec} and MPI
-\citep{MPIForum94} and scales well on large clusters of multi-core
-processors and supercomputers \citep{Helias12_26}.
+\citep{MPIForum94} and scales well on ordinary desktop computers to
+large clusters of multi-core processors and supercomputers
+\citep{Helias12_26}.
 
 The network description is a script, written either in SLI, NEST's
 built-in simulation language, or in Python, using the Python interface
 to NEST \citep[PyNEST;][]{Eppler09_12}. To build a network in NEST,
 the user first creates the neurons of the network and devices for
 stimulation and measurement using the \verb|Create| function and then
-connects the elements with each other. NEST provides two basic ways
-for creating connectivity.
+connects the elements with each other.
 
-\subsubsection{Native connection functions}
+\subsection{Native connection functions}
 
-The most basic connect function, \verb|Connect|, takes a list of
-pre-synaptic neurons (or devices) and a list of the same amount of
-post-synaptic neurons (or devices) and connects them in a one-to-one
-fashion. Because of the function call overhead, this function is not
-very efficient to use when creating large networks.
+The most basic way to set up connections is using the \verb|Connect|
+function, which takes a list of pre-synaptic neurons (or devices) and
+a list of the same amount of post-synaptic neurons (or devices) and
+connects the corresponding elements in a one-to-one fashion. Because
+of the function call overhead, this function is not very efficient to
+use when creating large networks.
 
-For such cases, the connection functions \verb|ConvergentConnect| and
+To avoid such overhead, the functions \verb|ConvergentConnect| and
 \verb|DivergentConnect| can be used to create multiple connections
-with a single call. In addition, random variants for both functions
-exist to support the user in creating networks on the basis of
-knowledge of connectivity statistics. However, random connection
-parameters (e.g. \emph{weight} or \emph{delay}) need to be specified
-by user code and supplied to NEST after the creation of connections.
+with a single call. In addition, random variants for both of these
+functions exist to support the user in creating networks on the basis
+of knowledge of connectivity statistics. However, random connection
+parameters (e.g. \emph{weight}, \emph{delay}, or time constants) need
+to be specified by user code and supplied to NEST after the creation
+of connections.
 
-\subsubsection{Topology module}
+\subsection{Topology module}
 
 To ease the creation of networks with topological relations between
 the neurons and organizations of neurons into layers and areas, NEST
@@ -613,34 +615,35 @@ between the native connection routines, the Topology module of NEST,
 and the novel \verb|ConnectionGenerator| interface described below is
 subject to future work.
 
-\subsubsection{Connectivity-generating libraries}
+\subsection{Connectivity-generating libraries}
 
-As detailed above, NEST has several methods for connecting neurons
-into a network built-in. However, while the native routines scale very
+As detailed above, NEST provides multiple methods for connecting
+neurons into a network. However, while the native routines scale very
 well \citep{Helias12_26}, they are only suitable for creating simple
-patterns such as convergent/divergent connectivity without using them
-in an iterative manner. On the other hand, the topology module
+patterns such as convergent/divergent connectivity without looping
+over them in user code. On the other hand, the topology module
 \citep{Plesser_13} allows to form more complex structures, but
-requires neurons to be organized in a layers. This has some overhead,
-which is also reflected in the performance and scaling.
+requires neurons to be organized in special data structures (e.g.
+layers). This again has some overhead, which is also reflected in the
+performance and scaling.
 
-To support the \verb|ConnectionGenerator| interface (see
-Section~\ref{sec:conn_gen}) in NEST and thus make more connection
+To support the \verb|ConnectionGenerator| interface introduced in
+Section~\ref{sec:conn_gen} in NEST and thus make more connection
 connectivity-generating available to the users, we created the
 \verb|ConnectionGeneratorModule|. It is implemented as a plugin for
 NEST which extends both user interfaces SLI and PyNEST and builds on
 \verb|libneurosim| (see Section~\ref{sec:libneurosim}).
 
-All elements (neurons or devices) in NEST are identified uniquely by
-an integer number, their global id (\emph{GID}). As all existing
-connection routines in NEST work either on single GIDs or on lists of
-GIDs, we decided to also use this convention for the Connection
-Generator interface in NEST, although that itself uses indices
-starting from zero (see Section~\label{sec:cgint}). Our new Connection
-Generator interface for NEST consists od the following functions:
+All neurons and devices in NEST are identified uniquely by an integer
+number, their global id (\emph{GID}). As all existing connection
+routines in NEST work either on single GIDs or on lists of GIDs, we
+decided to also use this convention for the Connection Generator
+interface in NEST, although that itself uses indices starting from
+zero (see Section~\ref{sec:cgint}). Our new Connection Generator
+interface for NEST consists of the following functions:
 
 \begin{unlist}
-\item[\tt CGConnect], which takes a connection generator \emph{cg},
+\item[\tt CGConnect] takes a \verb|ConnectionGenerator| \emph{cg},
   lists of GIDs for \emph{pre}- and a \emph{post}-synaptic
   populations, and a \emph{param\_map}. It creates the connections
   between neurons in \emph{pre}- and a \emph{post} as prescribed by
@@ -649,67 +652,84 @@ Generator interface for NEST consists od the following functions:
   for the parameter value vector created by the call to \verb|next()|
   in the \verb|ConnectionGenerator| interface (see Section
   \ref{sec:cgint}).
-\item[\tt CGParse], which takes a serialized version of a connection
+\item[\tt CGParse] takes a serialized version of a connection
   generator in the string \emph{xml} and returns the corresponding
   \verb|ConnectionGenerator| object. A special use of this function
   exists on supercomputers, where Python is often not available on the
   compute nodes, or where the memory and performance penalty would not
   be acceptable and a pure SLI-based solution is preferable.
-\item[\tt CGParseFile], which takes a file name \emph{fname} and parses
-  the serialized version of a connection generator contained therein.
-\item[\tt CGSelectImplementation], which takes an XML tag \emph{tag}
+\item[\tt CGParseFile] takes a file name \emph{fname} and parses the
+  serialized version of a connection generator contained therein.
+\item[\tt CGSelectImplementation] takes an XML tag \emph{tag}
   representing the parent node of a serialized connection generator
   and the name of a library \emph{library} to provide a parser for
   such an XML file. This information determines which library should
   carry out the parsing for \verb|CGParse| and \verb|CGParseFile|.
 \end{unlist}
 
-When PyNEST is used, the \verb|ConnectionGenerator| object can be
-created in Python using the Python wrapper of \verb|libcsa|. In the
-call to \verb|CGConnect|, a pointer to the underlying
-\verb|ConnectionGenerator| object in C++ is converted into a SLI
-Datum, which can be shipped into NEST's simulation kernel and handled
-there using the C++ interface to the connection generator. In SLI,
-there is no direct way of creating a connection generator. However,
-the SLI functions \verb|CGParse| and \verb|CGParseFile| can read a
-serialized version of a connection generator either from a string or
-from an XML file and reinstantiate the object, which can then be given
-to SLI's version of the \verb|CGConnect| function.
+In order to use the new interface in NEST, the user has to construct a
+\verb|ConnectionGenerator| object on the Python level by either using
+\verb|csa| or the Python bindings of \verb|libcsa| (see
+Section~\ref{sec:impl}). When PyNEST is used, this object can directly
+be given to \verb|CGConnect|, which wraps the
+\verb|ConnectionGenerator| object into a SLI Datum of type
+\verb|connectiongeneratortype| that can be shipped into NEST's
+simulation kernel. It is then iterated on the C++ level in case of
+\verb|libcsa|, or by calling back into Python in case of \verb|csa|.
+
+As SLI does not provide a direct way of creating a
+\verb|ConnectionGenerator| object, the user still has to create the
+object in Python. However, instead of directly passing it to a
+function of NEST, she has to serialize it using the respective
+function of the connectivity-creating library
+(e.g. NAMEOFSERIALIZATIONFUNCTIONFORCSA in case of CSA). This
+serialization can then be given to one of the SLI functions
+\verb|CGParse| or \verb|CGParseFile|, which read a serialized version
+of a connection generator either from a string or from an XML file and
+reinstantiate the object. This object (of type
+\verb|connectiongeneratortype|) can then be given to SLI's version of
+the \verb|CGConnect| function. Please note that the step of creating
+the serialization of the \verb|ConnectionGenerator| can also be
+carried out on another machine. This is an important use case if the
+simulation is to be run on a machine, where Python is not available.
 
 \ifdefined\INLINEFIGS
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=.8]{figures/sequence_diagram_nest.pdf}
 \caption{Sequence diagram showing the function calls during the use of
-  the \texttt{ConnectionGenerator} interface in NEST. The user first creates a
-  \texttt{ConnectionGenerator} object \emph{cg}. She then calls
-  PyNEST's \texttt{CGConnect()} function. \textcircled{\footnotesize
-    1} The function \texttt{cg\_get\_ranges()} returns all contiguous
-  ranges of global IDs (GIDs) in the given list as a vector of closed
-  intervals, still using the GID representation.
-  \textcircled{\footnotesize 2} At this point in time, the
-  ConnectionGeneratorModule needs to translate the GIDs to CSA
-  indices, which run from 0 and enumerate the elements of the given
-  \emph{pre}- and \emph{post}-synaptic populations. The result of the
-  translation (\emph{pre\_mask} and \emph{post\_mask}) is used to set
-  the masks on \emph{cg}. \textcircled{\footnotesize 3} The NEST
-  kernel iterates the connection generator by calling \texttt{next()}
-  until there are no more connections. For each received connection,
-  it creates the connection by calling \texttt{Network::connect()}. If
-  a non-empty \emph{param\_map} was given to \texttt{CGConnect}, the
-  connection's weight and delay are taken from the value-set in
+  the \texttt{ConnectionGenerator} interface in NEST. The user first
+  creates a \texttt{ConnectionGenerator} object \emph{cg}. She then
+  calls PyNEST's \texttt{CGConnect()}
+  function. \textcircled{\footnotesize 1} The function
+  \texttt{cg\_get\_ranges()} returns all contiguous ranges of global
+  IDs (GIDs) in the given list as a vector of closed intervals, still
+  using the GID representation.  \textcircled{\footnotesize 2} At this
+  point in time, the ConnectionGeneratorModule needs to translate the
+  GIDs to CSA indices, which run from 0 and enumerate the elements of
+  the given \emph{pre}- and \emph{post}-synaptic populations. The
+  result of the translation (\emph{pre\_mask} and \emph{post\_mask})
+  is used to set the masks on \emph{cg}. \textcircled{\footnotesize 3}
+  The NEST kernel iterates the connection generator by calling
+  \texttt{next()} until there are no more connections. For each
+  received connection, it creates the connection by calling
+  \texttt{Network::connect()}. If a non-empty \emph{param\_map} was
+  given to \texttt{CGConnect}, the connection's weight and delay are
+  taken from the value-set in
   \emph{cg}.}\label{fig:sequence_diagram_nest}
 \end{figure}
 \fi
 
 \Figure{3}{fig:sequence_diagram_nest} shows the different entities in
-NEST involved in a user call to \verb|CGConnect()|. After setting the
-masks for the connection generator to tell it which neurons are local
-and which are remote, the NEST kernel iteratively calls \verb|next()|.
-This function returns source and target indices and parameter values
-until there are no connections anymore. The connections are internally
-established one by one by calling NEST's basic
-\verb|Network::connect()| function on the C++ level.
+NEST involved in a user call to \verb|CGConnect| in PyNEST. After
+setting the masks for the connection generator to tell it which
+neurons are local and which are remote (see Section~\ref{sec:cgint}),
+the NEST kernel iteratively calls \verb|next()|. This function returns
+source and target indices, and values for weight and delay if the
+arity of the \verb|ConnectionGenerator| is 2, until there are no more
+connections. The connections are internally established one by one by
+calling NEST's basic \verb|Network::connect()| function on the C++
+level.
 
 %----------------------------------------------------------------------
 
@@ -772,7 +792,7 @@ connection generator object down to the simulator (by calling PyNEST's
 then take place on the C++ level in NEST (see
 Section~\ref{sec:conn_gen_nest}). This greatly reduces the overhead
 and thus improves the runtime and scalability of connection generation
-(Section~\ref{sec:benchmarks}).
+(see Section~\ref{sec:benchmarks}).
 
 %----------------------------------------------------------------------
 
@@ -780,12 +800,12 @@ and thus improves the runtime and scalability of connection generation
 
 We ran a series of benchmarks in order to assess the performance of
 and compare two implementations of CSA (see Section~\ref{sec:impl})
-and the two implementations of the \verb|CSAConnector| for PyNN (see Section
-\ref{sec:conn_gen_pynn}). Grouped by the software layer in which the
-iteration of the connection generator happens (either in Python by PyNN
-or in C++ by NEST) and the CSA implementation used (\verb|csa| is the Python
-version, \verb|libcsa| the C++ version), the following scenarios were
-measured:
+and the two implementations of the \verb|CSAConnector| for PyNN (see
+Section \ref{sec:conn_gen_pynn}). Grouped by the software layer in
+which the iteration of the connection generator happens (either in
+Python by PyNN or in C++ by NEST, see Section~\ref{sec:nest_gen_pynn})
+and the CSA implementation used (\verb|csa| is the Python version,
+\verb|libcsa| the C++ version), the following scenarios were measured:
 
 \begin{itemize}
 \item \textbf{Python, csa} used PyNN's original \verb|CSAConnector|
@@ -891,13 +911,14 @@ contrasts CSA's \emph{random} mask with a probability of $0.1$ with
 PyNN's \verb|FixedProbabilityConnector| (FPC) and NEST's function
 \verb|RandomConvergentConnect| (RCC).
 
-Note that NEST does not provide a Bernoulli trial based
-connection scheme such as used by FPC in PyNN and the \emph{random}
-mask in CSA and RCC was chosen because it is the closest function to
-resemble such a method. The use of RCC results, however, in a bias
-towards the other methods over NEST, as it requires iterative calls to
-RCC from the Python level, which entail a certain overhead in SLI,
-PyNEST and the C++ implementation of RCC itself (data not shown).
+Note that NEST does not provide a Bernoulli trial based connection
+scheme such as used by FPC in PyNN and the \emph{random} mask in CSA
+(see Section~\ref{sec:structure}) and RCC was chosen because it is the
+closest function to resemble such a method. The use of RCC results,
+however, in a bias towards the other methods over NEST, as it requires
+iterative calls to RCC from the Python level, which entail a certain
+overhead in SLI, PyNEST and the C++ implementation of RCC itself (data
+not shown).
 
 \ifdefined\INLINEFIGS
 \begin{figure}[ht]
