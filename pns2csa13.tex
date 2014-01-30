@@ -72,7 +72,7 @@
 \onecolumn
 \firstpage{1}
 
-\title[CSA in NEST and PyNN]{Efficient generation of connectivity in
+\title[Connection generators]{Efficient generation of connectivity in
   neuronal networks from simulator-independent descriptions}
 \author[\firstAuthorLast ]{\Authors}
 \address{}
@@ -192,7 +192,7 @@ scenarios of the interface.
 
 %----------------------------------------------------------------------
 
-\section{The Connection Generator interface}\label{sec:conn_gen}
+\section{The connection generator interface}\label{sec:conn_gen}
 
 To allow users to flexibly choose among simulators and libraries which
 generate connectivity, we have developed an interface that abstracts the
@@ -369,7 +369,7 @@ instances of such objects:
   it.
 \end{unlist}
 
-\section{The Connection-set Algebra}\label{sec:csa}
+\section{The connection-set algebra}\label{sec:csa}
 
 The connection generator interface described in the previous section
 enables the simulators to use external connectivity-generating
@@ -377,37 +377,39 @@ libraries. The benchmarks in Section~\ref{sec:benchmarks} use the
 interface to couple NEST to the connectivity-generating libraries
 \verb|csa| and \verb|libcsa|, which we now introduce.
 
-The Connection-set Algebra is a formalism for network connectivity
-which can be used both when describing a network to a fellow
-researcher and when implementing a model for a simulator.  It is
-currently focused on connectivity which has a constructive or
-statistical element such that it can be specified by an algorithm, but
-it can also be used when all network connections are listed explicitly
-or in cases where only some elements of the connectivity are
-explicitly specified. The distinguishing aspects of CSA are:
-\begin{itemize}
-\item It is abstract. CSA deals with sets of \emph{connections}. A
-  connection is an edge in a graph, with associated
-  parameters. There is a clean separation between CSA and other
-  aspects of model or simulator infrastructure.
-\item A connection-set can represent a \emph{type} of
-  connectivity---a connectivity pattern---in addition to the connectivity
-  of a specific network.
-\item It is an algebra: There are pre-existing connection-sets and
-  operators to define new connection-sets in terms of existing ones.
-\item It enables a succinct and precise description and definition of
-  connectivity in terms of such algebraic expressions.
-\item There are ways to implement CSA on a computer which are both
-  efficient and scalable on a parallel computer.
-\end{itemize}
+The Connection-set Algebra is a declarative formalism for the
+specification of network connectivity which can be used both when
+describing a network to a fellow researcher and when implementing a
+model for a simulator. CSA expressions define connection-sets. A
+connection-set is the set of edges in a network graph, together with
+parameters associated with those edges. The abstract nature of CSA
+creates a clean separation between CSA and other aspects of model or
+simulator infrastructure.  CSA expressions consist of pre-defined
+elementary connection-sets and operators such that new connection-sets
+can be defined in terms of existing ones. It enables a succinct and
+precise description and definition of connectivity in terms of such
+expressions. By allowing connection-sets to be infinite, they can
+represent \emph{types} of connectivity---connectivity patterns---in
+addition to connectivity of specific networks. There are ways to
+implement CSA on a computer which are both efficient and scalable on a
+parallel computer, also when connection-sets have infinite size. The
+parallelization is transparent to the user since intersection
+operators in the algebra can efficiently subdivide a connection-set
+among processes.
 
+CSA is currently focused on connectivity which has a constructive or
+statistical element such as connectivity specified by an algorithm,
+but it can also be used when all network connections are given
+explicitly or in cases where only some elements of the connectivity
+are explicitly specified.
 
 \subsection{Connection-sets}
 
-Given source and target populations $P_s$ and $P_t$, a CSA
+To give a flavor of CSA, we will now further introduce some of its
+concepts.  Given source and target populations $P_s$ and $P_t$, a CSA
 connection-set is defined as the set of connections between $P_s$ and
 $P_t$ along with zero or more per-connection parameters such as weight
-or delay. As for the connection generator, elements of populations are
+or delay. As for connection generators, elements of populations are
 enumerated using non-negative integers. Thus, a population $P$ is
 represented by an index set $\mathcal{I}$. One connection from $P_s$
 to $P_t$ is represented by the pair $(i, j)$, where $i \in
@@ -546,7 +548,12 @@ principles of implementation see \citet{djurfeldt12}.
 %\subsection{Parallelization}
 \subsection{Implementations}\label{sec:impl}
 
-There currently exist three implementations of CSA.  The original
+There currently exist three implementations of CSA.  They internally
+represent connection-sets as iterators and CSA expressions as trees of
+such iterators, although
+
+
+The original
 implementation is written in C++ and is part of the SPLIT simulation
 library \citep{djurfeldt05}.  It was used to specify the connectivity
 of the KTH cortex model \citep{djurfeldt08}---a model with three
