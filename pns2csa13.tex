@@ -453,10 +453,10 @@ states which connections exist.  In the example of the mask
 $\overline{M} = \{(0,1), (1,1), (1,2), (3,2), (2,3), (0,4)\}$ it can
 be regarded either as a connection matrix (see \Figure{1}{fig:csa}A)
 or as a boolean indicator function:
-\begin{equation}
+\begin{equation*}
 \overline{M} : \mathcal{I}_s \times \mathcal{I}_t \rightarrow \{ \mathcal{F},
 \mathcal{T} \}
-\end{equation}
+\end{equation*}
 In the example $\overline{M}(0,0) = \mathcal{F}$ while
 $\overline{M}(1,1) = \mathcal{T}$. If the mask is combined with a
 source population $P_s$ and a target population $P_t$, the result is
@@ -464,9 +464,9 @@ the network $(P_s, P_t, \overline{M})$ shown in \Figure{1}{fig:csa}B.
 
 In CSA, connections can be parameterized through functions mapping
 connections to values:
-\begin{equation}
+\begin{equation*}
 V : \mathcal{I}_s \times \mathcal{I}_t \rightarrow \mathcal{V}
-\end{equation}
+\end{equation*}
 where $\mathcal{V}$ is some codomain. In \citet{djurfeldt12}, such a
 function is called a \emph{value set}. An example of a value set is
 distance dependent delays with added noise sampled from a clipped
@@ -475,9 +475,9 @@ weight or delay to connections.
 
 A CSA \emph{connection-set}, $C$, is a tuple of a mask and zero or
 more value sets:
-\begin{equation}
+\begin{equation*}
 C = (\overline{M}, V_0, V_1, ...)
-\end{equation}
+\end{equation*}
 The number of value sets of a connection-set is called its
 \emph{arity}. A connection-set with arity 0 is for all purposes
 equivalent to a mask and the two can be used interchangeably.
@@ -496,14 +496,14 @@ about connectivity structure but also about population size. We can
 generalize by stripping off the population size information and
 allowing the index set $\mathcal{I}$ and mask to be infinite, defining
 the one-to-one mask $\bar{\delta}$:
-\begin{equation}
+\begin{equation*}
   \bar{\delta}(i, j) =
       \begin{cases}
         \mathcal{T}& \text{if $i = j$},\\
         \mathcal{F}& \text{otherwise}.
       \end{cases}
       \quad i, j \in \mathcal{I} = \mathbb{N}_0
-\end{equation}
+\end{equation*}
 Now $\bar{\delta}$ only encapsulates the concept of self- or
 one-to-one connectivity structure (depending on whether the source and
 target populations are the same or different) without reference to
@@ -519,14 +519,14 @@ function $\bar{\rho}(p)$ where the parameter $p$ is the probability
 that a given connection $(i, j)$ exists.  That is, for each
 combination of pre- and post-synaptic neurons, a Bernoulli trial
 determines whether they are connected.
-\begin{equation}
+\begin{equation*}
   \bar{\rho} (p) (i, j) =
   \begin{cases}
     \mathcal{T}& \text{with probability $p$},\\
     \mathcal{F}& \text{otherwise}.
   \end{cases}
   \quad i, j \in \mathbb{N}_0
-\end{equation}
+\end{equation*}
 By using CSA \emph{operators} such as intersection ($\cap$), union
 ($\cup$) and set difference ($-$), connection-sets can be combined into
 expressions. For example, the idea of ``random Erd\H{o}s-R\'enyi
