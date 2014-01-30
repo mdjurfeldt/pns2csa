@@ -298,19 +298,18 @@ and consists of the following virtual functions:
 
 \subsection{libneurosim}\label{sec:libneurosim}
 If the C++ header file for the \verb|ConnectionGenerator| interface
-definition and its supporting code is placed
-in the simulator or connectivity-generating library source trees, it
-will be duplicated over simulators or libraries.  As new versions of
-the interface are developed, the situation will quickly become
-unmanageable.  The \verb|ConnectionGenerator| interface is
-unusual in that it is a symmetric abstraction barrier: it both allows
-a given simulator to use any library supporting the API \emph{and}
-allows the same library to be used from any simulator supporting the
-API.
+definition and its supporting code were placed in the simulator or
+connectivity-generating library source trees, it would be duplicated
+over simulators or libraries.  As new versions of the interface are
+developed, the situation would quickly become unmanageable. The
+\verb|ConnectionGenerator| interface is unusual in that it is a
+symmetric abstraction barrier: it both allows a given simulator to use
+any library supporting the API \emph{and} allows the same library to
+be used from any simulator supporting the API.
 
-To create a space in which to put interfaces and other code
-of generic use for neuronal network simulation software, we have
-developed the neurosim library
+To create a space in which to put interfaces and other code of generic
+use for neuronal network simulation software, we have developed the
+neurosim library
 (\url{http://software.incf.org/software/libneurosim}).  More
 precisely, libneurosim is a software package which currently consists
 of two main component libraries: \verb|libneurosim|, providing C++
