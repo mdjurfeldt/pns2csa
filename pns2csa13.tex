@@ -597,7 +597,7 @@ use when creating large networks.
 
 To avoid such overhead, the functions \verb|ConvergentConnect| and
 \verb|DivergentConnect| can be used to create multiple connections
-with a single call. In addition, random variants for both of these
+with a single call. In addition, randomized variants for both of these
 functions exist to support the user in creating networks on the basis
 of knowledge of connectivity statistics. However, random connection
 parameters (e.g. \emph{weight}, \emph{delay}, or time constants) need
@@ -667,31 +667,30 @@ interface for NEST consists of the following functions:
   carry out the parsing for \verb|CGParse| and \verb|CGParseFile|.
 \end{unlist}
 
-In order to use the new interface in NEST, the user has to construct a
-\verb|ConnectionGenerator| object on the Python level by either using
-\verb|csa| or the Python bindings of \verb|libcsa| (see
-Section~\ref{sec:impl}). When PyNEST is used, this object can directly
-be given to \verb|CGConnect|, which wraps the
-\verb|ConnectionGenerator| object into a SLI Datum of type
-\verb|connectiongeneratortype| that can be shipped into NEST's
-simulation kernel. It is then iterated on the C++ level in case of
-\verb|libcsa|, or by calling back into Python in case of \verb|csa|.
+To use the connection generator interface from PyNEST, the user can
+construct a \verb|ConnectionGenerator| object on the Python level by
+either using \verb|csa| or the Python bindings of \verb|libcsa| (see
+Section~\ref{sec:impl}). This object can directly be given to
+\verb|CGConnect|, which wraps the \verb|ConnectionGenerator| object
+into a SLI Datum of type \verb|connectiongeneratortype| that can be
+shipped into NEST's simulation kernel, where it is iterated on the C++
+level. Future connectivity-generating libraries that implement the
+\verb|ConnectionGenerator| interface will be supported in the same way
+without requiring changes to the interface in NEST.
 
 As SLI does not provide a direct way of creating a
-\verb|ConnectionGenerator| object, the user still has to create the
-object in Python. However, instead of directly passing it to a
-function of NEST, she has to serialize it using the respective
-function of the connectivity-creating library
-(e.g. NAMEOFSERIALIZATIONFUNCTIONFORCSA in case of CSA). This
-serialization can then be given to one of the SLI functions
-\verb|CGParse| or \verb|CGParseFile|, which read a serialized version
-of a connection generator either from a string or from an XML file and
-reinstantiate the object. This object (of type
-\verb|connectiongeneratortype|) can then be given to SLI's version of
-the \verb|CGConnect| function. Please note that the step of creating
-the serialization of the \verb|ConnectionGenerator| can also be
-carried out on another machine. This is an important use case if the
-simulation is to be run on a machine, where Python is not available.
+\verb|ConnectionGenerator| object, the user still has to create that
+in Python. However, instead of directly passing it to a function of
+NEST, she has to serialize it using the respective function of the
+connectivity-creating library (e.g. NAMEOFSERIALIZATIONFUNCTIONFORCSA
+in case of CSA). This serialization can then be given to one of the
+SLI functions \verb|CGParse| or \verb|CGParseFile|, which
+reinstantiate the original object. This object (of type
+\verb|connectiongeneratortype|) can be given to SLI's version of the
+\verb|CGConnect| function. Please note that the step of creating the
+serialization of the \verb|ConnectionGenerator| can also be carried
+out on another machine. This also allows to run simulations using CSA
+on machines, where Python is not available.
 
 \ifdefined\INLINEFIGS
 \begin{figure}[ht]
