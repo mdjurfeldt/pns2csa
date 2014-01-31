@@ -276,26 +276,26 @@ The interface is designed as an abstract base class in C++
 and consists of the following virtual functions:
 
 \begin{unlist}
-\item[\tt int arity()]: return the number of per-connection values
+\item[\tt int arity()]: Return the number of per-connection values
   associated with this generator. Values can be parameters like
   weight, delay, time constants, or others.
-\item[\tt int size()]: return the number of connections represented by
+\item[\tt int size()]: Return the number of connections represented by
   this generator.
-\item[\tt void setMask(Mask\& mask)]: inform the generator about which
+\item[\tt void setMask(Mask\& mask)]: Inform the generator about which
   source and target indices are available. A
   \verb|ConnectionGenerator| mask represents the available nodes in
   the network for which to create connections.
 \item[\tt void setMask(std::vector$<$Mask$>$\& masks, int local)]:
-  this version of \texttt{setMask} is used by parallel simulators and
+  This version of \texttt{setMask} is used by parallel simulators and
   informs the connection generator on the \verb|local| rank about the
   masks of all ranks. Different ranks usually have different masks
   since they are responsible for different subsets of the connections
   of the network. Some connection generators can use such information
   to avoid the need for communication with other ranks.
-\item[\tt void start()]: start an iteration. This function must be called
+\item[\tt void start()]: Start an iteration. This function must be called
   before the first call to \verb|next()|.
 \item[\tt bool next(int\& source, int\& target, double* value)]:
-  advance to the next connection or return false, if no more
+  Advance to the next connection or return false, if no more
   connections are available from the \verb|ConnectionGenerator|.
   Source and target indices of the connection as well as associated
   parameters are written into \verb|source|, \verb|target| and the
