@@ -1,7 +1,9 @@
 import node;
 import roundedpath;
 
-defaultnodestyle = nodestyle (xmargin = 2pt, textpen = Helvetica ("m", "n"));
+real s = 1.6;
+
+defaultnodestyle = nodestyle (xmargin = s*2pt, textpen = fontsize (s*12pt) + Helvetica ("m", "n"));
 defaultdrawstyle = drawstyle(arrow = Arrow (6));
 
 node s0 = scircle ("0");
@@ -15,8 +17,8 @@ node t2 = scircle ("2");
 node t3 = scircle ("3");
 node t4 = scircle ("4");
 
-real h = 3cm;
-real v = 1cm;
+real h = s*3cm;
+real v = s*1cm;
 
 s0 << edown (v) << s1 << edown (v) << s2 << edown (v) << s3 << eup (3.5*v);
 s0 << eright (h) << t0;
@@ -32,7 +34,9 @@ draw (s0--t1,
       s2--t3,
       s0--t4);
 
-pair d = (0.6cm, -0.6cm);
+pair d = (s*0.6cm, s*(-0.6cm));
 
-draw (roundedpath (box (s0.pos - d, s3.pos + d - (0, 0.4cm)), 3), L="$P_s$");
-draw (roundedpath (box (t0.pos - d, t4.pos + d - (0, 0.4cm)), 3), L="$P_t$");
+currentpen = fontsize (s*12pt);
+
+draw (roundedpath (box (s0.pos - d, s3.pos + d - (0, s*0.4cm)), s*3), L="$P_s$");
+draw (roundedpath (box (t0.pos - d, t4.pos + d - (0, s*0.4cm)), s*3), L="$P_t$");
